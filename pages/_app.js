@@ -5,8 +5,6 @@ import Router from "next/router";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-
 @media (max-width: 252px) {
   html {
     font-size: 7px;
@@ -97,6 +95,10 @@ export default class PickMeup extends App {
         <Head>
           <title>픽미업, Pick me up</title>
           <link rel="shortcut icon" href="favicon.ico"></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         <Wrapper>
           <Component {...pageProps} />

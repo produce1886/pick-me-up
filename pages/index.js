@@ -1,5 +1,11 @@
 import Head from "next/head";
+import Gnb from "../src/components/organisms/gnb";
 
 export default function Home() {
-  return <p>Initial settings...</p>;
+  return (
+    <>
+      <Gnb></Gnb>
+      <p>Initial settings...</p>
+    </>
+  );
 }
