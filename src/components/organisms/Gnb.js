@@ -27,4 +27,5 @@ const InnerWrapper = styled.div`
   justify-content: space-between;
   display: flex;
   flex-direction: row;
+  margin: 0 4rem 0 4rem;
 `;
