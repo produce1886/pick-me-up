@@ -5,47 +5,7 @@ import Router from "next/router";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-@media (max-width: 252px) {
-  html {
-    font-size: 7px;
-  }
-}
-@media (min-width: 253px) and (max-width: 288px) {
-  html {
-    font-size: 8px;
-  }
-}
-@media (min-width: 289px) and (max-width: 324px) {
-  html {
-    font-size: 9px;
-  }
-}
-@media (min-width: 325px) and (max-width: 360px) {
-  html {
-    font-size: 10px;
-  }
-}
-@media (min-width: 361px) and (max-width: 396px) {
-  html {
-    font-size: 11px;
-  }
-}
-@media (min-width: 397px) and (max-width: 432px) {
-  html {
-    font-size: 12px;
-  }
-}
-@media (min-width: 433px){
-  html {
-    font-size: 13px;
-  }
-}
 
-@media (min-width: 576px) { 
-  html {
-    font-size: 14px;
-  } 
-} 
  
 @media (min-width: 768px) { 
   html {
@@ -71,6 +31,7 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 1rem;
   background-color:#fff;
+  min-width: 768px;
 }
 ::-webkit-scrollbar {
   display: none;
