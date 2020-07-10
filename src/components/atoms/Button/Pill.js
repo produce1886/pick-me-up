@@ -9,4 +9,7 @@ export default styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #fff;
+  border: none;
+  padding: 0 1rem 0 1rem;
 `;
