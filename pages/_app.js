@@ -5,7 +5,6 @@ import Router from "next/router";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-
  
 @media (min-width: 768px) { 
   html {
