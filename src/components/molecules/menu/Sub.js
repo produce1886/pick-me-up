@@ -14,15 +14,6 @@ export default function Sub() {
           </A>
         </Link>
       </Button>
-      <Button>
-        <Link href="">
-          <A>
-            <Text level={1} weight={500} color="#8b90a0">
-              회원가입
-            </Text>
-          </A>
-        </Link>
-      </Button>
     </Wrapper>
   );
 }
