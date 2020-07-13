@@ -6,4 +6,6 @@ export default styled.div`
   border-radius: 0.2rem;
   box-shadow: 0 0.1rem 0.2rem 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
+  position: relative;
+  box-sizing: border-box;
 `;
