@@ -9,11 +9,11 @@ export default function Item(props) {
       <InnerWrapper>
         <Col>
           <Row>
-            <Text level={14} weight="bold" color="#232735">
+            <Text level={18} weight="bold" color="#232735">
               {props.type}
             </Text>
-            <Text level={7.5} weight="bold" color="#8b90a0">
-              &nbsp;Project
+            <Text level={8} weight="bold" color="#8b90a0">
+              &nbsp;&nbsp;Project
             </Text>
           </Row>
           <Row>
@@ -46,7 +46,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 0 1.2rem 0;
-  width: 13rem;
+  width: 12rem;
   align-items: baseline;
 `;
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Logo from "../atoms/Image/Logo";
 import Wrapper from "../atoms/gnb";
 import MainMenu from "../molecules/menu/Main";
 import SubMenu from "../molecules/menu/Sub";
@@ -7,11 +8,7 @@ export default function GlobalNavigationBar() {
   return (
     <Wrapper>
       <InnerWrapper>
-        <div
-          style={{ backgroundColor: "#f00", width: "5rem", height: "1.5rem" }}
-        >
-          Logo
-        </div>
+        <Logo style={{ width: "5rem", height: "1.5rem" }}></Logo>
         <MainMenu></MainMenu>
         <SubMenu></SubMenu>
       </InnerWrapper>
