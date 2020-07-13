@@ -8,7 +8,7 @@ function Icon({ style, fill }) {
       fill="none"
       viewBox="0 0 20 21"
     >
-      <g clip-path="url(#prefix__clip0)">
+      <g clipPath="url(#prefix__clip0)">
         <path
           fill={fill}
           d="M10 20.763c5.523 0 10-4.478 10-10 0-5.523-4.477-10-10-10s-10 4.477-10 10c0 5.522 4.477 10 10 10z"
