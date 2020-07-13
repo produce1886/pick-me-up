@@ -2,21 +2,20 @@ import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Row from "../../atoms/Row";
 import Col from "../../atoms/Col";
+import Profile from "../../molecules/Profile";
 
 export default function Top(props) {
   return (
     <Wrapper>
       <Col>
         <Row>
-          <Text level={5} weight="bold" color="#9c69e2" line={1.17}>
+          <Text level={6} weight="bold" color="#9c69e2" line={1.17}>
             Title Title Title Title Title Title
           </Text>
         </Row>
         <Row>
           <Div>
-            <Text level={1} color="#232735">
-              Name
-            </Text>
+            <Profile size="0.8rem" level={1} name="Name"></Profile>
             <Text level={1} color="#232735">
               YYYY.MM.DD
             </Text>
@@ -39,5 +38,5 @@ const Div = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 0.3rem;
+  align-items: center;
 `;
