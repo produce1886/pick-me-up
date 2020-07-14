@@ -1,4 +1,11 @@
+
+import Gnb from "../src/components/organisms/Gnb";
+
+
 export default function Project() {
-  test
-  return <></>;
+  return (
+  <>
+  <Gnb></Gnb></>
+  
+  );
 }
