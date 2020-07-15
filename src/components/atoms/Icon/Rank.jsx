@@ -8,12 +8,10 @@ function Icon({ style, fill }) {
       fill="none"
       viewBox="0 0 45 60"
     >
-      <g clipPath="url(#prefix__clip0)">
-        <path
-          fill={fill}
-          d="M22.5 41.77H45V60L22.5 41.77zm-22.5 0h22.5L0 60V41.77zm0 0V0h45v41.77H0z"
-        ></path>
-      </g>
+      <path
+        fill={fill}
+        d="M22.5 41.77H45V60L22.5 41.77zm-22.5 0h22.5L0 60V41.77zm0 0V0h45v41.77H0z"
+      ></path>
       <defs>
         <clipPath id="prefix__clip0">
           <path fill="#fff" d="M0 0h45v60H0z"></path>
