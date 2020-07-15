@@ -5,32 +5,61 @@ import Text from "../atoms/Text";
 import Col from "../atoms/Col";
 import Icon from "../atoms/Icon/Chevron/Right";
 
-export default function Preview() {
-  return (
-    <Wrapper>
-      <Col>
-        <LinkWrapper>
-          <Link href="project">
-            <A>
-              <Text level={8} color="#232735" weight="bold">
-                신규 프로젝트
-              </Text>
-            </A>
-          </Link>
-          <Icon
-            style={{ width: "0.4rem", height: "0.8rem" }}
-            fill="#232735"
-          ></Icon>
-        </LinkWrapper>
-        <InnerWrapper>
-          <Postblock></Postblock>
-          <Postblock></Postblock>
-          <Postblock></Postblock>
-          <Postblock></Postblock>
-        </InnerWrapper>
-      </Col>
-    </Wrapper>
-  );
+export default function Preview(props) {
+  if (props.type === "new") {
+    return (
+      <Wrapper>
+        <Col>
+          <LinkWrapper>
+            <Link href="project">
+              <A>
+                <Text level={8} color="#232735" weight="bold">
+                  신규 프로젝트
+                </Text>
+              </A>
+            </Link>
+            <Icon
+              style={{ width: "0.4rem", height: "0.8rem" }}
+              fill="#232735"
+            ></Icon>
+          </LinkWrapper>
+          <InnerWrapper>
+            <Postblock type={props.type}></Postblock>
+            <Postblock type={props.type}></Postblock>
+            <Postblock type={props.type}></Postblock>
+            <Postblock type={props.type}></Postblock>
+          </InnerWrapper>
+        </Col>
+      </Wrapper>
+    );
+  }
+  if (props.type === "most") {
+    return (
+      <Wrapper>
+        <Col>
+          <LinkWrapper>
+            <Link href="project">
+              <A>
+                <Text level={8} color="#232735" weight="bold">
+                  가장 많이 본 프로젝트
+                </Text>
+              </A>
+            </Link>
+            <Icon
+              style={{ width: "0.4rem", height: "0.8rem" }}
+              fill="#232735"
+            ></Icon>
+          </LinkWrapper>
+          <InnerWrapper>
+            <Postblock type={props.type} rank={1}></Postblock>
+            <Postblock type={props.type} rank={2}></Postblock>
+            <Postblock type={props.type} rank={3}></Postblock>
+            <Postblock type={props.type} rank={4}></Postblock>
+          </InnerWrapper>
+        </Col>
+      </Wrapper>
+    );
+  }
 }
 
 const Wrapper = styled.div`

@@ -8,7 +8,8 @@ export default function Home() {
     <>
       <Gnb></Gnb>
       <Banner></Banner>
-      <Preview></Preview>
+      <Preview type="new"></Preview>
+      <Preview type="most"></Preview>
     </>
   );
 }
