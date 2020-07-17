@@ -33,7 +33,7 @@ export default function Top(props){
 const Wrapper = styled.div`
   width: 100%;
   border-bottom: 0.07rem solid #d3d4d8;
-  padding: 0.8rem 1rem 0.2rem 1rem;
+  padding: 0.8rem 1rem 0.6rem 1rem;
   box-sizing: border-box;
   height: fit-content;
 `;
