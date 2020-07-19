@@ -20,7 +20,7 @@ export default function Filter2(props){
 }
 
 const Div = styled.div`
-    width: 100%;
+    width: fit-content;
     height: 100%;
     display: flex;
     flex-direction: row;
