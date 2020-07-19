@@ -3,7 +3,7 @@ import Text from "../../atoms/Text"
 import Wrapper from "../../atoms/Filter/Filter1"
 import Icon from "../../atoms/Icon/X"
 
-export default function Filter2(props){
+export default function FilterSelect(props){
     return(
         <Wrapper background="#d3d4d8">
             <Div>
