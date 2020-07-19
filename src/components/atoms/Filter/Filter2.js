@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export default styled.p`
     ${(props) => css`
-        width: 6.16rem;
+        width: fit-content;
         height: 1.6rem;
         font-family: inherit;
         border: ${props.border} solid ${props.color};
