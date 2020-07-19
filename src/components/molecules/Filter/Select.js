@@ -3,21 +3,24 @@ import Text from "../../atoms/Text"
 import Wrapper from "../../atoms/Filter/Filter1"
 import Icon from "../../atoms/Icon/X"
 
-export default function Filter2(){
+export default function Filter2(props){
     return(
-        <Wrapper width="4.8rem" background="#d3d4d8">
+        <Wrapper background="#d3d4d8">
             <Div>
-                <Text width="2.4rem" line="1.08rem" level={3} color="#232735">
-                    최신순
+                &nbsp;
+                <Text line="1.08rem" level={3} color="#232735">
+                    {props.word}
                 </Text>
-                <Icon style={{width: "0.7rem", height: "0.7rem"}} fill="#232735"></Icon>
+                &nbsp;
+                <Icon style={{width: "0.6rem", height: "0.6rem"}} fill="#232735"></Icon>
+                &nbsp;
             </Div>
         </Wrapper>
     );
 }
 
 const Div = styled.div`
-    width: 100%;
+    width: fit-content;
     height: 100%;
     display: flex;
     flex-direction: row;
