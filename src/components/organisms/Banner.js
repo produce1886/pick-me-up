@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Wrapper from "../atoms/Banner/Wrapper";
-import Item from "../molecules/Banner";
+import Item from "../molecules/BannerItem";
 
 export default function Banner() {
   return (
