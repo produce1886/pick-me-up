@@ -12,6 +12,6 @@ export default styled.p`
         -moz-appearance: none;
         appearance: none;
         padding: 0 0.4rem 0 0.4rem;
-        margin: 0 0.4rem 0 0rem;
+        margin: 0 0.8rem 0 0;
     `}
 `;
