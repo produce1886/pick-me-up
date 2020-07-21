@@ -1,10 +1,46 @@
 import Wrapper from "../atoms/Postblock";
 import Top from "../molecules/Postblock/Top";
+import Bottom from "../molecules/Postblock/Bottom";
+import styled, { css } from "styled-components";
+import Text from "../atoms/Text";
 
-export default function Postblock() {
+export default function Postblock(props) {
   return (
     <Wrapper>
-      <Top></Top>
+      <Top type={props.type} rank={props.rank}></Top>
+      {props.type === "most" && (
+        <BodyMost>
+          <Text level={2} color="#232735">
+            Body textbox Continually unleash technically sound products before
+            installed base opportunities. Holisticly harness granular...
+          </Text>
+        </BodyMost>
+      )}
+      {props.type === "new" && (
+        <BodyNew>
+          <Text level={2} color="#232735">
+            Body textbox Continually unleash technically sound products before
+            installed base opportunities. Holisticly harness granular...
+          </Text>
+        </BodyNew>
+      )}
+      <Bottom></Bottom>
     </Wrapper>
   );
 }
+
+const BodyNew = styled.div`
+  width: 100%;
+  padding: 0.7rem 1rem 0 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 5.4rem;
+`;
+
+const BodyMost = styled.div`
+  width: 100%;
+  padding: 0.7rem 1rem 0 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  height: 3.7rem;
+`;
