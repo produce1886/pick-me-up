@@ -11,7 +11,7 @@ export default function Filter(props){
     return(
         <Row>
             {props.type==="bigoff" && ( 
-                <Wrapper width="6.16rem" height="1.6rem" border="0.04rem" color="#d3d4d8" background="#ffffff" radius="0.2rem">
+                <Wrapper width="6rem" height="1.6rem" border="0.04rem" color="#d3d4d8" background="#ffffff" radius="0.2rem">
                 <Div>
                     <Text line="1.08rem" level={3} color="#232735">
                         {props.word}
