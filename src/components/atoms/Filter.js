@@ -2,14 +2,16 @@ import styled, { css } from "styled-components";
 
 export default styled.p`
     ${(props) => css`
-        width: fit-content;
-        height: 1.6rem;
+        width: ${props.width};
+        height: ${props.height};
         font-family: inherit;
         border: ${props.border} solid ${props.color};
-        background: #ffffff;
-        border-radius: 0.2rem;
+        background: ${props.background};
+        border-radius: ${props.radius};
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        padding: 0 0.4rem 0 0.4rem;
+        margin: 0 0.4rem 0 0rem;
     `}
 `;
