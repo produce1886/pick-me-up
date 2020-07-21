@@ -2,14 +2,14 @@ import styled from "styled-components";
 import Gnb from "../src/components/organisms/Gnb";
 import Projectlist from "../src/components/templates/Projectlist"
 import Filter from "../src/components/molecules/Filter"
-import FilterSearchProject from "../src/components/organisms/FilterSearchProject"
+import FilterSearch from "../src/components/organisms/FilterSearch"
 import WriteIcon from "../src/components/atoms/Icon/Write"
 export default function Project() {
   return (
   <>
   <Gnb></Gnb>
   <FilterWrapper>
-    <FilterSearchProject></FilterSearchProject>
+    <FilterSearch type="project"></FilterSearch>
   </FilterWrapper>
   <Wrapper>
     <FilterListWrapper>
@@ -31,8 +31,6 @@ const Wrapper = styled.div`
   background-color: #f0f8fd;
   justify-content: center;
   width: 100%;
-  padding: 0.2rem 1rem 0.5rem 1rem;
-  box-sizing: border-box;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -56,12 +54,17 @@ const FilterWrapper = styled.div`
 `;
 
 const FilterListWrapper = styled.div`
+  width: 48rem;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  bottom: 0;
 `;
 
 const IconWrapper = styled.div`
-  padding: ;
   align-items: center;
   justify-content: center;
   display: flex;
