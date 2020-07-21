@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 `;
 
 const Div = styled.div`
-  width: 48rem;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -54,7 +54,7 @@ const FilterWrapper = styled.div`
 `;
 
 const FilterListWrapper = styled.div`
-  width: 48rem;
+  width: 50rem;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -62,6 +62,7 @@ const FilterListWrapper = styled.div`
   align-items: center;
   box-sizing: border-box;
   bottom: 0;
+  margin: 0 0 0 3rem;
 `;
 
 const IconWrapper = styled.div`
@@ -69,5 +70,5 @@ const IconWrapper = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: column;
-  margin: 0 0 13rem 2rem;
+  margin: 0 0 13rem 1rem;
 `;

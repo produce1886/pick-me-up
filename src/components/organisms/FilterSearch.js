@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 `;
 
 const FilterWrapper = styled.div`
-    width: 21rem;
+    width: 23rem;
     height: 1.6rem;
     justify-content: left;
     align-items: center;
