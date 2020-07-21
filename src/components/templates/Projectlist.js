@@ -6,32 +6,22 @@ export default function Projectlist(){
         <Wrapper>
             <Div>
                 <Projectblock></Projectblock>
-                &nbsp;
-                &nbsp;
                 <Projectblock></Projectblock>
             </Div>
             <Div>
                 <Projectblock></Projectblock>
-                &nbsp;
-                &nbsp;
                 <Projectblock></Projectblock>
             </Div>
             <Div>
                 <Projectblock></Projectblock>
-                &nbsp;
-                &nbsp;
                 <Projectblock></Projectblock>
             </Div>
             <Div>
                 <Projectblock></Projectblock>
-                &nbsp;
-                &nbsp;
                 <Projectblock></Projectblock>
             </Div>
             <Div>
                 <Projectblock></Projectblock>
-                &nbsp;
-                &nbsp;
                 <Projectblock></Projectblock>
             </Div>
         </Wrapper>
@@ -51,9 +41,9 @@ const Wrapper = styled.div`
 `;
 
 const Div = styled.div`
-    padding: 0.46rem 0.4rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 0.45rem 0 0.45rem 0;
 `;

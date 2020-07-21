@@ -8,4 +8,5 @@ export default styled.div`
   background-color: #ffffff;
   position: relative;
   box-sizing: border-box;
+  margin: 0 0.4rem 0 0.4rem;
 `;
