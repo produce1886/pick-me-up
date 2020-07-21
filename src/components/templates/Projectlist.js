@@ -39,7 +39,7 @@ export default function Projectlist(){
 }
 
 const Wrapper = styled.div`
-    width: 48rem;
+    width: 48.5rem;
     height: 67.68rem;
     justify-content: center;
     align-items: center;
