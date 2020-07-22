@@ -1,29 +1,27 @@
 import styled from "styled-components";
 import Gnb from "../src/components/organisms/Gnb";
-import Projectlist from "../src/components/templates/Projectlist"
-import Filter from "../src/components/molecules/Filter"
-import FilterSearch from "../src/components/organisms/FilterSearch"
-import WriteIcon from "../src/components/atoms/Icon/Write"
+import Projectlist from "../src/components/templates/Projectlist";
+import Filter from "../src/components/molecules/Filter";
+import FilterSearch from "../src/components/organisms/FilterSearch";
+import WriteButton from "../src/components/molecules/Button/Write";
+
 export default function Project() {
   return (
-  <>
-  <Gnb></Gnb>
-  <FilterWrapper>
-    <FilterSearch type="project"></FilterSearch>
-  </FilterWrapper>
-  <Wrapper>
-    <FilterListWrapper>
-      <Div>
-        <Filter type="bigoff" word="최신순"></Filter>
-      </Div>
-      <Projectlist></Projectlist>
-    </FilterListWrapper>
-    <IconWrapper>
-      <WriteIcon style={{width: "2.4rem", height: "2.4rem"}}></WriteIcon>
-    </IconWrapper>
-  </Wrapper>
-  </>
-  
+    <>
+      <Gnb></Gnb>
+      <FilterWrapper>
+        <FilterSearch type="project"></FilterSearch>
+      </FilterWrapper>
+      <Wrapper>
+        <FilterListWrapper>
+          <Div>
+            <Filter type="bigoff" word="최신순"></Filter>
+          </Div>
+          <Projectlist></Projectlist>
+        </FilterListWrapper>
+        <WriteButton></WriteButton>
+      </Wrapper>
+    </>
   );
 }
 
@@ -63,12 +61,4 @@ const FilterListWrapper = styled.div`
   box-sizing: border-box;
   bottom: 0;
   margin: 0 0 0 3rem;
-`;
-
-const IconWrapper = styled.div`
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  margin: 0 0 13rem 1rem;
 `;
