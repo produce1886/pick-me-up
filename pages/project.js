@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Gnb from "../src/components/organisms/Gnb";
-import Projectlist from "../src/components/templates/Projectlist";
+import ProjectList from "../src/components/templates/ProjectList";
 import Filter from "../src/components/molecules/Filter";
 import FilterSearch from "../src/components/organisms/FilterSearch";
 import WriteButton from "../src/components/molecules/Button/Write";
@@ -17,7 +17,7 @@ export default function Project() {
           <Div>
             <Filter type="bigoff" word="최신순"></Filter>
           </Div>
-          <Projectlist></Projectlist>
+          <ProjectList></ProjectList>
         </FilterListWrapper>
         <WriteButton></WriteButton>
       </Wrapper>
