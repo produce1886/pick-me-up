@@ -2,7 +2,7 @@ import Text from "../../atoms/Text";
 import Wrapper from "../../atoms/Button/Pill";
 import Link from "next/link";
 import styled from "styled-components";
-import Icon from "../../atoms/Icon/Plus"
+import Icon from "../../atoms/Icon/Plus";
 
 export default function Button(props){
     return (
