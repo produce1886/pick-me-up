@@ -15,7 +15,7 @@ export default function Project() {
       <Wrapper>
         <FilterListWrapper>
           <Div>
-            <Filter type="bigoff" word="최신순"></Filter>
+            <Filter type="bigoff" title="최신순"></Filter>
           </Div>
           <ProjectList></ProjectList>
         </FilterListWrapper>
