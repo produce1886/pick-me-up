@@ -2,8 +2,8 @@ import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Row from "../../atoms/Row";
 import Col from "../../atoms/Col";
-import Profile from "../../molecules/Profile";
-import Rank from "../../molecules/Rank";
+import Profile from "../Profile";
+import Rank from "../Rank";
 
 export default function Top(props) {
   return (

@@ -1,29 +1,29 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import ViewCount from "../ViewCount";
 import CommentCount from "../CommentCount";
 import MoreButton from "../Button/More";
-import TagButton from "../Button/Tag"
+import TagButton from "../Button/Tag";
 
-export default function Bottom(){
-    return(
+export default function Bottom() {
+  return (
     <Wrapper>
       <Col>
         <Row>
-            <TagButton text="Tag text" link=""></TagButton>
-            <TagButton text="Tag text" link=""></TagButton>
-            <TagButton text="Tag text" link=""></TagButton>
+          <TagButton text="Tag text" link=""></TagButton>
+          <TagButton text="Tag text" link=""></TagButton>
+          <TagButton text="Tag text" link=""></TagButton>
         </Row>
-        <Row2> 
+        <Row2>
           <Div>
             <ViewCount count={10}></ViewCount>
-             &nbsp;
-             <CommentCount count={10}></CommentCount>
-         </Div>
-        <MoreButton link=""></MoreButton>
+            &nbsp;
+            <CommentCount count={10}></CommentCount>
+          </Div>
+          <MoreButton link=""></MoreButton>
         </Row2>
-    </Col>
-  </Wrapper>
-    );
+      </Col>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`
@@ -47,7 +47,7 @@ const Div = styled.div`
 const Row2 = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;  
+  align-items: center;
   justify-content: space-between;
 `;
 

@@ -1,33 +1,33 @@
-import styled from "styled-components"
-import Filterinfo from "../../molecules/Filterinfo"
+import styled from "styled-components";
+import Filterinfo from "../FilterInfo";
 import Text from "../../atoms/Text";
 import Row from "../../atoms/Row";
 import Col from "../../atoms/Col";
-import Profile from "../../molecules/Profile";
+import Profile from "../Profile";
 
-export default function Top(props){
-    return(
-        <Wrapper>
-            <Col>
-                <FirstDiv>
-                 <Text level={6} weight="bold" color="#9c69e2" line={1.17}>
-                    Title Textbox Title Textbox
-                 </Text>
-                </FirstDiv>
-                <FirstDiv>
-                 <Profile size="0.8rem" level={1} name="Name"></Profile>
-                </FirstDiv>
-                <Row>
-                 <Div>
-                  <Filterinfo></Filterinfo>
-                  <Text level={1} color="#232735">
-                   YYYY.MM.DD
-                  </Text>
-                 </Div>
-                </Row>
-            </Col>
-        </Wrapper>
-    )
+export default function Top(props) {
+  return (
+    <Wrapper>
+      <Col>
+        <FirstDiv>
+          <Text level={6} weight="bold" color="#9c69e2" line={1.17}>
+            Title Textbox Title Textbox
+          </Text>
+        </FirstDiv>
+        <FirstDiv>
+          <Profile size="0.8rem" level={1} name="Name"></Profile>
+        </FirstDiv>
+        <Row>
+          <Div>
+            <Filterinfo></Filterinfo>
+            <Text level={1} color="#232735">
+              YYYY.MM.DD
+            </Text>
+          </Div>
+        </Row>
+      </Col>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`
@@ -46,7 +46,7 @@ const Div = styled.div`
 `;
 
 const FirstDiv = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 `;
