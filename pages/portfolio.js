@@ -14,30 +14,3 @@ export default function Portfolio() {
   </>
   );
 }
-
-const FilterWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 0.01rem solid #d3d4d8;
-`;
-
-const Wrapper = styled.div`
-  background-color: #f5edff;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 5rem;
-`;
