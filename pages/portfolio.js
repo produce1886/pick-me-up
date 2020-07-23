@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import Gnb from "../src/components/organisms/Gnb";
 import FilterSearch from "../src/components/organisms/FilterSearch"
+import Bottom from "../src/components/organisms/Bottom";
+import PortfolioBody from "../src/components/templates/PortfolioBody"
 export default function Portfolio() {
+
   return (
     <>
     <Gnb></Gnb>
-    <FilterWrapper>
-     <FilterSearch type="portfolio"></FilterSearch>
-   </FilterWrapper>
-    <Wrapper></Wrapper>
+    <FilterSearch type="portfolio"></FilterSearch>
+    <PortfolioBody></PortfolioBody>
+    <Bottom background="#f5edff"></Bottom>
   </>
   );
 }
@@ -29,4 +31,13 @@ const Wrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 5rem;
 `;
