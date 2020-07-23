@@ -3,61 +3,61 @@ import React from "react";
 function Icon({ style }) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       style={style}
+      viewBox="0 0 68 68"
       fill="none"
-      viewBox="0 0 60 60"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <g clipPath="url(#prefix__clip0)">
-        <g filter="url(#prefix__filter0_d)">
-          <circle cx="30" cy="30" r="30" fill="#9C69E2"></circle>
-        </g>
-        <path
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M29.741 19.267H20.61a2.607 2.607 0 00-2.609 2.61V40.14a2.612 2.612 0 002.609 2.609h18.264a2.61 2.61 0 002.609-2.609v-9.132"
-        ></path>
-        <path
-          stroke="#fff"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M39.526 17.31a2.771 2.771 0 013.914 0 2.77 2.77 0 010 3.914L31.046 33.618l-5.218 1.304 1.304-5.218 12.394-12.393z"
-        ></path>
+      <g filter="url(#filter0_d)">
+        <circle cx="34" cy="31" r="30" fill="#9C69E2" />
       </g>
+      <path
+        d="M33.7413 20.2675H24.6092C23.9172 20.2675 23.2535 20.5424 22.7642 21.0317C22.2749 21.521 22 22.1847 22 22.8767V41.1409C22 41.8329 22.2749 42.4965 22.7642 42.9858C23.2535 43.4752 23.9172 43.7501 24.6092 43.7501H42.8734C43.5654 43.7501 44.229 43.4752 44.7183 42.9858C45.2076 42.4965 45.4825 41.8329 45.4825 41.1409V32.0088"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M43.5258 18.3106C44.0448 17.7916 44.7487 17.5 45.4827 17.5C46.2166 17.5 46.9205 17.7916 47.4395 18.3106C47.9585 18.8296 48.2501 19.5335 48.2501 20.2674C48.2501 21.0014 47.9585 21.7053 47.4395 22.2243L35.046 34.6179L29.8276 35.9225L31.1322 30.7041L43.5258 18.3106Z"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
       <defs>
-        <clipPath id="prefix__clip0">
-          <path fill="#fff" d="M0 0h60v60H0z"></path>
-        </clipPath>
         <filter
-          id="prefix__filter0_d"
+          id="filter0_d"
+          x="0"
+          y="0"
           width="68"
           height="68"
-          x="-4"
-          y="-1"
-          colorInterpolationFilters="sRGB"
           filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feColorMatrix
             in="SourceAlpha"
+            type="matrix"
             values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-          ></feColorMatrix>
-          <feOffset dy="3"></feOffset>
-          <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-          <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"></feColorMatrix>
+          />
+          <feOffset dy="3" />
+          <feGaussianBlur stdDeviation="2" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"
+          />
           <feBlend
-            in2="BackgroundImageFix"
             mode="multiply"
+            in2="BackgroundImageFix"
             result="effect1_dropShadow"
-          ></feBlend>
+          />
           <feBlend
+            mode="normal"
             in="SourceGraphic"
             in2="effect1_dropShadow"
             result="shape"
-          ></feBlend>
+          />
         </filter>
       </defs>
     </svg>

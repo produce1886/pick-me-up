@@ -1,23 +1,25 @@
 import styled from "styled-components";
+import Filterinfo from "../FilterInfo";
 import Text from "../../atoms/Text";
 import Row from "../../atoms/Row";
 import Col from "../../atoms/Col";
 import Profile from "../Profile";
-import Rank from "../Rank";
 
 export default function Top(props) {
   return (
     <Wrapper>
       <Col>
-        {props.type === "most" && <Rank number={props.rank}></Rank>}
-        <Row>
+        <FirstDiv>
           <Text level={6} weight="bold" color="#9c69e2" line={1.17}>
-            Title Title Title Title Title Title
+            Title Textbox Title Textbox
           </Text>
-        </Row>
+        </FirstDiv>
+        <FirstDiv>
+          <Profile size="0.8rem" level={1} name="Name"></Profile>
+        </FirstDiv>
         <Row>
           <Div>
-            <Profile size="0.8rem" level={1} name="Name"></Profile>
+            <Filterinfo></Filterinfo>
             <Text level={1} color="#232735">
               YYYY.MM.DD
             </Text>
@@ -31,7 +33,7 @@ export default function Top(props) {
 const Wrapper = styled.div`
   width: 100%;
   border-bottom: 0.07rem solid #d3d4d8;
-  padding: 0.8rem 1rem 0rem 1rem;
+  padding: 0.8rem 1rem 0.6rem 1rem;
   box-sizing: border-box;
   height: fit-content;
 `;
@@ -41,4 +43,10 @@ const Div = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const FirstDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 `;
