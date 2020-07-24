@@ -1,20 +1,20 @@
 import ProjectList from "./ProjectList";
-import Filter from "../molecules/Filter";
+import Filter from "../molecules/Filter/Filter";
 import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
+import DropdownMenu from "../molecules/Filter/DropdownMenu";
 export default function ProjectFilter(){
-    return(
-<Wrapper>
-        <InnerWrapper>
-          <Div>
-            <Filter type="bigoff" title="최신순"></Filter>
-          </Div>
-          <ProjectList></ProjectList>
-        </InnerWrapper>
-        <WriteButton></WriteButton>
-        </Wrapper>
-      
-    );
+    return (
+			<Wrapper>
+				<InnerWrapper>
+					<Div>
+						<Filter title="최신순"></Filter>
+					</Div>
+					<ProjectList></ProjectList>
+				</InnerWrapper>
+				<WriteButton></WriteButton>
+			</Wrapper>
+		);
 }
 
 const Div = styled.div`
