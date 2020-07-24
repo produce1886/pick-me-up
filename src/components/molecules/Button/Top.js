@@ -21,7 +21,7 @@ ${(props) => css`
     bottom: 0;
     display: flex;
     flex-direction: column;
-    background-color: ${props.background};
+    background-color: transparent;
     border: none;
     padding: 0 24rem 0 0;
     `}
