@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import Gnb from "../src/components/organisms/Gnb";
 import ProjectBody from "../src/components/templates/ProjectBody"
-import Bottom from "../src/components/organisms/Bottom";
+import BottomButtons from "../src/components/organisms/BottomButtons";
 import FilterSearch from "../src/components/organisms/FilterSearch";
 
-export default function Project() {
+export default function Project(props) {
   
   return (
     <>
       <Gnb></Gnb>
       <FilterSearch type="project"></FilterSearch>
       <ProjectBody></ProjectBody>
-      <Bottom background="#f0f8fd"></Bottom>
+      <BottomButtons background="#f0f8fd"></BottomButtons>
     </>
   );
 }
