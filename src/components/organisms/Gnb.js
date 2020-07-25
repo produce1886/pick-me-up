@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Logo from "../molecules/Button/Logo";
 import Wrapper from "../atoms/gnb";
 import MainMenu from "../molecules/menu/Main";
-import SubMenu from "../molecules/menu/Sub";
+import LogInButton from "../molecules/Button/SignIn";
 
 export default function GlobalNavigationBar() {
   return (
@@ -10,7 +10,7 @@ export default function GlobalNavigationBar() {
       <InnerWrapper>
         <Logo></Logo>
         <MainMenu></MainMenu>
-        <SubMenu></SubMenu>
+        <LogInButton></LogInButton>
       </InnerWrapper>
     </Wrapper>
   );

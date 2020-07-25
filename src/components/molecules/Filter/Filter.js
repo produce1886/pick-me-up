@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Text from "../atoms/Text";
-import Wrapper from "../atoms/Filter";
-import Icondownline from "../atoms/Icon/Chevron/Down";
-import Iconupline from "../atoms/Icon/Chevron/Up";
-import Iconup from "../atoms/Icon/Filter/Up";
-import Icondown from "../atoms/Icon/Filter/Down";
+import Text from "../../atoms/Text";
+import Wrapper from "../../atoms/Filter";
+import Icondownline from "../../atoms/Icon/Chevron/Down";
+import Iconupline from "../../atoms/Icon/Chevron/Up";
+import Iconup from "../../atoms/Icon/Filter/Up";
+import Icondown from "../../atoms/Icon/Filter/Down";
 
 export default function Filter(props) {
   const [clicked, setClicked] = useState(false);
@@ -33,6 +33,7 @@ export default function Filter(props) {
         ) : (
           <Icondown style={iconStyle} fill="#232735"></Icondown>
         )}
+        {clicked && props.children}
       </Wrapper>
     );
   }
@@ -54,6 +55,7 @@ export default function Filter(props) {
       ) : (
         <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>
       )}
+      {clicked && props.children}
     </Wrapper>
   );
 }

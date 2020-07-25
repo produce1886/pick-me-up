@@ -1,27 +1,29 @@
 import styled from "styled-components";
 import Search from "../molecules/Input/Search";
-import Filter from "../molecules/Filter";
+import Filter from "../molecules/Filter/Filter";
 
 export default function FilterSearch(props) {
   return (
     <Wrapper>
-      <FilterWrapper>
-        <Filter title="카테고리"></Filter>
-        <Filter title="구인분야"></Filter>
-        {props.type === "project" && (
-          <>
-            <Filter title="지역"></Filter>
-            <Filter title="프로젝트 종류"></Filter>
-          </>
-        )}
-      </FilterWrapper>
-      <Search></Search>
+      <InnerWrapper>
+        <FilterWrapper>
+          <Filter title="카테고리"></Filter>
+          <Filter title="구인분야"></Filter>
+          {props.type === "project" && (
+            <>
+              <Filter title="지역"></Filter>
+              <Filter title="프로젝트 종류"></Filter>
+            </>
+          )}
+        </FilterWrapper>
+        <Search></Search>
+      </InnerWrapper>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
-  width: 48rem;
+  width: 100%;
   height: 3.2rem;
   justify-content: center;
   align-items: center;
@@ -29,6 +31,7 @@ const Wrapper = styled.div`
   bottom: 0;
   display: flex;
   flex-direction: row;
+  border-bottom: 0.01rem solid #d3d4d8;
 `;
 
 const FilterWrapper = styled.div`
@@ -39,4 +42,12 @@ const FilterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 15rem 0 0rem;
+`;
+const InnerWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  margin: 0 4rem 0 4rem;
+  max-width: 1200px;
+  width: 48rem;
 `;
