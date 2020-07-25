@@ -2,19 +2,20 @@ import ProjectList from "./ProjectList";
 import Filter from "../molecules/Filter/Filter";
 import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
-import DropdownMenu from "../molecules/Filter/DropdownMenu";
-export default function ProjectFilter(){
-    return (
-			<Wrapper>
-				<InnerWrapper>
-					<Div>
-						<Filter title="최신순"></Filter>
-					</Div>
-					<ProjectList></ProjectList>
-				</InnerWrapper>
-				<WriteButton></WriteButton>
-			</Wrapper>
-		);
+//import DropdownMenu from "../molecules/Filter/DropdownMenu";
+
+export default function ProjectFilter() {
+  return (
+    <Wrapper>
+      <InnerWrapper>
+        <Div>
+          <Filter title="최신순"></Filter>
+        </Div>
+        <ProjectList></ProjectList>
+      </InnerWrapper>
+      <WriteButton></WriteButton>
+    </Wrapper>
+  );
 }
 
 const Div = styled.div`
@@ -26,9 +27,9 @@ const Div = styled.div`
 `;
 
 const InnerWrapper = styled.div`
-margin: 0 4rem 0 4rem;
-max-width: 1200px;
-width: 48rem;
+  margin: 0 4rem 0 4rem;
+  max-width: 1200px;
+  width: 48rem;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
