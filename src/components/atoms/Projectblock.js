@@ -9,4 +9,5 @@ export default styled.div`
   position: relative;
   box-sizing: border-box;
   margin: 0 0.4rem 0 0.4rem;
+  z-index:101;
 `;

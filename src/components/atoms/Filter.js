@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export default styled.p`
+export default styled.div`
 	${(props) => css`
 		width: ${props.width};
 		height: ${props.height};
@@ -13,8 +13,7 @@ export default styled.p`
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-    align-items: center;
+		align-items: center;
 		position: relative;
-		zindex: ${props.zIndex};
 	`}
 `;

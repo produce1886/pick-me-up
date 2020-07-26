@@ -61,7 +61,6 @@ export default function Filter(props) {
 }
 
 const Col = styled.div`
-	display: flex;
 	flex-direction: column;
 	width: fit-content;
 	height: fit-content;
