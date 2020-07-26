@@ -35,6 +35,8 @@ const InnerWrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	box-sizing: border-box;
+	position: relative;
+	z-index: 100;
 `;
 
 const Wrapper = styled.div`

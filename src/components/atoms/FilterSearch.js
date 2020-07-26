@@ -13,7 +13,5 @@ ${(props) => css`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    position: relative;
-    zindex: ${props.zIndex};
     `}
 `;
