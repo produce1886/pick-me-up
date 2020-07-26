@@ -1,8 +1,6 @@
 import styled, { css } from "styled-components";
-import Wrapper from "../atoms/Portfolioblock";
+import Wrapper from "../atoms/PortfolioBlock";
 
-export default function Portfolioblock(){
-    return(
-        <Wrapper></Wrapper>
-    );
+export default function PortfolioBlock() {
+  return <Wrapper></Wrapper>;
 }
