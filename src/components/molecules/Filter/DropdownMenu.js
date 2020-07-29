@@ -7,20 +7,53 @@ import { useState } from "react";
 
 export default function DropdownMenu(props) {
 	const CATEGORY = [
-		{ id: 0, title: "웹", selected: false, key: "category", link: ""},
-		{ id: 1, title: "어플리케이션", selected: false, key: "category", link: ""},
-		{ id: 2, title: "게임", selected: false, key: "category", link: ""},
-		{ id: 3, title: "그래픽", selected: false, key: "category", link: ""},
-		{ id: 4, title: "브랜딩", selected: false, key: "category", link: ""},
-		{ id: 5, title: "소프트웨어", selected: false, key: "category", link: ""},
-		{ id: 6, title: "영상", selected: false, key: "category",link:""},
-		{ id: 7, title: "임베디드", selected: false, key: "category",link:""},
-		{ id: 8, title: "제품", selected: false, key: "category",link:""},
-		{ id: 9, title: "출판", selected: false, key: "category",link:""},
-		{ id: 10, title: "퍼블리싱", selected: false, key: "category",link:""},
-		{ id: 11, title: "기타", selected: false, key: "category",link:""},
+		{ id: 0, title: "웹", selected: false, key: "category", link: "" },
+		{ id: 1, title: "어플리케이션", selected: false, key: "category", link: "" },
+		{ id: 2, title: "게임", selected: false, key: "category", link: "" },
+		{ id: 3, title: "그래픽", selected: false, key: "category", link: "" },
+		{ id: 4, title: "브랜딩", selected: false, key: "category", link: "" },
+		{ id: 5, title: "소프트웨어", selected: false, key: "category", link: "" },
+		{ id: 6, title: "영상", selected: false, key: "category", link: "" },
+		{ id: 7, title: "임베디드", selected: false, key: "category", link: "" },
+		{ id: 8, title: "제품", selected: false, key: "category", link: "" },
+		{ id: 9, title: "출판", selected: false, key: "category", link: "" },
+		{ id: 10, title: "퍼블리싱", selected: false, key: "category", link: "" },
+		{ id: 11, title: "기타", selected: false, key: "category", link: "" },
 	];
-	const [category_title,setCategoryTitle]=useState("카테고리");
+	const FIELD = [
+		{id: 0, title: "기획", selected: false, key: "field", link: ""},
+		{id: 1, title: "개발", selected: false, key: "field", link: ""},
+		{id: 2, title: "디자인", selected: false, key: "field", link: ""}
+	];
+	const  REGION=[
+		{id: 0, title: "서울", selected: false, key: "region", link: ""},
+		{id: 1, title: "경기", selected: false, key: "region", link: ""},
+		{id: 2, title: "광주", selected: false, key: "region", link: ""},
+		{id: 3, title: "대구", selected: false, key: "region", link: ""},
+		{id: 4, title: "대전", selected: false, key: "region", link: ""},
+		{id: 5, title: "부산", selected: false, key: "region", link: ""},
+		{id: 6, title: "인천", selected: false, key: "region", link: ""},
+		{id: 7, title: "울산", selected: false, key: "region", link: ""},
+		{id: 8, title: "세종", selected: false, key: "region", link: ""},
+		{id: 9, title: "제주", selected: false, key: "region", link: ""},
+		{id: 10, title: "강원", selected: false, key: "region", link: ""},
+		{id: 11, title: "경남", selected: false, key: "region", link: ""},
+		{id: 12, title: "경북", selected: false, key: "region", link: ""},
+		{id: 13, title: "전남", selected: false, key: "region", link: ""},
+		{id: 14, title: "전북", selected: false, key: "region", link: ""},
+		{id: 15, title: "충남", selected: false, key: "region", link: ""},
+		{id: 16, title: "충북", selected: false, key: "region", link: ""}
+	]
+	const PROJECTTYPE=[
+		{id: 0, title: "공모전", selected: false, key: "projecttype", link: ""},
+		{id: 0, title: "창업", selected: false, key: "projecttype", link: ""},
+		{id: 0, title: "프로젝트", selected: false, key: "projecttype", link: ""},
+		{id: 0, title: "기타", selected: false, key: "projecttype", link: ""}
+	]
+	const ALIGN=[
+		{id: 0, title: "조회순", selected: false, key: "align", link: ""},
+		{id: 1, title: "댓글순", selected: false, key: "align", link: ""},
+	]
 	if (props.activeMenu === "align") {
 		return (
 			<Wrapper zIndex="102">
@@ -34,12 +67,18 @@ export default function DropdownMenu(props) {
 						최신순
 					</Text>
 				</Hover>
-				<ItemWrapper link="" text="조회순"></ItemWrapper>
-				<ItemWrapper link="" text="댓글순"></ItemWrapper>
+				{ALIGN.map((value) => (
+					<ItemWrapper
+						link={value.link}
+						text={value.title}
+						selected={value.selected}
+						key={value.key}
+						id={value.id}></ItemWrapper>
+				))}
 			</Wrapper>
 		);
 	} else if (props.activeMenu === "category") {
-		let lists=[];
+		let lists = [];
 		return (
 			<Wrapper zIndex="200">
 				<Hover
@@ -52,12 +91,14 @@ export default function DropdownMenu(props) {
 						전체보기
 					</Text>
 				</Hover>
-				{
-					CATEGORY.map(value => (
-						<ItemWrapper link={value.link} text={value.title} selected={value.selected} key={value.key} id={value.id}></ItemWrapper>
-					))
-				}
-				
+				{CATEGORY.map((value) => (
+					<ItemWrapper
+						link={value.link}
+						text={value.title}
+						selected={value.selected}
+						key={value.key}
+						id={value.id}></ItemWrapper>
+				))}
 			</Wrapper>
 		);
 	} else if (props.activeMenu === "region") {
@@ -73,23 +114,14 @@ export default function DropdownMenu(props) {
 						전체보기
 					</Text>
 				</Hover>
-				<ItemWrapper link="" text="서울"></ItemWrapper>
-				<ItemWrapper link="" text="경기"></ItemWrapper>
-				<ItemWrapper link="" text="광주"></ItemWrapper>
-				<ItemWrapper link="" text="대구"></ItemWrapper>
-				<ItemWrapper link="" text="대전"></ItemWrapper>
-				<ItemWrapper link="" text="부산"></ItemWrapper>
-				<ItemWrapper link="" text="인천"></ItemWrapper>
-				<ItemWrapper link="" text="울산"></ItemWrapper>
-				<ItemWrapper link="" text="세종"></ItemWrapper>
-				<ItemWrapper link="" text="제주"></ItemWrapper>
-				<ItemWrapper link="" text="강원"></ItemWrapper>
-				<ItemWrapper link="" text="경남"></ItemWrapper>
-				<ItemWrapper link="" text="경북"></ItemWrapper>
-				<ItemWrapper link="" text="전남"></ItemWrapper>
-				<ItemWrapper link="" text="전북"></ItemWrapper>
-				<ItemWrapper link="" text="충남"></ItemWrapper>
-				<ItemWrapper link="" text="충북"></ItemWrapper>
+				{REGION.map((value) => (
+					<ItemWrapper
+						link={value.link}
+						text={value.title}
+						selected={value.selected}
+						key={value.key}
+						id={value.id}></ItemWrapper>
+				))}
 			</Wrapper>
 		);
 	} else if (props.activeMenu === "field") {
@@ -105,9 +137,14 @@ export default function DropdownMenu(props) {
 						전체보기
 					</Text>
 				</Hover>
-				<ItemWrapper link="" text="기획"></ItemWrapper>
-				<ItemWrapper link="" text="개발"></ItemWrapper>
-				<ItemWrapper link="" text="디자인"></ItemWrapper>
+				{FIELD.map((value) => (
+					<ItemWrapper
+						link={value.link}
+						text={value.title}
+						selected={value.selected}
+						key={value.key}
+						id={value.id}></ItemWrapper>
+				))}
 			</Wrapper>
 		);
 	} else if (props.activeMenu === "projecttype") {
@@ -123,10 +160,14 @@ export default function DropdownMenu(props) {
 						전체보기
 					</Text>
 				</Hover>
-				<ItemWrapper link="" text="공모전"></ItemWrapper>
-				<ItemWrapper link="" text="창업"></ItemWrapper>
-				<ItemWrapper link="" text="프로젝트"></ItemWrapper>
-				<ItemWrapper link="" text="기타"></ItemWrapper>
+				{PROJECTTYPE.map((value) => (
+					<ItemWrapper
+						link={value.link}
+						text={value.title}
+						selected={value.selected}
+						key={value.key}
+						id={value.id}></ItemWrapper>
+				))}
 			</Wrapper>
 		);
 	}
