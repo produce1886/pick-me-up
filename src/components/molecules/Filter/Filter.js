@@ -6,7 +6,6 @@ import Icondownline from "../../atoms/Icon/Chevron/Down";
 import Iconupline from "../../atoms/Icon/Chevron/Up";
 import Iconup from "../../atoms/Icon/Filter/Up";
 import Icondown from "../../atoms/Icon/Filter/Down";
-import DropdownMenu from "../Filter/DropdownMenu";
 
 export default function Filter(props) {
   const [clicked, setClicked] = useState(false);
