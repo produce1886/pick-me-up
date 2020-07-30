@@ -4,12 +4,16 @@ import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
 import DropdownMenu from "../molecules/Filter/DropdownMenu";
 export default function ProjectFilter() {
+	const ALIGN=[
+		{id: 0, title: "조회순", selected: false, key: "align", link: ""},
+		{id: 1, title: "댓글순", selected: false, key: "align", link: ""},
+	]
 	return (
 		<Wrapper>
 			<InnerWrapper>
 				<Div>
 					<Filter title="최신순">
-						<DropdownMenu activeMenu="align"></DropdownMenu>
+						<DropdownMenu activeMenu="align" ALIGN={ALIGN}></DropdownMenu>
 					</Filter>
 				</Div>
 				<ProjectList></ProjectList>
