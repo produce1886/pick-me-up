@@ -49,28 +49,73 @@ export default function FilterSearch(props) {
 		{id: 2, title: "프로젝트", selected: false, key: "projecttype", link: ""},
 		{id: 3, title: "기타", selected: false, key: "projecttype", link: ""}
 	]
-	const [title, setTitle]=useState("카테고리");
-	const toggleSelected=(e, title, id, key)=>{
-		setTitle(title);
-		alert(e.target);
+	const category="카테고리"
+	const region="지역"
+	const field="구인분야"
+	const projecttype="프로젝트 종류"
+	
+	const [categorytitle, setCategoryTitle]=useState(category);
+	const [regiontitle, setRegionTitle]=useState(region);
+	const [fieldtitle, setFieldTitle]=useState(field);
+	const [projecttypetitle, setProjectTypeTitle]=useState(projecttype);
+	
+	const [selected, setSelected]=useState(false);
+
+	let _CATEGORY=Array.from(CATEGORY);
+	let _REGION = Array.from(REGION);
+	let _FIELD=Array.from(FIELD);
+	let _PROJECTTYPE=Array.from(PROJECTTYPE);
+
+	const toggleSelected=(key, id)=>{
+		if (key===_CATEGORY.key){
+			for (let i=0;i<_CATEGORY.length;i++){
+				if(_CATEGORY[i].id===id){
+					setCategoryTitle(_CATEGORY[i].title);
+					alert(_CATEGORY[id].key)			
+				}
+			}
+		}
+		else if (key===_FIELD.key){
+			for (let i=0;i<_FIELD.length;i++){
+				if(_FIELD[i].id===id){
+					setFieldTitle(_FIELD[i].title);
+				}
+			}
+		}
+		else if (key===_PROJECTTYPE.key){
+			for (let i=0;i<_PROJECTTYPE.length;i++){
+				if(_PROJECTTYPE[i].id===id){
+					setProjectTypeTitle(_PROJECTTYPE[i].title);
+					alert(_PROJECTTYPE[id].key)			
+				}
+			}
+		}
+		else if (key===_REGION.key){
+			for (let i=0;i<_REGION.length;i++){
+				if(_REGION[i].id===id){
+					setRegionTitle(_REGION[i].title);
+					alert(_REGION[id].key)			
+				}
+			}
+		}
 	}
   
 	return (
 		<Wrapper>
 			<InnerWrapper>
 				<FilterWrapper>
-					<Filter title={title} >
+					<Filter title={categorytitle} CATEGORY={CATEGORY}>
 						<DropdownMenu activeMenu="category" toggleSelected={toggleSelected} CATEGORY={CATEGORY}></DropdownMenu>
 					</Filter>
-					<Filter title="구인분야">
+					<Filter title={fieldtitle}>
 						<DropdownMenu activeMenu="field" toggleSelected={toggleSelected} FIELD={FIELD}></DropdownMenu>
 					</Filter>
 					{props.type === "project" && (
 						<>
-							<Filter title="지역">
+							<Filter title={regiontitle}>
 								<DropdownMenu activeMenu="region" toggleSelected={toggleSelected} REGION={REGION}></DropdownMenu>
 							</Filter>
-							<Filter title="프로젝트 종류">
+							<Filter title={projecttypetitle}>
 								<DropdownMenu activeMenu="projecttype" toggleSelected={toggleSelected} PROJECTTYPE={PROJECTTYPE}></DropdownMenu>
 							</Filter>
 						</>

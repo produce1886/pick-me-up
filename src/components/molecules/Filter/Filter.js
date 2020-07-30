@@ -6,13 +6,14 @@ import Icondownline from "../../atoms/Icon/Chevron/Down";
 import Iconupline from "../../atoms/Icon/Chevron/Up";
 import Iconup from "../../atoms/Icon/Filter/Up";
 import Icondown from "../../atoms/Icon/Filter/Down";
+import IconX from "../../atoms/Icon/X"
 
 export default function Filter(props) {
   const [clicked, setClicked] = useState(false);
   const iconStyle = {
     width: "0.6rem",
     height: "0.4rem",
-    margin: "0 0 0 0.4rem",
+    margin: "0 0 0 0.3rem",
   };
   if (props.title === "최신순") {
     return (
@@ -23,6 +24,7 @@ export default function Filter(props) {
         border={clicked ? "0.08rem" : "0.04rem"}
         borderColor={clicked ? "#c8acee" : "#d3d4d8"}
         backgroundColor="#ffffff"
+        CATEGORY={props.CATEGORY}
       >
         <Text line="1.08rem" level={3} color="#232735">
           {props.title}
@@ -41,6 +43,7 @@ export default function Filter(props) {
     <Wrapper
       onClick={() => setClicked(!clicked)}
       width="fit-content"
+      max-height="1.6rem"
       height="1.6rem"
       border="0.04rem"
       borderColor="#d3d4d8"
@@ -50,7 +53,7 @@ export default function Filter(props) {
         {props.title}
       </Text>
       {clicked ? (
-        <Iconupline style={iconStyle} fill="#8b90a0"></Iconupline>
+        <Iconupline style={iconStyle} fill="#8b90a0"></Iconupline> 
       ) : (
         <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>
       )}

@@ -6,6 +6,7 @@ import Text from "../../atoms/Text";
 import { useState } from "react";
 
 export default function DropdownMenu(props) {
+
 	if (props.activeMenu === "align") {
 		return (
 			<Wrapper zIndex="102">
@@ -26,7 +27,8 @@ export default function DropdownMenu(props) {
 						selected={value.selected}
 						key={value.key}
 						id={value.id}
-						toggleSelected={props.toggleSelected}></ItemWrapper>
+						toggleSelected={props.toggleSelected}
+						></ItemWrapper>
 				))}
 			</Wrapper>
 		);
@@ -51,7 +53,8 @@ export default function DropdownMenu(props) {
 						selected={value.selected}
 						key={value.key}
 						id={value.id}
-						toggleSelected={props.toggleSelected}></ItemWrapper>
+						toggleSelected={props.toggleSelected}
+						></ItemWrapper>
 				))}
 			</Wrapper>
 		);
@@ -75,7 +78,8 @@ export default function DropdownMenu(props) {
 						selected={value.selected}
 						key={value.key}
 						id={value.id}
-						toggleSelected={props.toggleSelected}></ItemWrapper>
+						toggleSelected={props.toggleSelected}
+						></ItemWrapper>
 				))}
 			</Wrapper>
 		);
@@ -99,7 +103,8 @@ export default function DropdownMenu(props) {
 						selected={value.selected}
 						key={value.key}
 						id={value.id}
-						toggleSelected={props.toggleSelected}></ItemWrapper>
+						toggleSelected={props.toggleSelected}
+						></ItemWrapper>
 				))}
 			</Wrapper>
 		);
@@ -123,7 +128,8 @@ export default function DropdownMenu(props) {
 						selected={value.selected}
 						key={value.key}
 						id={value.id}
-						toggleSelected={props.toggleSelected}></ItemWrapper>
+						toggleSelected={props.toggleSelected}
+						></ItemWrapper>
 				))}
 			</Wrapper>
 		);
