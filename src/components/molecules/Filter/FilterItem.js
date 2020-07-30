@@ -6,17 +6,17 @@ import { useState, useRef, useEffect } from "react";
 
 export default function FilterItem(props) {
 	const [mouseon, setColor] = useState(false);
-	const clickedItem=(e)=>{
-		//props.toggleSelected(props.key, props.id);
-		alert(e.target.value);
-	} ;
+	const selected=()=>{
+		props.toggleSelected(props.text)
+		console.log(props)
+	}
 	return (
 		<Link href={props.link}>
 			<A>
 				<Wrapper
                     onMouseOver={() => setColor(true)}
 					onMouseOut={()=>setColor(false)}
-					onClick={(e)=>clickedItem(e)}
+					onClick={()=>props.toggleSelected(props.text)}
                     backgroundColor={mouseon ? "#f5edff": "#ffffff"}>
 					<Text line="1rem" level={3} color="#232735" align="left">
 						{props.text}
