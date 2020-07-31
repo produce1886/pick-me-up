@@ -10,7 +10,6 @@ import IconX from "../../atoms/Icon/X";
 import DropdownMenu from "../Filter/DropdownMenu";
 
 export default function Filter(props) {
-	const [clicked, setClicked] = useState(false);
 	const iconStyle = {
 		width: "0.6rem",
 		height: "0.4rem",
@@ -21,17 +20,20 @@ export default function Filter(props) {
 		height: "0.6rem",
 		margin: "0 0 0 0.3rem",
 	};
+
+	const [clicked, setClicked] = useState(false);
 	const [title, setTitle] = useState(props.title);
 	const [selected, setSelected] = useState(false);
 	const toggleSelected = (text, selected) => {
 		setTitle(text);
 		setSelected(selected);
 	};
+
 	let background = "#ffffff";
 	let icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
 
 	if (selected) {
-		icon = <IconX style={iconXStyle} fill="#232735" onClick={alert("clicked")}></IconX>;
+		icon = <IconX style={iconXStyle} fill="#232735" setSelected={setSelected}></IconX>;
 		background = "#d3d4d8";
 	} else if (clicked) {
 		icon = <Iconupline style={iconStyle} fill="#8b90a0"></Iconupline>;
@@ -86,9 +88,3 @@ export default function Filter(props) {
 		</Wrapper>
 	);
 }
-
-const Col = styled.div`
-	flex-direction: column;
-	width: fit-content;
-	height: fit-content;
-`;
