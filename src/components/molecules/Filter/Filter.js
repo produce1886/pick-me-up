@@ -22,17 +22,16 @@ export default function Filter(props) {
 		margin: "0 0 0 0.3rem",
 	};
 	const [title, setTitle] = useState(props.title);
-	const [selected, setSelected] = useState();
+	const [selected, setSelected] = useState(false);
 	const toggleSelected = (text, selected) => {
 		setTitle(text);
 		setSelected(selected);
-		console.log(text, selected);
 	};
 	let background = "#ffffff";
 	let icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
 
 	if (selected) {
-		icon = <IconX style={iconXStyle} fill="#232735" ></IconX>;
+		icon = <IconX style={iconXStyle} fill="#232735" onClick={alert("clicked")}></IconX>;
 		background = "#d3d4d8";
 	} else if (clicked) {
 		icon = <Iconupline style={iconStyle} fill="#8b90a0"></Iconupline>;
