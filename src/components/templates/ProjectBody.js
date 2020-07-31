@@ -2,14 +2,14 @@ import ProjectList from "./ProjectList";
 import Filter from "../molecules/Filter/Filter";
 import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
-import Item from "../molecules/Filter/Item"
+import {ALIGN} from "../molecules/Filter/Item"
 export default function ProjectFilter() {
 	
 	return (
 		<Wrapper>
 			<InnerWrapper>
 				<Div>
-					<Filter title="최신순" activeMenu="align" data={Item.ALIGN}></Filter>
+					<Filter title="최신순" activeMenu="align" data={ALIGN}></Filter>
 				</Div>
 				<ProjectList></ProjectList>
 			</InnerWrapper>

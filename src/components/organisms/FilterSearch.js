@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Search from "../molecules/Input/Search";
 import Filter from "../molecules/Filter/Filter";
 import Wrapper from "../atoms/FilterSearch";
-import Item from "../molecules/Filter/Item"
+import {PROJECTTYPE, FIELD, REGION, CATEGORY} from "../molecules/Filter/Item"
 export default function FilterSearch(props) {
 	
 	const category = "카테고리";
@@ -14,12 +14,12 @@ export default function FilterSearch(props) {
 		<Wrapper>
 			<InnerWrapper>
 				<FilterWrapper>
-					<Filter title={category} activeMenu="category" data={Item.CATEGORY}></Filter>
-					<Filter title={field} activeMenu="field" data={Item.FIELD}></Filter>
+					<Filter title={category} activeMenu="category" data={CATEGORY}></Filter>
+					<Filter title={field} activeMenu="field" data={FIELD}></Filter>
 					{props.type === "project" && (
 						<>
-							<Filter title={region} activeMenu="region" data={Item.REGION}></Filter>
-							<Filter title={projecttype} activeMenu="projecttype" data={Item.PROJECTTYPE}></Filter>
+							<Filter title={region} activeMenu="region" data={REGION}></Filter>
+							<Filter title={projecttype} activeMenu="projecttype" data={PROJECTTYPE}></Filter>
 						</>
 					)}
 				</FilterWrapper>
