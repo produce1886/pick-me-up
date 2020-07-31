@@ -6,6 +6,7 @@ import Text from "../../atoms/Text";
 import { useState } from "react";
 
 export default function DropdownMenu(props) {
+	
 		return (
 			<Wrapper zIndex={props.activeMenu==="align" ? "102" : "200"}>
 				<Hover
