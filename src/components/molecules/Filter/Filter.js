@@ -24,20 +24,43 @@ export default function Filter(props) {
 	const [clicked, setClicked] = useState(false);
 	const [title, setTitle] = useState(props.title);
 	const [selected, setSelected] = useState(false);
+	const [reset, setReset] = useState(false);
+
 	const toggleSelected = (text, selected) => {
 		setTitle(text);
 		setSelected(selected);
 	};
+	const resetFilter = () => {
+		setTitle(props.title);
+		setSelected(false);
+		setClicked(false);
+		setReset(!reset);
+		console.log(selected, clicked, reset)
+	};
 
 	let background = "#ffffff";
 	let icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
-
+	let iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
 	if (selected) {
-		icon = <IconX style={iconXStyle} fill="#232735" setSelected={setSelected}></IconX>;
+		icon = (
+			<Button onClick={resetFilter}>
+				<IconX style={iconXStyle} fill="#232735"></IconX>
+			</Button>
+		);
+		iconAlign = (
+			<Button onClick={resetFilter}>
+				<IconX style={iconXStyle} fill="#232735"></IconX>
+			</Button>
+		);
 		background = "#d3d4d8";
 	} else if (clicked) {
 		icon = <Iconupline style={iconStyle} fill="#8b90a0"></Iconupline>;
 		background = "#f0f1f3";
+		iconAlign = <Iconup style={iconStyle} fill="#232735"></Iconup>;
+	} else if (reset) {
+		background = "#ffffff";
+		icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
+		iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
 	}
 	if (props.title === "최신순") {
 		return (
@@ -51,12 +74,8 @@ export default function Filter(props) {
 				<Text line="1.08rem" level={3} color="#232735">
 					{title}
 				</Text>
-				{clicked ? (
-					<Iconup style={iconStyle} fill="#232735"></Iconup>
-				) : (
-					<Icondown style={iconStyle} fill="#232735"></Icondown>
-				)}
-				{clicked && (
+				{iconAlign}
+				{clicked && !selected &&(
 					<DropdownMenu
 						activeMenu={props.activeMenu}
 						data={props.data}
@@ -88,3 +107,9 @@ export default function Filter(props) {
 		</Wrapper>
 	);
 }
+
+const Button = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+`;
