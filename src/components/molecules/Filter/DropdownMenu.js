@@ -25,7 +25,8 @@ export default function DropdownMenu(props) {
 					selected={value.selected}
 					type={value.type}
 					key={value.key}
-					toggleSelected={props.toggleSelected}></ItemWrapper>
+					toggleSelected={props.toggleSelected}
+					></ItemWrapper>
 			))}
 		</Wrapper>
 	);
