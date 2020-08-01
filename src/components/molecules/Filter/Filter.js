@@ -22,41 +22,62 @@ export default function Filter(props) {
 	};
 
 	const [clicked, setClicked] = useState(false);
-	const [title, setTitle] = useState(props.title);
-	const [selected, setSelected] = useState(false);
-	const toggleSelected = (text, selected) => {
-		setTitle(text);
-		setSelected(selected);
+	const [item, setItem] = useState(null);
+
+	const toggleSelected = (item) => {
+		setItem(item);
 	};
+	const resetFilter = () => {
+		setItem(null);
+		setClicked(false);
+	};
+
+	const openMenu=()=>{
+		if(item)return;
+		setClicked(!clicked)
+	}
 
 	let background = "#ffffff";
 	let icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
+	let iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
+	let backgroundAlign = "#ffffff"
 
-	if (selected) {
-		icon = <IconX style={iconXStyle} fill="#232735" setSelected={setSelected}></IconX>;
+	if (item) {
+		icon = (
+			<Button onClick={resetFilter}>
+				<IconX style={iconXStyle} fill="#232735"></IconX>
+			</Button>
+		);
+		iconAlign = (
+			<Button onClick={resetFilter}>
+				<IconX style={iconXStyle} fill="#232735"></IconX>
+			</Button>
+		);
 		background = "#d3d4d8";
+		backgroundAlign = "#d3d4d8";
 	} else if (clicked) {
 		icon = <Iconupline style={iconStyle} fill="#8b90a0"></Iconupline>;
 		background = "#f0f1f3";
+		iconAlign = <Iconup style={iconStyle} fill="#232735"></Iconup>;
+	} else{
+		background = "#ffffff";
+		icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
+		iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
 	}
 	if (props.title === "최신순") {
 		return (
 			<Wrapper
-				onClick={() => setClicked(!clicked)}
+				onClick={() => openMenu()}
 				width="6rem"
 				height="1.6rem"
 				border={clicked ? "0.08rem" : "0.04rem"}
 				borderColor={clicked ? "#c8acee" : "#d3d4d8"}
-				backgroundColor="#ffffff">
+				backgroundColor={backgroundAlign}>
 				<Text line="1.08rem" level={3} color="#232735">
-					{title}
+					{item? item.title : props.title}
 				</Text>
-				{clicked ? (
-					<Iconup style={iconStyle} fill="#232735"></Iconup>
-				) : (
-					<Icondown style={iconStyle} fill="#232735"></Icondown>
-				)}
-				{clicked && (
+				{iconAlign}
+				{clicked && !item &&(
 					<DropdownMenu
 						activeMenu={props.activeMenu}
 						data={props.data}
@@ -68,7 +89,7 @@ export default function Filter(props) {
 
 	return (
 		<Wrapper
-			onClick={() => setClicked(!clicked)}
+			onClick={() => openMenu()}
 			width="fit-content"
 			max-height="1.6rem"
 			height="1.6rem"
@@ -76,10 +97,10 @@ export default function Filter(props) {
 			borderColor="#d3d4d8"
 			backgroundColor={background}>
 			<Text line="1.08rem" level={3} color="#232735">
-				{title}
+			{item? item.title : props.title}
 			</Text>
 			{icon}
-			{clicked && !selected && (
+			{clicked && !item && (
 				<DropdownMenu
 					activeMenu={props.activeMenu}
 					data={props.data}
@@ -88,3 +109,9 @@ export default function Filter(props) {
 		</Wrapper>
 	);
 }
+
+const Button = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+`;

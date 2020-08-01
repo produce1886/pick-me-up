@@ -8,17 +8,17 @@ export default function FilterItem(props) {
 	const [mouseon, setColor] = useState(false);
 	
 	return (
-		<Link href={props.link}>
+		<Link href={props.item.link}>
 			<A>
 				<Wrapper
 					onMouseOver={() => setColor(true)}
 					onMouseOut={() => setColor(false)}
 					onClick={() => {
-						props.toggleSelected(props.text, true);
+						props.toggleSelected(props.item);
 					}}
 					backgroundColor={mouseon ? "#f5edff" : "#ffffff"}>
 					<Text line="1rem" level={3} color="#232735" align="left">
-						{props.text}
+						{props.item.title}
 					</Text>
 				</Wrapper>
 			</A>
