@@ -20,12 +20,9 @@ export default function DropdownMenu(props) {
 			</Hover>
 			{props.data.map((value) => (
 				<ItemWrapper
-					link={value.link}
-					text={value.title}
-					selected={value.selected}
-					type={value.type}
-					key={value.key}
-					toggleSelected={props.toggleSelected}></ItemWrapper>
+					item={value}
+					toggleSelected={props.toggleSelected}
+					></ItemWrapper>
 			))}
 		</Wrapper>
 	);
