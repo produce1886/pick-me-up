@@ -1,7 +1,8 @@
-import Head from "next/head";
 import Gnb from "../src/components/organisms/Gnb";
 import Banner from "../src/components/organisms/Banner";
 import Preview from "../src/components/templates/Preview";
+import HotTag from "../src/components/organisms/HotTag";
+import Footer from "../src/components/organisms/Footer";
 
 export default function Home() {
   return (
@@ -10,6 +11,8 @@ export default function Home() {
       <Banner></Banner>
       <Preview type="new"></Preview>
       <Preview type="most"></Preview>
+      <HotTag></HotTag>
+      <Footer></Footer>
     </>
   );
 }

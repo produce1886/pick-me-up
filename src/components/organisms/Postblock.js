@@ -1,10 +1,10 @@
-import Wrapper from "../atoms/Postblock";
-import Top from "../molecules/Postblock/Top";
-import Bottom from "../molecules/Postblock/Bottom";
+import Wrapper from "../atoms/PostBlock";
+import Top from "../molecules/PostBlock/Top";
+import Bottom from "../molecules/PostBlock/Bottom";
 import styled, { css } from "styled-components";
 import Text from "../atoms/Text";
 
-export default function Postblock(props) {
+export default function PostBlock(props) {
   return (
     <Wrapper>
       <Top type={props.type} rank={props.rank}></Top>

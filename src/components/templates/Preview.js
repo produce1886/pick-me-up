@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Postblock from "../organisms/Postblock";
 import Link from "next/link";
 import Text from "../atoms/Text";
-import Col from "../atoms/Col";
 import Icon from "../atoms/Icon/Chevron/Right";
 
 export default function Preview(props) {
@@ -69,27 +68,32 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: 1.6rem 0 1.6rem 0;
+  box-sizing: border-box;
 `;
 
 const InnerWrapper = styled.div`
-  max-width: 1200px;
-  width: 48rem;
   align-items: center;
   justify-content: space-between;
   display: flex;
   flex-direction: row;
-  margin: 0 4rem 0 4rem;
 `;
 
 const LinkWrapper = styled.div`
-  max-width: 1200px;
-  width: 48rem;
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin: 0 4rem 1.2rem 4rem;
+  margin-bottom: 1.2rem;
 `;
 
 const A = styled.a`
   margin-right: 0.8rem;
+`;
+
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0 4rem 0 4rem;
+  max-width: 1200px;
+  width: 48rem;
 `;
