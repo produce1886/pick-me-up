@@ -3,9 +3,7 @@ import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 import styled, { createGlobalStyle } from "styled-components";
-import withRedux from "next-redux-wrapper";
-import { Provider } from "react-redux";
-import configureStore from "../src/store";
+import { wrapper } from "../src/store";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -56,7 +54,7 @@ class PickMeup extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <Provider store={store}>
+      <>
         <GlobalStyle />
         <Head>
           <title>픽미업, Pick me up</title>
@@ -69,7 +67,7 @@ class PickMeup extends App {
         <Wrapper>
           <Component {...pageProps} />
         </Wrapper>
-      </Provider>
+      </>
     );
   }
 }
@@ -80,4 +78,4 @@ const Wrapper = styled.div`
   background-color: #fff;
 `;
 
-export default withRedux(configureStore)(PickMeup);
+export default wrapper.withRedux(PickMeup);
