@@ -1,19 +1,29 @@
+import { useCallback } from "react";
 import GoogleLogin from "react-google-login";
-import dotenv from "dotenv";
-
-dotenv.config();
+import { useDispatch } from "react-redux";
 
 export default function SignInButton() {
-  const responseGoogle = (response) => {
-    console.log(response);
-  };
+  const dispatch = useDispatch();
+  const loginHandler = useCallback((response) => {
+    const name = response.profileObj.name;
+    const email = response.profileObj.email;
+    const image = response.profileObj.imageUrl;
+
+    dispatch({
+      type: "IN",
+      isSignedIn: true,
+      name: name,
+      email: email,
+      profile_pic: image,
+    });
+  }, []);
 
   return (
     <GoogleLogin
       clientId={process.env.GOOGLE_CLIENT_ID}
       buttonText="Log In"
-      onSuccess={responseGoogle}
-      onFailure={responseGoogle}
+      onSuccess={loginHandler}
+      onFailure={(response) => console.lof(response)}
       cookiePolicy={"single_host_origin"}
     />
   );
