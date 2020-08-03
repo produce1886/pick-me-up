@@ -5,7 +5,7 @@ export const initialState = {
   profile_pic: "",
 };
 
-export default function reducer(state = initialState, action) {
+const reducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case "IN": {
@@ -19,4 +19,6 @@ export default function reducer(state = initialState, action) {
       return state;
     }
   }
-}
+};
+
+export default reducer;
