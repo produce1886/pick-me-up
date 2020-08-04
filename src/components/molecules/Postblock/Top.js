@@ -41,4 +41,5 @@ const Div = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0.25rem 0 0.55rem 0;
 `;

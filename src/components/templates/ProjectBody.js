@@ -2,14 +2,14 @@ import ProjectList from "./ProjectList";
 import Filter from "../molecules/Filter/Filter";
 import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
-//import DropdownMenu from "../molecules/Filter/DropdownMenu";
+import { ALIGN } from "../molecules/Filter/ItemData";
 
 export default function ProjectFilter() {
   return (
     <Wrapper>
       <InnerWrapper>
         <Div>
-          <Filter title="최신순"></Filter>
+          <Filter title="최신순" activeMenu="align" data={ALIGN}></Filter>
         </Div>
         <ProjectList></ProjectList>
       </InnerWrapper>
@@ -34,6 +34,8 @@ const InnerWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
+  position: relative;
+  z-index: 100;
 `;
 
 const Wrapper = styled.div`

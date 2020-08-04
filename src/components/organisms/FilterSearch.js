@@ -1,18 +1,37 @@
 import styled from "styled-components";
 import Search from "../molecules/Input/Search";
 import Filter from "../molecules/Filter/Filter";
-
+import Wrapper from "../atoms/FilterSearch";
+import {
+  PROJECTTYPE,
+  FIELD,
+  REGION,
+  CATEGORY,
+} from "../molecules/Filter/ItemData";
 export default function FilterSearch(props) {
+  const category = "카테고리";
+  const region = "지역";
+  const field = "구인분야";
+  const projecttype = "프로젝트 종류";
+
   return (
     <Wrapper>
       <InnerWrapper>
         <FilterWrapper>
-          <Filter title="카테고리"></Filter>
-          <Filter title="구인분야"></Filter>
+          <Filter
+            title={category}
+            activeMenu="category"
+            data={CATEGORY}
+          ></Filter>
+          <Filter title={field} activeMenu="field" data={FIELD}></Filter>
           {props.type === "project" && (
             <>
-              <Filter title="지역"></Filter>
-              <Filter title="프로젝트 종류"></Filter>
+              <Filter title={region} activeMenu="region" data={REGION}></Filter>
+              <Filter
+                title={projecttype}
+                activeMenu="projecttype"
+                data={PROJECTTYPE}
+              ></Filter>
             </>
           )}
         </FilterWrapper>
@@ -21,18 +40,6 @@ export default function FilterSearch(props) {
     </Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 3.2rem;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  bottom: 0;
-  display: flex;
-  flex-direction: row;
-  border-bottom: 0.01rem solid #d3d4d8;
-`;
 
 const FilterWrapper = styled.div`
   width: 23rem;
