@@ -49,4 +49,5 @@ const FirstDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: left;
+  margin: 0.1rem 0 0.2rem 0;
 `;
