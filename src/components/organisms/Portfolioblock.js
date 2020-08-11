@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import Wrapper from "../atoms/PortfolioBlock";
-import { Motion, spring } from "react-motion";
 import { useState } from "react";
 
 export default function PortfolioBlock() {
@@ -11,19 +10,22 @@ export default function PortfolioBlock() {
       onMouseOver={() => setShow(true)}
       onMouseOut={() => setShow(false)}
     >
-      <DetailWrapper y={show ? "-5rem" : "5rem"}></DetailWrapper>
+      <DetailWrapper y={show ? "-3rem" : "3rem"}></DetailWrapper>
     </Wrapper>
   );
 }
 
 const DetailWrapper = styled.div`
   width: 100%;
-  height: 5rem;
+  height: 3rem;
   position: absolute;
-  bottom: -5rem;
+  bottom: -3rem;
   background-color: #888;
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+}
   ${(props) => css`
-    webkit-transform: translateY(${props.y});
+    -webkit-transform: translateY(${props.y});
     transform: translateY(${props.y});
   `}
 `;
