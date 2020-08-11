@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export default styled.div`
   width: 15.5rem;
@@ -9,4 +9,5 @@ export default styled.div`
   position: relative;
   box-sizing: border-box;
   margin: 0 0.4rem 0 0.4rem;
+  overflow: hidden;
 `;
