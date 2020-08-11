@@ -23,7 +23,7 @@ export default function SignInButton() {
       clientId={process.env.GOOGLE_CLIENT_ID}
       buttonText="Log In"
       onSuccess={loginHandler}
-      onFailure={(response) => console.lof(response)}
+      onFailure={(response) => console.log(response)}
       cookiePolicy={"single_host_origin"}
     />
   );
