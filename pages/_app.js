@@ -3,7 +3,7 @@ import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 import styled, { createGlobalStyle } from "styled-components";
-import { wrapper } from "../src/store";
+import { wrapper } from "../src/_store";
 import dotenv from "dotenv";
 
 dotenv.config();
