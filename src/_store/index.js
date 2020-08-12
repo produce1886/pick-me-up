@@ -13,4 +13,4 @@ const enhancer =
 const makeStore = (context) => createStore(reducer, enhancer);
 
 // export an assembled wrapper
-export const wrapper = createWrapper(makeStore, { debug: true });
+export const wrapper = createWrapper(makeStore, { debug: false });
