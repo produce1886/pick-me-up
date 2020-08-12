@@ -17,7 +17,7 @@ export default function Top(props) {
         </Row>
         <Row>
           <Div>
-            <Profile size="0.8rem" level={1} name="Name"></Profile>
+            <Profile direction="row" size="0.8rem" level={1} name="Name"></Profile>
             <Text level={1} color="#232735">
               YYYY.MM.DD
             </Text>
@@ -41,4 +41,5 @@ const Div = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0.25rem 0 0.55rem 0;
 `;

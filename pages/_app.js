@@ -3,6 +3,10 @@ import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 import styled, { createGlobalStyle } from "styled-components";
+import { wrapper } from "../src/store";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const GlobalStyle = createGlobalStyle`
  
@@ -46,7 +50,7 @@ html,
           }
 `;
 
-export default class PickMeup extends App {
+class PickMeup extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
@@ -73,3 +77,5 @@ const Wrapper = styled.div`
   min-height: 100%;
   background-color: #fff;
 `;
+
+export default wrapper.withRedux(PickMeup);

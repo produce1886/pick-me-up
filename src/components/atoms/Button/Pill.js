@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export default styled.button`
   width: fit-content;
@@ -12,4 +12,9 @@ export default styled.button`
   color: #fff;
   border: none;
   padding: 0 0.75rem 0 0.75rem;
+  ${(props) =>
+    css`
+      position: ${props.center ? "absolute" : "none"};
+      left: ${props.center ? "45.5%" : "none"};
+    `}
 `;

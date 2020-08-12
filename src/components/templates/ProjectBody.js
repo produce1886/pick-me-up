@@ -2,9 +2,18 @@ import ProjectList from "./ProjectList";
 import Filter from "../molecules/Filter/Filter";
 import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
-import {ALIGN} from "../molecules/Filter/Item"
+import { ALIGN } from "../molecules/Filter/ItemData";
+import ModalBlock from "../organisms/Modalblock";
+import { useState } from "react";
+
 export default function ProjectFilter() {
-	
+	const [modalIsOpen, setIsOpen] = useState(false);
+	function openModal() {
+		setIsOpen(true);
+	}
+	function closeModal() {
+		setIsOpen(false);
+	}
 	return (
 		<Wrapper>
 			<InnerWrapper>
@@ -13,7 +22,8 @@ export default function ProjectFilter() {
 				</Div>
 				<ProjectList></ProjectList>
 			</InnerWrapper>
-			<WriteButton></WriteButton>
+			<WriteButton openModal={openModal}></WriteButton>
+			{modalIsOpen && <ModalBlock></ModalBlock>}
 		</Wrapper>
 	);
 }

@@ -1,14 +1,25 @@
 import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
 import Portfoliolist from "../templates/Portfoliolist";
+import { useModal } from "react-modal-hook";
+import ModalBlock from "../organisms/Modalblock";
+import { useState } from "react";
 
 export default function PortfolioBody() {
+	const [modalIsOpen, setIsOpen] = useState(false);
+	function openModal() {
+		setIsOpen(true);
+	}
+	function closeModal() {
+		setIsOpen(false);
+	}
 	return (
 		<Wrapper>
 			<InnerWrapper>
 				<Portfoliolist></Portfoliolist>
 			</InnerWrapper>
-			<WriteButton></WriteButton>
+			<WriteButton openModal={openModal}></WriteButton>
+			{modalIsOpen && <ModalBlock></ModalBlock>}
 		</Wrapper>
 	);
 }

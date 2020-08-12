@@ -15,7 +15,7 @@ export default function Top(props) {
           </Text>
         </FirstDiv>
         <FirstDiv>
-          <Profile size="0.8rem" level={1} name="Name"></Profile>
+          <Profile direction="row" size="0.8rem" level={1} name="Name"></Profile>
         </FirstDiv>
         <Row>
           <Div>
@@ -49,4 +49,5 @@ const FirstDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: left;
+  margin: 0.1rem 0 0.2rem 0;
 `;
