@@ -86,11 +86,11 @@ const getProjects = () => {
       setIsLoading(true);
       try {
         const newProjectsData = await axios.get(
-          `${process.env.API_HOST}/projects?size=4`
+          `${process.env.API_HOST}/projects?size=4&sort=createdDate,desc`
         );
         setNewProjects(newProjectsData.data);
         const hotProjectsData = await axios.get(
-          `${process.env.API_HOST}/projects?size=4`
+          `${process.env.API_HOST}/projects?size=4&sort=viewNum,desc`
         );
         setHotProjects(hotProjectsData.data);
         setIsLoading(false);
