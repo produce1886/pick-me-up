@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Postblock from "../organisms/Postblock";
 import Link from "next/link";
@@ -5,6 +7,8 @@ import Text from "../atoms/Text";
 import Icon from "../atoms/Icon/Chevron/Right";
 
 export default function Preview(props) {
+  const { newProjects, hotProjects, isLoading } = getProjects();
+
   if (props.type === "new") {
     return (
       <Wrapper>
@@ -23,10 +27,15 @@ export default function Preview(props) {
             ></Icon>
           </LinkWrapper>
           <InnerWrapper>
-            <Postblock type={props.type}></Postblock>
-            <Postblock type={props.type}></Postblock>
-            <Postblock type={props.type}></Postblock>
-            <Postblock type={props.type}></Postblock>
+            {newProjects &&
+              !isLoading &&
+              newProjects.content.map((item, index) => (
+                <Postblock
+                  key={index}
+                  item={item}
+                  type={props.type}
+                ></Postblock>
+              ))}
           </InnerWrapper>
         </Col>
       </Wrapper>
@@ -50,16 +59,49 @@ export default function Preview(props) {
             ></Icon>
           </LinkWrapper>
           <InnerWrapper>
-            <Postblock type={props.type} rank={1}></Postblock>
-            <Postblock type={props.type} rank={2}></Postblock>
-            <Postblock type={props.type} rank={3}></Postblock>
-            <Postblock type={props.type} rank={4}></Postblock>
+            {hotProjects &&
+              !isLoading &&
+              hotProjects.content.map((item, index) => (
+                <Postblock
+                  key={index}
+                  rank={index + 1}
+                  item={item}
+                  type={props.type}
+                ></Postblock>
+              ))}
           </InnerWrapper>
         </Col>
       </Wrapper>
     );
   }
 }
+
+const getProjects = () => {
+  const [newProjects, setNewProjects] = useState(null);
+  const [hotProjects, setHotProjects] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const newProjectsData = await axios.get(
+          `${process.env.API_HOST}/projects?size=4`
+        );
+        setNewProjects(newProjectsData.data);
+        const hotProjectsData = await axios.get(
+          `${process.env.API_HOST}/projects?size=4`
+        );
+        setHotProjects(hotProjectsData.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+  return { newProjects, hotProjects, isLoading };
+};
 
 const Wrapper = styled.div`
   width: 100%;
