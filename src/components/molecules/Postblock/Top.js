@@ -46,6 +46,7 @@ const Div = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0.35rem 0 0.55rem 0;
+  box-sizing: border-box;
 `;
 
 const Row = styled.div`
@@ -53,4 +54,5 @@ const Row = styled.div`
   flex-direction: row;
   max-height: 1.25rem;
   overflow: hidden;
+  margin-top: 0.2rem;
 `;
