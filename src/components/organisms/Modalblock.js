@@ -25,7 +25,7 @@ export default function Modalblock(props) {
 	}, []);
 	return (
 		<>
-			<Overlay visible="visible" onClick={console.log("hi")} />
+			<Overlay visible="visible" onClick={alert(props)} />
 			<Wrapper tabIndex="-1" visible={visible}>
 				<Inner>
 					<Top type={props.type}></Top>
