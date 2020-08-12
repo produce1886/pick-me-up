@@ -3,15 +3,15 @@ import ViewCount from "../ViewCount";
 import CommentCount from "../CommentCount";
 import MoreButton from "../Button/More";
 
-export default function Bottom() {
+export default function Bottom(props) {
   return (
     <Wrapper>
       <Div>
-        <ViewCount count={10}></ViewCount>
+        <ViewCount count={props.viewNum}></ViewCount>
         &nbsp;
-        <CommentCount count={10}></CommentCount>
+        <CommentCount count={props.commentNum}></CommentCount>
       </Div>
-      <MoreButton link=""></MoreButton>
+      <MoreButton link={`project/${props.id}`}></MoreButton>
     </Wrapper>
   );
 }

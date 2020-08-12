@@ -5,26 +5,37 @@ import styled, { css } from "styled-components";
 import Text from "../atoms/Text";
 
 export default function PostBlock(props) {
+  const date = props.item.createdDate.split("T")[0];
+
   return (
     <Wrapper>
-      <Top type={props.type} rank={props.rank}></Top>
+      <Top
+        type={props.type}
+        rank={props.rank}
+        title={props.item.title}
+        date={date}
+        name={props.item.author}
+        profileImage={props.item.profileImg}
+      ></Top>
       {props.type === "most" && (
-        <BodyMost>
+        <BodyHot>
           <Text level={2} color="#232735">
-            Body textbox Continually unleash technically sound products before
-            installed base opportunities. Holisticly harness granular...
+            {props.item.content}
           </Text>
-        </BodyMost>
+        </BodyHot>
       )}
       {props.type === "new" && (
         <BodyNew>
           <Text level={2} color="#232735">
-            Body textbox Continually unleash technically sound products before
-            installed base opportunities. Holisticly harness granular...
+            {props.item.content}
           </Text>
         </BodyNew>
       )}
-      <Bottom></Bottom>
+      <Bottom
+        viewNum={props.item.viewNum}
+        commentNum={props.item.commentNum}
+        id={props.item.id}
+      ></Bottom>
     </Wrapper>
   );
 }
@@ -34,13 +45,13 @@ const BodyNew = styled.div`
   padding: 0.7rem 1rem 0 1rem;
   box-sizing: border-box;
   overflow: hidden;
-  height: 5.4rem;
+  height: 7rem;
 `;
 
-const BodyMost = styled.div`
+const BodyHot = styled.div`
   width: 100%;
   padding: 0.7rem 1rem 0 1rem;
   box-sizing: border-box;
   overflow: hidden;
-  height: 3.7rem;
+  height: 4.5rem;
 `;

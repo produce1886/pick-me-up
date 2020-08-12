@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import Profile from "../molecules/Profile";
 
 export default function GlobalNavigationBar() {
-  const state = useSelector((state) => state.login);
+  const state = useSelector((state) => state.user);
 
   return (
     <Wrapper>
@@ -21,8 +21,8 @@ export default function GlobalNavigationBar() {
             <Profile
               level={1}
               size="1.4rem"
-              name={state.name}
-              profileImage={state.profile_pic}
+              name={state.userData.name}
+              profileImage={state.userData.profilePic}
             ></Profile>
           ) : (
             <LogInButton></LogInButton>
