@@ -4,14 +4,23 @@ import Middle from "../../atoms/Modal/Middle";
 import Image from "../../atoms/Image/Modal";
 import ImageHolder from "../../atoms/ImageHolder/Profile";
 import FileIcon from "../../atoms/Icon/File";
+import TextIcon from "../../atoms/Icon/Text"
 export default function ModalMiddle(props) {
 	return (
 		<Middle>
 			<FileWrapper>
-				<FileIcon style={{ width: "0.5rem", height: "1rem", marginRight: "0.3rem" }}></FileIcon>
+				<FileIcon style={{ width: "0.4rem", height: "0.9rem", marginRight: "0.3rem" }}></FileIcon>
 				<Text width="fit-content" level={2} line="1rem" color="#232735">
 					파일 추가
 				</Text>
+				{props.type==="project" && (
+					<>
+					<TextIcon style={{ width: "0.5rem", height: "1rem",marginLeft: "0.5rem",  marginRight: "0.3rem" }}></TextIcon>
+					<Text width="fit-content" level={2} line="1rem" color="#232735">
+						텍스트 추가
+					</Text>
+					</>
+				)}
 			</FileWrapper>
 			<Textarea placeholder="내용을 입력하세요" type="text"></Textarea>
 			{props.UserImage ? (
