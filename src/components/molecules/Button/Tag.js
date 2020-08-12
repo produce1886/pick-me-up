@@ -7,8 +7,8 @@ export default function Button(props) {
   return (
     <Link href={props.link}>
       <A>
-        <Wrapper>
-          <Text level={0} color="#fff">
+        <Wrapper backgroundColor={props.backgroundColor}>
+          <Text level={0} color={props.textColor}>
             {props.text}
           </Text>
         </Wrapper>

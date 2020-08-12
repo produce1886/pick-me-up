@@ -23,15 +23,15 @@ export default function HotTag() {
             </Text>
           </Div>
           <Row>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
+            <Tag backgroundColor="#c8acee" text="Tag text" link="" textColor="#fff"></Tag>
           </Row>
         </Col>
       </InnerWrapper>

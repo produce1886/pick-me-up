@@ -9,9 +9,9 @@ export default function Bottom() {
     <Wrapper>
       <Col>
         <Row>
-          <TagButton text="Tag text" link=""></TagButton>
-          <TagButton text="Tag text" link=""></TagButton>
-          <TagButton text="Tag text" link=""></TagButton>
+          <TagButton backgroundColor="#c8acee" text="Tag text" textColor="#fff" link=""></TagButton>
+          <TagButton backgroundColor="#c8acee" text="Tag text" textColor="#fff" link=""></TagButton>
+          <TagButton backgroundColor="#c8acee" text="Tag text" textColor="#fff" link=""></TagButton>
         </Row>
         <Row2>
           <Div>
