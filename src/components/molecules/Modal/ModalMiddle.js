@@ -4,7 +4,7 @@ import Middle from "../../atoms/Modal/Middle";
 import Image from "../../atoms/Image/Modal";
 import ImageHolder from "../../atoms/ImageHolder/Profile";
 import FileIcon from "../../atoms/Icon/File";
-import TextIcon from "../../atoms/Icon/Text"
+import TextIcon from "../../atoms/Icon/Text";
 export default function ModalMiddle(props) {
 	return (
 		<Middle>
@@ -13,12 +13,18 @@ export default function ModalMiddle(props) {
 				<Text width="fit-content" level={2} line="1rem" color="#232735">
 					파일 추가
 				</Text>
-				{props.type==="project" && (
+				{props.type === "project" && (
 					<>
-					<TextIcon style={{ width: "0.5rem", height: "1rem",marginLeft: "0.5rem",  marginRight: "0.3rem" }}></TextIcon>
-					<Text width="fit-content" level={2} line="1rem" color="#232735">
-						텍스트 추가
-					</Text>
+						<TextIcon
+							style={{
+								width: "0.5rem",
+								height: "1rem",
+								marginLeft: "0.5rem",
+								marginRight: "0.3rem",
+							}}></TextIcon>
+						<Text width="fit-content" level={2} line="1rem" color="#232735">
+							텍스트 추가
+						</Text>
 					</>
 				)}
 			</FileWrapper>
@@ -49,10 +55,10 @@ const FileWrapper = styled.div`
 	height: 1rem;
 	flex-direction: row;
 	margin: 0 0 1rem 0;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	display: flex;
 `;
 
 const Textarea = styled.textarea`
