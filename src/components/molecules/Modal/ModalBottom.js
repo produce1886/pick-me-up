@@ -13,9 +13,7 @@ export default function ModalBottom(props) {
 					<Icon
 						style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }}
 						fill="#232735"></Icon>
-					<Text color="#8b90a0" level={3}>
-						태그를 추가하세요
-					</Text>
+					<Input placeholder="태그를 추가하세요" type="text"></Input>
 				</IconTextWrapper>
 				<TagWrapper>
 					<TagButton backgroundColor="#f0f1f3" text="Tag text" textColor="#232735" link="">
@@ -70,4 +68,15 @@ const IconTextWrapper = styled.div`
 	display: flex;
 	align-items: left;
 	flex-direction: row;
+`;
+
+const Input = styled.input`
+  background-color: transparent;
+  border: none;
+  padding: unset;
+  box-sizing: border-box;
+  width: 10rem;
+  outline: none;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.64rem;
 `;

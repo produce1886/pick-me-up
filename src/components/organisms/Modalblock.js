@@ -13,7 +13,7 @@ export default function Modalblock(props) {
 			<Overlay visible="visible" />
 			<Wrapper tabIndex="-1" visible="visible">
 				<Inner tabIndex="0" height="56rem">
-                    <Top type="project"></Top>
+                    <Top type={props.type}></Top>
                     <Middle></Middle>
 					<Bottom></Bottom>
 				</Inner>
