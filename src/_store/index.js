@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware } from "redux";
-import reducer from "../reducers";
+import reducer from "../_reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { createWrapper } from "next-redux-wrapper";
 

@@ -1,18 +1,20 @@
+import { LOGIN_USER, LOGOUT_USER } from "../_actions/types";
+
 export const initialState = {
   isSignedIn: false,
-  name: "",
-  email: "",
-  profile_pic: "",
+  userData: {
+    name: "",
+    email: "",
+    profile_pic: "",
+  },
 };
 
 const reducer = (state = initialState, action) => {
-  let newState;
   switch (action.type) {
-    case "IN": {
-      newState = Object.assign({}, state, action);
-      return newState;
+    case LOGIN_USER: {
+      return { isSignedIn: true, userData: action.payload };
     }
-    case "OUT": {
+    case LOGOUT_USER: {
       return initialState;
     }
     default: {
