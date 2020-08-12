@@ -9,7 +9,7 @@ export default function Bottom(props) {
       <Div>
         <ViewCount count={props.viewNum}></ViewCount>
         &nbsp;
-        <CommentCount count={props.commentNum}></CommentCount>
+        <CommentCount count={props.commentsNum}></CommentCount>
       </Div>
       <MoreButton link={`project/${props.id}`}></MoreButton>
     </Wrapper>
