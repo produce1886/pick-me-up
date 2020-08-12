@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import Image from "../atoms/Icon/Profile";
 import Text from "../atoms/Text";
 import ImageHolder from "../atoms/ImageHolder/Profile";
-
+import Wrapper from "../atoms/Profile";
 export default function Profile(props) {
   return (
-    <Wrapper>
+    <Wrapper direction={props.direction}>
       {props.profileImage ? (
         <ImageHolder size={props.size}>
           <Img src={props.profileImage}></Img>
@@ -26,12 +26,6 @@ export default function Profile(props) {
     </Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  width: fit-content;
-  align-items: center;
-  display: flex;
-`;
 
 const Img = styled.img`
   width: 100%;
