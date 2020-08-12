@@ -52,11 +52,12 @@ const Textarea = styled.textarea`
 	padding: unset;
 	box-sizing: border-box;
 	width: 100%;
-	height: 2rem;
+	height: 5rem;
 	outline: none;
 	font-family: "Noto Sans KR", sans-serif;
 	font-size: 0.72rem;
 	margin: 0 0 0.3rem 0;
+	resize: none;
 	input::placeholder {
 		color: #d3d4d8;
 	}

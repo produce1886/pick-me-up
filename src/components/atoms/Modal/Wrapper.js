@@ -5,7 +5,7 @@ export default styled.div`
 		box-sizing: border-box;
 		display: ${(props) => (props.visible ? 'block' : 'none')};
 		position: absolute;
-		height: 60rem;
+		height: 62rem;
 		top: 3.5rem;
 		left: 0;
 		bottom: 0;

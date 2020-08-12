@@ -53,7 +53,7 @@ const Div = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	justify-content: space-between;
+    justify-content: space-between;
 `;
 const TagWrapper = styled.div`
 	width: 100%;
