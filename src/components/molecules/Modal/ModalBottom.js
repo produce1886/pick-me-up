@@ -3,32 +3,49 @@ import Text from "../../atoms/Text";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
+import IconX from "../../atoms/Icon/X";
+import WriteBlock from "../Button/WriteBlock";
 export default function ModalBottom(props) {
 	return (
 		<Bottom>
 			<Div>
 				<IconTextWrapper>
-					<Icon style={{ width: "1rem", height: "1rem", marginRight: "0.5rem"}} fill="#232735"></Icon>
+					<Icon
+						style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }}
+						fill="#232735"></Icon>
 					<Text color="#8b90a0" level={3}>
-						태그를 추가하세요 
+						태그를 추가하세요
 					</Text>
 				</IconTextWrapper>
 				<TagWrapper>
-					<TagButton
-						backgroundColor="#f0f1f3"
-						text="Tag text"
-						textColor="#232735"
-						link=""></TagButton>
-					<TagButton
-						backgroundColor="#f0f1f3"
-						text="Tag text"
-						textColor="#232735"
-						link=""></TagButton>
+					<TagButton backgroundColor="#f0f1f3" text="Tag text" textColor="#232735" link="">
+						<IconX
+							style={{ width: "0.5rem", height: "0.5rem", margin: "0.2rem 0 0 0" }}
+							fill="#232735"></IconX>
+					</TagButton>
+					<TagButton backgroundColor="#f0f1f3" text="Tag text" textColor="#232735" link="">
+						<IconX
+							style={{ width: "0.5rem", height: "0.5rem", margin: "0.2rem 0 0 0" }}
+							fill="#232735"></IconX>
+					</TagButton>
 				</TagWrapper>
+
+				<ButtonWrapper>
+					<WriteBlock link=""></WriteBlock>
+				</ButtonWrapper>
 			</Div>
 		</Bottom>
 	);
 }
+
+const ButtonWrapper = styled.div`
+	width: fit-content;
+	height: 2rem;
+	display: flex;
+    align-items: right;
+    justify-content: right;
+    margin: 0 0 0 33rem;
+`;
 
 const Div = styled.div`
 	width: 100%;
@@ -40,7 +57,7 @@ const Div = styled.div`
 `;
 const TagWrapper = styled.div`
 	width: 100%;
-	height: 1rem;
+	height: 1.5rem;
 	display: flex;
 	align-items: left;
 	flex-direction: row;
