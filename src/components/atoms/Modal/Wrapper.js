@@ -11,7 +11,9 @@ export default styled.div`
 		bottom: 0;
 		right: 0;
 		z-index: 1000;
-		overflow: auto;
+		overflow-y: auto;
+		overflow-x: hidden;
+		max-height: 62rem;
 		outline: 0;
 	`}
 `;
