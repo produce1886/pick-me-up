@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Row from "../atoms/Row";
 import Col from "../atoms/Col";
 import Icon from "../atoms/Icon/Tag";
@@ -6,6 +8,8 @@ import Text from "../atoms/Text";
 import Tag from "../molecules/Button/Tag";
 
 export default function HotTag() {
+  const { tags, isLoading } = getHotTags();
+
   return (
     <Wrapper>
       <InnerWrapper>
@@ -23,21 +27,39 @@ export default function HotTag() {
             </Text>
           </Div>
           <Row>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
-            <Tag text="Tag text" link=""></Tag>
+            {!isLoading &&
+              tags &&
+              tags.content.map((item, index) => (
+                <Tag key={index} text={item.name} link=""></Tag>
+              ))}
           </Row>
         </Col>
       </InnerWrapper>
     </Wrapper>
   );
 }
+
+const getHotTags = () => {
+  const [tags, setTags] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const result = await axios.get(
+          `${process.env.API_HOST}/tags?size=10&sort=score,desc`
+        );
+        setTags(result.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+  return { tags, isLoading };
+};
 
 const Wrapper = styled.div`
   width: 100%;
