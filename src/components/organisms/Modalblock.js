@@ -6,40 +6,33 @@ import Top from "../molecules/Modal/ModalTop";
 import Middle from "../molecules/Modal/ModalMiddle";
 import Bottom from "../molecules/Modal/ModalBottom";
 import { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 
 export default function Modalblock(props) {
-	const wrapperRef = useRef(null);
-	useOutsideAlerter(wrapperRef);
+	const [visible, setVisible] = useState("none");
+	const handleClickOutside = (event) => {
+		const domNode = ReactDOM.findDOMNode();
+		if (!domNode || !domNode.contains(event.target)) {
+			setVisible("visible");
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener("click", handleClickOutside, true);
+		return () => {
+			document.removeEventListener("click", handleClickOutside, true);
+		};
+	}, []);
 	return (
 		<>
-			<Overlay visible="visible" />
-			<Wrapper tabIndex="-1" visible="visible">
-				<Inner tabIndex="0" height="56rem">
+			<Overlay visible="visible" onClick={console.log("hi")} />
+			<Wrapper tabIndex="-1" visible={visible}>
+				<Inner>
 					<Top type={props.type}></Top>
 					<Middle type={props.type}></Middle>
-					<Bottom></Bottom>
+					<Bottom ismodal={props.ismodal}></Bottom>
 				</Inner>
 			</Wrapper>
 		</>
 	);
-}
-
-function useOutsideAlerter(ref) {
-	/**
-	 * Alert if clicked on outside of element
-	 */
-	function handleClickOutside(event) {
-		if (ref.current && !ref.current.contains(event.target)) {
-			alert("You clicked outside of me!");
-		}
-	}
-
-	useEffect(() => {
-		// Bind the event listener
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-			// Unbind the event listener on clean up
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	});
 }
