@@ -1,4 +1,5 @@
 {
     "prettier.withNodeModules": true,
-    "prettier.endOfLine": "auto"
+    "prettier.endOfLine": "auto",
+    "editor.formatOnSave": true
 }
