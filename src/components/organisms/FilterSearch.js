@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Search from "../molecules/Input/Search";
-import Filters from "../molecules/Filter/Filters";
+import Filters from "../molecules/Filter/FilterGroup";
 import Wrapper from "../atoms/FilterSearch";
+
 export default function FilterSearch(props) {
   const category = "카테고리";
   const region = "지역";

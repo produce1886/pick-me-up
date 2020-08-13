@@ -1,14 +1,17 @@
-import ProjectList from "./ProjectList";
-import Filter from "../molecules/Filter/Filter";
-import WriteButton from "../molecules/Button/Write";
-import styled from "styled-components";
-import { ALIGN } from "../molecules/Filter/ItemData";
-import ModalWrite from "../organisms/ModalWrite";
 import { useState } from "react";
+import styled from "styled-components";
+import FilterSearch from "../organisms/FilterSearch";
+import Filter from "../molecules/Filter/Filter";
+import { ALIGN } from "../molecules/Filter/ItemData";
+import ProjectList from "./ProjectList";
+import WriteButton from "../molecules/Button/Write";
+import ModalWrite from "../organisms/ModalWrite";
+import BottomButtons from "../organisms/BottomButtons";
 
-export default function ProjectFilter() {
+export default function ProjectBody() {
   const [viewVisible, setViewVisible] = useState(false);
   const [writeVisible, setWriteVisible] = useState(false);
+
   const openView = () => {
     setViewVisible(true);
   };
@@ -24,13 +27,17 @@ export default function ProjectFilter() {
   };
 
   return (
-    <Wrapper>
-      <InnerWrapper>
-        <Div>
-          <Filter title="최신순" activeMenu="align" data={ALIGN}></Filter>
-        </Div>
-        <ProjectList></ProjectList>
-      </InnerWrapper>
+    <>
+      <FilterSearch type="project"></FilterSearch>
+      <Wrapper>
+        <InnerWrapper>
+          <Div>
+            <Filter title="최신순" activeMenu="align" data={ALIGN}></Filter>
+          </Div>
+          <ProjectList></ProjectList>
+          <BottomButtons></BottomButtons>
+        </InnerWrapper>
+      </Wrapper>
       <WriteButton openWrite={openWrite}></WriteButton>
       {writeVisible && (
         <ModalWrite
@@ -40,7 +47,7 @@ export default function ProjectFilter() {
           type="project"
         ></ModalWrite>
       )}
-    </Wrapper>
+    </>
   );
 }
 
@@ -49,7 +56,8 @@ const Div = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin: 1.2rem 0 1.2rem 1rem;
+  padding: 1.2rem 0 1.2rem 1rem;
+  box-sizing: border-box;
 `;
 
 const InnerWrapper = styled.div`
@@ -70,6 +78,6 @@ const Wrapper = styled.div`
   width: 100%;
   align-items: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   box-sizing: border-box;
 `;

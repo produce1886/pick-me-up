@@ -1,12 +1,8 @@
 import styled from "styled-components";
-import Filter from "../../molecules/Filter/Filter";
-import {
-  PROJECTTYPE,
-  FIELD,
-  REGION,
-  CATEGORY,
-} from "../../molecules/Filter/ItemData";
-export default function Filters(props) {
+import Filter from "./Filter";
+import { PROJECTTYPE, FIELD, REGION, CATEGORY } from "./ItemData";
+
+export default function FilterGroup(props) {
   const category = "카테고리";
   const region = "지역";
   const field = "구인분야";
