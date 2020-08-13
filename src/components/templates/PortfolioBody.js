@@ -7,29 +7,34 @@ import ModalView from "../organisms/ModalView";
 import { useState } from "react";
 
 export default function PortfolioBody() {
-	const [modalIsOpen, setIsOpen] = useState(false);
-	const [viewModalIsOpen, setViewOpen] = useState(false);
-	function openWrite() {
-		setIsOpen(true);
-	}
-	function closeWrite() {
-		setIsOpen(false);
-	}
-	function openView() {
-		setViewOpen(true);
-	}
-	function closeView() {
-		setViewOpen(false);
-	}
+	const [viewVisible, setViewVisible] = useState(false);
+	const [writeVisible, setWriteVisible] = useState(false);
+	const openView = () => {
+		setViewVisible(true);
+	};
+	const openWrite = () => {
+		setWriteVisible(true);
+	};
+
+	const closeView = () => {
+		setViewVisible(false);
+	};
+	const closeWrite = () => {
+		setWriteVisible(false);
+	};
 
 	return (
 		<Wrapper>
 			<InnerWrapper>
 				<Portfoliolist openView={openView}></Portfoliolist>
-				{viewModalIsOpen && <ModalView></ModalView>}
+				{viewVisible && (
+					<ModalView visible={viewVisible} maskClosable={true} onClose={closeView}></ModalView>
+				)}
 			</InnerWrapper>
-			<WriteButton openView={openView}></WriteButton>
-			{viewModalIsOpen && <ModalView></ModalView>}
+			<WriteButton openWrite={openWrite}></WriteButton>
+			{writeVisible && (
+				<ModalWrite visible={writeVisible} maskClosable={true} onClose={closeWrite}></ModalWrite>
+			)}
 		</Wrapper>
 	);
 }

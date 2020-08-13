@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import Profile from "../../molecules/Profile";
 import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon/Write";
+import Link from "next/link";
 export default function CommentWrite() {
 	return (
 		<Wrapper>
@@ -13,13 +14,20 @@ export default function CommentWrite() {
 				<CommentBox>
 					<Textarea placeholder="내용을 입력하세요" type="text"></Textarea>
 				</CommentBox>
-				<IconButton>
-					<Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
-				</IconButton>
+
+				<Link href="">
+					<A>
+						<IconButton>
+							<Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
+						</IconButton>
+					</A>
+				</Link>
 			</Div>
 		</Wrapper>
 	);
 }
+
+const A = styled.a``;
 
 const IconDiv = styled.div`
 	width: fit-content;
