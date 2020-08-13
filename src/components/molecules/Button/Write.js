@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function WriteButton(props) {
 	return (
-		<ButtonWrapper onClick={props.openModal}>
+		<ButtonWrapper onClick={props.openWrite}>
 			<Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
 		</ButtonWrapper>
 	);
