@@ -3,7 +3,7 @@ import Filter from "../molecules/Filter/Filter";
 import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
 import { ALIGN } from "../molecules/Filter/ItemData";
-import ModalBlock from "../organisms/Modalblock";
+import ModalWrite from "../organisms/ModalWrite";
 import { useState } from "react";
 
 export default function ProjectFilter() {
@@ -23,7 +23,7 @@ export default function ProjectFilter() {
 				<ProjectList></ProjectList>
 			</InnerWrapper>
 			<WriteButton openModal={openModal}></WriteButton>
-			{modalIsOpen && <ModalBlock></ModalBlock>}
+			{modalIsOpen && <ModalWrite></ModalWrite>}
 		</Wrapper>
 	);
 }
