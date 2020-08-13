@@ -2,24 +2,34 @@ import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
 import Portfoliolist from "../templates/Portfoliolist";
 import { useModal } from "react-modal-hook";
-import ModalBlock from "../organisms/Modalblock";
+import ModalWrite from "../organisms/ModalWrite";
+import ModalView from "../organisms/ModalView";
 import { useState } from "react";
 
 export default function PortfolioBody() {
 	const [modalIsOpen, setIsOpen] = useState(false);
-	function openModal() {
+	const [viewModalIsOpen, setViewOpen] = useState(false);
+	function openWrite() {
 		setIsOpen(true);
 	}
-	function closeModal() {
+	function closeWrite() {
 		setIsOpen(false);
 	}
+	function openView() {
+		setViewOpen(true);
+	}
+	function closeView() {
+		setViewOpen(false);
+	}
+
 	return (
 		<Wrapper>
 			<InnerWrapper>
-				<Portfoliolist></Portfoliolist>
+				<Portfoliolist openView={openView}></Portfoliolist>
+				{viewModalIsOpen && <ModalView></ModalView>}
 			</InnerWrapper>
-			<WriteButton openModal={openModal}></WriteButton>
-			{modalIsOpen && <ModalBlock></ModalBlock>}
+			<WriteButton openView={openView}></WriteButton>
+			{viewModalIsOpen && <ModalView></ModalView>}
 		</Wrapper>
 	);
 }

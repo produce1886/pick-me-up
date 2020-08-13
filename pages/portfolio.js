@@ -3,7 +3,6 @@ import Gnb from "../src/components/organisms/Gnb";
 import FilterSearch from "../src/components/organisms/FilterSearch";
 import BottomButtons from "../src/components/organisms/BottomButtons";
 import PortfolioBody from "../src/components/templates/PortfolioBody";
-import ModalBlock from "../src/components/organisms/Modalblock";
 export default function Portfolio() {
 	return (
 		<>

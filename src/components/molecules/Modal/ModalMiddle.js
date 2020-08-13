@@ -7,7 +7,7 @@ import FileIcon from "../../atoms/Icon/File";
 import TextIcon from "../../atoms/Icon/Text";
 export default function ModalMiddle(props) {
 	return (
-		<Middle>
+		<Middle height="42rem">
 			<FileWrapper>
 				<FileIcon style={{ width: "0.4rem", height: "0.9rem", marginRight: "0.3rem" }}></FileIcon>
 				<Text width="fit-content" level={2} line="1rem" color="#232735">
