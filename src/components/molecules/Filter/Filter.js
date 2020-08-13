@@ -92,14 +92,14 @@ export default function Filter(props) {
   return (
     <Wrapper
       onClick={() => openMenu()}
-      width="fit-content"
+      width={props.width}
+      height={props.height}
       max-height="1.6rem"
-      height="1.6rem"
       border="0.04rem"
       borderColor="#d3d4d8"
       backgroundColor={background}
     >
-      <Text line="1.08rem" level={3} color="#232735">
+      <Text line={props.line} level={props.level} color="#232735">
         {item ? item.title : props.title}
       </Text>
       {icon}
