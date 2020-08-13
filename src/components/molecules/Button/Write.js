@@ -1,14 +1,19 @@
 import Icon from "../../atoms/Icon/Write";
 import styled from "styled-components";
-
+import Link from "next/link";
 export default function WriteButton(props) {
 	return (
-		<ButtonWrapper onClick={props.openWrite}>
-			<Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
-		</ButtonWrapper>
+		<Link href="">
+			<A>
+				<ButtonWrapper onClick={props.openWrite}>
+					<Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
+				</ButtonWrapper>
+			</A>
+		</Link>
 	);
 }
 
+const A = styled.a``;
 const ButtonWrapper = styled.button`
 	width: 2.4rem;
 	height: 2.4rem;

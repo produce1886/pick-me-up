@@ -9,19 +9,25 @@ import { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 export default function Modalblock(props) {
-	useEffect(() => {
-		document.addEventListener("mousedown", pageClick, false);
-		return document.removeEventListener("mousedown", pageClick, false);
-	});
-	pageClick = (event) => {
-		if (getDOMNode().contains(event.target)) {
-			alert("hi");
+	const onMaskClick = (e) => {
+		if (e.target === e.currentTarget) {
+			props.onClose(e);
+		}
+	};
+
+	const close = (e) => {
+		if (props.onClose) {
+			props.onClose(e);
 		}
 	};
 	return (
 		<>
-			<Overlay visible="visible" onMouseUp={pageClick} />
-			<Wrapper tabIndex="-1" visible="visible" height="62rem">
+			<Overlay visible={props.visible} />
+			<Wrapper
+				tabIndex="-1"
+				visible={props.visible}
+				height="62rem"
+				onClick={props.maskClosable ? onMaskClick : null}>
 				<Inner>
 					<Top type={props.type}></Top>
 					<Middle type={props.type}></Middle>

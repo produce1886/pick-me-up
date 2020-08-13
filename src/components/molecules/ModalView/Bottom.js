@@ -47,16 +47,7 @@ const Bottom = styled.div`
 	border-top: 0.07rem solid #d3d4d8;
 `;
 
-const TagWrapper = styled.div`
-	width: 100%;
-	height: 1.5rem;
-	display: flex;
-	align-items: left;
-	flex-direction: row;
-	margin: 0 0 0 2.5rem;
-`;
-
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.button`
 	width: 100%;
 	height: 1rem;
 	display: flex;
@@ -64,15 +55,6 @@ const ButtonWrapper = styled.div`
 	justify-content: center;
 	flex-direction: row;
 	margin: 1rem 0 0 0;
-`;
-
-const Input = styled.input`
-	background-color: transparent;
 	border: none;
-	padding: unset;
-	box-sizing: border-box;
-	width: 10rem;
-	outline: none;
-	font-family: "Noto Sans KR", sans-serif;
-	font-size: 0.64rem;
+	background-color: transparent;
 `;

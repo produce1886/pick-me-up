@@ -2,24 +2,20 @@ import React from "react";
 
 function Icon({ style }) {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			style={style}
-			fill="none"
-			viewBox="0 0 905 906">
+		<svg xmlns="http://www.w3.org/2000/svg" style={style} fill="none" viewBox="0 0 905 906">
 			<rect width="905" height="906" fill="#F0F1F3" rx="10" />
 			<path
 				stroke="#8B90A0"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="5"
+				strokelinecap="round"
+				strokelinejoin="round"
+				strokeWidth="5"
 				d="M480.222 384h-54.444c-4.296 0-7.778 3.482-7.778 7.778v54.444c0 4.296 3.482 7.778 7.778 7.778h54.444c4.296 0 7.778-3.482 7.778-7.778v-54.444c0-4.296-3.482-7.778-7.778-7.778z"
 			/>
 			<path
 				stroke="#8B90A0"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="5"
+				strokelinecap="round"
+				strokelinejoin="round"
+				strokeWidth="5"
 				d="M439.389 411.222c3.222 0 5.833-2.611 5.833-5.833s-2.611-5.833-5.833-5.833-5.833 2.611-5.833 5.833 2.611 5.833 5.833 5.833zM488 430.667l-19.444-19.445L425.778 454"
 			/>
 			<path
