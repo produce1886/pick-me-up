@@ -14,7 +14,7 @@ export default function ProjectBody() {
   const [field, setField] = useState();
   const [region, setRegion] = useState();
   const [projectType, setProjectType] = useState();
-  const [sort, setSort] = useState();
+  const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState();
 
   const [viewVisible, setViewVisible] = useState(false);
@@ -47,7 +47,12 @@ export default function ProjectBody() {
       <Wrapper>
         <InnerWrapper>
           <Div>
-            <Filter title="최신순" activeMenu="align" data={ALIGN}></Filter>
+            <Filter
+              title="최신순"
+              activeMenu="align"
+              data={ALIGN}
+              onClick={setSort}
+            ></Filter>
           </Div>
           <ProjectList></ProjectList>
           <BottomButtons></BottomButtons>

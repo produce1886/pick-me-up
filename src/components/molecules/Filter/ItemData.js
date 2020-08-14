@@ -47,8 +47,9 @@ const PROJECTTYPE = [
 ];
 
 const ALIGN = [
-  { id: 0, title: "조회순", key: "align" },
-  { id: 1, title: "댓글순", key: "align" },
+  { id: 0, title: "최신순", key: "align" },
+  { id: 1, title: "조회순", key: "align" },
+  { id: 2, title: "댓글순", key: "align" },
 ];
 
 export { CATEGORY, FIELD, REGION, ALIGN, PROJECTTYPE };

@@ -30,7 +30,11 @@ export default function Filter(props) {
   };
 
   const resetFilter = () => {
-    props.onClick();
+    if (props.title === "최신순") {
+      props.onClick("최신순");
+    } else {
+      props.onClick();
+    }
     setItem(null);
     setClicked(false);
   };
