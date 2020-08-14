@@ -18,7 +18,7 @@ export default function FilterSearch(props) {
           setRegion={props.setRegion}
           setProjectType={props.setProjectType}
         ></Filters>
-        <Search></Search>
+        <Search setQuery={props.setQuery}></Search>
       </InnerWrapper>
     </Wrapper>
   );

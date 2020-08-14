@@ -42,6 +42,7 @@ export default function ProjectBody() {
         setField={setField}
         setRegion={setRegion}
         setProjectType={setProjectType}
+        setQuery={setQuery}
       ></FilterSearch>
       <Wrapper>
         <InnerWrapper>
