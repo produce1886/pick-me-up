@@ -9,6 +9,14 @@ import ModalWrite from "../organisms/ModalWrite";
 import BottomButtons from "../organisms/BottomButtons";
 
 export default function ProjectBody() {
+  const [filter, setFilter] = useState({});
+  const [category, setCategory] = useState();
+  const [field, setField] = useState();
+  const [region, setRegion] = useState();
+  const [projectType, setProjectType] = useState();
+  const [sort, setSort] = useState();
+  const [query, setQuery] = useState();
+
   const [viewVisible, setViewVisible] = useState(false);
   const [writeVisible, setWriteVisible] = useState(false);
 
@@ -28,7 +36,13 @@ export default function ProjectBody() {
 
   return (
     <>
-      <FilterSearch type="project"></FilterSearch>
+      <FilterSearch
+        type="project"
+        setCategory={setCategory}
+        setField={setField}
+        setRegion={setRegion}
+        setProjectType={setProjectType}
+      ></FilterSearch>
       <Wrapper>
         <InnerWrapper>
           <Div>

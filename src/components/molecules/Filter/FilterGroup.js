@@ -18,6 +18,7 @@ export default function FilterGroup(props) {
         title={category}
         activeMenu="category"
         data={CATEGORY}
+        onClick={props.setCategory}
       ></Filter>
       <Filter
         width={props.width}
@@ -27,6 +28,7 @@ export default function FilterGroup(props) {
         title={field}
         activeMenu="field"
         data={FIELD}
+        onClick={props.setField}
       ></Filter>
       {props.type === "project" && (
         <>
@@ -38,6 +40,7 @@ export default function FilterGroup(props) {
             title={region}
             activeMenu="region"
             data={REGION}
+            onClick={props.setRegion}
           ></Filter>
           <Filter
             width={props.width}
@@ -47,6 +50,7 @@ export default function FilterGroup(props) {
             title={projecttype}
             activeMenu="projecttype"
             data={PROJECTTYPE}
+            onClick={props.setProjectType}
           ></Filter>
         </>
       )}

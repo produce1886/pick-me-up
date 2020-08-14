@@ -4,11 +4,6 @@ import Filters from "../molecules/Filter/FilterGroup";
 import Wrapper from "../atoms/FilterSearch";
 
 export default function FilterSearch(props) {
-  const category = "카테고리";
-  const region = "지역";
-  const field = "구인분야";
-  const projecttype = "프로젝트 종류";
-
   return (
     <Wrapper>
       <InnerWrapper>
@@ -18,6 +13,10 @@ export default function FilterSearch(props) {
           line="1.08rem"
           level={3}
           type={props.type}
+          setCategory={props.setCategory}
+          setField={props.setField}
+          setRegion={props.setRegion}
+          setProjectType={props.setProjectType}
         ></Filters>
         <Search></Search>
       </InnerWrapper>
