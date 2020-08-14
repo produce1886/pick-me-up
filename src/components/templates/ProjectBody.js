@@ -9,7 +9,6 @@ import ModalWrite from "../organisms/ModalWrite";
 import BottomButtons from "../organisms/BottomButtons";
 
 export default function ProjectBody() {
-  const [filter, setFilter] = useState({});
   const [category, setCategory] = useState();
   const [field, setField] = useState();
   const [region, setRegion] = useState();
@@ -54,7 +53,14 @@ export default function ProjectBody() {
               onClick={setSort}
             ></Filter>
           </Div>
-          <ProjectList></ProjectList>
+          <ProjectList
+            category={category}
+            field={field}
+            region={region}
+            projectType={projectType}
+            query={query}
+            sort={sort}
+          ></ProjectList>
           <BottomButtons></BottomButtons>
         </InnerWrapper>
       </Wrapper>
