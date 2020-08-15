@@ -1,50 +1,35 @@
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
-import Image from "../../atoms/Image/Modal";
-import ImageHolder from "../../atoms/ImageHolder/Profile";
 import FileIcon from "../../atoms/Icon/File";
-import TextIcon from "../../atoms/Icon/Text";
+import Dropzone from "../Modal/DropZoneComponent";
+import { useState, useEffect } from "react";
 export default function ModalMiddle(props) {
+  const [img, setImage] = useState(null);
+  const onClick = async () => {
+    const formData = new FormData();
+    formData.append("file", img);
+    /*const res = await axios.post("/api/upload", formData);
+    console.log(res);
+     */
+  };
+  const onChange = (e) => {
+    setImage(e.target.files[0]);
+  };
   return (
-    <Middle height="42rem">
+    <Middle height="fit-content" minheight="38rem">
       <FileWrapper>
-        <FileIcon
-          style={{ width: "0.4rem", height: "0.9rem", marginRight: "0.3rem" }}
-        ></FileIcon>
-        <Text width="fit-content" level={2} line="1rem" color="#232735">
-          파일 추가
-        </Text>
-        {props.type === "project" && (
-          <>
-            <TextIcon
-              style={{
-                width: "0.5rem",
-                height: "1rem",
-                marginLeft: "0.5rem",
-                marginRight: "0.3rem",
-              }}
-            ></TextIcon>
-            <Text width="fit-content" level={2} line="1rem" color="#232735">
-              텍스트 추가
-            </Text>
-          </>
-        )}
+        <FileButton onClick={onClick}>
+          <FileIcon
+            style={{ width: "0.4rem", height: "0.9rem", marginRight: "0.3rem" }}
+          ></FileIcon>
+          <Text width="fit-content" level={2} line="1rem" color="#232735">
+            파일 추가
+          </Text>
+        </FileButton>
       </FileWrapper>
       <Textarea placeholder="내용을 입력하세요" type="text"></Textarea>
-      {props.UserImage ? (
-        <ImageHolder size={props.size}>
-          <Img src={props.profileImage}></Img>
-        </ImageHolder>
-      ) : (
-        <Image
-          style={{
-            width: `${props.size}`,
-            height: `${props.size}`,
-          }}
-          fill="#f0f1f3"
-        ></Image>
-      )}
+      <Dropzone></Dropzone>
     </Middle>
   );
 }
@@ -64,6 +49,14 @@ const FileWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
 `;
+const FileButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border: none;
+  background: transparent;
+  flex-direction: row;
+`;
 
 const Textarea = styled.textarea`
   background-color: transparent;
@@ -71,7 +64,7 @@ const Textarea = styled.textarea`
   padding: unset;
   box-sizing: border-box;
   width: 100%;
-  height: 6rem;
+  height: 15rem;
   outline: none;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.72rem;
