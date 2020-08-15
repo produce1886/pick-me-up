@@ -72,13 +72,4 @@ const Input = styled.input`
   font-size: 1.6rem;
   font-weight: bolder;
   margin: 0 0 0.3rem 0;
-  input::placeholder {
-    color: #d3d4d8;
-  }
-  input::-webkit-input-placeholder {
-    color: #d3d4d8;
-  }
-  input:-ms-input-placeholder {
-    color: #d3d4d8;
-  }
 `;
