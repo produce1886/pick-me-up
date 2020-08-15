@@ -1,11 +1,30 @@
 import styled from "styled-components";
-import Text from "../../atoms/Text";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import IconX from "../../atoms/Icon/X";
 import WriteBlock from "../Button/WriteBlock";
+import { useState } from "react";
 export default function ModalBottom(props) {
+  let taglists = [];
+  let newtaglists = [];
+  const [taginput, setTagInput] = useState();
+  const [tagArray, setTagArray] = useState(taglists);
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && tagArray.length < 5) {
+      newtaglists = Array.from(tagArray);
+      newtaglists.push({ _taginput: taginput });
+      setTagArray(newtaglists);
+      setTagInput("");
+    }
+    if (tagArray.length === 5 && event.key === "Enter") {
+      alert("태그는 5개까지 가능합니다.");
+    }
+  };
+  const handleChange = (event) => {
+    setTagInput(event.target.value);
+  };
   return (
     <Bottom>
       <Div>
@@ -14,31 +33,27 @@ export default function ModalBottom(props) {
             style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }}
             fill="#232735"
           ></Icon>
-          <Input placeholder="태그를 추가하세요" type="text"></Input>
+          <Input
+            onChange={handleChange}
+            onKeyPress={handleKeyPress}
+            value={taginput}
+            placeholder="태그를 추가하세요"
+          ></Input>
         </IconTextWrapper>
         <TagWrapper>
-          <TagButton ismodal={props.ismodal} text="Tag text" link="">
-            <IconX
-              style={{
-                width: "0.5rem",
-                height: "0.5rem",
-                margin: "0.2rem 0 0 0",
-              }}
-              fill="#232735"
-            ></IconX>
-          </TagButton>
-          <TagButton ismodal={props.ismodal} text="Tag text" link="">
-            <IconX
-              style={{
-                width: "0.5rem",
-                height: "0.5rem",
-                margin: "0.2rem 0 0 0",
-              }}
-              fill="#232735"
-            ></IconX>
-          </TagButton>
+          {tagArray.map((value) => (
+            <TagButton ismodal={props.ismodal} text={value._taginput} link="">
+              <IconX
+                style={{
+                  width: "0.5rem",
+                  height: "0.5rem",
+                  margin: "0.2rem 0 0 0",
+                }}
+                fill="#232735"
+              ></IconX>
+            </TagButton>
+          ))}
         </TagWrapper>
-
         <ButtonWrapper>
           <WriteBlock link=""></WriteBlock>
         </ButtonWrapper>
@@ -50,10 +65,11 @@ export default function ModalBottom(props) {
 const ButtonWrapper = styled.div`
   width: 5rem;
   height: 1.5rem;
-  display: flex;
   align-items: right;
   justify-content: right;
-  margin: 0 0 0 33rem;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
 `;
 
 const Div = styled.div`
@@ -63,6 +79,7 @@ const Div = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
 `;
 const TagWrapper = styled.div`
   width: 100%;
@@ -71,6 +88,7 @@ const TagWrapper = styled.div`
   align-items: left;
   flex-direction: row;
   margin: 0 0 0 2.5rem;
+  box-sizing: border-box;
 `;
 
 const IconTextWrapper = styled.div`
@@ -79,6 +97,7 @@ const IconTextWrapper = styled.div`
   display: flex;
   align-items: left;
   flex-direction: row;
+  box-sizing: border-box;
 `;
 
 const Input = styled.input`
