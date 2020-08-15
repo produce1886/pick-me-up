@@ -33,7 +33,7 @@ export default function PostBlock(props) {
       )}
       <Bottom
         viewNum={props.item.viewNum}
-        commentNum={props.item.commentNum}
+        commentsNum={props.item.commentsNum}
         id={props.item.id}
       ></Bottom>
     </Wrapper>
