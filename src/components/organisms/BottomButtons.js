@@ -3,9 +3,9 @@ import MoreListButton from "../molecules/Button/MoreList";
 import styled, { css } from "styled-components";
 import Wrapper from "../atoms/BottomButtons";
 
-export default function Bottom(props) {
+export default function Bottom() {
   return (
-    <Wrapper background={props.background}>
+    <Wrapper>
       <InnerWrapper>
         <TopButton></TopButton>
         <MoreListButton text="더 불러오기"></MoreListButton>
