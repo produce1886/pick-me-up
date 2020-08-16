@@ -4,9 +4,34 @@ import { useState, useEffect } from "react";
 import Text from "../../atoms/Text";
 import File from "../../atoms/Icon/FileLogo";
 import Upload from "../../atoms/Icon/Upload";
-export default function DropZoneComponent() {
-  const [selectedFiles, setSelectFile] = useState([]); //array type
-  const [errorMessage, setError] = useState(""); // string type
+export default function Dropzone() {
+  const [selectedFiles, setSelectFile] = useState([]); //전체 file들
+  const [errorMessage, setError] = useState(""); //에러메시지
+  const [duplicateFiles, setDuplicateFiles] = useState([]); //중복파일 방지 state
+  useEffect(() => {
+    let filteredArray = selectedFiles.reduce((file, current) => {
+      const x = file.find((item) => item.name === current.name);
+      if (!x) {
+        return file.concat([current]);
+      } else {
+        return file;
+      }
+    }, []);
+    setDuplicateFiles([...filteredArray]);
+  }, [selectedFiles]); //중복 파일 제거 검증
+
+  const removeFile = (name) => {
+    const validFileIndex = duplicateFiles.findIndex((e) => e.name === name);
+    // find the index of the item
+    duplicateFiles.splice(validFileIndex, 1);
+    // remove the item from array
+    setDuplicateFiles([...duplicateFiles]);
+    // update validFiles array
+    const selectedFileIndex = selectedFiles.findIndex((e) => e.name === name);
+    selectedFiles.splice(selectedFileIndex, 1);
+    // update selectedFiles array also
+    setSelectFile([...selectedFiles]);
+  }; // x 누를 시 선택된 파일 제거
 
   const fileSize = (size) => {
     if (size === 0) return "0 Bytes";
@@ -38,10 +63,18 @@ export default function DropZoneComponent() {
   const fileDrop = (e) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
-    console.log(files);
     if (files.length) {
       handleFiles(files);
     }
+  };
+  const addFile = (e) => {
+    const clickedfiles = Array.from(e.target.files);
+    if (clickedfiles.length) {
+      handleFiles(clickedfiles);
+    }
+  };
+  const upload = () => {
+    document.getElementById("multi").click();
   };
 
   const validateFile = (file) => {
@@ -64,6 +97,7 @@ export default function DropZoneComponent() {
         setSelectFile((prevArray) => [...prevArray, files[i]]);
         // add to an array so we can display the name of file
         files[i]["invalid"] = false; // add a new property called invalid
+        console.log(selectedFiles);
       } else {
         files[i]["invalid"] = true; // add a new property called invalid
         setSelectFile((prevArray) => [...prevArray, files[i]]); // add to the same array so we can display the name of the file
@@ -80,7 +114,14 @@ export default function DropZoneComponent() {
         onDrop={fileDrop}
       >
         <FileDilsplayContainer>
-          <UploadBox>
+          <UploadBox onClick={upload}>
+            <input
+              type="file"
+              id="multi"
+              onChange={addFile}
+              multiple
+              style={{ display: "none" }}
+            />
             <Upload
               style={{
                 width: "2rem",
@@ -96,8 +137,15 @@ export default function DropZoneComponent() {
           </UploadBox>
         </FileDilsplayContainer>
       </DropContainer>
-      {selectedFiles.map((data, i) => (
-        <FileStatusBar key={i}>
+      {duplicateFiles.map((data, i) => (
+        <FileStatusBar
+          key={i}
+          onClick={
+            !data.invalid
+              ? () => openImageModal(data)
+              : () => removeFile(data.name)
+          }
+        >
           <File
             style={{
               width: "2rem",
@@ -128,7 +176,7 @@ export default function DropZoneComponent() {
               </Text>
             </FileErrorMessage>
           )}
-          <FileRemove>
+          <FileRemove onClick={() => removeFile(data.name)}>
             <Text line="1.08rem" level={2}>
               X
             </Text>
@@ -142,7 +190,7 @@ const DropMessage = styled.div`
   margin: 4rem 0 0 0;
   text-align: center;
 `;
-const UploadBox = styled.div`
+const UploadBox = styled.button`
   width: fit-content;
   height: 5rem;
   display: flex;
@@ -150,6 +198,8 @@ const UploadBox = styled.div`
   align-items: center;
   position: relative;
   flex-direction: column;
+  border: none;
+  background: transparent;
 `;
 const Container = styled.div`
   text-align: center;
@@ -226,4 +276,46 @@ const DropContainer = styled.div`
   border: 0.1rem dashed #c8acee;
   width: 100%;
   height: 10rem;
+`;
+
+const FileWrapper = styled.div`
+  width: fit-content;
+  height: 1rem;
+  flex-direction: row;
+  margin: 0 0 1rem 0;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+`;
+const FileButton = styled.button`
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border: none;
+  background: transparent;
+  flex-direction: row;
+`;
+
+const Textarea = styled.textarea`
+  background-color: transparent;
+  border: none;
+  padding: unset;
+  box-sizing: border-box;
+  width: 100%;
+  height: 15rem;
+  outline: none;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 0.72rem;
+  margin: 0 0 0.3rem 0;
+  resize: none;
+  input::placeholder {
+    color: #d3d4d8;
+  }
+  input::-webkit-input-placeholder {
+    color: #d3d4d8;
+  }
+  input:-ms-input-placeholder {
+    color: #d3d4d8;
+  }
 `;
