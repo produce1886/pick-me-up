@@ -40,6 +40,7 @@ export default function PortfolioBody() {
           visible={writeVisible}
           maskClosable={true}
           onClose={closeWrite}
+          ismodal="modal"
         ></ModalWrite>
       )}
     </Wrapper>
