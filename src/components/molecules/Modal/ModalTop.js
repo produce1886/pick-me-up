@@ -18,13 +18,15 @@ export default function ModalTop(props) {
             level={1}
           ></Filters>
         </TitleFilterWrapper>
-        <Profile
-          direction="column"
-          size="2rem"
-          level={2}
-          name="name"
-          weight={800}
-        ></Profile>
+
+        <ProfileWrapper>
+          <Profile size="2rem"></Profile>
+          <TextDiv>
+            <Text level={2} weight={800}>
+              name
+            </Text>
+          </TextDiv>
+        </ProfileWrapper>
       </Div>
     </Top>
   );
@@ -37,6 +39,19 @@ const Div = styled.div`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+`;
+const TextDiv = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0.3rem 0 0;
+`;
+const ProfileWrapper = styled.div`
+  width: 2.2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 0.3rem 0 0;
 `;
 const TitleFilterWrapper = styled.div`
   width: 30rem;
@@ -57,13 +72,4 @@ const Input = styled.input`
   font-size: 1.6rem;
   font-weight: bolder;
   margin: 0 0 0.3rem 0;
-  input::placeholder {
-    color: #d3d4d8;
-  }
-  input::-webkit-input-placeholder {
-    color: #d3d4d8;
-  }
-  input:-ms-input-placeholder {
-    color: #d3d4d8;
-  }
 `;
