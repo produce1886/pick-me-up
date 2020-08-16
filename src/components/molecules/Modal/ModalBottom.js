@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
-import IconX from "../../atoms/Icon/X";
 import WriteBlock from "../Button/WriteBlock";
 import { useState } from "react";
 export default function ModalBottom(props) {
@@ -16,7 +15,7 @@ export default function ModalBottom(props) {
   }; // x 누를 시 선택된 tag 제거
 
   const handleKeyPress = (event) => {
-    if (event.key === "Enter" && tagArray.length < 5) {
+    if (event.key === "Enter" && tagArray.length < 5 && taginput.length > 0) {
       newtaglists = Array.from(tagArray);
       newtaglists.push({ _taginput: taginput });
       setTagArray(newtaglists);
@@ -50,21 +49,11 @@ export default function ModalBottom(props) {
             {tagArray.map((value, i) => (
               <TagButton
                 key={i}
-                ismodal={props.ismodal}
+                ismodal="modal"
                 text={value._taginput}
                 link=""
-              >
-                <XButton onClick={() => removeTag(key)}>
-                  <IconX
-                    style={{
-                      width: "0.5rem",
-                      height: "0.5rem",
-                      margin: "0.2rem 0 0 0",
-                    }}
-                    fill="#232735"
-                  ></IconX>
-                </XButton>
-              </TagButton>
+                removeTag={removeTag}
+              ></TagButton>
             ))}
           </TagWrapper>
           <ButtonWrapper>
@@ -84,13 +73,6 @@ const ButtonWrapper = styled.div`
   position: absolute;
   bottom: 1.5rem;
   right: 1.5rem;
-`;
-
-const XButton = styled.div`
-  width: fit-content;
-  height: fit-content;
-  align-items: right;
-  justify-content: right;
 `;
 
 const Div = styled.div`

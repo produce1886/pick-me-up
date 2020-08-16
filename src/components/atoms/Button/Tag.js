@@ -10,5 +10,6 @@ export default styled.button`
     padding: 0 0.6rem 0 0.6rem;
     border: none;
     margin: 0 0.1rem 0 0.1rem;
+    flex-direction: row;
   `}
 `;
