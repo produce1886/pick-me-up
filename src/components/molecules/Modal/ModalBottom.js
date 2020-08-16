@@ -2,20 +2,24 @@ import styled from "styled-components";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
-import IconX from "../../atoms/Icon/X";
 import WriteBlock from "../Button/WriteBlock";
 import { useState } from "react";
 export default function ModalBottom(props) {
-  let taglists = [];
   let newtaglists = [];
-  const [taginput, setTagInput] = useState();
-  const [tagArray, setTagArray] = useState(taglists);
+  const [taginput, setTagInput] = useState("");
+  const [tagArray, setTagArray] = useState([]);
+  const removeTag = (key) => {
+    const tagIndex = tagArray.findIndex((e) => e.key === key);
+    tagArray.splice(tagIndex, 1);
+    setTagArray([...tagArray]);
+  }; // x 누를 시 선택된 tag 제거
 
   const handleKeyPress = (event) => {
-    if (event.key === "Enter" && tagArray.length < 5) {
+    if (event.key === "Enter" && tagArray.length < 5 && taginput.length > 0) {
       newtaglists = Array.from(tagArray);
       newtaglists.push({ _taginput: taginput });
       setTagArray(newtaglists);
+      console.log(tagArray);
       setTagInput("");
     }
     if (tagArray.length === 5 && event.key === "Enter") {
@@ -26,39 +30,38 @@ export default function ModalBottom(props) {
     setTagInput(event.target.value);
   };
   return (
-    <Bottom>
-      <Div>
-        <IconTextWrapper>
-          <Icon
-            style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }}
-            fill="#232735"
-          ></Icon>
-          <Input
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
-            value={taginput}
-            placeholder="태그를 추가하세요"
-          ></Input>
-        </IconTextWrapper>
-        <TagWrapper>
-          {tagArray.map((value) => (
-            <TagButton ismodal={props.ismodal} text={value._taginput} link="">
-              <IconX
-                style={{
-                  width: "0.5rem",
-                  height: "0.5rem",
-                  margin: "0.2rem 0 0 0",
-                }}
-                fill="#232735"
-              ></IconX>
-            </TagButton>
-          ))}
-        </TagWrapper>
-        <ButtonWrapper>
-          <WriteBlock link=""></WriteBlock>
-        </ButtonWrapper>
-      </Div>
-    </Bottom>
+    <>
+      <Bottom>
+        <Div>
+          <IconTextWrapper>
+            <Icon
+              style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }}
+              fill="#232735"
+            ></Icon>
+            <Input
+              onChange={handleChange}
+              onKeyPress={handleKeyPress}
+              value={taginput}
+              placeholder="태그를 추가하세요"
+            ></Input>
+          </IconTextWrapper>
+          <TagWrapper>
+            {tagArray.map((value, i) => (
+              <TagButton
+                key={i}
+                ismodal="modal"
+                text={value._taginput}
+                link=""
+                removeTag={removeTag}
+              ></TagButton>
+            ))}
+          </TagWrapper>
+          <ButtonWrapper>
+            <WriteBlock link=""></WriteBlock>
+          </ButtonWrapper>
+        </Div>
+      </Bottom>
+    </>
   );
 }
 
