@@ -26,7 +26,7 @@ export default function Dropzone() {
     duplicateFiles.splice(validFileIndex, 1);
     // remove the item from array
     setDuplicateFiles([...duplicateFiles]);
-    // update validFiles array
+    // update duplicateFiles array
     const selectedFileIndex = selectedFiles.findIndex((e) => e.name === name);
     selectedFiles.splice(selectedFileIndex, 1);
     // update selectedFiles array also
@@ -67,16 +67,6 @@ export default function Dropzone() {
       handleFiles(files);
     }
   };
-  const addFile = (e) => {
-    const clickedfiles = Array.from(e.target.files);
-    if (clickedfiles.length) {
-      handleFiles(clickedfiles);
-    }
-  };
-  const upload = () => {
-    document.getElementById("multi").click();
-  };
-
   const validateFile = (file) => {
     const validTypes = [
       "image/jpeg",
@@ -114,14 +104,7 @@ export default function Dropzone() {
         onDrop={fileDrop}
       >
         <FileDilsplayContainer>
-          <UploadBox onClick={upload}>
-            <input
-              type="file"
-              id="multi"
-              onChange={addFile}
-              multiple
-              style={{ display: "none" }}
-            />
+          <UploadBox>
             <Upload
               style={{
                 width: "2rem",
@@ -190,7 +173,7 @@ const DropMessage = styled.div`
   margin: 4rem 0 0 0;
   text-align: center;
 `;
-const UploadBox = styled.button`
+const UploadBox = styled.div`
   width: fit-content;
   height: 5rem;
   display: flex;
@@ -207,7 +190,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: fit-content;
-  margin: 3.5rem 0 0 0;
+  margin: 1.5rem 0 0 0;
 `;
 const FileDilsplayContainer = styled.div`
   width: 100%;
@@ -276,46 +259,4 @@ const DropContainer = styled.div`
   border: 0.1rem dashed #c8acee;
   width: 100%;
   height: 10rem;
-`;
-
-const FileWrapper = styled.div`
-  width: fit-content;
-  height: 1rem;
-  flex-direction: row;
-  margin: 0 0 1rem 0;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  display: flex;
-`;
-const FileButton = styled.button`
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  border: none;
-  background: transparent;
-  flex-direction: row;
-`;
-
-const Textarea = styled.textarea`
-  background-color: transparent;
-  border: none;
-  padding: unset;
-  box-sizing: border-box;
-  width: 100%;
-  height: 15rem;
-  outline: none;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 0.72rem;
-  margin: 0 0 0.3rem 0;
-  resize: none;
-  input::placeholder {
-    color: #d3d4d8;
-  }
-  input::-webkit-input-placeholder {
-    color: #d3d4d8;
-  }
-  input:-ms-input-placeholder {
-    color: #d3d4d8;
-  }
 `;
