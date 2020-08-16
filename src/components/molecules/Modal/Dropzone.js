@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Text from "../../atoms/Text";
 import Upload from "../../atoms/Icon/Upload";
 import Close from "../../atoms/Icon/Close";
@@ -8,10 +8,15 @@ export default function Dropzone() {
   const [selectedFiles, setSelectFile] = useState([]); //전체 file들
   const [imagePreviewUrl, setImagePreviewUrl] = useState([]);
 
-  const removeFile = (data) => {
-    const newArray = selectedFiles.filter((file) => file.data !== data);
-    setSelectFile([newArray]);
-  }; // x 누를 시 선택된 파일 제거
+  const removeFile = (id) => {
+    const imagePreviewUrlIndex = imagePreviewUrl.findIndex((e) => e.id === id);
+    imagePreviewUrl.splice(imagePreviewUrlIndex, 1);
+    setImagePreviewUrl([...imagePreviewUrl]);
+    const selectedFilesIndex = selectedFiles.findIndex((e) => e.id === id);
+    console.log(e.id);
+    selectedFiles.splice(selectedFilesIndex, 1);
+    setSelectFile([...selectedFiles]);
+  }; // x 누를 시 선택된 tag 제거
 
   const dragOver = (e) => {
     e.preventDefault();
@@ -94,8 +99,13 @@ export default function Dropzone() {
       </DropContainer>
       <FileStatusBar>
         {selectedFiles.map((file, i) => (
-          <PreviewImage key={i}>
-            <XButton onClick={removeFile}>
+          <PreviewImage>
+            <XButton
+              name={file.name}
+              data={file.data}
+              id={i}
+              onClick={removeFile}
+            >
               <Close
                 style={{ width: "1rem", height: "1rem" }}
                 fill="#232735"
