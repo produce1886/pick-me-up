@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
-import Filters from "../Filter/Filters";
+import Filters from "../Filter/FilterGroup";
 
 export default function ModalTop(props) {
   return (

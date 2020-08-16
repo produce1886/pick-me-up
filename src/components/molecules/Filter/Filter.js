@@ -24,10 +24,17 @@ export default function Filter(props) {
   const [clicked, setClicked] = useState(false);
   const [item, setItem] = useState(null);
 
-  const toggleSelected = (item) => {
+  const setSelected = (item) => {
+    props.onClick(item.title);
     setItem(item);
   };
+
   const resetFilter = () => {
+    if (props.title === "최신순") {
+      props.onClick("최신순");
+    } else {
+      props.onClick();
+    }
     setItem(null);
     setClicked(false);
   };
@@ -82,7 +89,7 @@ export default function Filter(props) {
           <DropdownMenu
             activeMenu={props.activeMenu}
             data={props.data}
-            toggleSelected={toggleSelected}
+            setSelected={setSelected}
           ></DropdownMenu>
         )}
       </Wrapper>
@@ -107,7 +114,7 @@ export default function Filter(props) {
         <DropdownMenu
           activeMenu={props.activeMenu}
           data={props.data}
-          toggleSelected={toggleSelected}
+          setSelected={setSelected}
         ></DropdownMenu>
       )}
     </Wrapper>
