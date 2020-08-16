@@ -1,25 +1,14 @@
+import React from "react";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
 import FileIcon from "../../atoms/Icon/File";
-import Dropzone from "../Modal/DropZoneComponent";
-import { useState, useEffect } from "react";
-export default function ModalMiddle(props) {
-  const [img, setImage] = useState(null);
-  const onClick = async () => {
-    const formData = new FormData();
-    formData.append("file", img);
-    /*const res = await axios.post("/api/upload", formData);
-    console.log(res);
-     */
-  };
-  const onChange = (e) => {
-    setImage(e.target.files[0]);
-  };
+import Dropzone from "./Dropzone";
+export default function ModalMiddle() {
   return (
     <Middle height="fit-content" minheight="38rem">
       <FileWrapper>
-        <FileButton onClick={onClick}>
+        <FileButton>
           <FileIcon
             style={{ width: "0.4rem", height: "0.9rem", marginRight: "0.3rem" }}
           ></FileIcon>
@@ -33,12 +22,6 @@ export default function ModalMiddle(props) {
     </Middle>
   );
 }
-
-const Img = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-
 const FileWrapper = styled.div`
   width: fit-content;
   height: 1rem;
