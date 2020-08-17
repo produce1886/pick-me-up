@@ -3,8 +3,11 @@ import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
 import Filterinfo from "../FilterInfo";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ModalTop(props) {
+  const userInfo = useSelector((state) => state.user);
+  const userData = userInfo.userData;
   return (
     <Top hight="4rem">
       <Div>
@@ -17,10 +20,14 @@ export default function ModalTop(props) {
           <Filterinfo type={props.type}></Filterinfo>
         </TitleFilterWrapper>
         <ProfileBox>
-          <Profile direction="column" size="2rem"></Profile>
+          <Profile
+            direction="column"
+            size="2rem"
+            profileImage={userData.profilePic}
+          ></Profile>
           <TextDiv>
             <Text level={3} weight={800}>
-              name
+              {userData.name}
             </Text>
           </TextDiv>
         </ProfileBox>
