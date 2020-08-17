@@ -7,6 +7,7 @@ import ProjectList from "./ProjectList";
 import WriteButton from "../molecules/Button/Write";
 import ModalWrite from "../organisms/ModalWrite";
 import BottomButtons from "../organisms/BottomButtons";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ProjectBody() {
   const [category, setCategory] = useState();
@@ -33,6 +34,7 @@ export default function ProjectBody() {
     setWriteVisible(false);
   };
 
+  const isSignedIn = useSelector((state) => state.user.isSignedIn);
   return (
     <>
       <FilterSearch
@@ -64,7 +66,7 @@ export default function ProjectBody() {
           <BottomButtons></BottomButtons>
         </InnerWrapper>
       </Wrapper>
-      <WriteButton openWrite={openWrite}></WriteButton>
+      {isSignedIn && <WriteButton openWrite={openWrite}></WriteButton>}
       {writeVisible && (
         <ModalWrite
           visible={writeVisible}

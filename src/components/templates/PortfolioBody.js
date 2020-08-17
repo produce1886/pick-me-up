@@ -4,6 +4,7 @@ import Portfoliolist from "../templates/Portfoliolist";
 import ModalWrite from "../organisms/ModalWrite";
 import ModalView from "../organisms/ModalView";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PortfolioBody() {
   const [viewVisible, setViewVisible] = useState(false);
@@ -21,6 +22,7 @@ export default function PortfolioBody() {
   const closeWrite = () => {
     setWriteVisible(false);
   };
+  const isSignedIn = useSelector((state) => state.user.isSignedIn);
 
   return (
     <Wrapper>
@@ -34,7 +36,7 @@ export default function PortfolioBody() {
           ></ModalView>
         )}
       </InnerWrapper>
-      <WriteButton openWrite={openWrite}></WriteButton>
+      {isSignedIn && <WriteButton openWrite={openWrite}></WriteButton>}
       {writeVisible && (
         <ModalWrite
           visible={writeVisible}

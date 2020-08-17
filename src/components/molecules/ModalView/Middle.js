@@ -8,7 +8,7 @@ import ImageHolder from "../../atoms/ImageHolder/Profile";
 
 export default function ModalMiddle(props) {
   return (
-    <Middle height="30rem" min-height="30rem">
+    <Middle height="32rem" min-height="30rem">
       <DateWrapper>
         <Text level="">YYYY.MM.DD 00:00</Text>
       </DateWrapper>
@@ -38,6 +38,10 @@ export default function ModalMiddle(props) {
         <TagButton text="Tag text" link=""></TagButton>
         <TagButton text="Tag text" link=""></TagButton>
       </TagWrapper>
+      <ButtonWrapper>
+        <TagButton text="게시글 수정" link=""></TagButton>
+        <TagButton text="게시글 삭제" link=""></TagButton>
+      </ButtonWrapper>
     </Middle>
   );
 }
@@ -71,7 +75,15 @@ const TagWrapper = styled.div`
   align-items: left;
   flex-direction: row;
 `;
-
+const ButtonWrapper = styled.div`
+  width: 9rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: right;
+  flex-direction: row;
+  margin: 0 0 0 28rem;
+  justify-content: space-between;
+`;
 const Img = styled.img`
   width: 100%;
   height: 100%;

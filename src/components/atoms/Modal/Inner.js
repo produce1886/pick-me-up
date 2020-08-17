@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export default styled.div`
-	${(props) => css`
+  ${(props) => css`
 		width: 40rem;
 		height: ${props.height};
 		background-color: #ffffff;
@@ -12,6 +12,6 @@ export default styled.div`
 		position: relative;
 		top: 50%;
         margin: 0 auto;
-        transform: translateY(-50%);
+		transform: translateY(-50%);
 	`}
 `;
