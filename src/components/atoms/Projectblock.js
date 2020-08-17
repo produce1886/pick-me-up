@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export default styled.div`
   width: 23.6rem;
@@ -8,6 +8,6 @@ export default styled.div`
   background-color: #ffffff;
   position: relative;
   box-sizing: border-box;
-  margin: 0 0.4rem 0 0.4rem;
-  z-index:101;
+  z-index: 101;
+  margin-bottom: 0.8rem;
 `;
