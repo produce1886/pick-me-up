@@ -9,31 +9,30 @@ import { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 export default function ModalView(props) {
-	const onMaskClick = (e) => {
-		if (e.target === e.currentTarget) {
-			props.onClose(e);
-		}
-	};
+  const onMaskClick = (e) => {
+    if (e.target === e.currentTarget) {
+      props.onClose(e);
+    }
+  };
 
-	const close = (e) => {
-		if (props.onClose) {
-			props.onClose(e);
-		}
-	};
-	return (
-		<>
-			<Overlay visible={props.visible} />
-			<Wrapper
-				tabIndex="-1"
-				visible={props.visible}
-				height="70rem"
-				onClick={props.maskClosable ? onMaskClick : null}>
-				<Inner>
-					<Top type={props.type}></Top>
-					<Middle type="project"></Middle>
-					<Bottom count="1N"></Bottom>
-				</Inner>
-			</Wrapper>
-		</>
-	);
+  return (
+    <>
+      <Overlay
+        visible={props.visible}
+        onClick={props.maskClosable ? onMaskClick : null}
+      />
+      <Wrapper
+        tabIndex="-1"
+        visible={props.visible}
+        height="70rem"
+        onClick={props.maskClosable ? onMaskClick : null}
+      >
+        <Inner>
+          <Top type={props.type}></Top>
+          <Middle type="project"></Middle>
+          <Bottom count="1N"></Bottom>
+        </Inner>
+      </Wrapper>
+    </>
+  );
 }
