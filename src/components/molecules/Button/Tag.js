@@ -3,6 +3,7 @@ import Wrapper from "../../atoms/Button/Tag";
 import Link from "next/link";
 import styled from "styled-components";
 import IconX from "../../atoms/Icon/X";
+
 export default function Button(props) {
   return (
     <Link href={props.link}>
@@ -18,13 +19,13 @@ export default function Button(props) {
             >
               {props.text}
             </Text>
-            <IconButton
-              onClick={(e) => {
-                e.preventDefault();
-                props.removeTag(props.key);
-              }}
-            >
-              {props.ismodal && (
+            {props.ismodal && (
+              <IconButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  props.removeTag(props.key);
+                }}
+              >
                 <IconX
                   style={{
                     width: "0.5rem",
@@ -33,8 +34,8 @@ export default function Button(props) {
                   }}
                   fill="#232735"
                 ></IconX>
-              )}
-            </IconButton>
+              </IconButton>
+            )}
           </Div>
         </Wrapper>
       </A>
