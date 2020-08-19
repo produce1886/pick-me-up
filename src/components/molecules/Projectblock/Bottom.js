@@ -4,20 +4,20 @@ import CommentCount from "../CommentCount";
 import MoreButton from "../Button/More";
 import TagButton from "../Button/Tag";
 
-export default function Bottom() {
+export default function Bottom(props) {
+  const renderTags = props.tags.map((item, index) => {
+    return <TagButton text={item.tag} key={index} link=""></TagButton>;
+  });
+
   return (
     <Wrapper>
       <Col>
-        <Row>
-          <TagButton text="Tag text" link=""></TagButton>
-          <TagButton text="Tag text" link=""></TagButton>
-          <TagButton text="Tag text" link=""></TagButton>
-        </Row>
+        <Row>{renderTags}</Row>
         <Row2>
           <Div>
-            <ViewCount count={10}></ViewCount>
+            <ViewCount count={props.viewNum}></ViewCount>
             &nbsp;
-            <CommentCount count={10}></CommentCount>
+            <CommentCount count={props.commentsNum}></CommentCount>
           </Div>
           <MoreButton link=""></MoreButton>
         </Row2>
