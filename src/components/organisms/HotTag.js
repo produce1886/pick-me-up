@@ -28,7 +28,7 @@ export default function HotTag() {
           </Div>
           <Row>
             {!isLoading &&
-              tags.length > 0 &&
+              tags &&
               tags.content.map((item, index) => (
                 <Tag key={index} text={item.name} link=""></Tag>
               ))}
@@ -40,7 +40,7 @@ export default function HotTag() {
 }
 
 const getHotTags = () => {
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
