@@ -74,6 +74,7 @@ export default function Preview(props) {
       </Wrapper>
     );
   }
+  return <></>;
 }
 
 const getProjects = () => {
