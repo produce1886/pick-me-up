@@ -22,10 +22,14 @@ export default function Filter(props) {
   };
 
   const [clicked, setClicked] = useState(false);
-  const [item, setItem] = useState(null);
+  const [item, setItem] = useState("");
 
   const setSelected = (item) => {
-    props.onClick(item.title);
+    if (item) {
+      props.onClick(item.title);
+    } else {
+      props.onClick("");
+    }
     setItem(item);
   };
 
@@ -35,7 +39,7 @@ export default function Filter(props) {
     } else {
       props.onClick();
     }
-    setItem(null);
+    setItem("");
     setClicked(false);
   };
 
