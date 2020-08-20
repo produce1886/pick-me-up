@@ -18,15 +18,11 @@ export default function ModalTop(props) {
             onChange={handleChange}
           ></Input>
           <Filters
-            type={props.type}
+            type="project"
             width="fit-content"
             height="1rem"
             line="1rem"
             level={1}
-            category={props.category}
-            field={props.field}
-            region={props.region}
-            projectType={props.projectType}
             setCategory={props.setCategory}
             setField={props.setField}
             setRegion={props.setRegion}
