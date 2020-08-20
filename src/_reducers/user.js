@@ -13,9 +13,9 @@ if (userData) {
   initialState = {
     isSignedIn: false,
     userData: {
-      name: "",
+      username: "",
       email: "",
-      profilePic: "",
+      image: "",
     },
   };
 }
