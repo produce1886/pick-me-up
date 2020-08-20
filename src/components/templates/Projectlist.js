@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ProjectBlock from "../organisms/ProjectBlock";
+import NoResult from "../molecules/NoResult";
+import BottomButtons from "../organisms/BottomButtons";
 
 export default function Projectlist(props) {
   const { category, field, region, projectType, query, sort } = props;
@@ -30,9 +32,21 @@ export default function Projectlist(props) {
     <ProjectBlock key={index} item={item}></ProjectBlock>
   );
 
-  return <Wrapper>{!isLoading && data.length > 0 && getList(data)}</Wrapper>;
-}
+  if (!isLoading && data.length === 0) {
+    return (
+      <Wrapper>
+        <NoResult></NoResult>
+      </Wrapper>
+    );
+  }
 
+  return (
+    <>
+      <Wrapper>{!isLoading && data.length > 0 && getList(data)}</Wrapper>
+      <BottomButtons></BottomButtons>
+    </>
+  );
+}
 const getProjectList = (category, field, region, projectType, query, sort) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);

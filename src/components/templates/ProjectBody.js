@@ -6,7 +6,6 @@ import { ALIGN } from "../molecules/Filter/ItemData";
 import ProjectList from "./ProjectList";
 import WriteButton from "../molecules/Button/Write";
 import ModalWrite from "../organisms/ModalWrite";
-import BottomButtons from "../organisms/BottomButtons";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ProjectBody() {
@@ -64,7 +63,6 @@ export default function ProjectBody() {
             query={query}
             sort={sort}
           ></ProjectList>
-          <BottomButtons></BottomButtons>
         </InnerWrapper>
       </Wrapper>
       {isSignedIn && <WriteButton openWrite={openWrite}></WriteButton>}
