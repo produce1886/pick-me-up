@@ -65,7 +65,7 @@ const getProjectList = (category, field, region, projectType, query, sort) => {
     category: category,
     huntingField: field,
     region: region,
-    projectCategory: category,
+    projectCategory: projectType,
     keyword: query,
   };
 
