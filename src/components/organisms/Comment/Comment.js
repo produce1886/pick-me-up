@@ -3,7 +3,13 @@ import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon/optionmore";
+import EditnDelete from "../../molecules/Filter/EditnDelete";
+import { useState } from "react";
 export default function Comment() {
+  const [clicked, setClicked] = useState(false);
+  const openMenu = () => {
+    setClicked(!clicked);
+  };
   return (
     <Wrapper>
       <ProfileDiv>
@@ -19,9 +25,10 @@ export default function Comment() {
               YYYY.MM.DD 00:00
             </Text>
           </Div>
-          <ButtonWrapper>
+          <ButtonWrapper onClick={console.log(clicked)}>
             <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
           </ButtonWrapper>
+          {clicked && <EditnDelete></EditnDelete>}
         </InfoWrapper>
         <CommentBox>
           <Text level={1} color="#232735">
