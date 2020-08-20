@@ -8,7 +8,7 @@ export default styled.button`
     justify-content: center;
     align-items: center;
     padding: 0 0.6rem 0 0.6rem;
-    border: none;
+    border: solid 0.01rem ${props.borderColor};
     margin: 0 0.1rem 0 0.1rem;
     flex-direction: row;
   `}
