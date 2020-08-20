@@ -4,7 +4,9 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import WriteBlock from "../Button/WriteBlock";
 import { useState } from "react";
+import axios from "axios";
 export default function ModalBottom(props) {
+  const { project } = getProject();
   let newtaglists = [];
   const [taginput, setTagInput] = useState("");
   const [tagArray, setTagArray] = useState([]);
@@ -53,10 +55,16 @@ export default function ModalBottom(props) {
                 text={value._taginput}
                 link=""
                 removeTag={removeTag}
+                tagtype="modalwrite"
               ></TagButton>
             ))}
           </TagWrapper>
-          <ButtonWrapper>
+          <ButtonWrapper
+            onClick={() => {
+              Write;
+              props.onClose();
+            }}
+          >
             <WriteBlock link=""></WriteBlock>
           </ButtonWrapper>
         </Div>
@@ -64,6 +72,30 @@ export default function ModalBottom(props) {
     </>
   );
 }
+const getProject = () => {
+  const [project, setProject] = useState();
+  const Write = async () => {
+    try {
+      const result = await axios.post(`${process.env.API_HOST}/projects`, {
+        title: props.title,
+        content: props.content,
+        email: props.email,
+        category: props.category,
+        huntingField: props.field,
+        region: props.region,
+        projectCategory: props.projectType,
+        tags: tagArray,
+      });
+      setProject(result.data);
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  };
+  Write();
+  return { project };
+};
 
 const ButtonWrapper = styled.div`
   width: 5rem;
