@@ -2,10 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";
-export default function ModalMiddle() {
+export default function ModalMiddle(props) {
+  const handleChange = (event) => {
+    props.setContent(event.target.value);
+  };
   return (
     <Middle height="fit-content" minheight="38rem">
-      <Textarea placeholder="내용을 입력하세요" type="text"></Textarea>
+      <Textarea
+        placeholder="내용을 입력하세요"
+        type="text"
+        onChange={handleChange}
+      ></Textarea>
       <Dropzone></Dropzone>
     </Middle>
   );
