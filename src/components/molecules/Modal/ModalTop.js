@@ -5,25 +5,43 @@ import Profile from "../Profile";
 import Filters from "../Filter/FilterGroup";
 
 export default function ModalTop(props) {
+  const handleChange = (event) => {
+    props.setTitle(event.target.value);
+  };
   return (
     <Top height="6rem">
       <Div>
         <TitleFilterWrapper>
-          <Input placeholder="제목을 입력하세요" type="text"></Input>
+          <Input
+            placeholder="제목을 입력하세요"
+            type="text"
+            onChange={handleChange}
+          ></Input>
           <Filters
             type={props.type}
             width="fit-content"
             height="1rem"
             line="1rem"
             level={1}
+            category={props.category}
+            field={props.field}
+            region={props.region}
+            projectType={props.projectType}
+            setCategory={props.setCategory}
+            setField={props.setField}
+            setRegion={props.setRegion}
+            setProjectType={props.setProjectType}
           ></Filters>
         </TitleFilterWrapper>
 
         <ProfileWrapper>
-          <Profile size="2rem"></Profile>
+          <Profile
+            size="2rem"
+            profileImage={props.userData.profilePic}
+          ></Profile>
           <TextDiv>
             <Text level={2} weight={800}>
-              name
+              {props.userData.name}
             </Text>
           </TextDiv>
         </ProfileWrapper>
