@@ -4,6 +4,7 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import WriteBlock from "../Button/WriteBlock";
 import { useState } from "react";
+import axios from "axios";
 export default function ModalBottom(props) {
   let newtaglists = [];
   const [taginput, setTagInput] = useState("");
@@ -19,7 +20,6 @@ export default function ModalBottom(props) {
       newtaglists = Array.from(tagArray);
       newtaglists.push({ _taginput: taginput });
       setTagArray(newtaglists);
-      console.log(tagArray);
       setTagInput("");
     }
     if (tagArray.length === 5 && event.key === "Enter") {
@@ -53,10 +53,16 @@ export default function ModalBottom(props) {
                 text={value._taginput}
                 link=""
                 removeTag={removeTag}
+                tagtype="modalwrite"
               ></TagButton>
             ))}
           </TagWrapper>
-          <ButtonWrapper>
+          <ButtonWrapper
+            onClick={() => {
+              Write();
+              props.onClose();
+            }}
+          >
             <WriteBlock link=""></WriteBlock>
           </ButtonWrapper>
         </Div>
@@ -64,6 +70,42 @@ export default function ModalBottom(props) {
     </>
   );
 }
+const Write = async (props) => {
+  try {
+    const result = await axios.post(
+      `${process.env.API_HOST}/projects`,
+      {
+        title: props.title,
+        content: props.content,
+        email: props.email,
+        category: props.category,
+        huntingField: props.field,
+        region: props.region,
+        projectCategory: props.projectCategory,
+        tags: tagArray,
+      },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    alert(props);
+  } catch (error) {
+    if (error.response) {
+      // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // 요청이 이루어 졌으나 응답을 받지 못했습니다.
+      // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
+      // Node.js의 http.ClientRequest 인스턴스입니다.
+      console.log(error.request);
+    } else {
+      // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
+      console.log("Error", error.message);
+    }
+    console.log(error.config);
+  } finally {
+  }
+};
 
 const ButtonWrapper = styled.div`
   width: 5rem;

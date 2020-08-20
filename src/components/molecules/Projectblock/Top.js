@@ -11,7 +11,7 @@ export default function Top(props) {
       <Col>
         <FirstDiv>
           <Text level={6} weight="bold" color="#9c69e2" line={1.17}>
-            Title Textbox Title Textbox
+            {props.title}
           </Text>
         </FirstDiv>
         <FirstDiv>
@@ -19,14 +19,21 @@ export default function Top(props) {
             direction="row"
             size="0.8rem"
             level={1}
-            name="Name"
+            name={props.name}
+            profileImage={props.profileImage}
           ></Profile>
         </FirstDiv>
         <Row>
           <Div>
-            <Filterinfo type="project"></Filterinfo>
+            <Filterinfo
+              type="project"
+              category={props.category}
+              field={props.field}
+              region={props.region}
+              projectCategory={props.projectCategory}
+            ></Filterinfo>
             <Text level={1} color="#232735">
-              YYYY.MM.DD
+              {props.date}
             </Text>
           </Div>
         </Row>

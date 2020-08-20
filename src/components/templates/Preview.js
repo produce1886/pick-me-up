@@ -7,92 +7,81 @@ import Text from "../atoms/Text";
 import Icon from "../atoms/Icon/Chevron/Right";
 
 export default function Preview(props) {
-  const { newProjects, hotProjects, isLoading } = getProjects();
+  const { projects, isLoading } = getProjects(props.type);
 
-  if (props.type === "new") {
-    return (
-      <Wrapper>
-        <Col>
-          <LinkWrapper>
-            <Link href="project">
-              <A>
-                <Text level={8} color="#232735" weight="bold">
-                  신규 프로젝트
-                </Text>
-              </A>
-            </Link>
-            <Icon
-              style={{ width: "0.4rem", height: "0.8rem" }}
-              fill="#232735"
-            ></Icon>
-          </LinkWrapper>
-          <InnerWrapper>
-            {newProjects &&
-              !isLoading &&
-              newProjects.content.map((item, index) => (
-                <Postblock
-                  key={index}
-                  item={item}
-                  type={props.type}
-                ></Postblock>
-              ))}
-          </InnerWrapper>
-        </Col>
-      </Wrapper>
-    );
-  }
-  if (props.type === "most") {
-    return (
-      <Wrapper>
-        <Col>
-          <LinkWrapper>
-            <Link href="project">
-              <A>
-                <Text level={8} color="#232735" weight="bold">
-                  가장 많이 본 프로젝트
-                </Text>
-              </A>
-            </Link>
-            <Icon
-              style={{ width: "0.4rem", height: "0.8rem" }}
-              fill="#232735"
-            ></Icon>
-          </LinkWrapper>
-          <InnerWrapper>
-            {hotProjects &&
-              !isLoading &&
-              hotProjects.content.map((item, index) => (
-                <Postblock
-                  key={index}
-                  rank={index + 1}
-                  item={item}
-                  type={props.type}
-                ></Postblock>
-              ))}
-          </InnerWrapper>
-        </Col>
-      </Wrapper>
-    );
-  }
+  return (
+    <Wrapper>
+      <Col>
+        <LinkWrapper>
+          <Link href="project">
+            <A>
+              <Text level={8} color="#232735" weight="bold">
+                {props.type === "new" && "신규 프로젝트"}
+                {props.type === "most" && "가장 많이 본 프로젝트"}
+              </Text>
+            </A>
+          </Link>
+          <Icon
+            style={{ width: "0.4rem", height: "0.8rem" }}
+            fill="#232735"
+          ></Icon>
+        </LinkWrapper>
+        <InnerWrapper>
+          {props.type === "new" &&
+            projects.length > 0 &&
+            !isLoading &&
+            projects.map((item, index) => (
+              <Postblock key={index} item={item} type={props.type}></Postblock>
+            ))}
+          {props.type === "most" &&
+            projects.length > 0 &&
+            !isLoading &&
+            projects.map((item, index) => (
+              <Postblock
+                key={index}
+                rank={index + 1}
+                item={item}
+                type={props.type}
+              ></Postblock>
+            ))}
+        </InnerWrapper>
+      </Col>
+    </Wrapper>
+  );
 }
 
-const getProjects = () => {
-  const [newProjects, setNewProjects] = useState(null);
-  const [hotProjects, setHotProjects] = useState(null);
+const getProjects = (type) => {
+  const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  let sort;
+  if (type === "new") {
+    sort = "createdDate";
+  } else if (type === "most") {
+    sort = "viewNum";
+  }
+
+  let body = {
+    page: 0,
+    size: 4,
+    sortColumn: `${sort}`,
+    category: "",
+    huntingField: "",
+    region: "",
+    projectCategory: "",
+    keyword: "",
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const newProjectsData = await axios.get(
-          `${process.env.API_HOST}/projects?size=4&sort=createdDate,desc`
+        const result = await axios.post(
+          `${process.env.API_HOST}/projects/list`,
+          body
         );
-        setNewProjects(newProjectsData.data);
-        const hotProjectsData = await axios.get(
-          `${process.env.API_HOST}/projects?size=4&sort=viewNum,desc`
-        );
-        setHotProjects(hotProjectsData.data);
+        setProjects(result.data);
+
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -100,7 +89,7 @@ const getProjects = () => {
     };
     fetchData();
   }, []);
-  return { newProjects, hotProjects, isLoading };
+  return { projects, isLoading };
 };
 
 const Wrapper = styled.div`

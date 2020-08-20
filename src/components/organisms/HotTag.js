@@ -40,16 +40,16 @@ export default function HotTag() {
 }
 
 const getHotTags = () => {
-  const [tags, setTags] = useState(null);
+  const [tags, setTags] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const result = await axios.get(
-          `${process.env.API_HOST}/tags?size=10&sort=score,desc`
-        );
+        const result = await axios.post(`${process.env.API_HOST}/tags`, {
+          size: 10,
+        });
         setTags(result.data);
         setIsLoading(false);
       } catch (error) {

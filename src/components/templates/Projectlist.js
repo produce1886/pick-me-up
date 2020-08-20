@@ -14,34 +14,29 @@ export default function Projectlist(props) {
     sort
   );
 
-  return (
-    <Wrapper>
-      <Div>
-        <ProjectBlock></ProjectBlock>
-        <ProjectBlock></ProjectBlock>
-      </Div>
-      <Div>
-        <ProjectBlock></ProjectBlock>
-        <ProjectBlock></ProjectBlock>
-      </Div>
-      <Div>
-        <ProjectBlock></ProjectBlock>
-        <ProjectBlock></ProjectBlock>
-      </Div>
-      <Div>
-        <ProjectBlock></ProjectBlock>
-        <ProjectBlock></ProjectBlock>
-      </Div>
-      <Div>
-        <ProjectBlock></ProjectBlock>
-      </Div>
-    </Wrapper>
+  const getList = (items) => {
+    return (
+      <>
+        <Div>{items.slice(0, 2).map(getBlock)}</Div>
+        <Div>{items.slice(2, 4).map(getBlock)}</Div>
+        <Div>{items.slice(4, 6).map(getBlock)}</Div>
+        <Div>{items.slice(6, 8).map(getBlock)}</Div>
+        <Div>{items.slice(8, 10).map(getBlock)}</Div>
+      </>
+    );
+  };
+
+  const getBlock = (item, index) => (
+    <ProjectBlock key={index} item={item}></ProjectBlock>
   );
+
+  return <Wrapper>{!isLoading && data.length > 0 && getList(data)}</Wrapper>;
 }
 
 const getProjectList = (category, field, region, projectType, query, sort) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+
   const sortColumn = {
     최신순: "createdDate",
     댓글순: "commentsNum",

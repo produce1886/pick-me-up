@@ -23,11 +23,11 @@ export default function ModalTop(props) {
           <Profile
             direction="column"
             size="2rem"
-            profileImage={userData.profilePic}
+            profileImage={userData.image}
           ></Profile>
           <TextDiv>
             <Text level={3} weight={800}>
-              {userData.name}
+              {userData.username}
             </Text>
           </TextDiv>
         </ProfileBox>

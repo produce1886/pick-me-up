@@ -1,21 +1,35 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Text from "../atoms/Text";
 import Top from "../molecules/ProjectBlock/Top";
 import Bottom from "../molecules/ProjectBlock/Bottom";
 import Wrapper from "../atoms/ProjectBlock";
 
 export default function ProjectBlock(props) {
+  const date = props.item.createdDate.split("T")[0];
+
   return (
     <Wrapper>
-      <Top></Top>
+      <Top
+        title={props.item.title}
+        name={props.item.user.username}
+        date={date}
+        profileImage={props.item.user.image}
+        category={props.item.category}
+        field={props.item.huntingField}
+        region={props.item.region}
+        projectCategory={props.item.projectCategory}
+      ></Top>
       <Body>
         <Text level={2} color="#232735">
-          Body textbox Continually unleash technically sound products before
-          installed base opportunities. Holisticly harness granular e-business
-          with e-business ROI. Interactively andemic process improvements...
+          {props.item.content}
         </Text>
       </Body>
-      <Bottom></Bottom>
+      <Bottom
+        tags={props.item.projectTag}
+        viewNum={props.item.viewNum}
+        commentsNum={props.item.commentsNum}
+        id={props.item.id}
+      ></Bottom>
     </Wrapper>
   );
 }
