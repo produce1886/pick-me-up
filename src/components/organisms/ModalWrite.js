@@ -12,12 +12,12 @@ export default function Modalblock(props) {
   const userInfo = useSelector((state) => state.user);
   const userData = userInfo.userData;
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
   const [email, setEmail] = useState(userData.email);
-  const [modalcategory, setModalCategory] = useState();
-  const [modalfield, setModalField] = useState();
-  const [modalregion, setModalRegion] = useState();
-  const [modalprojectType, setModalProjectType] = useState();
+  const [modalcategory, setModalCategory] = useState("");
+  const [modalfield, setModalField] = useState("");
+  const [modalregion, setModalRegion] = useState("");
+  const [modalprojectType, setModalProjectType] = useState("");
 
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -51,7 +51,8 @@ export default function Modalblock(props) {
             projectType={modalprojectType}
             title={title}
             setTitle={setTitle}
-            userData={userData}
+            name={userData.name}
+            profilePic={userData.profilePic}
           ></Top>
           <Middle
             type={props.type}
