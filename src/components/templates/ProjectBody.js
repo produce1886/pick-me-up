@@ -10,12 +10,12 @@ import BottomButtons from "../organisms/BottomButtons";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ProjectBody() {
-  const [category, setCategory] = useState();
-  const [field, setField] = useState();
-  const [region, setRegion] = useState();
-  const [projectType, setProjectType] = useState();
+  const [category, setCategory] = useState("");
+  const [field, setField] = useState("");
+  const [region, setRegion] = useState("");
+  const [projectType, setProjectType] = useState("");
   const [sort, setSort] = useState("최신순");
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState("");
 
   const [viewVisible, setViewVisible] = useState(false);
   const [writeVisible, setWriteVisible] = useState(false);
@@ -35,6 +35,7 @@ export default function ProjectBody() {
   };
 
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
+
   return (
     <>
       <FilterSearch

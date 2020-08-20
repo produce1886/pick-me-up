@@ -1,7 +1,7 @@
 import Wrapper from "../atoms/PostBlock";
 import Top from "../molecules/PostBlock/Top";
 import Bottom from "../molecules/PostBlock/Bottom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Text from "../atoms/Text";
 
 export default function PostBlock(props) {
@@ -14,8 +14,8 @@ export default function PostBlock(props) {
         rank={props.rank}
         title={props.item.title}
         date={date}
-        name={props.item.author}
-        profileImage={props.item.profileImg}
+        name={props.item.user.username}
+        profileImage={props.item.user.image}
       ></Top>
       {props.type === "most" && (
         <BodyHot>
