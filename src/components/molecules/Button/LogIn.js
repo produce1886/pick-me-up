@@ -7,9 +7,9 @@ export default function SignInButton() {
   const dispatch = useDispatch();
   const loginHandler = useCallback((response) => {
     let userData = {
-      name: response.profileObj.name,
+      username: response.profileObj.name,
       email: response.profileObj.email,
-      profilePic: response.profileObj.imageUrl,
+      image: response.profileObj.imageUrl,
     };
     dispatch(loginUser(userData));
   }, []);

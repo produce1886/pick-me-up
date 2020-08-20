@@ -21,8 +21,8 @@ export default function GlobalNavigationBar() {
             <Profile
               level={1}
               size="1.4rem"
-              name={state.userData.name}
-              profileImage={state.userData.profilePic}
+              name={state.userData.username}
+              profileImage={state.userData.image}
             ></Profile>
           ) : (
             <LogInButton></LogInButton>
