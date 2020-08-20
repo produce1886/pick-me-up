@@ -32,6 +32,8 @@ export default function Projectlist(props) {
     <ProjectBlock key={index} item={item}></ProjectBlock>
   );
 
+  const loadMoreHandler = () => {};
+
   if (!isLoading && data.length === 0) {
     return (
       <Wrapper>
@@ -43,7 +45,7 @@ export default function Projectlist(props) {
   return (
     <>
       <Wrapper>{!isLoading && data.length > 0 && getList(data)}</Wrapper>
-      <BottomButtons></BottomButtons>
+      <BottomButtons onClick={loadMoreHandler}></BottomButtons>
     </>
   );
 }
