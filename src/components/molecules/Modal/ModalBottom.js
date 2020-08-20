@@ -21,7 +21,6 @@ export default function ModalBottom(props) {
       newtaglists = Array.from(tagArray);
       newtaglists.push({ _taginput: taginput });
       setTagArray(newtaglists);
-      console.log(tagArray);
       setTagInput("");
     }
     if (tagArray.length === 5 && event.key === "Enter") {
