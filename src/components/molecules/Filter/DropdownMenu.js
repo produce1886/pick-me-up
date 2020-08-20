@@ -23,6 +23,8 @@ export default function DropdownMenu(props) {
           key={index}
           item={value}
           setSelected={props.setSelected}
+          width="5.2rem"
+          height="1.6rem"
         ></ItemWrapper>
       ))}
     </Wrapper>
