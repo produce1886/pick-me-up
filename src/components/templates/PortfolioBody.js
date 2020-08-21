@@ -39,6 +39,7 @@ export default function PortfolioBody() {
       {isSignedIn && <WriteButton openWrite={openWrite}></WriteButton>}
       {writeVisible && (
         <ModalWrite
+          type="portfolio"
           visible={writeVisible}
           maskClosable={true}
           onClose={closeWrite}

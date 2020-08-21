@@ -40,6 +40,7 @@ export default function Modalblock(props) {
       >
         <Inner>
           <Top
+            type={props.type}
             setCategory={setCategory}
             setField={setField}
             setRegion={setRegion}
@@ -48,7 +49,7 @@ export default function Modalblock(props) {
             name={userData.name}
             profilePic={userData.profilePic}
           ></Top>
-          <Middle setContent={setContent}></Middle>
+          <Middle type={props.type} setContent={setContent}></Middle>
           <Bottom
             ismodal={props.ismodal}
             onClose={props.onClose}
