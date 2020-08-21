@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
@@ -5,6 +6,8 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 
 export default function ModalMiddle(props) {
+  const user = useSelector((state) => state.user);
+
   let date = props.date;
   date = date.replace("T", " ");
 
@@ -33,18 +36,20 @@ export default function ModalMiddle(props) {
         <TagButton text="Tag text" tagtype="modalview"></TagButton>
         <TagButton text="Tag text" tagtype="modalview"></TagButton>
       </TagWrapper>
-      <ButtonWrapper>
-        <Button>
-          <Text level={1} weight={500} color="#232735">
-            게시글 수정
-          </Text>
-        </Button>
-        <Button>
-          <Text level={1} weight={500} color="#232735">
-            게시글 삭제
-          </Text>
-        </Button>
-      </ButtonWrapper>
+      {props.userEmail === user.userData.email && (
+        <ButtonWrapper>
+          <Button>
+            <Text level={1} weight={500} color="#232735">
+              게시글 수정
+            </Text>
+          </Button>
+          <Button>
+            <Text level={1} weight={500} color="#232735">
+              게시글 삭제
+            </Text>
+          </Button>
+        </ButtonWrapper>
+      )}
     </Middle>
   );
 }
