@@ -1,17 +1,27 @@
+import { useSelector } from "react-redux";
 import Wrapper from "../../atoms/CommentWrite";
 import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Icon from "../../atoms/Icon/Write";
 
 export default function CommentWrite() {
+  const user = useSelector((state) => state.user);
+
+  const commentSubmitHandler = () => {
+    if (!user.isSignedin) {
+      alert("로그인하신 다음에 댓글을 사용하실 수 있습니다.");
+      return;
+    }
+  };
+
   return (
     <Wrapper>
       <Div>
-        <Profile size="2rem"></Profile>
+        <Profile size="2rem" profileImage={user.userData.image}></Profile>
         <CommentBox>
           <Textarea placeholder="내용을 입력하세요" type="text"></Textarea>
         </CommentBox>
-        <IconButton>
+        <IconButton onClick={commentSubmitHandler}>
           <Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
         </IconButton>
       </Div>
