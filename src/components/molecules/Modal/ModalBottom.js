@@ -12,19 +12,84 @@ export default function ModalBottom(props) {
   const [tagArray, setTagArray] = useState([]);
 
   tagArray.map((value) => tags.push(value.tagtext));
+  const isEmpty = function (value) {
+    if (
+      value == "" ||
+      value == null ||
+      value == undefined ||
+      (value != null && typeof value == "object" && !Object.keys(value).length)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const check = () => {
+    if (isEmpty(props.title)) {
+      alert("제목을 입력하세요");
+    }
+    if (isEmpty(props.content)) {
+      alert("내용을 입력하세요");
+    }
+    if (isEmpty(props.category)) {
+      alert("카테고리를 선택해주세요");
+    }
+    if (isEmpty(props.field)) {
+      alert("구인분야를 선택해주세요");
+    }
+    if (isEmpty(props.region) && props.type === "project") {
+      alert("지역을 선택해주세요");
+    }
+    if (isEmpty(props.projectType) && props.type === "project") {
+      alert("프로젝트 종류를 선택해주세요");
+    }
+  };
   const Write = async () => {
     try {
-      const result = await axios.post(`${process.env.API_HOST}/projects`, {
-        title: props.title,
-        content: props.content,
-        email: props.email,
-        category: props.category,
-        huntingField: props.field,
-        region: props.region,
-        projectCategory: props.projectType,
-        tags: tags,
-      });
-      console.log(result.data);
+      if (
+        props.type === "project" &&
+        !isEmpty(props.title) &&
+        !isEmpty(props.content) &&
+        !isEmpty(props.category) &&
+        !isEmpty(props.field) &&
+        !isEmpty(props.projectType) &&
+        !isEmpty(props.region)
+      ) {
+        const result = await axios.post(`${process.env.API_HOST}/projects`, {
+          title: props.title,
+          content: props.content,
+          email: props.email,
+          category: props.category,
+          huntingField: props.field,
+          region: props.region,
+          projectCategory: props.projectType,
+          tags: tags,
+        });
+        console.log(result.data);
+        props.onClose();
+      } else if (
+        props.type === "portfolio" &&
+        !isEmpty(props.title) &&
+        !isEmpty(props.content) &&
+        !isEmpty(props.category) &&
+        !isEmpty(props.field)
+      ) {
+        //portfolio로 바꾸기
+        const result = await axios.post(`${process.env.API_HOST}/projects`, {
+          title: props.title,
+          content: props.content,
+          email: props.email,
+          category: props.category,
+          huntingField: props.field,
+          region: props.region,
+          projectCategory: props.projectType,
+          tags: tags,
+        });
+        console.log(result.data);
+        props.onClose();
+      } else {
+        check();
+      }
     } catch (error) {
       if (error.response) {
         // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
@@ -97,8 +162,6 @@ export default function ModalBottom(props) {
           <ButtonWrapper
             onClick={() => {
               Write();
-              console.log(tags);
-              props.onClose();
             }}
           >
             <WriteBlock link=""></WriteBlock>
