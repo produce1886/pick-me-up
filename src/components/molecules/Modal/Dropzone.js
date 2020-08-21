@@ -4,7 +4,7 @@ import Text from "../../atoms/Text";
 import Upload from "../../atoms/Icon/Upload";
 import Close from "../../atoms/Icon/Close";
 
-export default function Dropzone() {
+export default function Dropzone(props) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [preview, setPreview] = useState([]);
 
@@ -31,9 +31,25 @@ export default function Dropzone() {
   const fileDrop = (e) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        handleFile(files[i]);
+    if (files.length > 0 && props.type === "project") {
+      if (selectedFiles.length === 1) {
+        alert("이미지는 1개까지 가능합니다.");
+        console.log(selectedFiles);
+      } else {
+        for (let i = 0; i < files.length; i++) {
+          handleFile(files[i]);
+          console.log(selectedFiles);
+        }
+      }
+    } else {
+      if (selectedFiles.length === 5) {
+        alert("이미지는 5개까지 가능합니다.");
+        console.log(selectedFiles);
+      } else {
+        for (let i = 0; i < files.length; i++) {
+          handleFile(files[i]);
+          console.log(selectedFiles);
+        }
       }
     }
   };

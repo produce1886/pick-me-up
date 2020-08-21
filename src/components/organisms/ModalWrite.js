@@ -9,11 +9,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Modalblock(props) {
-  const userInfo = useSelector((state) => state.user);
-  const userData = userInfo.userData;
+  const state = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const email = userData.email;
+  const email = state.userData.email;
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
@@ -37,16 +36,18 @@ export default function Modalblock(props) {
       >
         <Inner>
           <Top
+            type={props.type}
             setCategory={setCategory}
             setField={setField}
             setRegion={setRegion}
             setProjectType={setProjectType}
             setTitle={setTitle}
-            name={userData.name}
-            profilePic={userData.profilePic}
+            name={state.userData.username}
+            profileImage={state.userData.image}
           ></Top>
-          <Middle setContent={setContent}></Middle>
+          <Middle type={props.type} setContent={setContent}></Middle>
           <Bottom
+            type={props.type}
             ismodal={props.ismodal}
             onClose={props.onClose}
             visible={props.visible}

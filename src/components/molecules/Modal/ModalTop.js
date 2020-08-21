@@ -18,7 +18,7 @@ export default function ModalTop(props) {
             onChange={handleChange}
           ></Input>
           <Filters
-            type="project"
+            type={props.type}
             width="fit-content"
             height="1rem"
             line="1rem"
