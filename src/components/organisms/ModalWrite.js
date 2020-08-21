@@ -13,11 +13,11 @@ export default function Modalblock(props) {
   const userData = userInfo.userData;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [email, setEmail] = useState(userData.email);
-  const [modalcategory, setModalCategory] = useState("");
-  const [modalfield, setModalField] = useState("");
-  const [modalregion, setModalRegion] = useState("");
-  const [modalprojectType, setModalProjectType] = useState("");
+  const email = userData.email;
+  const [category, setCategory] = useState("");
+  const [field, setField] = useState("");
+  const [region, setRegion] = useState("");
+  const [projectType, setProjectType] = useState("");
 
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -40,33 +40,23 @@ export default function Modalblock(props) {
       >
         <Inner>
           <Top
-            type={props.type}
-            setCategory={setModalCategory}
-            setField={setModalField}
-            setRegion={setModalRegion}
-            setProjectType={setModalProjectType}
-            category={modalcategory}
-            field={modalfield}
-            region={modalregion}
-            projectType={modalprojectType}
-            title={title}
+            setCategory={setCategory}
+            setField={setField}
+            setRegion={setRegion}
+            setProjectType={setProjectType}
             setTitle={setTitle}
             name={userData.name}
             profilePic={userData.profilePic}
           ></Top>
-          <Middle
-            type={props.type}
-            setContent={setContent}
-            content={content}
-          ></Middle>
+          <Middle setContent={setContent}></Middle>
           <Bottom
             ismodal={props.ismodal}
             onClose={props.onClose}
             visible={props.visible}
-            category={modalcategory}
-            field={modalfield}
-            region={modalregion}
-            projectType={modalprojectType}
+            category={category}
+            field={field}
+            region={region}
+            projectType={projectType}
             title={title}
             email={email}
             content={content}

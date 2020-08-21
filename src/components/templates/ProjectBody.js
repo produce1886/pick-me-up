@@ -71,7 +71,6 @@ export default function ProjectBody() {
           visible={writeVisible}
           maskClosable={true}
           onClose={closeWrite}
-          type="project"
         ></ModalWrite>
       )}
     </>
