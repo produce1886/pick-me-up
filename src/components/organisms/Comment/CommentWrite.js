@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { useRouter } from "next/router";
 import Wrapper from "../../atoms/CommentWrite";
 import styled from "styled-components";
 import Profile from "../../molecules/Profile";
@@ -6,12 +9,27 @@ import Icon from "../../atoms/Icon/Write";
 
 export default function CommentWrite() {
   const user = useSelector((state) => state.user);
+  const router = useRouter();
+  const pid = router.asPath.split("/")[2];
+  const [content, setContent] = useState("");
+
+  const onChangeHandler = (e) => {
+    setContent(e.target.value);
+  };
 
   const commentSubmitHandler = () => {
-    if (!user.isSignedin) {
+    if (!user.isSignedIn) {
       alert("로그인하신 다음에 댓글을 사용하실 수 있습니다.");
       return;
     }
+    if (content.length < 1) {
+      return;
+    }
+    axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
+      email: user.userData.email,
+      content: content,
+    });
+    router.push(router.asPath);
   };
 
   return (
@@ -19,7 +37,11 @@ export default function CommentWrite() {
       <Div>
         <Profile size="2rem" profileImage={user.userData.image}></Profile>
         <CommentBox>
-          <Textarea placeholder="내용을 입력하세요" type="text"></Textarea>
+          <Textarea
+            placeholder="내용을 입력하세요"
+            type="text"
+            onChange={onChangeHandler}
+          ></Textarea>
         </CommentBox>
         <IconButton onClick={commentSubmitHandler}>
           <Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
