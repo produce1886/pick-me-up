@@ -3,13 +3,16 @@ import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon/optionmore";
-import EditnDelete from "../../molecules/Filter/EditnDelete";
+import EditnDelete from "../Comment/EditnDelete";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 export default function Comment() {
   const [clicked, setClicked] = useState(false);
   const openMenu = () => {
     setClicked(!clicked);
   };
+
+  const isSignedIn = useSelector((state) => state.user.isSignedIn);
   return (
     <Wrapper>
       <ProfileDiv>
@@ -25,11 +28,11 @@ export default function Comment() {
               YYYY.MM.DD 00:00
             </Text>
           </Div>
-          <ButtonWrapper onClick={console.log(clicked)}>
+          <ButtonWrapper onClick={() => openMenu()}>
             <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
           </ButtonWrapper>
-          {clicked && <EditnDelete></EditnDelete>}
         </InfoWrapper>
+
         <CommentBox>
           <Text level={1} color="#232735">
             comment text style example.comment text style example.comment text
@@ -43,6 +46,7 @@ export default function Comment() {
           </Text>
         </CommentBox>
       </TextDiv>
+      {clicked && isSignedIn && <EditnDelete></EditnDelete>}
     </Wrapper>
   );
 }
@@ -102,4 +106,7 @@ const ButtonWrapper = styled.button`
   justify-content: center;
   border: none;
   background-color: transparent;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 0.2rem;
 `;

@@ -27,7 +27,11 @@ export default function Projectlist(props) {
   };
 
   const getBlock = (item, index) => (
-    <ProjectBlock key={index} item={item}></ProjectBlock>
+    <ProjectBlock
+      key={index}
+      item={item}
+      openView={props.openView}
+    ></ProjectBlock>
   );
 
   return <Wrapper>{!isLoading && data.length > 0 && getList(data)}</Wrapper>;
