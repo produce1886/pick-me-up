@@ -14,7 +14,13 @@ export default function ModalTop(props) {
               {props.title}
             </Text>
           </TitleWrapper>
-          <Filterinfo type={props.type}></Filterinfo>
+          <Filterinfo
+            type={props.type}
+            category={props.category}
+            field={props.field}
+            region={props.region}
+            projectCategory={props.projectCategory}
+          ></Filterinfo>
         </TitleFilterWrapper>
         <ProfileBox>
           <Profile
@@ -41,13 +47,16 @@ const Div = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+
 const TextDiv = styled.div`
   width: 2rem;
   height: fit-content;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 0 0.3rem 0 0;
 `;
+
 const TitleWrapper = styled.div`
   width: 30rem;
   height: fit-content;

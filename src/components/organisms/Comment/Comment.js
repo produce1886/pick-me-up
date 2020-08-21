@@ -9,29 +9,40 @@ import { useSelector } from "react-redux";
 
 export default function Comment(props) {
   const [clicked, setClicked] = useState(false);
+  let date = props.date;
+  date = date.replace("T", " ");
+  const user = props.userInfo;
+  const loginUser = useSelector((state) => state.user.userData);
+
   const openMenu = () => {
     setClicked(!clicked);
   };
 
-  const isSignedIn = useSelector((state) => state.user.isSignedIn);
   return (
     <Wrapper>
       <ProfileDiv>
-        <Profile direction="row" size="2rem"></Profile>
+        <Profile
+          direction="row"
+          size="2rem"
+          profileImage={user.image}
+        ></Profile>
       </ProfileDiv>
       <TextDiv>
         <InfoWrapper>
           <Div>
             <Text level={2} name="name" weight={800} align="center">
-              {props.name}
+              {user.username}
             </Text>
+            &nbsp;
             <Text level={1} color="#d3d4d8">
-              {props.date}
+              {date}
             </Text>
           </Div>
-          <ButtonWrapper onClick={() => openMenu()}>
-            <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
-          </ButtonWrapper>
+          {loginUser.email === user.email && (
+            <ButtonWrapper onClick={() => openMenu()}>
+              <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
+            </ButtonWrapper>
+          )}
         </InfoWrapper>
         <CommentBox>
           <Text level={1} color="#232735">
@@ -39,7 +50,7 @@ export default function Comment(props) {
           </Text>
         </CommentBox>
       </TextDiv>
-      {clicked && isSignedIn && <EditnDelete></EditnDelete>}
+      {clicked && <EditnDelete id={props.id}></EditnDelete>}
     </Wrapper>
   );
 }
@@ -54,9 +65,7 @@ const ProfileDiv = styled.div`
   margin: 0 0rem 0 0.5rem;
 `;
 const Div = styled.div`
-  width: 7rem;
   height: 1rem;
-  justify-content: space-between;
   align-items: center;
   display: flex;
   flex-direction: row;

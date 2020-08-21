@@ -5,15 +5,25 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 
 export default function ModalMiddle(props) {
+  let date = props.date;
+  date = date.replace("T", " ");
+
   return (
     <Middle height="32rem" min-height="30rem">
       <DateWrapper>
-        <Text level={0}>{props.date}</Text>
+        <Text level={1} color="#232735" weight={500}>
+          {date}
+        </Text>
       </DateWrapper>
       <ContentBox>
-        <Text level={1} color="#232735">
+        <Text level={2} color="#232735">
           {props.content}
         </Text>
+        {props.image && (
+          <ImageHolder>
+            <Img src={props.image}></Img>
+          </ImageHolder>
+        )}
       </ContentBox>
       <TagWrapper>
         <Icon
@@ -53,9 +63,9 @@ const DateWrapper = styled.div`
 const ContentBox = styled.div`
   width: 100%;
   height: 24rem;
-  justify-content: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: flex-start;
   max-height: 800px;
   box-sizing: border-box;
   overflow-y: auto;
@@ -65,14 +75,19 @@ const TagWrapper = styled.div`
   width: 100%;
   height: 1.5rem;
   display: flex;
-  align-items: left;
+  align-items: center;
   flex-direction: row;
 `;
+
 const ButtonWrapper = styled.div`
   height: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+`;
+
+const ImageHolder = styled.div`
+  width: 100%;
 `;
 
 const Img = styled.img`

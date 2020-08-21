@@ -32,13 +32,29 @@ export default function ModalView() {
         onClick={onMaskClick}
       >
         <Inner>
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
+          {isLoading && <p>Loading...</p>}
+          {!isLoading && project && (
             <>
-              <Top type={type}></Top>
-              <Middle type={type}></Middle>
-              <Bottom commentsNum={10}></Bottom>
+              <Top
+                type={type}
+                title={project.title}
+                name={project.user.username}
+                profileImage={project.user.image}
+                category={project.category}
+                field={project.huntingField}
+                region={project.region}
+                projectCategory={project.projectCategory}
+              ></Top>
+              <Middle
+                type={type}
+                date={project.createdDate}
+                content={project.content}
+                image={project.image}
+              ></Middle>
+              <Bottom
+                commentsNum={project.commentsNum}
+                comments={project.comments}
+              ></Bottom>
             </>
           )}
         </Inner>
@@ -64,7 +80,9 @@ const getProject = (pid) => {
         console.error(error);
       }
     };
-    fetchData();
+    if (!project) {
+      fetchData();
+    }
   }, []);
   return { project, isLoading };
 };
