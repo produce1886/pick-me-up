@@ -6,7 +6,7 @@ import { ALIGN } from "../molecules/Filter/ItemData";
 import ProjectList from "./ProjectList";
 import WriteButton from "../molecules/Button/Write";
 import ModalWrite from "../organisms/ModalWrite";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function ProjectBody() {
   const [category, setCategory] = useState("");
@@ -15,25 +15,15 @@ export default function ProjectBody() {
   const [projectType, setProjectType] = useState("");
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
-
-  const [viewVisible, setViewVisible] = useState(false);
   const [writeVisible, setWriteVisible] = useState(false);
+  const isSignedIn = useSelector((state) => state.user.isSignedIn);
 
-  const openView = () => {
-    setViewVisible(true);
-  };
   const openWrite = () => {
     setWriteVisible(true);
-  };
-
-  const closeView = () => {
-    setViewVisible(false);
   };
   const closeWrite = () => {
     setWriteVisible(false);
   };
-
-  const isSignedIn = useSelector((state) => state.user.isSignedIn);
 
   return (
     <>
@@ -62,7 +52,6 @@ export default function ProjectBody() {
             projectType={projectType}
             query={query}
             sort={sort}
-            openView={openView}
           ></ProjectList>
         </InnerWrapper>
       </Wrapper>
