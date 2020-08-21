@@ -13,7 +13,7 @@ export default function ModalMiddle(props) {
         type="text"
         onChange={handleChange}
       ></Textarea>
-      <Dropzone></Dropzone>
+      <Dropzone type={props.type}></Dropzone>
     </Middle>
   );
 }

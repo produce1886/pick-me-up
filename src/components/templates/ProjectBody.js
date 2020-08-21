@@ -69,6 +69,7 @@ export default function ProjectBody() {
       {isSignedIn && <WriteButton openWrite={openWrite}></WriteButton>}
       {writeVisible && (
         <ModalWrite
+          type="project"
           visible={writeVisible}
           maskClosable={true}
           onClose={closeWrite}
