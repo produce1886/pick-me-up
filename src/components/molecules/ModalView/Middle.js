@@ -9,7 +9,7 @@ export default function ModalMiddle(props) {
   date = date.replace("T", " ");
 
   return (
-    <Middle height="32rem" min-height="30rem">
+    <Middle height="fit-content">
       <DateWrapper>
         <Text level={1} color="#232735" weight={500}>
           {date}
@@ -53,7 +53,7 @@ const DateWrapper = styled.div`
   width: 100%;
   height: 1rem;
   flex-direction: row;
-  margin: 0 0 1rem 0;
+  margin-bottom: 0.5rem;
   justify-content: flex-end;
   align-items: center;
   box-sizing: border-box;
@@ -62,13 +62,12 @@ const DateWrapper = styled.div`
 
 const ContentBox = styled.div`
   width: 100%;
-  height: 24rem;
+  height: 28rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  max-height: 800px;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;
 
 const TagWrapper = styled.div`

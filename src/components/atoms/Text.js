@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export default styled.p`
   ${(props) => css`
     width: ${props.width};
+    height: ${props.height};
     font-weight: ${props.weight};
     text-align: ${props.align};
     font-size: ${0.48 + props.level * 0.08}rem;

@@ -45,7 +45,7 @@ export default function Comment(props) {
           )}
         </InfoWrapper>
         <CommentBox>
-          <Text level={1} color="#232735">
+          <Text level={1} color="#232735" width="100%" height="100%">
             {props.comment}
           </Text>
         </CommentBox>
@@ -58,48 +58,49 @@ export default function Comment(props) {
 const ProfileDiv = styled.div`
   width: fit-content;
   height: 100%;
-  justify-content: left;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  margin: 0 0rem 0 0.5rem;
-`;
-const Div = styled.div`
-  height: 1rem;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-`;
-const TextDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 0.7rem 0.5rem 0.7rem 0.5rem;
 `;
+
+const Div = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+`;
+
+const TextDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.3rem;
+`;
+
 const InfoWrapper = styled.div`
   width: 100%;
-  height: 1rem;
   justify-content: space-between;
   align-items: center;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
 `;
+
 const CommentBox = styled.div`
   width: 100%;
-  height: fit-content;
+  height: 2rem;
   justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: row;
-  max-height: 36px;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: scroll;
   margin: 0.3rem 0 0 0;
 `;
+
 const ButtonWrapper = styled.button`
   width: fit-content;
   height: fit-content;
@@ -111,4 +112,5 @@ const ButtonWrapper = styled.button`
   position: relative;
   box-sizing: border-box;
   border-radius: 0.2rem;
+  padding: unset;
 `;

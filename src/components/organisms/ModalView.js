@@ -25,12 +25,7 @@ export default function ModalView() {
   return (
     <>
       <Overlay visible={visible} onClick={onMaskClick} />
-      <Wrapper
-        tabIndex="-1"
-        visible={visible}
-        height="70rem"
-        onClick={onMaskClick}
-      >
+      <Wrapper tabIndex="-1" visible={visible} onClick={onMaskClick}>
         <Inner>
           {isLoading && <p>Loading...</p>}
           {!isLoading && project && (
