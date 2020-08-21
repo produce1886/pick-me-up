@@ -5,6 +5,7 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import ImageHolder from "../../atoms/ImageHolder/Profile";
 import EditnDelete from "../Button/EditnDelete";
+
 export default function ModalMiddle(props) {
   return (
     <Middle height="32rem" min-height="30rem">
@@ -37,22 +38,24 @@ export default function ModalMiddle(props) {
         <TagButton text="Tag text" link="" tagtype="modalview"></TagButton>
         <TagButton text="Tag text" link="" tagtype="modalview"></TagButton>
       </TagWrapper>
-      <ButtonWrapper>
-        <EditnDelete
-          text="게시글 수정"
-          link=""
-          level={1}
-          weight={500}
-          color="#000000"
-        ></EditnDelete>
-        <EditnDelete
-          text="게시글 삭제"
-          link=""
-          level={1}
-          weight={500}
-          color="#000000"
-        ></EditnDelete>
-      </ButtonWrapper>
+      {props.isSignedin && (
+        <ButtonWrapper>
+          <EditnDelete
+            text="게시글 수정"
+            link=""
+            level={1}
+            weight={500}
+            color="#000000"
+          ></EditnDelete>
+          <EditnDelete
+            text="게시글 삭제"
+            link=""
+            level={1}
+            weight={500}
+            color="#000000"
+          ></EditnDelete>
+        </ButtonWrapper>
+      )}
     </Middle>
   );
 }

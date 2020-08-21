@@ -6,6 +6,7 @@ import { ALIGN } from "../molecules/Filter/ItemData";
 import ProjectList from "./ProjectList";
 import WriteButton from "../molecules/Button/Write";
 import ModalWrite from "../organisms/ModalWrite";
+import ModalView from "../organisms/ModalView";
 import BottomButtons from "../organisms/BottomButtons";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -63,7 +64,15 @@ export default function ProjectBody() {
             projectType={projectType}
             query={query}
             sort={sort}
+            openView={openView}
           ></ProjectList>
+          {viewVisible && (
+            <ModalView
+              visible={viewVisible}
+              maskClosable={true}
+              onClose={closeView}
+            ></ModalView>
+          )}
           <BottomButtons></BottomButtons>
         </InnerWrapper>
       </Wrapper>
