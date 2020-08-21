@@ -16,15 +16,12 @@ export default function ModalView(props) {
 
   return (
     <>
-      <Overlay
-        visible={props.visible}
-        onClick={props.maskClosable ? onMaskClick : null}
-      />
+      <Overlay visible={props.visible} onClick={onMaskClick} />
       <Wrapper
         tabIndex="-1"
         visible={props.visible}
         height="70rem"
-        onClick={props.maskClosable ? onMaskClick : null}
+        onClick={onMaskClick}
       >
         <Inner>
           <Top
