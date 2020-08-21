@@ -2,16 +2,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ProjectBlock from "../organisms/ProjectBlock";
+import NoResult from "../molecules/NoResult";
+import BottomButtons from "../organisms/BottomButtons";
 
 export default function Projectlist(props) {
   const { category, field, region, projectType, query, sort } = props;
-  const { data, isLoading } = getProjectList(
+  const [project, setProject] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const isLoading = getProjectList(
     category,
     field,
     region,
     projectType,
     query,
-    sort
+    sort,
+    setProject,
+    limit
   );
 
   const getList = (items) => {
@@ -34,28 +40,52 @@ export default function Projectlist(props) {
     ></ProjectBlock>
   );
 
-  return <Wrapper>{!isLoading && data.length > 0 && getList(data)}</Wrapper>;
+  const loadMoreHandler = () => {
+    let _limit = limit + limit;
+    setLimit(_limit);
+  };
+
+  if (!isLoading && project.length === 0) {
+    return (
+      <Wrapper>
+        <NoResult></NoResult>
+      </Wrapper>
+    );
+  }
+
+  return (
+    <>
+      <Wrapper>{!isLoading && project.length > 0 && getList(project)}</Wrapper>
+      <BottomButtons onClick={loadMoreHandler}></BottomButtons>
+    </>
+  );
 }
 
-const getProjectList = (category, field, region, projectType, query, sort) => {
+const getProjectList = (
+  category,
+  field,
+  region,
+  projectType,
+  query,
+  sort,
+  setProject,
+  limit
+) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState([]);
-
   const sortColumn = {
     최신순: "createdDate",
     댓글순: "commentsNum",
     조회순: "viewNum",
   };
 
-  //이후 페이지네이션 관련 코드 추가 필요
   let body = {
     page: 0,
-    size: 10,
+    size: limit,
     sortColumn: sortColumn[sort],
     category: category,
     huntingField: field,
     region: region,
-    projectCategory: category,
+    projectCategory: projectType,
     keyword: query,
   };
 
@@ -67,15 +97,15 @@ const getProjectList = (category, field, region, projectType, query, sort) => {
           `${process.env.API_HOST}/projects/list`,
           body
         );
-        setData(result.data);
+        setProject(result.data);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [category, field, region, projectType, query, sort]);
-  return { data, isLoading };
+  }, [category, field, region, projectType, query, sort, limit]);
+  return isLoading;
 };
 
 const Wrapper = styled.div`

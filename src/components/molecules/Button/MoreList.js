@@ -4,7 +4,7 @@ import Icon from "../../atoms/Icon/Plus";
 
 export default function Button(props) {
   return (
-    <Wrapper center={true}>
+    <Wrapper center={true} onClick={props.onClick}>
       <Text level={1}>{props.text}</Text>
       <Icon
         style={{
