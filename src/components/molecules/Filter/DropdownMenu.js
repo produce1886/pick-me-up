@@ -10,6 +10,7 @@ export default function DropdownMenu(props) {
       top="1.7rem"
       left="-0.1rem"
       width="5.4rem"
+      height="fit-content"
     >
       {props.activeMenu != "align" && (
         <Hover backgroundColor="#ffffff" width="5.2rem" height="1.6rem">

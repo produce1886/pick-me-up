@@ -1,7 +1,6 @@
 import Wrapper from "../../atoms/Comment";
 import styled, { css } from "styled-components";
 import Profile from "../../molecules/Profile";
-import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon/Write";
 import Link from "next/link";
 export default function CommentWrite() {

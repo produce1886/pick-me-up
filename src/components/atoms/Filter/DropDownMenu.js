@@ -3,11 +3,11 @@ import styled, { css } from "styled-components";
 export default styled.div`
   ${(props) => css`
     width: ${props.width};
-    height: fit-content;
+    height: ${props.height};
     border: none;
     background-color: #ffffff;
     flex-direction: column;
-    justify-content: left;
+    justify-content: center;
     display: flex;
     align-items: left;
     flex: none;

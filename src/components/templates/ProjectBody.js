@@ -62,6 +62,7 @@ export default function ProjectBody() {
             projectType={projectType}
             query={query}
             sort={sort}
+            openView={openView}
           ></ProjectList>
         </InnerWrapper>
       </Wrapper>
