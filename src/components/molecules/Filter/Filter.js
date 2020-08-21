@@ -37,7 +37,7 @@ export default function Filter(props) {
     if (props.title === "최신순") {
       props.onClick("최신순");
     } else {
-      props.onClick();
+      props.onClick("");
     }
     setItem("");
     setClicked(false);
