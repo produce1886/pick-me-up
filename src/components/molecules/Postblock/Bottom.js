@@ -11,7 +11,7 @@ export default function Bottom(props) {
         &nbsp;
         <CommentCount count={props.commentsNum}></CommentCount>
       </Div>
-      <MoreButton link={`project/${props.id}`}></MoreButton>
+      <MoreButton id={props.id}></MoreButton>
     </Wrapper>
   );
 }

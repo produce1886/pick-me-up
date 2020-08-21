@@ -19,7 +19,7 @@ export default function Bottom(props) {
             &nbsp;
             <CommentCount count={props.commentsNum}></CommentCount>
           </Div>
-          <MoreButton link=""></MoreButton>
+          <MoreButton id={props.id}></MoreButton>
         </Row2>
       </Col>
     </Wrapper>
