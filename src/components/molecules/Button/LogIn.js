@@ -2,8 +2,10 @@ import { useCallback } from "react";
 import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../_actions/user";
+import { useRouter } from "next/router";
 
 export default function SignInButton() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const loginHandler = useCallback((response) => {
     let userData = {
@@ -12,6 +14,7 @@ export default function SignInButton() {
       image: response.profileObj.imageUrl,
     };
     dispatch(loginUser(userData));
+    router.push(router.pathname);
   }, []);
 
   return (

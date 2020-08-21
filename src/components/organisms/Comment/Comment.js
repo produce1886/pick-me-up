@@ -6,47 +6,51 @@ import Icon from "../../atoms/Icon/optionmore";
 import EditnDelete from "../Comment/EditnDelete";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-export default function Comment() {
+
+export default function Comment(props) {
   const [clicked, setClicked] = useState(false);
+  let date = props.date;
+  date = date.replace("T", " ");
+  const user = props.userInfo;
+  const loginUser = useSelector((state) => state.user.userData);
+
   const openMenu = () => {
     setClicked(!clicked);
   };
 
-  const isSignedIn = useSelector((state) => state.user.isSignedIn);
   return (
     <Wrapper>
       <ProfileDiv>
-        <Profile direction="row" size="2rem"></Profile>
+        <Profile
+          direction="row"
+          size="2rem"
+          profileImage={user.image}
+        ></Profile>
       </ProfileDiv>
       <TextDiv>
         <InfoWrapper>
           <Div>
             <Text level={2} name="name" weight={800} align="center">
-              name
+              {user.username}
             </Text>
+            &nbsp;
             <Text level={1} color="#d3d4d8">
-              YYYY.MM.DD 00:00
+              {date}
             </Text>
           </Div>
-          <ButtonWrapper onClick={() => openMenu()}>
-            <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
-          </ButtonWrapper>
+          {loginUser.email === user.email && (
+            <ButtonWrapper onClick={() => openMenu()}>
+              <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
+            </ButtonWrapper>
+          )}
         </InfoWrapper>
-
         <CommentBox>
-          <Text level={1} color="#232735">
-            comment text style example.comment text style example.comment text
-            style example.comment text style example.comment text style
-            example.comment text style example.comment text style
-            example.comment text style example.comment text style example.
-            comment text style example.comment text style example.comment text
-            style example.comment text style example.comment text style
-            example.comment text style example.comment text style
-            example.comment text style example.comment text style example.
+          <Text level={1} color="#232735" width="100%" height="100%">
+            {props.comment}
           </Text>
         </CommentBox>
       </TextDiv>
-      {clicked && isSignedIn && <EditnDelete></EditnDelete>}
+      {clicked && <EditnDelete id={props.id}></EditnDelete>}
     </Wrapper>
   );
 }
@@ -54,50 +58,49 @@ export default function Comment() {
 const ProfileDiv = styled.div`
   width: fit-content;
   height: 100%;
-  justify-content: left;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  margin: 0 0rem 0 0.5rem;
-`;
-const Div = styled.div`
-  width: 7rem;
-  height: 1rem;
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-`;
-const TextDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 0.7rem 0.5rem 0.7rem 0.5rem;
 `;
+
+const Div = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+`;
+
+const TextDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.3rem;
+`;
+
 const InfoWrapper = styled.div`
   width: 100%;
-  height: 1rem;
   justify-content: space-between;
   align-items: center;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
 `;
+
 const CommentBox = styled.div`
   width: 100%;
-  height: fit-content;
+  height: 2rem;
   justify-content: center;
   align-items: center;
   display: flex;
   flex-direction: row;
-  max-height: 36px;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: scroll;
   margin: 0.3rem 0 0 0;
 `;
+
 const ButtonWrapper = styled.button`
   width: fit-content;
   height: fit-content;
@@ -109,4 +112,5 @@ const ButtonWrapper = styled.button`
   position: relative;
   box-sizing: border-box;
   border-radius: 0.2rem;
+  padding: unset;
 `;
