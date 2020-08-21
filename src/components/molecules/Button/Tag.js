@@ -19,7 +19,7 @@ export default function Button(props) {
   return (
     <Wrapper backgroundColor={background} borderColor={bordercolor}>
       <Div>
-        <Text level={0} color={textcolor} align="center">
+        <Text level={0.5} color={textcolor} align="center">
           {props.text}
         </Text>
         {props.ismodal && (
@@ -31,9 +31,9 @@ export default function Button(props) {
           >
             <IconX
               style={{
-                width: "0.65rem",
-                height: "0.65rem",
-                margin: "0.15rem 0 0 0.3rem",
+                width: "0.6rem",
+                height: "0.6rem",
+                marginLeft: "0.2rem",
               }}
               fill="#232735"
             ></IconX>
@@ -49,10 +49,13 @@ const IconButton = styled.div`
   height: fit-content;
   flex-direction: row;
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
+
 const Div = styled.div`
   width: fit-content;
-  height: fit-content;
   flex-direction: row;
   display: flex;
+  align-items: center;
 `;
