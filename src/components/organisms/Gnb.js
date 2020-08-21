@@ -3,6 +3,7 @@ import Logo from "../molecules/Button/Logo";
 import Wrapper from "../atoms/gnb";
 import MainMenu from "../molecules/menu/Main";
 import LogInButton from "../molecules/Button/LogIn";
+import LogOutButton from "../molecules/Button/LogOut";
 import { useSelector } from "react-redux";
 import Profile from "../molecules/Profile";
 
@@ -18,12 +19,15 @@ export default function GlobalNavigationBar() {
         <MainMenu></MainMenu>
         <ProfileWrapper>
           {state.isSignedIn ? (
-            <Profile
-              level={1}
-              size="1.4rem"
-              name={state.userData.username}
-              profileImage={state.userData.image}
-            ></Profile>
+            <>
+              <Profile
+                level={1}
+                size="1.4rem"
+                name={state.userData.username}
+                profileImage={state.userData.image}
+              ></Profile>
+              <LogOutButton></LogOutButton>
+            </>
           ) : (
             <LogInButton></LogInButton>
           )}

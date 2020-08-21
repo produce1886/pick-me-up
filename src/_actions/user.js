@@ -12,7 +12,8 @@ export function loginUser(data) {
   };
 }
 
-export function logoutUser(userData) {
+export function logoutUser() {
+  Cookies.remove("userData", { path: "" });
   return {
     type: LOGOUT_USER,
   };

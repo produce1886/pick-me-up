@@ -3,8 +3,8 @@ import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
-import Image from "../../atoms/Image/Modal";
 import ImageHolder from "../../atoms/ImageHolder/Profile";
+import EditnDelete from "../Button/EditnDelete";
 
 export default function ModalMiddle(props) {
   return (
@@ -35,13 +35,27 @@ export default function ModalMiddle(props) {
           style={{ width: "1.5rem", height: "1.5rem", marginRight: "0.3rem" }}
           fill="#232735"
         ></Icon>
-        <TagButton text="Tag text" link=""></TagButton>
-        <TagButton text="Tag text" link=""></TagButton>
+        <TagButton text="Tag text" link="" tagtype="modalview"></TagButton>
+        <TagButton text="Tag text" link="" tagtype="modalview"></TagButton>
       </TagWrapper>
-      <ButtonWrapper>
-        <TagButton text="게시글 수정" link=""></TagButton>
-        <TagButton text="게시글 삭제" link=""></TagButton>
-      </ButtonWrapper>
+      {props.isSignedin && (
+        <ButtonWrapper>
+          <EditnDelete
+            text="게시글 수정"
+            link=""
+            level={1}
+            weight={500}
+            color="#000000"
+          ></EditnDelete>
+          <EditnDelete
+            text="게시글 삭제"
+            link=""
+            level={1}
+            weight={500}
+            color="#000000"
+          ></EditnDelete>
+        </ButtonWrapper>
+      )}
     </Middle>
   );
 }
@@ -76,12 +90,12 @@ const TagWrapper = styled.div`
   flex-direction: row;
 `;
 const ButtonWrapper = styled.div`
-  width: 9rem;
+  width: 6.5rem;
   height: 1.5rem;
   display: flex;
   align-items: right;
   flex-direction: row;
-  margin: 0 0 0 28rem;
+  margin: 0 0 0 29.7rem;
   justify-content: space-between;
 `;
 const Img = styled.img`

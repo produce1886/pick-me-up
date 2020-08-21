@@ -7,6 +7,8 @@ export default function FilterItem(props) {
 
   return (
     <Wrapper
+      width={props.width}
+      height={props.height}
       onMouseOver={() => setColor(true)}
       onMouseOut={() => setColor(false)}
       onClick={() => {
