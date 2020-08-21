@@ -6,7 +6,7 @@ import TagButton from "../Button/Tag";
 
 export default function Bottom(props) {
   const renderTags = props.tags.map((item, index) => {
-    return <TagButton text={item.tag} key={index} link=""></TagButton>;
+    return <TagButton text={item.tag} key={index}></TagButton>;
   });
 
   return (

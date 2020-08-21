@@ -30,7 +30,7 @@ export default function HotTag() {
             {!isLoading &&
               tags &&
               tags.content.map((item, index) => (
-                <Tag key={index} text={item.name} link=""></Tag>
+                <Tag key={index} text={item.name}></Tag>
               ))}
           </Row>
         </Col>
