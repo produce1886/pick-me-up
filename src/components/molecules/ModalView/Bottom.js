@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Comment from "../../organisms/Comment/Comment";
-import MoreButton from "../Button/More";
 import CommentWrite from "../../organisms/Comment/CommentWrite";
 
 export default function ModalBottom(props) {
@@ -9,17 +8,19 @@ export default function ModalBottom(props) {
     <Bottom>
       <Div>
         <Text level={4} weight={500} color="#9c69e2">
-          {props.count}
+          {props.commentsNum}
         </Text>
         <Text level={4} weight={500} color="#232735">
           Comments
         </Text>
       </Div>
-      <Comment></Comment>
-      <Comment></Comment>
-      <Comment></Comment>
+      <Comment comment="" date="" name=""></Comment>
       <ButtonWrapper>
-        <MoreButton link=""></MoreButton>
+        <MoreButton>
+          <Text level={1} weight={500} color=" #8b90a0">
+            더보기
+          </Text>
+        </MoreButton>
       </ButtonWrapper>
       <CommentWrite></CommentWrite>
     </Bottom>
@@ -57,4 +58,9 @@ const ButtonWrapper = styled.button`
   margin: 1rem 0 0 0;
   border: none;
   background-color: transparent;
+`;
+
+const MoreButton = styled.button`
+  background-color: transparent;
+  border: none;
 `;

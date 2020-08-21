@@ -6,12 +6,12 @@ import Filterinfo from "../FilterInfo";
 
 export default function ModalTop(props) {
   return (
-    <Top hight="4rem">
+    <Top>
       <Div>
         <TitleFilterWrapper>
           <TitleWrapper>
             <Text level={12} color="#9c69e2" weight={800}>
-              Title
+              {props.title}
             </Text>
           </TitleWrapper>
           <Filterinfo type={props.type}></Filterinfo>

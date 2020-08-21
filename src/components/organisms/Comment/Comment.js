@@ -6,7 +6,8 @@ import Icon from "../../atoms/Icon/optionmore";
 import EditnDelete from "../Comment/EditnDelete";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-export default function Comment() {
+
+export default function Comment(props) {
   const [clicked, setClicked] = useState(false);
   const openMenu = () => {
     setClicked(!clicked);
@@ -22,27 +23,19 @@ export default function Comment() {
         <InfoWrapper>
           <Div>
             <Text level={2} name="name" weight={800} align="center">
-              name
+              {props.name}
             </Text>
             <Text level={1} color="#d3d4d8">
-              YYYY.MM.DD 00:00
+              {props.date}
             </Text>
           </Div>
           <ButtonWrapper onClick={() => openMenu()}>
             <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
           </ButtonWrapper>
         </InfoWrapper>
-
         <CommentBox>
           <Text level={1} color="#232735">
-            comment text style example.comment text style example.comment text
-            style example.comment text style example.comment text style
-            example.comment text style example.comment text style
-            example.comment text style example.comment text style example.
-            comment text style example.comment text style example.comment text
-            style example.comment text style example.comment text style
-            example.comment text style example.comment text style
-            example.comment text style example.comment text style example.
+            {props.comment}
           </Text>
         </CommentBox>
       </TextDiv>
