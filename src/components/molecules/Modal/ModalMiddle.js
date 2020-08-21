@@ -8,7 +8,7 @@ export default function ModalMiddle(props) {
     props.setContent(event.target.value);
   };
   return (
-    <Middle height="32rem">
+    <Middle height="36rem">
       <Textarea
         placeholder="내용을 입력하세요"
         type="text"
@@ -25,7 +25,7 @@ const Textarea = styled.textarea`
   padding: unset;
   box-sizing: border-box;
   width: 100%;
-  height: 19rem;
+  height: 17rem;
   outline: none;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.72rem;
