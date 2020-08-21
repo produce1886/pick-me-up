@@ -27,16 +27,13 @@ export default function Modalblock(props) {
 
   return (
     <>
-      <Overlay
-        visible={props.visible}
-        onClick={props.maskClosable ? onMaskClick : null}
-      />
+      <Overlay visible={props.visible} onClick={onMaskClick} />
 
       <Wrapper
         tabIndex="-1"
         visible={props.visible}
         height="62rem"
-        onClick={props.maskClosable ? onMaskClick : null}
+        onClick={onMaskClick}
       >
         <Inner>
           <Top

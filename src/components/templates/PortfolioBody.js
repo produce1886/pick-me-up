@@ -29,18 +29,13 @@ export default function PortfolioBody() {
       <InnerWrapper>
         <Portfoliolist openView={openView}></Portfoliolist>
         {viewVisible && (
-          <ModalView
-            visible={viewVisible}
-            maskClosable={true}
-            onClose={closeView}
-          ></ModalView>
+          <ModalView visible={viewVisible} onClose={closeView}></ModalView>
         )}
       </InnerWrapper>
       {isSignedIn && <WriteButton openWrite={openWrite}></WriteButton>}
       {writeVisible && (
         <ModalWrite
           visible={writeVisible}
-          maskClosable={true}
           onClose={closeWrite}
           ismodal="modal"
         ></ModalWrite>
