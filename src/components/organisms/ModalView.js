@@ -7,7 +7,7 @@ import Bottom from "../molecules/ModalView/Bottom";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function ModalView(props) {
+export default function ModalView() {
   const router = useRouter();
   const [visible, setVisible] = useState(true);
   const type = router.pathname === "/project/[pid]" ? "project" : "portfolio";
@@ -15,6 +15,7 @@ export default function ModalView(props) {
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
       setVisible(false);
+      router.push(`/${type}`);
     }
   };
 
