@@ -16,7 +16,7 @@ export default function ModalBottom(props) {
           </Text>
           &nbsp;
           <Text level={4} weight={500} color="#232735">
-            {props.commentsNum < 1 ? "Comment" : "Comments"}
+            {props.commentsNum < 2 ? "Comment" : "Comments"}
           </Text>
         </Div>
         {props.comments.map((item, index) => (
