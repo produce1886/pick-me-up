@@ -39,5 +39,5 @@ const Body = styled.div`
   padding: 0.7rem 1rem 0rem 1rem;
   box-sizing: border-box;
   overflow: hidden;
-  height: 3.84rem;
+  height: 4.5rem;
 `;
