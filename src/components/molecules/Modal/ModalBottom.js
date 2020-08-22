@@ -153,7 +153,6 @@ export default function ModalBottom(props) {
                 key={i}
                 ismodal="modal"
                 text={value.tagtext}
-                link=""
                 removeTag={() => removeTag(value)}
                 tagtype="modalwrite"
               ></TagButton>

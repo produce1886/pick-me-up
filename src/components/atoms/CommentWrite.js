@@ -5,8 +5,7 @@ export default styled.div`
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  height: 4rem;
+  height: 3.3rem;
   position: relative;
   box-sizing: border-box;
-  margin: 0.2rem 0;
 `;

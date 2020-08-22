@@ -1,61 +1,74 @@
-import Wrapper from "../../atoms/Comment";
-import styled, { css } from "styled-components";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { useRouter } from "next/router";
+import Wrapper from "../../atoms/CommentWrite";
+import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Icon from "../../atoms/Icon/Write";
-import Link from "next/link";
+
 export default function CommentWrite() {
+  const user = useSelector((state) => state.user);
+  const router = useRouter();
+  const pid = router.asPath.split("/")[2];
+  const [content, setContent] = useState("");
+
+  const onChangeHandler = (e) => {
+    setContent(e.target.value);
+  };
+
+  const commentSubmitHandler = () => {
+    if (!user.isSignedIn) {
+      alert("로그인하신 다음에 댓글을 사용하실 수 있습니다.");
+      return;
+    }
+    if (content.length < 1) {
+      return;
+    }
+    axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
+      email: user.userData.email,
+      content: content,
+    });
+    router.push(router.asPath);
+  };
+
   return (
     <Wrapper>
       <Div>
-        <IconDiv margin="0 0 0 0.5rem">
-          <Profile direction="row" size="2rem"></Profile>
-        </IconDiv>
+        <Profile size="2rem" profileImage={user.userData.image}></Profile>
         <CommentBox>
-          <Textarea placeholder="내용을 입력하세요" type="text"></Textarea>
+          <Textarea
+            placeholder="내용을 입력하세요"
+            type="text"
+            onChange={onChangeHandler}
+          ></Textarea>
         </CommentBox>
-
-        <Link href="">
-          <A>
-            <IconButton>
-              <Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
-            </IconButton>
-          </A>
-        </Link>
+        <IconButton onClick={commentSubmitHandler}>
+          <Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
+        </IconButton>
       </Div>
     </Wrapper>
   );
 }
 
-const A = styled.a``;
-
-const IconDiv = styled.div`
-  width: fit-content;
-  height: 100%;
-  justify-content: left;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  background-color: transparent;
-  border: none;
-`;
-const IconButton = styled.button`
-  width: fit-content;
-  height: 100%;
-  justify-content: left;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  background-color: transparent;
-  border: none;
-`;
 const Div = styled.div`
   width: 100%;
-  height: 3.4rem;
   justify-content: space-between;
   align-items: center;
   display: flex;
   flex-direction: row;
 `;
+
+const IconButton = styled.button`
+  width: fit-content;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+`;
+
 const CommentBox = styled.div`
   width: 100%;
   height: fit-content;
@@ -65,12 +78,11 @@ const CommentBox = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
-  max-height: 36px;
   box-sizing: border-box;
-  overflow-y: auto;
-  padding: 0.3rem;
-  margin: 0.3rem 0.5rem 0 0rem;
+  overflow-y: scroll;
+  padding: 0.5rem;
 `;
+
 const Textarea = styled.textarea`
   background-color: transparent;
   border: none;
@@ -81,7 +93,6 @@ const Textarea = styled.textarea`
   outline: none;
   font-family: "Noto Sans KR", sans-serif;
   font-size: 0.56rem;
-  margin: 0 0 0.3rem 0;
   resize: none;
   input::placeholder {
     color: #d3d4d8;
