@@ -14,6 +14,7 @@ export default function Dropzone(props) {
     newArray.splice(currentIndex, 1);
     setSelectedFiles(newArray);
     setPreview(newArray);
+    props.setImage(newArray);
   };
 
   const dragOver = (e) => {
@@ -78,6 +79,7 @@ export default function Dropzone(props) {
     if (validateFile(file)) {
       processImage(file);
       setSelectedFiles([...selectedFiles, file]);
+      props.setImage([...props.image, file]);
     } else {
       alert("파일 형식이 올바르지 않습니다.");
     }

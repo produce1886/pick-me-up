@@ -17,6 +17,7 @@ export default function Modalblock(props) {
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
+  const [image, setImage] = useState([]);
 
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -45,7 +46,12 @@ export default function Modalblock(props) {
             name={state.userData.username}
             profileImage={state.userData.image}
           ></Top>
-          <Middle type={props.type} setContent={setContent}></Middle>
+          <Middle
+            type={props.type}
+            setContent={setContent}
+            setImage={setImage}
+            image={image}
+          ></Middle>
           <Bottom
             type={props.type}
             ismodal={props.ismodal}
@@ -58,6 +64,7 @@ export default function Modalblock(props) {
             title={title}
             email={email}
             content={content}
+            image={image}
           ></Bottom>
         </Inner>
       </Wrapper>
