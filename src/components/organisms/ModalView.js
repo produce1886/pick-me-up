@@ -46,6 +46,8 @@ export default function ModalView() {
                 content={project.content}
                 image={project.image}
                 userEmail={project.user.email}
+                pid={pid}
+                setVisible={setVisible}
               ></Middle>
               <Bottom
                 commentsNum={project.commentsNum}
