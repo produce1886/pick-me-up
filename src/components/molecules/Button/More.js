@@ -4,7 +4,7 @@ import Text from "../../atoms/Text";
 
 export default function MoreButton(props) {
   return (
-    <Link href="/project/[pid]" as={`/project/${props.id}`}>
+    <Link href={`/project?pid=${props.id}`} as={`/project/${props.id}`}>
       <A>
         <Text level={1} weight={500} color="#8b90a0">
           더보기
