@@ -1,6 +1,6 @@
 import WriteButton from "../molecules/Button/Write";
 import styled from "styled-components";
-import Portfoliolist from "../templates/Portfoliolist";
+import Portfoliolist from "./PortfolioList";
 import ModalWrite from "../organisms/ModalWrite";
 import ModalView from "../organisms/ModalView";
 import { useState } from "react";
