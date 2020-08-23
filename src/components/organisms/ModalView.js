@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
 import Wrapper from "../atoms/Modal/Wrapper";
@@ -8,30 +7,25 @@ import Top from "../molecules/ModalView/Top";
 import Middle from "../molecules/ModalView/Middle";
 import Bottom from "../molecules/ModalView/Bottom";
 
-export default function ModalView() {
-  const router = useRouter();
-  const [visible, setVisible] = useState(true);
-  const type = router.pathname === "/project/[pid]" ? "project" : "portfolio";
-  const pid = router.asPath.split("/")[2];
-  const { project, isLoading } = getProject(pid);
+export default function ModalView(props) {
+  const { project, isLoading } = getProject(props.pid);
 
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
-      setVisible(false);
-      router.push(`/${type}`);
+      props.onClose();
     }
   };
-
+  console.log(project);
   return (
     <>
-      <Overlay visible={visible} onClick={onMaskClick} />
-      <Wrapper tabIndex="-1" visible={visible} onClick={onMaskClick}>
+      <Overlay visible={props.visible} onClick={onMaskClick} />
+      <Wrapper tabIndex="-1" visible={props.visible} onClick={onMaskClick}>
         <Inner>
           {isLoading && <p>Loading...</p>}
           {!isLoading && project && (
             <>
               <Top
-                type={type}
+                type={props.type}
                 title={project.title}
                 name={project.user.username}
                 profileImage={project.user.image}
@@ -41,18 +35,18 @@ export default function ModalView() {
                 projectCategory={project.projectCategory}
               ></Top>
               <Middle
-                type={type}
+                type={props.type}
                 date={project.createdDate}
                 content={project.content}
                 image={project.image}
                 userEmail={project.user.email}
-                pid={pid}
-                setVisible={setVisible}
+                pid={project.id}
+                tags={project.projectTag}
               ></Middle>
               <Bottom
                 commentsNum={project.commentsNum}
                 comments={project.comments}
-                pid={pid}
+                pid={project.id}
               ></Bottom>
             </>
           )}
