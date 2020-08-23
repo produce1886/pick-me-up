@@ -52,6 +52,7 @@ export default function ModalView() {
               <Bottom
                 commentsNum={project.commentsNum}
                 comments={project.comments}
+                pid={pid}
               ></Bottom>
             </>
           )}
