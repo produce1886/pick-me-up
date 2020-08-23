@@ -8,10 +8,92 @@ import axios from "axios";
 export default function ModalBottom(props) {
   let tags = [];
   let newtaglists = [];
+  let image;
   const [taginput, setTagInput] = useState("");
   const [tagArray, setTagArray] = useState([]);
 
   tagArray.map((value) => tags.push(value.tagtext));
+
+  if (props.image.length > 0) {
+    image = props.image[0].data;
+    console.log(image);
+  } else {
+    image = "";
+  }
+  const Write = async () => {
+    try {
+      if (
+        props.type === "project" &&
+        !isEmpty(props.title) &&
+        !isEmpty(props.content) &&
+        !isEmpty(props.category) &&
+        !isEmpty(props.field) &&
+        !isEmpty(props.projectType) &&
+        !isEmpty(props.region)
+      ) {
+        const result = await axios.post(`${process.env.API_HOST}/projects`, {
+          title: props.title,
+          content: props.content,
+          email: props.email,
+          category: props.category,
+          huntingField: props.field,
+          region: props.region,
+          projectCategory: props.projectType,
+          tags: tags,
+          image: image,
+        });
+        console.log(result.data);
+        props.onClose();
+      } else if (
+        props.type === "portfolio" &&
+        !isEmpty(props.title) &&
+        !isEmpty(props.content) &&
+        !isEmpty(props.category) &&
+        !isEmpty(props.field)
+      ) {
+        const result = await axios.post(`${process.env.API_HOST}/portfolio`, {
+          title: props.title,
+          content: props.content,
+          email: props.email,
+          category: props.category,
+          huntingField: props.field,
+          region: props.region,
+          projectCategory: props.projectType,
+          tags: tags,
+          image: image,
+        });
+        console.log(result.data);
+        props.onClose();
+      } else {
+        check();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  };
+
+  const removeTag = (value) => {
+    const tagIndex = tagArray.indexOf(value);
+    let newArray = [...tagArray];
+    newArray.splice(tagIndex, 1);
+    setTagArray(newArray);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && tagArray.length < 5 && taginput.length > 0) {
+      newtaglists = Array.from(tagArray);
+      newtaglists.push({ tagtext: taginput });
+      setTagArray(newtaglists);
+      setTagInput("");
+    }
+    if (tagArray.length === 5 && event.key === "Enter") {
+      alert("태그는 5개까지 가능합니다.");
+    }
+  };
+  const handleChange = (event) => {
+    setTagInput(event.target.value);
+  };
   const isEmpty = function (value) {
     if (
       value == "" ||
@@ -44,93 +126,7 @@ export default function ModalBottom(props) {
       alert("프로젝트 종류를 선택해주세요");
     }
   };
-  const Write = async () => {
-    try {
-      if (
-        props.type === "project" &&
-        !isEmpty(props.title) &&
-        !isEmpty(props.content) &&
-        !isEmpty(props.category) &&
-        !isEmpty(props.field) &&
-        !isEmpty(props.projectType) &&
-        !isEmpty(props.region)
-      ) {
-        const result = await axios.post(`${process.env.API_HOST}/projects`, {
-          title: props.title,
-          content: props.content,
-          email: props.email,
-          category: props.category,
-          huntingField: props.field,
-          region: props.region,
-          projectCategory: props.projectType,
-          tags: tags,
-        });
-        console.log(result.data);
-        props.onClose();
-      } else if (
-        props.type === "portfolio" &&
-        !isEmpty(props.title) &&
-        !isEmpty(props.content) &&
-        !isEmpty(props.category) &&
-        !isEmpty(props.field)
-      ) {
-        //portfolio로 바꾸기
-        const result = await axios.post(`${process.env.API_HOST}/projects`, {
-          title: props.title,
-          content: props.content,
-          email: props.email,
-          category: props.category,
-          huntingField: props.field,
-          region: props.region,
-          projectCategory: props.projectType,
-          tags: tags,
-        });
-        console.log(result.data);
-        props.onClose();
-      } else {
-        check();
-      }
-    } catch (error) {
-      if (error.response) {
-        // 요청이 이루어졌으며 서버가 2xx의 범위를 벗어나는 상태 코드로 응답했습니다.
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // 요청이 이루어 졌으나 응답을 받지 못했습니다.
-        // `error.request`는 브라우저의 XMLHttpRequest 인스턴스 또는
-        // Node.js의 http.ClientRequest 인스턴스입니다.
-        console.log(error.request);
-      } else {
-        // 오류를 발생시킨 요청을 설정하는 중에 문제가 발생했습니다.
-        console.log("Error", error.message);
-      }
-      console.log(error.config);
-    } finally {
-    }
-  };
 
-  const removeTag = (value) => {
-    const tagIndex = tagArray.indexOf(value);
-    let newArray = [...tagArray];
-    newArray.splice(tagIndex, 1);
-    setTagArray(newArray);
-  }; // x 누를 시 선택된 tag 제거
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter" && tagArray.length < 5 && taginput.length > 0) {
-      newtaglists = Array.from(tagArray);
-      newtaglists.push({ tagtext: taginput });
-      setTagArray(newtaglists);
-      setTagInput("");
-    }
-    if (tagArray.length === 5 && event.key === "Enter") {
-      alert("태그는 5개까지 가능합니다.");
-    }
-  };
-  const handleChange = (event) => {
-    setTagInput(event.target.value);
-  };
   return (
     <>
       <Bottom>
@@ -153,7 +149,6 @@ export default function ModalBottom(props) {
                 key={i}
                 ismodal="modal"
                 text={value.tagtext}
-                link=""
                 removeTag={() => removeTag(value)}
                 tagtype="modalwrite"
               ></TagButton>

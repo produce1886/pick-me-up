@@ -14,6 +14,7 @@ export default function Dropzone(props) {
     newArray.splice(currentIndex, 1);
     setSelectedFiles(newArray);
     setPreview(newArray);
+    props.setImage(newArray);
   };
 
   const dragOver = (e) => {
@@ -34,21 +35,17 @@ export default function Dropzone(props) {
     if (files.length > 0 && props.type === "project") {
       if (selectedFiles.length === 1) {
         alert("이미지는 1개까지 가능합니다.");
-        console.log(selectedFiles);
       } else {
         for (let i = 0; i < files.length; i++) {
           handleFile(files[i]);
-          console.log(selectedFiles);
         }
       }
     } else {
       if (selectedFiles.length === 5) {
         alert("이미지는 5개까지 가능합니다.");
-        console.log(selectedFiles);
       } else {
         for (let i = 0; i < files.length; i++) {
           handleFile(files[i]);
-          console.log(selectedFiles);
         }
       }
     }
@@ -82,6 +79,7 @@ export default function Dropzone(props) {
     if (validateFile(file)) {
       processImage(file);
       setSelectedFiles([...selectedFiles, file]);
+      props.setImage([...props.image, file]);
     } else {
       alert("파일 형식이 올바르지 않습니다.");
     }

@@ -1,39 +1,55 @@
 import styled from "styled-components";
+import { useState } from "react";
 import Text from "../../atoms/Text";
 import Comment from "../../organisms/Comment/Comment";
-import MoreButton from "../Button/More";
 import CommentWrite from "../../organisms/Comment/CommentWrite";
 
 export default function ModalBottom(props) {
+  const [loadMoreVisible, setLoadMoreVisible] = useState(false);
+
   return (
-    <Bottom>
-      <Div>
-        <Text level={4} weight={500} color="#9c69e2">
-          {props.count}
-        </Text>
-        <Text level={4} weight={500} color="#232735">
-          Comments
-        </Text>
-      </Div>
-      <Comment></Comment>
-      <Comment></Comment>
-      <Comment></Comment>
-      <ButtonWrapper>
-        <MoreButton link=""></MoreButton>
-      </ButtonWrapper>
-      <CommentWrite></CommentWrite>
-    </Bottom>
+    <>
+      <Bottom>
+        <Div>
+          <Text level={4} weight={500} color="#9c69e2">
+            {props.commentsNum}
+          </Text>
+          &nbsp;
+          <Text level={4} weight={500} color="#232735">
+            {props.commentsNum < 2 ? "Comment" : "Comments"}
+          </Text>
+        </Div>
+        {props.comments.map((item, index) => (
+          <Comment
+            comment={item.content}
+            date={item.createdDate}
+            userInfo={item.user}
+            id={item.id}
+            key={index}
+            pid={props.pid}
+          ></Comment>
+        ))}
+        {loadMoreVisible && (
+          <ButtonWrapper>
+            <MoreButton>
+              <Text level={1} weight={500} color=" #8b90a0">
+                더보기
+              </Text>
+            </MoreButton>
+          </ButtonWrapper>
+        )}
+        <CommentWrite></CommentWrite>
+      </Bottom>
+    </>
   );
 }
 
 const Div = styled.div`
-  width: 5.5rem;
-  height: 1.6rem;
-  justify-content: space-between;
   align-items: center;
   display: flex;
   flex-direction: row;
 `;
+
 const Bottom = styled.div`
   width: 100%;
   height: fit-content;
@@ -43,11 +59,11 @@ const Bottom = styled.div`
   justify-content: center;
   position: relative;
   flex-direction: column;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 0.5rem 1.5rem 1rem 1.5rem;
   border-top: 0.07rem solid #d3d4d8;
 `;
 
-const ButtonWrapper = styled.button`
+const ButtonWrapper = styled.div`
   width: 100%;
   height: 1rem;
   display: flex;
@@ -55,6 +71,9 @@ const ButtonWrapper = styled.button`
   justify-content: center;
   flex-direction: row;
   margin: 1rem 0 0 0;
-  border: none;
+`;
+
+const MoreButton = styled.button`
   background-color: transparent;
+  border: none;
 `;

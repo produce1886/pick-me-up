@@ -31,7 +31,7 @@ export default function ModalTop(props) {
         </TitleFilterWrapper>
 
         <ProfileWrapper>
-          <Profile size="2rem" profileImage={props.profilePic}></Profile>
+          <Profile size="2rem" profileImage={props.profileImage}></Profile>
           <TextDiv>
             <Text level={2} weight={800}>
               {props.name}

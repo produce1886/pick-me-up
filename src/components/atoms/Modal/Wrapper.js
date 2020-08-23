@@ -2,18 +2,18 @@ import styled, { css } from "styled-components";
 
 export default styled.div`
   ${(props) => css`
+    width: 30rem;
+    min-width: 650px;
+    height: fit-content;
+    max-height: 62rem;
+    overflow-y: auto;
     box-sizing: border-box;
     display: ${(props) => (props.visible ? "block" : "none")};
     position: absolute;
-    height: ${props.height};
-    top: 3.5rem;
-    left: 15rem;
-    bottom: 0;
-    right: 15rem;
+    top: 8.4rem;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
-    overflow-x: hidden;
-    overflow-y: auto;
     outline: 0;
-    max-height: 62rem;
   `}
 `;
