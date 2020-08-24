@@ -14,7 +14,11 @@ export default function ModalMiddle(props) {
         type="text"
         onChange={handleChange}
       ></Textarea>
-      <Dropzone type={props.type}></Dropzone>
+      <Dropzone
+        type={props.type}
+        setImage={props.setImage}
+        image={props.image}
+      ></Dropzone>
     </Middle>
   );
 }

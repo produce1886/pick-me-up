@@ -15,7 +15,7 @@ export default function ModalView(props) {
       props.onClose();
     }
   };
-
+  console.log(project);
   return (
     <>
       <Overlay visible={props.visible} onClick={onMaskClick} />
@@ -40,11 +40,13 @@ export default function ModalView(props) {
                 content={project.content}
                 image={project.image}
                 userEmail={project.user.email}
+                pid={project.id}
                 tags={project.projectTag}
               ></Middle>
               <Bottom
                 commentsNum={project.commentsNum}
                 comments={project.comments}
+                pid={project.id}
               ></Bottom>
             </>
           )}

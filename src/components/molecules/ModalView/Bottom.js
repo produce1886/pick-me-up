@@ -26,6 +26,7 @@ export default function ModalBottom(props) {
             userInfo={item.user}
             id={item.id}
             key={index}
+            pid={props.pid}
           ></Comment>
         ))}
         {loadMoreVisible && (
