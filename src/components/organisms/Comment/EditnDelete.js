@@ -1,19 +1,43 @@
 import ItemWrapper from "../../molecules/Filter/FilterItem";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
+
 export default function EditnDelete(props) {
+  const pid = parseInt(props.pid, 10);
+  const router = useRouter();
   const data = [
     { key: 0, title: "댓글 수정", type: "more", mode: "edit" },
     { key: 1, title: "댓글 삭제", type: "more", mode: "delete" },
   ];
-  const [mode, setMode] = useState("");
-  const [item, setItem] = useState("");
+  const [comment, setComment] = useState();
+
+  const deleteComment = () => {
+    const fetchData = async () => {
+      try {
+        if (window.confirm("댓글을 삭제하시겠습니까?")) {
+          const result = await axios.delete(
+            `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
+          );
+          console.log(result);
+          setComment(result.data);
+          router.push(router.asPath);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        //need to refresh
+      }
+    };
+    fetchData();
+  };
 
   const setSelected = (item) => {
-    if (item) {
-      setMode(item.mode);
+    if (item.key === 1) {
+      deleteComment();
+    } else if (item.key === 0) {
     }
-    setItem(item);
   };
   return (
     <Wrapper

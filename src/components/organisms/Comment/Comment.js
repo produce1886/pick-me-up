@@ -13,7 +13,6 @@ export default function Comment(props) {
   date = date.replace("T", " ");
   const user = props.userInfo;
   const loginUser = useSelector((state) => state.user.userData);
-
   const openMenu = () => {
     setClicked(!clicked);
   };
@@ -50,7 +49,7 @@ export default function Comment(props) {
           </Text>
         </CommentBox>
       </TextDiv>
-      {clicked && <EditnDelete id={props.id}></EditnDelete>}
+      {clicked && <EditnDelete id={props.id} pid={props.pid}></EditnDelete>}
     </Wrapper>
   );
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";
@@ -7,6 +6,7 @@ export default function ModalMiddle(props) {
   const handleChange = (event) => {
     props.setContent(event.target.value);
   };
+
   return (
     <Middle height="36rem">
       <Textarea
@@ -14,7 +14,11 @@ export default function ModalMiddle(props) {
         type="text"
         onChange={handleChange}
       ></Textarea>
-      <Dropzone type={props.type}></Dropzone>
+      <Dropzone
+        type={props.type}
+        setImages={props.setImages}
+        images={props.images}
+      ></Dropzone>
     </Middle>
   );
 }
