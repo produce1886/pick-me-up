@@ -26,7 +26,7 @@ export default function Button(props) {
           <IconButton
             onClick={(e) => {
               e.preventDefault();
-              props.removeTag(props.key);
+              props.removeTag();
             }}
           >
             <IconX
