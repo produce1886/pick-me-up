@@ -55,7 +55,9 @@ export default function ProjectBody() {
           ></ProjectList>
         </InnerWrapper>
       </Wrapper>
-      {isSignedIn && <WriteButton openWrite={openWrite}></WriteButton>}
+      {isSignedIn && !writeVisible && (
+        <WriteButton openWrite={openWrite}></WriteButton>
+      )}
       {writeVisible && (
         <ModalWrite
           type="project"

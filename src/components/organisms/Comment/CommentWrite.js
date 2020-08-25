@@ -29,7 +29,7 @@ export default function CommentWrite() {
       email: user.userData.email,
       content: content,
     });
-    router.push(router.asPath);
+    //need to refresh
   };
 
   return (

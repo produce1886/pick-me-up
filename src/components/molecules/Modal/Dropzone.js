@@ -8,15 +8,6 @@ export default function Dropzone(props) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [preview, setPreview] = useState([]);
 
-  const removeFile = (file) => {
-    const currentIndex = selectedFiles.indexOf(file);
-    let newArray = [...selectedFiles];
-    newArray.splice(currentIndex, 1);
-    setSelectedFiles(newArray);
-    setPreview(newArray);
-    props.setImage(newArray);
-  };
-
   const dragOver = (e) => {
     e.preventDefault();
   };
@@ -79,10 +70,19 @@ export default function Dropzone(props) {
     if (validateFile(file)) {
       processImage(file);
       setSelectedFiles([...selectedFiles, file]);
-      props.setImage([...props.image, file]);
+      props.setImages([...props.images, file]);
     } else {
       alert("파일 형식이 올바르지 않습니다.");
     }
+  };
+
+  const removeFile = (file) => {
+    const currentIndex = selectedFiles.indexOf(file);
+    let newArray = [...selectedFiles];
+    newArray.splice(currentIndex, 1);
+    setSelectedFiles(newArray);
+    setPreview(newArray);
+    props.setImages(newArray);
   };
 
   const renderPreviewImages = () => {
