@@ -3,23 +3,36 @@ import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import WriteBlock from "../Button/WriteBlock";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 export default function ModalBottom(props) {
   let tags = [];
   let newtaglists = [];
-  let image;
+  let newimgArray = [];
   const [taginput, setTagInput] = useState("");
   const [tagArray, setTagArray] = useState([]);
+  const [imgArray, setImgArray] = useState([]);
 
   tagArray.map((value) => tags.push(value.tagtext));
 
+  const setImage = (file) => {
+    let reader = new FileReader();
+    reader.onloadend = () => {
+      file = reader.result;
+      newimgArray = Array.from(imgArray);
+      newimgArray.push(file);
+      setImgArray(newimgArray);
+    };
+    reader.readAsDataURL(file);
+  };
+
   if (props.image.length > 0) {
-    image = props.image[0].data;
-    console.log(image);
-  } else {
-    image = "";
+    for (let i = 0; i < props.image.length; i++) {
+      const file = props.image[i];
+      setImage(file);
+    }
   }
+  console.log(imgArray);
   const Write = async () => {
     try {
       if (
@@ -40,7 +53,7 @@ export default function ModalBottom(props) {
           region: props.region,
           projectCategory: props.projectType,
           tags: tags,
-          image: image,
+          image: "",
         });
         console.log(result.data);
         props.onClose();
@@ -51,18 +64,17 @@ export default function ModalBottom(props) {
         !isEmpty(props.category) &&
         !isEmpty(props.field)
       ) {
-        const result = await axios.post(`${process.env.API_HOST}/portfolio`, {
+        const result = await axios.post(`${process.env.API_HOST}/portfolios`, {
           title: props.title,
           content: props.content,
           email: props.email,
           category: props.category,
           huntingField: props.field,
-          region: props.region,
-          projectCategory: props.projectType,
           tags: tags,
-          image: image,
+          image: "",
         });
         console.log(result.data);
+        console.log(imgArray);
         props.onClose();
       } else {
         check();
