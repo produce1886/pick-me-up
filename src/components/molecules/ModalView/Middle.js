@@ -7,7 +7,7 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { route } from "next/dist/next-server/server/router";
 export default function ModalMiddle(props) {
   const router = useRouter();
   const user = useSelector((state) => state.user);

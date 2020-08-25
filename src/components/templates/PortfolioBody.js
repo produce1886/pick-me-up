@@ -32,9 +32,7 @@ export default function PortfolioBody() {
           <ModalView visible={viewVisible} onClose={closeView}></ModalView>
         )}
       </InnerWrapper>
-      {isSignedIn && !writeVisible && (
-        <WriteButton openWrite={openWrite}></WriteButton>
-      )}
+      {isSignedIn && <WriteButton openWrite={openWrite}></WriteButton>}
       {writeVisible && (
         <ModalWrite
           type="portfolio"

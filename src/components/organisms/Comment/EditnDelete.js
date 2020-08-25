@@ -3,7 +3,6 @@ import Wrapper from "../../atoms/Filter/DropDownMenu";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-
 export default function EditnDelete(props) {
   const pid = parseInt(props.pid, 10);
   const router = useRouter();
@@ -12,7 +11,6 @@ export default function EditnDelete(props) {
     { key: 1, title: "댓글 삭제", type: "more", mode: "delete" },
   ];
   const [comment, setComment] = useState();
-
   const deleteComment = () => {
     const fetchData = async () => {
       try {
@@ -27,12 +25,11 @@ export default function EditnDelete(props) {
       } catch (error) {
         console.log(error);
       } finally {
-        //need to refresh
+        router.push(router.asPath);
       }
     };
     fetchData();
   };
-
   const setSelected = (item) => {
     if (item.key === 1) {
       deleteComment();
