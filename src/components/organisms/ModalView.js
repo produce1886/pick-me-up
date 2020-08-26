@@ -15,7 +15,6 @@ export default function ModalView(props) {
       props.onClose();
     }
   };
-  console.log(project);
   return (
     <>
       <Overlay visible={props.visible} onClick={onMaskClick} />
@@ -42,6 +41,7 @@ export default function ModalView(props) {
                 userEmail={project.user.email}
                 pid={project.id}
                 tags={project.projectTag}
+                // portfolio id pfid로 넣기
               ></Middle>
               <Bottom
                 commentsNum={project.commentsNum}

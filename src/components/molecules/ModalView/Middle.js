@@ -12,33 +12,41 @@ export default function ModalMiddle(props) {
   const router = useRouter();
   const user = useSelector((state) => state.user);
   const [project, setProject] = useState();
+  const [portfolio, setPortfolio] = useState();
   const pid = props.pid;
+  //portfolio id
+  const pfid = "";
   let date = props.date;
   date = date.replace("T", " ");
 
-  const deleteProject = () => {
+  const deleteBlock = () => {
     const fetchData = async () => {
       try {
-        if (window.confirm("게시글을 삭제하시겠습니까?")) {
-          const result = await axios.delete(
-            `${process.env.API_HOST}/projects/${pid}`
-          );
-          setProject(result.data);
-          router.push("/project");
+        if (props.type === "project") {
+          if (window.confirm("게시글을 삭제하시겠습니까?")) {
+            const result = await axios.delete(
+              `${process.env.API_HOST}/projects/${pid}`
+            );
+            setProject(result.data);
+            router.push("/project");
+          }
+        } else if (props.type === "portfolio") {
+          if (window.confirm("게시글을 삭제하시겠습니까?")) {
+            const result = await axios.delete(
+              `${process.env.API_HOST}/portfolios/${pfid}`
+            );
+            setPortfolio(result.data);
+            router.push("/portfolio");
+          }
         }
       } catch (error) {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        } else if (error.request) {
-          console.log(error.request);
-        } else {
-          console.log("Error", error.message);
-        }
-        console.log(error.config);
+        console.log(error);
       } finally {
-        router.push("/project");
+        if (props.type === "project") {
+          router.push("/project");
+        } else {
+          router.push("/portfolio");
+        }
       }
     };
     fetchData();
@@ -77,7 +85,7 @@ export default function ModalMiddle(props) {
               게시글 수정
             </Text>
           </Button>
-          <Button onClick={deleteProject}>
+          <Button onClick={deleteBlock}>
             <Text level={1} weight={500} color="#232735">
               게시글 삭제
             </Text>
