@@ -6,6 +6,7 @@ import CommentWrite from "../../organisms/Comment/CommentWrite";
 
 export default function ModalBottom(props) {
   const [commentUpdate, setCommentUpdate] = useState("");
+  const [contentUpdate, setContentUpdate] = useState("");
   const [edit, setEdit] = useState(false);
   return (
     <>
@@ -29,13 +30,14 @@ export default function ModalBottom(props) {
               key={index}
               pid={props.pid}
               setCommentUpdate={setCommentUpdate}
+              setContentUpdate={setContentUpdate}
               setEdit={setEdit}
             ></Comment>
           ))}
 
         <CommentWrite
-          commentUpdate={commentUpdate.content}
-          setCommentUpdate={setCommentUpdate}
+          contentUpdate={contentUpdate}
+          setContentUpdate={setContentUpdate}
           edit={edit}
           cid={commentUpdate.id}
           setEdit={setEdit}

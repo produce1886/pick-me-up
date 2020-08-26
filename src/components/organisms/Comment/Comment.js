@@ -55,6 +55,7 @@ export default function Comment(props) {
           pid={props.pid}
           setCommentUpdate={props.setCommentUpdate}
           setEdit={props.setEdit}
+          setContentUpdate={props.setContentUpdate}
         ></EditnDelete>
       )}
     </Wrapper>

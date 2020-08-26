@@ -14,7 +14,7 @@ export default function CommentWrite(props) {
   const [content, setContent] = useState("");
   const onChangeHandler = (e) => {
     props.edit
-      ? props.setCommentUpdate(e.target.value)
+      ? props.setContentUpdate(e.target.value)
       : setContent(e.target.value);
   };
   const commentSubmitHandler = () => {
@@ -22,26 +22,36 @@ export default function CommentWrite(props) {
       alert("로그인하신 다음에 댓글을 사용하실 수 있습니다.");
       return;
     }
-    if (content.length < 1 || !props.commentUpdate < 1) {
+    if (content.length < 1 && props.contentUpdate < 1) {
+      alert("댓글을 작성해주세요");
       return;
     }
     if (!props.edit) {
-      axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
-        email: user.userData.email,
-        content: content,
-      });
-    } else if (props.edit) {
-      axios.post(
-        `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
-        {
+      try {
+        axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
+          email: user.userData.email,
           content: content,
-        }
-      );
-      props.setEdit(false);
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
-    //need to refresh
+
+    if (props.edit) {
+      try {
+        axios.put(
+          `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
+          {
+            content: props.contentUpdate,
+          }
+        );
+        props.setEdit(false);
+      } catch (error) {
+        console.log(error);
+      }
+      //need to refresh
+    }
   };
-  console.log(props);
   return (
     <Wrapper>
       <Div>
@@ -54,7 +64,7 @@ export default function CommentWrite(props) {
               onChangeHandler(e);
             }}
             maxLength="100"
-            value={props.edit ? props.commentUpdate : content}
+            value={props.edit ? props.contentUpdate : content}
           ></Textarea>
         </CommentBox>
         <IconButton onClick={commentSubmitHandler}>
