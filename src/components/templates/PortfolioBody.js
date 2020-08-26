@@ -1,49 +1,66 @@
-import WriteButton from "../molecules/Button/Write";
-import styled from "styled-components";
-import Portfoliolist from "./PortfolioList";
-import ModalWrite from "../organisms/ModalWrite";
-import ModalView from "../organisms/ModalView";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import FilterSearch from "../organisms/FilterSearch";
+import Filter from "../molecules/Filter/Filter";
+import { ALIGN } from "../molecules/Filter/ItemData";
+import PortfolioList from "./PortfolioList";
+import WriteButton from "../molecules/Button/Write";
+import ModalWrite from "../organisms/ModalWrite";
 
 export default function PortfolioBody() {
-  const [viewVisible, setViewVisible] = useState(false);
+  const [category, setCategory] = useState("");
+  const [field, setField] = useState("");
+  const [sort, setSort] = useState("최신순");
+  const [query, setQuery] = useState("");
   const [writeVisible, setWriteVisible] = useState(false);
-  const openView = () => {
-    setViewVisible(true);
-  };
+  const isSignedIn = useSelector((state) => state.user.isSignedIn);
+
   const openWrite = () => {
     setWriteVisible(true);
-  };
-
-  const closeView = () => {
-    setViewVisible(false);
   };
   const closeWrite = () => {
     setWriteVisible(false);
   };
-  const isSignedIn = useSelector((state) => state.user.isSignedIn);
 
   return (
-    <Wrapper>
-      <InnerWrapper>
-        <Portfoliolist openView={openView}></Portfoliolist>
-        {viewVisible && (
-          <ModalView visible={viewVisible} onClose={closeView}></ModalView>
+    <>
+      <FilterSearch
+        type="portfolio"
+        setCategory={setCategory}
+        setField={setField}
+        setQuery={setQuery}
+      ></FilterSearch>
+      <Wrapper>
+        <InnerWrapper>
+          <Div>
+            <Filter
+              title="최신순"
+              activeMenu="align"
+              data={ALIGN}
+              onClick={setSort}
+            ></Filter>
+          </Div>
+          <PortfolioList
+            category={category}
+            field={field}
+            query={query}
+            sort={sort}
+          ></PortfolioList>
+        </InnerWrapper>
+        {isSignedIn && !writeVisible && (
+          <WriteButton openWrite={openWrite}></WriteButton>
         )}
-      </InnerWrapper>
-      {isSignedIn && !writeVisible && (
-        <WriteButton openWrite={openWrite}></WriteButton>
-      )}
-      {writeVisible && (
-        <ModalWrite
-          type="portfolio"
-          visible={writeVisible}
-          onClose={closeWrite}
-          ismodal="modal"
-        ></ModalWrite>
-      )}
-    </Wrapper>
+        {writeVisible && (
+          <ModalWrite
+            type="portfolio"
+            visible={writeVisible}
+            onClose={closeWrite}
+            ismodal="modal"
+          ></ModalWrite>
+        )}
+      </Wrapper>
+    </>
   );
 }
 
@@ -53,14 +70,25 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  box-sizing: border-box;
 `;
+
 const InnerWrapper = styled.div`
-  margin: 0 3rem 0 3rem;
+  margin: 0 4rem 0 4rem;
   max-width: 1200px;
   width: 48rem;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+`;
+
+const Div = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 1.2rem 0 1.2rem 1rem;
   box-sizing: border-box;
 `;

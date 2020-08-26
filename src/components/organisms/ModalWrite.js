@@ -42,9 +42,23 @@ export default function Modalblock(props) {
           axios.post(`${process.env.API_HOST}/projects`, body);
           props.onClose();
         } else if (props.type === "portfolio") {
+          let image = images.length > 0 ? images[0].data : "";
+          let body = {
+            title: title,
+            content: content,
+            email: email,
+            category: category,
+            huntingField: field,
+            tags: tags,
+            image: image,
+          };
+          axios.post(`${process.env.API_HOST}/portfolios`, body);
+          props.onClose();
+        }
+        /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
+        else if (props.type === "portfolio") {
           let imageDataArray = [];
           images.map((value) => imageDataArray.push(value.data));
-
           let body = {
             title: title,
             content: content,
@@ -57,6 +71,7 @@ export default function Modalblock(props) {
           axios.post(`${process.env.API_HOST}/portfolios`, body);
           props.onClose();
         }
+        */
       } catch (error) {
         console.log(error);
         alert("에러가 발생했습니다.");
