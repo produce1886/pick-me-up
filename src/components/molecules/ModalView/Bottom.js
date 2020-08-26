@@ -5,8 +5,6 @@ import Comment from "../../organisms/Comment/Comment";
 import CommentWrite from "../../organisms/Comment/CommentWrite";
 
 export default function ModalBottom(props) {
-  const [loadMoreVisible, setLoadMoreVisible] = useState(false);
-
   return (
     <>
       <Bottom>
@@ -29,15 +27,7 @@ export default function ModalBottom(props) {
             pid={props.pid}
           ></Comment>
         ))}
-        {loadMoreVisible && (
-          <ButtonWrapper>
-            <MoreButton>
-              <Text level={1} weight={500} color=" #8b90a0">
-                더보기
-              </Text>
-            </MoreButton>
-          </ButtonWrapper>
-        )}
+
         <CommentWrite></CommentWrite>
       </Bottom>
     </>
