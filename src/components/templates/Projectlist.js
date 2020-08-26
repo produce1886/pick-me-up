@@ -33,11 +33,7 @@ export default function Projectlist(props) {
   };
 
   const getBlock = (item, index) => (
-    <ProjectBlock
-      key={index}
-      item={item}
-      openView={props.openView}
-    ></ProjectBlock>
+    <ProjectBlock key={index} item={item}></ProjectBlock>
   );
 
   const loadMoreHandler = () => {
