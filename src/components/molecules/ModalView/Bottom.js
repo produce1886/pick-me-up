@@ -19,16 +19,17 @@ export default function ModalBottom(props) {
             {props.commentsNum < 2 ? "Comment" : "Comments"}
           </Text>
         </Div>
-        {props.comments.map((item, index) => (
-          <Comment
-            comment={item.content}
-            date={item.createdDate}
-            userInfo={item.user}
-            id={item.id}
-            key={index}
-            pid={props.pid}
-          ></Comment>
-        ))}
+        {props.comments &&
+          props.comments.map((item, index) => (
+            <Comment
+              comment={item.content}
+              date={item.createdDate}
+              userInfo={item.user}
+              id={item.id}
+              key={index}
+              pid={props.pid}
+            ></Comment>
+          ))}
         {loadMoreVisible && (
           <ButtonWrapper>
             <MoreButton>
