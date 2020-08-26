@@ -32,32 +32,6 @@ export default function CommentWrite() {
     //need to refresh
   };
 
-  const checkword = (obj, maxByte) => {
-    let strValue = obj.value;
-    let strLen = strValue.length;
-    let totalByte = 0;
-    let len = 0;
-    let oneChar = "";
-    let str2 = "";
-    for (let i = 0; i < strLen; i++) {
-      oneChar = strValue.charAt(i);
-      if (escape(oneChar).length > 4) {
-        totalByte += 2;
-      } else {
-        totalByte++;
-      }
-      if (totalByte <= maxByte) {
-        len = i + 1;
-      }
-    }
-    if (totalByte > maxByte) {
-      alert(maxByte + "자를 초과할 수 없습니다.");
-      str2 = strValue.substr(0, len);
-      obj.value = str2;
-      checkword(obj, 4000);
-    }
-  };
-
   return (
     <Wrapper>
       <Div>
@@ -67,9 +41,7 @@ export default function CommentWrite() {
             placeholder="내용을 입력하세요"
             type="text"
             onChange={onChangeHandler}
-            onKeyUp={(event) => {
-              checkword(event.target, 300);
-            }}
+            maxLength="100"
           ></Textarea>
         </CommentBox>
         <IconButton onClick={commentSubmitHandler}>
