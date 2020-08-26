@@ -10,4 +10,7 @@ export default styled.div`
   box-sizing: border-box;
   margin: 0 0.4rem 0 0.4rem;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

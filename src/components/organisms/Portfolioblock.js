@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Text from "../atoms/Text";
 import Detail from "../molecules/PortfolioBlock/Detail";
 import Wrapper from "../atoms/PortfolioBlock";
 import { useState } from "react";
@@ -8,12 +9,23 @@ export default function PortfolioBlock(props) {
 
   return (
     <Wrapper
-      onClick={props.openView}
       onMouseOver={() => setShow(true)}
       onMouseOut={() => setShow(false)}
     >
-      <Img src=""></Img>
-      <Detail y={show ? "-3rem" : "3rem"}></Detail>
+      {props.item.image ? (
+        <Img src={props.item.image}></Img>
+      ) : (
+        <Text level={5} weight={500}>
+          {props.item.content.substr(0, 15)}
+        </Text>
+      )}
+      <Detail
+        y={show ? "-3rem" : "3rem"}
+        title={props.item.title}
+        name={props.item.user.username}
+        viewNum={props.item.viewNum}
+        commentsNum={props.item.commentsNum}
+      ></Detail>
     </Wrapper>
   );
 }
