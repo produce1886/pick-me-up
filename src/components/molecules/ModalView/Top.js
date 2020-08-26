@@ -22,12 +22,9 @@ export default function ModalTop(props) {
         ></Filterinfo>
       </TitleFilterWrapper>
       <ProfileBox>
-        <ProfileHolder size="2rem" noMargin={true}>
+        <ProfileHolder size="3rem" noMargin={true}>
           <Img src={props.profileImage}></Img>
         </ProfileHolder>
-        <Text level={3} weight={800}>
-          {props.name}
-        </Text>
       </ProfileBox>
     </Top>
   );

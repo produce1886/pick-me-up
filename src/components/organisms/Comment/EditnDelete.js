@@ -3,6 +3,7 @@ import Wrapper from "../../atoms/Filter/DropDownMenu";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+
 export default function EditnDelete(props) {
   const pid = parseInt(props.pid, 10);
   const router = useRouter();
@@ -11,6 +12,7 @@ export default function EditnDelete(props) {
     { key: 1, title: "댓글 삭제", type: "more", mode: "delete" },
   ];
   const [comment, setComment] = useState();
+
   const deleteComment = () => {
     const fetchData = async () => {
       try {
@@ -18,22 +20,43 @@ export default function EditnDelete(props) {
           const result = await axios.delete(
             `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
           );
-          console.log(result);
           setComment(result.data);
-          router.push(router.asPath);
         }
       } catch (error) {
         console.log(error);
       } finally {
-        router.push(router.asPath);
+        //need to refresh
       }
     };
     fetchData();
+  };
+
+  const getComment = () => {
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(
+          `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
+        );
+        const comment = Object.assign(result.data);
+        props.setCommentUpdate(comment);
+        props.setContentUpdate(comment.content);
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    };
+    fetchData();
+  };
+
+  const UpdateComment = () => {
+    getComment();
+    props.setEdit(true);
   };
   const setSelected = (item) => {
     if (item.key === 1) {
       deleteComment();
     } else if (item.key === 0) {
+      UpdateComment();
     }
   };
   return (

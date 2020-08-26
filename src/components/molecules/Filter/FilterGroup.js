@@ -59,7 +59,7 @@ export default function FilterGroup(props) {
 }
 
 const FilterWrapper = styled.div`
-  width: 22rem;
+  width: fit-content;
   height: 1.6rem;
   justify-content: left;
   align-items: center;
