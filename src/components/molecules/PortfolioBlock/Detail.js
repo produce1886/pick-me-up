@@ -13,7 +13,12 @@ function Detail(props) {
         </Text>
       </Row>
       <Row>
-        <Profile name={props.name} size="0.8rem" level={1}></Profile>
+        <Profile
+          name={props.name}
+          size="0.8rem"
+          level={1}
+          profileImage={props.profile}
+        ></Profile>
         <Div>
           <ViewCount count={props.viewNum}></ViewCount>
           &nbsp;
