@@ -22,7 +22,6 @@ export default function EditnDelete(props) {
           );
           console.log(result);
           setComment(result.data);
-          router.push(router.asPath);
         }
       } catch (error) {
         console.log(error);
