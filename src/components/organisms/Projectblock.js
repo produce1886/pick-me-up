@@ -8,7 +8,7 @@ export default function ProjectBlock(props) {
   const date = props.item.createdDate.split("T")[0];
 
   return (
-    <Wrapper onClick={props.openView}>
+    <Wrapper>
       <Top
         title={props.item.title}
         name={props.item.user.username}
