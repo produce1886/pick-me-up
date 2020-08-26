@@ -8,7 +8,7 @@ import Middle from "../molecules/ModalView/Middle";
 import Bottom from "../molecules/ModalView/Bottom";
 
 export default function ModalView(props) {
-  const { project, isLoading } = getProject(props.pid);
+  const { data, isLoading } = getData(props.pid, props.type);
 
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -21,32 +21,33 @@ export default function ModalView(props) {
       <Wrapper tabIndex="-1" visible={props.visible} onClick={onMaskClick}>
         <Inner>
           {isLoading && <p>Loading...</p>}
-          {!isLoading && project && (
+          {!isLoading && data && (
             <>
               <Top
                 type={props.type}
-                title={project.title}
-                name={project.user.username}
-                profileImage={project.user.image}
-                category={project.category}
-                field={project.huntingField}
-                region={project.region}
-                projectCategory={project.projectCategory}
+                title={data.title}
+                name={data.user.username}
+                profileImage={data.user.image}
+                category={data.category}
+                field={data.huntingField}
+                region={data.region}
+                projectCategory={data.projectCategory}
               ></Top>
               <Middle
                 type={props.type}
-                date={project.createdDate}
-                content={project.content}
-                image={project.image}
-                userEmail={project.user.email}
-                pid={project.id}
-                tags={project.projectTag}
-                // portfolio id pfid로 넣기
+                date={data.createdDate}
+                content={data.content}
+                image={data.image}
+                userEmail={data.user.email}
+                pid={data.id}
+                tags={
+                  props.type === "project" ? data.projectTag : data.portfolioTag
+                }
               ></Middle>
               <Bottom
-                commentsNum={project.commentsNum}
-                comments={project.comments}
-                pid={project.id}
+                commentsNum={data.commentsNum}
+                comments={data.comments}
+                pid={data.id}
               ></Bottom>
             </>
           )}
@@ -56,26 +57,34 @@ export default function ModalView(props) {
   );
 }
 
-const getProject = (pid) => {
-  const [project, setProject] = useState();
+const getData = (pid, type) => {
+  const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const result = await axios.get(
-          `${process.env.API_HOST}/projects/${pid}`
-        );
-        setProject(result.data);
-        setIsLoading(false);
+        if (type === "project") {
+          const result = await axios.get(
+            `${process.env.API_HOST}/projects/${pid}`
+          );
+          setData(result.data);
+          setIsLoading(false);
+        } else if (type === "portfolio") {
+          const result = await axios.get(
+            `${process.env.API_HOST}/portfolios/${pid}`
+          );
+          setData(result.data);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error(error);
       }
     };
-    if (!project) {
+    if (!data) {
       fetchData();
     }
   }, []);
-  return { project, isLoading };
+  return { data, isLoading };
 };

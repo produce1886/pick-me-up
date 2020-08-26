@@ -21,7 +21,6 @@ export default function EditnDelete(props) {
             `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
           );
           setComment(result.data);
-          router.push(router.asPath);
         }
       } catch (error) {
         console.log(error);

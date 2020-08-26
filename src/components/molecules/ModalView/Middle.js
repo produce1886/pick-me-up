@@ -69,15 +69,17 @@ export default function ModalMiddle(props) {
           </ImageHolder>
         )}
       </ContentBox>
-      <TagWrapper>
-        <Icon
-          style={{ width: "1.5rem", height: "1.5rem", marginRight: "0.3rem" }}
-          fill="#232735"
-        ></Icon>
-        {props.tags.map((item, index) => (
-          <TagButton text={item.tag} key={index}></TagButton>
-        ))}
-      </TagWrapper>
+      {props.tags && props.tags.length > 0 && (
+        <TagWrapper>
+          <Icon
+            style={{ width: "1.5rem", height: "1.5rem", marginRight: "0.3rem" }}
+            fill="#232735"
+          ></Icon>
+          {props.tags.map((item, index) => (
+            <TagButton text={item.tag} key={index}></TagButton>
+          ))}
+        </TagWrapper>
+      )}
       {props.userEmail === user.userData.email && (
         <ButtonWrapper>
           <Button>
