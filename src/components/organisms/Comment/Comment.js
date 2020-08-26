@@ -49,7 +49,14 @@ export default function Comment(props) {
           </Text>
         </CommentBox>
       </TextDiv>
-      {clicked && <EditnDelete id={props.id} pid={props.pid}></EditnDelete>}
+      {clicked && (
+        <EditnDelete
+          id={props.id}
+          pid={props.pid}
+          setCommentUpdate={props.setCommentUpdate}
+          setEdit={props.setEdit}
+        ></EditnDelete>
+      )}
     </Wrapper>
   );
 }

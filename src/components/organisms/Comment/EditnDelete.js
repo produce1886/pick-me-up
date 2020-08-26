@@ -32,10 +32,33 @@ export default function EditnDelete(props) {
     fetchData();
   };
 
+  const getComment = () => {
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(
+          `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
+        );
+        const comment = Object.assign(result.data);
+        props.setCommentUpdate(comment);
+        console.log(comment);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        //need to refresh
+      }
+    };
+    fetchData();
+  };
+
+  const UpdateComment = () => {
+    getComment();
+    props.setEdit(true);
+  };
   const setSelected = (item) => {
     if (item.key === 1) {
       deleteComment();
     } else if (item.key === 0) {
+      UpdateComment();
     }
   };
   return (
