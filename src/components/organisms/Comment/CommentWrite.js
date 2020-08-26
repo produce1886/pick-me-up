@@ -25,8 +25,7 @@ export default function CommentWrite(props) {
     if (content.length < 1 && props.contentUpdate < 1) {
       alert("댓글을 작성해주세요");
       return;
-    }
-    if (!props.edit) {
+    } else if (!props.edit) {
       try {
         axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
           email: user.userData.email,
@@ -35,9 +34,7 @@ export default function CommentWrite(props) {
       } catch (error) {
         console.log(error);
       }
-    }
-
-    if (props.edit) {
+    } else if (props.edit) {
       try {
         axios.put(
           `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
