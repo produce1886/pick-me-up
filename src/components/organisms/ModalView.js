@@ -15,7 +15,6 @@ export default function ModalView(props) {
       props.onClose();
     }
   };
-  console.log(project);
   return (
     <>
       <Overlay visible={props.visible} onClick={onMaskClick} />
