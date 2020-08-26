@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Filterinfo from "../FilterInfo";
+import FilterInfo from "../FilterInfo";
 import Text from "../../atoms/Text";
 import Row from "../../atoms/Row";
 import Col from "../../atoms/Col";
@@ -25,13 +25,13 @@ export default function Top(props) {
         </FirstDiv>
         <Row>
           <Div>
-            <Filterinfo
+            <FilterInfo
               type="project"
               category={props.category}
               field={props.field}
               region={props.region}
               projectCategory={props.projectCategory}
-            ></Filterinfo>
+            ></FilterInfo>
             <Text level={1} color="#232735">
               {props.date}
             </Text>
