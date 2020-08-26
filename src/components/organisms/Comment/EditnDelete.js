@@ -20,7 +20,6 @@ export default function EditnDelete(props) {
           const result = await axios.delete(
             `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
           );
-          console.log(result);
           setComment(result.data);
           router.push(router.asPath);
         }
