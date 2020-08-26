@@ -40,7 +40,6 @@ export default function EditnDelete(props) {
         const comment = Object.assign(result.data);
         props.setCommentUpdate(comment);
         props.setContentUpdate(comment.content);
-        console.log(comment);
       } catch (error) {
         console.log(error);
       } finally {
