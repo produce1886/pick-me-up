@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
 import Filters from "../Filter/FilterGroup";
 
 export default function ModalTop(props) {
-  const handleChange = (event) => {
-    props.setTitle(event.target.value);
+  const onChangeHandler = (e) => {
+    props.setTitle(e.target.value);
   };
   return (
     <Top height="6rem">
@@ -15,7 +14,10 @@ export default function ModalTop(props) {
           <Input
             placeholder="제목을 입력하세요"
             type="text"
-            onChange={handleChange}
+            onChange={(e) => {
+              onChangeHandler(e);
+            }}
+            value={props.isUpdate ? props.updateTitle : props.title}
           ></Input>
           <Filters
             type={props.type}

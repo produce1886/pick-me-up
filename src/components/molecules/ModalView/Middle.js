@@ -80,7 +80,7 @@ export default function ModalMiddle(props) {
       )}
       {props.userEmail === user.userData.email && (
         <ButtonWrapper>
-          <Button>
+          <Button onClick={props.setIsUpdate(true)}>
             <Text level={1} weight={500} color="#232735">
               게시글 수정
             </Text>
