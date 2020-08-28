@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Upload from "../../atoms/Icon/Upload";
@@ -7,6 +7,11 @@ import Close from "../../atoms/Icon/Close";
 export default function Dropzone(props) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [preview, setPreview] = useState([]);
+
+  useEffect(() => {
+    setSelectedFiles(props.images);
+    setPreview(props.images);
+  }, [props.images]);
 
   const dragOver = (e) => {
     e.preventDefault();

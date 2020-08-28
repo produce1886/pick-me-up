@@ -12,7 +12,7 @@ export default function ModalMiddle(props) {
         placeholder="내용을 입력하세요"
         type="text"
         onChange={handleChange}
-        value={props.isUpdate ? props.updateContent : props.content}
+        value={props.content}
       ></Textarea>
       <Dropzone
         type={props.type}

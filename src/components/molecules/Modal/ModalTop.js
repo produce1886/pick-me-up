@@ -14,10 +14,8 @@ export default function ModalTop(props) {
           <Input
             placeholder="제목을 입력하세요"
             type="text"
-            onChange={(e) => {
-              onChangeHandler(e);
-            }}
-            value={props.isUpdate ? props.updateTitle : props.title}
+            value={props.title}
+            onChange={handleChange}
           ></Input>
           <Filters
             type={props.type}
@@ -25,6 +23,10 @@ export default function ModalTop(props) {
             height="1rem"
             line="1rem"
             level={1}
+            category={props.category}
+            field={props.field}
+            region={props.region}
+            projectType={props.projectType}
             setCategory={props.setCategory}
             setField={props.setField}
             setRegion={props.setRegion}

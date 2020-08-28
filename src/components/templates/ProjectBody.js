@@ -8,7 +8,7 @@ import WriteButton from "../molecules/Button/Write";
 import ModalWrite from "../organisms/ModalWrite";
 import { useSelector } from "react-redux";
 
-export default function ProjectBody() {
+export default function ProjectBody(props) {
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
@@ -55,7 +55,7 @@ export default function ProjectBody() {
           ></ProjectList>
         </InnerWrapper>
       </Wrapper>
-      {isSignedIn && !writeVisible && (
+      {isSignedIn && !writeVisible && !props.viewVisible && (
         <WriteButton openWrite={openWrite}></WriteButton>
       )}
       {writeVisible && (
