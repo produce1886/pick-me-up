@@ -56,7 +56,6 @@ export default function PortfolioBody(props) {
             type="portfolio"
             visible={writeVisible}
             onClose={closeWrite}
-            ismodal="modal"
           ></ModalWrite>
         )}
       </Wrapper>

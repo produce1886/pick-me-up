@@ -155,7 +155,6 @@ export default function Modalblock(props) {
           ></Middle>
           <Bottom
             type={props.type}
-            ismodal={props.ismodal}
             onClose={props.onClose}
             onClick={post}
             tags={tags}
