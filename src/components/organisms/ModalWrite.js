@@ -157,7 +157,6 @@ export default function Modalblock(props) {
             type={props.type}
             ismodal={props.ismodal}
             onClose={props.onClose}
-            visible={props.visible}
             onClick={post}
             tags={tags}
             setTags={setTags}
