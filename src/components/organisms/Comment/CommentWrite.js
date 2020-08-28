@@ -7,31 +7,48 @@ import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Icon from "../../atoms/Icon/Write";
 
-export default function CommentWrite() {
+export default function CommentWrite(props) {
   const user = useSelector((state) => state.user);
   const router = useRouter();
   const pid = router.asPath.split("/")[2];
   const [content, setContent] = useState("");
-
   const onChangeHandler = (e) => {
-    setContent(e.target.value);
+    props.edit
+      ? props.setContentUpdate(e.target.value)
+      : setContent(e.target.value);
   };
-
   const commentSubmitHandler = () => {
     if (!user.isSignedIn) {
       alert("로그인하신 다음에 댓글을 사용하실 수 있습니다.");
       return;
     }
-    if (content.length < 1) {
+    if (content.length < 1 && props.contentUpdate < 1) {
+      alert("댓글을 작성해주세요");
       return;
+    } else if (!props.edit) {
+      try {
+        axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
+          email: user.userData.email,
+          content: content,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (props.edit) {
+      try {
+        axios.put(
+          `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
+          {
+            content: props.contentUpdate,
+          }
+        );
+        props.setEdit(false);
+      } catch (error) {
+        console.log(error);
+      }
+      //need to refresh
     }
-    axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
-      email: user.userData.email,
-      content: content,
-    });
-    //need to refresh
   };
-
   return (
     <Wrapper>
       <Div>
@@ -40,7 +57,11 @@ export default function CommentWrite() {
           <Textarea
             placeholder="내용을 입력하세요"
             type="text"
-            onChange={onChangeHandler}
+            onChange={(e) => {
+              onChangeHandler(e);
+            }}
+            maxLength="100"
+            value={props.edit ? props.contentUpdate : content}
           ></Textarea>
         </CommentBox>
         <IconButton onClick={commentSubmitHandler}>

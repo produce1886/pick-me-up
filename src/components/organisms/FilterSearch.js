@@ -31,4 +31,5 @@ const InnerWrapper = styled.div`
   margin: 0 4rem 0 4rem;
   max-width: 1200px;
   width: 48rem;
+  justify-content: space-between;
 `;

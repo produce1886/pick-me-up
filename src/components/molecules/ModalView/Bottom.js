@@ -5,8 +5,9 @@ import Comment from "../../organisms/Comment/Comment";
 import CommentWrite from "../../organisms/Comment/CommentWrite";
 
 export default function ModalBottom(props) {
-  const [loadMoreVisible, setLoadMoreVisible] = useState(false);
-
+  const [commentUpdate, setCommentUpdate] = useState("");
+  const [contentUpdate, setContentUpdate] = useState("");
+  const [edit, setEdit] = useState(false);
   return (
     <>
       <Bottom>
@@ -28,18 +29,19 @@ export default function ModalBottom(props) {
               id={item.id}
               key={index}
               pid={props.pid}
+              setCommentUpdate={setCommentUpdate}
+              setContentUpdate={setContentUpdate}
+              setEdit={setEdit}
             ></Comment>
           ))}
-        {loadMoreVisible && (
-          <ButtonWrapper>
-            <MoreButton>
-              <Text level={1} weight={500} color=" #8b90a0">
-                더보기
-              </Text>
-            </MoreButton>
-          </ButtonWrapper>
-        )}
-        <CommentWrite></CommentWrite>
+
+        <CommentWrite
+          contentUpdate={contentUpdate}
+          setContentUpdate={setContentUpdate}
+          edit={edit}
+          cid={commentUpdate.id}
+          setEdit={setEdit}
+        ></CommentWrite>
       </Bottom>
     </>
   );
