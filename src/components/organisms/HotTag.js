@@ -6,6 +6,7 @@ import Icon from "../atoms/Icon/Tag";
 import styled from "styled-components";
 import Text from "../atoms/Text";
 import Tag from "../molecules/Button/Tag";
+import Skeleton from "../_skeletons/index/Tag";
 
 export default function HotTag() {
   const { tags, isLoading } = getHotTags();
@@ -27,6 +28,20 @@ export default function HotTag() {
             </Text>
           </Div>
           <Row>
+            {isLoading && (
+              <>
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+                <Skeleton />
+              </>
+            )}
             {!isLoading &&
               tags &&
               tags.content.map((item, index) => (

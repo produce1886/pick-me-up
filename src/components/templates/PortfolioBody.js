@@ -8,7 +8,7 @@ import PortfolioList from "./PortfolioList";
 import WriteButton from "../molecules/Button/Write";
 import ModalWrite from "../organisms/ModalWrite";
 
-export default function PortfolioBody() {
+export default function PortfolioBody(props) {
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [sort, setSort] = useState("최신순");
@@ -48,7 +48,7 @@ export default function PortfolioBody() {
             sort={sort}
           ></PortfolioList>
         </InnerWrapper>
-        {isSignedIn && !writeVisible && (
+        {isSignedIn && !writeVisible && !props.viewVisible && (
           <WriteButton openWrite={openWrite}></WriteButton>
         )}
         {writeVisible && (
@@ -56,7 +56,6 @@ export default function PortfolioBody() {
             type="portfolio"
             visible={writeVisible}
             onClose={closeWrite}
-            ismodal="modal"
           ></ModalWrite>
         )}
       </Wrapper>
