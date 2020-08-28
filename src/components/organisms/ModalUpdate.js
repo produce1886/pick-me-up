@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
@@ -8,9 +8,8 @@ import Top from "../molecules/Modal/ModalTop";
 import Middle from "../molecules/Modal/ModalMiddle";
 import Bottom from "../molecules/Modal/ModalBottom";
 
-export default function Modalblock(props) {
+export default function ModalUpdate(props) {
   const state = useSelector((state) => state.user);
-  const email = state.userData.email;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -19,8 +18,26 @@ export default function Modalblock(props) {
   const [projectType, setProjectType] = useState("");
   const [images, setImages] = useState([]);
   const [tags, setTags] = useState([]);
+  const { isLoading } = getData(
+    props.pid,
+    props.type,
+    setTitle,
+    setContent,
+    setCategory,
+    setField,
+    setRegion,
+    setProjectType,
+    setImages,
+    setTags
+  );
 
-  const post = () => {
+  if (tags.length > 0 && typeof tags[0] === "object") {
+    let tagArray = [];
+    tags.map((value) => tagArray.push(value.tag));
+    setTags(tagArray);
+  }
+
+  const update = () => {
     let flag = checkIsNotEmpty();
     if (!flag) {
       return;
@@ -31,7 +48,6 @@ export default function Modalblock(props) {
           let body = {
             title: title,
             content: content,
-            email: email,
             category: category,
             huntingField: field,
             region: region,
@@ -39,21 +55,20 @@ export default function Modalblock(props) {
             tags: tags,
             image: image,
           };
-          axios.post(`${process.env.API_HOST}/projects`, body);
-          props.onClose();
+          axios.put(`${process.env.API_HOST}/projects/${props.pid}`, body);
+          props.setUpdate(false);
         } else if (props.type === "portfolio") {
           let image = images.length > 0 ? images[0].data : "";
           let body = {
             title: title,
             content: content,
-            email: email,
             category: category,
             huntingField: field,
             tags: tags,
             image: image,
           };
-          axios.post(`${process.env.API_HOST}/portfolios`, body);
-          props.onClose();
+          axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
+          props.setUpdate(false);
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
         else if (props.type === "portfolio") {
@@ -62,14 +77,13 @@ export default function Modalblock(props) {
           let body = {
             title: title,
             content: content,
-            email: email,
             category: category,
             huntingField: field,
             tags: tags,
             image: imageDataArray,
           };
-          axios.post(`${process.env.API_HOST}/portfolios`, body);
-          props.onClose();
+          axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
+          props.setUpdate(false);
         }
         */
       } catch (error) {
@@ -129,22 +143,26 @@ export default function Modalblock(props) {
 
   return (
     <>
-      <Overlay visible={props.visible} onClick={onMaskClick} />
+      <Overlay visible={!isLoading} onClick={onMaskClick} />
       <Wrapper
         tabIndex="-1"
-        visible={props.visible}
+        visible={!isLoading}
         height="62rem"
         onClick={onMaskClick}
       >
         <Inner>
           <Top
             type={props.type}
+            title={title}
+            category={category}
+            field={field}
+            region={region}
+            projectType={projectType}
             setCategory={setCategory}
             setField={setField}
             setRegion={setRegion}
             setProjectType={setProjectType}
             setTitle={setTitle}
-            name={state.userData.username}
             profileImage={state.userData.image}
           ></Top>
           <Middle
@@ -152,16 +170,78 @@ export default function Modalblock(props) {
             setContent={setContent}
             setImages={setImages}
             images={images}
+            content={content}
           ></Middle>
           <Bottom
             type={props.type}
             onClose={props.onClose}
-            onClick={post}
             tags={tags}
             setTags={setTags}
+            onClick={update}
           ></Bottom>
         </Inner>
       </Wrapper>
     </>
   );
 }
+
+const getData = (
+  pid,
+  type,
+  setTitle,
+  setContent,
+  setCategory,
+  setField,
+  setRegion,
+  setProjectType,
+  setImages,
+  setTags
+) => {
+  const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        if (type === "project") {
+          const result = await axios.get(
+            `${process.env.API_HOST}/projects/${pid}`
+          );
+          setData(result.data);
+          setTitle(result.data.title);
+          setContent(result.data.content);
+          setCategory(result.data.category);
+          setField(result.data.huntingField);
+          setRegion(result.data.region);
+          setProjectType(result.data.projectCategory);
+          if (result.data.image != "") {
+            setImages([{ data: result.data.image }]);
+          }
+          setTags(result.data.projectTag);
+          setIsLoading(false);
+        } else if (type === "portfolio") {
+          const result = await axios.get(
+            `${process.env.API_HOST}/portfolios/${pid}`
+          );
+          setData(result.data);
+          setTitle(result.data.title);
+          setContent(result.data.content);
+          setCategory(result.data.category);
+          setField(result.data.huntingField);
+          if (result.data.image != "") {
+            setImages([{ data: result.data.image }]);
+          }
+          setTags(result.data.portfolioTag);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (!data) {
+      fetchData();
+    }
+  }, []);
+  return { isLoading };
+};

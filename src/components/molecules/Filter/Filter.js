@@ -53,6 +53,10 @@ export default function Filter(props) {
   let iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
   let backgroundAlign = "#ffffff";
 
+  if (!item && props.value) {
+    setSelected({ title: props.value });
+  }
+
   if (item) {
     icon = (
       <Button onClick={resetFilter}>

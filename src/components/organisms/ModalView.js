@@ -43,6 +43,7 @@ export default function ModalView(props) {
                 tags={
                   props.type === "project" ? data.projectTag : data.portfolioTag
                 }
+                setUpdate={props.setUpdate}
               ></Middle>
               <Bottom
                 commentsNum={data.commentsNum}
