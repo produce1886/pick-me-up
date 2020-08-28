@@ -17,7 +17,7 @@ export default function Portfolio() {
         ></Modal>
       )}
       <Gnb></Gnb>
-      <PortfolioBody></PortfolioBody>
+      <PortfolioBody viewVisible={!!router.query.pid}></PortfolioBody>
       <Footer></Footer>
     </>
   );

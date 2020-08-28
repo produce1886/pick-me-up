@@ -18,7 +18,7 @@ export default function Project() {
         ></Modal>
       )}
       <Gnb></Gnb>
-      <ProjectBody></ProjectBody>
+      <ProjectBody viewVisible={!!router.query.pid}></ProjectBody>
       <Footer></Footer>
     </>
   );
