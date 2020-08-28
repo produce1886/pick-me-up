@@ -156,10 +156,7 @@ export default function Modalblock(props) {
           ></Middle>
           <Bottom
             type={props.type}
-<<<<<<< HEAD
-=======
             onClose={props.onClose}
->>>>>>> 7808feb636887d852082c07448994785f80391f5
             onClick={post}
             tags={tags}
             setTags={setTags}
