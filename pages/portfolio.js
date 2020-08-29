@@ -27,7 +27,7 @@ export default function Portfolio() {
           pid={router.query.pid}
           onClose={() => {
             setUpdate(false);
-            router.push(`/potfolio`);
+            router.push(`/portfolio`);
           }}
           setUpdate={setUpdate}
         ></UpdateModal>
