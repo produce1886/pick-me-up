@@ -53,9 +53,11 @@ export default function Comment(props) {
         <EditnDelete
           id={props.id}
           pid={props.pid}
-          setCommentUpdate={props.setCommentUpdate}
+          setCidUpdate={props.setCidUpdate}
           setEdit={props.setEdit}
           setContentUpdate={props.setContentUpdate}
+          type={props.type}
+          setClicked={setClicked}
         ></EditnDelete>
       )}
     </Wrapper>

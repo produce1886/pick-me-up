@@ -46,6 +46,7 @@ export default function ModalView(props) {
                 setUpdate={props.setUpdate}
               ></Middle>
               <Bottom
+                type={props.type}
                 commentsNum={data.commentsNum}
                 comments={data.comments}
                 pid={data.id}
