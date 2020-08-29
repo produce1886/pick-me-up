@@ -14,7 +14,7 @@ export default function SignInButton() {
       image: response.profileObj.imageUrl,
     };
     dispatch(loginUser(userData));
-    router.push(router.pathname);
+    setTimeout(() => router.push(router.pathname), 100);
   }, []);
 
   return (
