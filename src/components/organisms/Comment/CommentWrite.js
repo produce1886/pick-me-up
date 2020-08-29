@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -27,21 +27,37 @@ export default function CommentWrite(props) {
       return;
     } else if (!props.edit) {
       try {
-        axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
-          email: user.userData.email,
-          content: content,
-        });
+        if (props.type === "project") {
+          axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
+            email: user.userData.email,
+            content: content,
+          });
+        } else if (props.type === "portfolio") {
+          axios.post(`${process.env.API_HOST}/portfolios/${pid}/comments`, {
+            email: user.userData.email,
+            content: content,
+          });
+        }
       } catch (error) {
         console.log(error);
       }
     } else if (props.edit) {
       try {
-        axios.put(
-          `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
-          {
-            content: props.contentUpdate,
-          }
-        );
+        if (props.type === "prtoject") {
+          axios.put(
+            `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
+            {
+              content: props.contentUpdate,
+            }
+          );
+        } else if (props.type === "portfolio") {
+          axios.put(
+            `${process.env.API_HOST}/portfolios/${pid}/comments/${props.cid}`,
+            {
+              content: props.contentUpdate,
+            }
+          );
+        }
         props.setEdit(false);
       } catch (error) {
         console.log(error);
