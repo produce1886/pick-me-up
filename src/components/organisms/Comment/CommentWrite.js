@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useRouter } from "next/router";
 import Wrapper from "../../atoms/CommentWrite";
 import styled from "styled-components";
 import Profile from "../../molecules/Profile";
@@ -9,8 +8,6 @@ import Icon from "../../atoms/Icon/Write";
 
 export default function CommentWrite(props) {
   const user = useSelector((state) => state.user);
-  const router = useRouter();
-  const pid = router.asPath.split("/")[2];
   const [content, setContent] = useState("");
   const onChangeHandler = (e) => {
     props.edit
@@ -27,7 +24,7 @@ export default function CommentWrite(props) {
       return;
     } else if (!props.edit) {
       try {
-        axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
+        axios.post(`${process.env.API_HOST}/projects/${props.pid}/comments`, {
           email: user.userData.email,
           content: content,
         });
@@ -37,7 +34,7 @@ export default function CommentWrite(props) {
     } else if (props.edit) {
       try {
         axios.put(
-          `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
+          `${process.env.API_HOST}/projects/${props.pid}/comments/${props.cid}`,
           {
             content: props.contentUpdate,
           }

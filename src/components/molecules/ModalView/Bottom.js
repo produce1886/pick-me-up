@@ -39,6 +39,7 @@ export default function ModalBottom(props) {
           contentUpdate={contentUpdate}
           setContentUpdate={setContentUpdate}
           edit={edit}
+          pid={props.pid}
           cid={commentUpdate.id}
           setEdit={setEdit}
         ></CommentWrite>
