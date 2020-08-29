@@ -6,13 +6,13 @@ export default function ModalMiddle(props) {
   const handleChange = (event) => {
     props.setContent(event.target.value);
   };
-
   return (
     <Middle height="36rem">
       <Textarea
         placeholder="내용을 입력하세요"
         type="text"
         onChange={handleChange}
+        value={props.content}
       ></Textarea>
       <Dropzone
         type={props.type}

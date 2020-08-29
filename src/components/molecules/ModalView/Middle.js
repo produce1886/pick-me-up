@@ -14,8 +14,6 @@ export default function ModalMiddle(props) {
   const [project, setProject] = useState();
   const [portfolio, setPortfolio] = useState();
   const pid = props.pid;
-  //portfolio id
-  const pfid = "";
   let date = props.date;
   date = date.replace("T", " ");
 
@@ -33,7 +31,7 @@ export default function ModalMiddle(props) {
         } else if (props.type === "portfolio") {
           if (window.confirm("게시글을 삭제하시겠습니까?")) {
             const result = await axios.delete(
-              `${process.env.API_HOST}/portfolios/${pfid}`
+              `${process.env.API_HOST}/portfolios/${pid}`
             );
             setPortfolio(result.data);
             router.push("/portfolio");
@@ -82,7 +80,7 @@ export default function ModalMiddle(props) {
       )}
       {props.userEmail === user.userData.email && (
         <ButtonWrapper>
-          <Button>
+          <Button onClick={() => props.setUpdate(true)}>
             <Text level={1} weight={500} color="#232735">
               게시글 수정
             </Text>
