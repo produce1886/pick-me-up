@@ -15,7 +15,7 @@ export default function ModalTop(props) {
             placeholder="제목을 입력하세요"
             type="text"
             value={props.title}
-            onChange={handleChange}
+            onChange={onChangeHandler}
           ></Input>
           <Filters
             type={props.type}
