@@ -8,7 +8,7 @@ import Top from "../molecules/Modal/ModalTop";
 import Middle from "../molecules/Modal/ModalMiddle";
 import Bottom from "../molecules/Modal/ModalBottom";
 
-export default function Modalblock(props) {
+export default function ModalWrite(props) {
   const state = useSelector((state) => state.user);
   const email = state.userData.email;
   const [title, setTitle] = useState("");
@@ -40,6 +40,7 @@ export default function Modalblock(props) {
             image: image,
           };
           axios.post(`${process.env.API_HOST}/projects`, body);
+          setTimeout(() => props.setReload(props.reload + 1), 100);
           props.onClose();
         } else if (props.type === "portfolio") {
           let image = images.length > 0 ? images[0].data : "";
@@ -53,6 +54,7 @@ export default function Modalblock(props) {
             image: image,
           };
           axios.post(`${process.env.API_HOST}/portfolios`, body);
+          setTimeout(() => props.setReload(props.reload + 1), 100);
           props.onClose();
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
@@ -69,6 +71,7 @@ export default function Modalblock(props) {
             image: imageDataArray,
           };
           axios.post(`${process.env.API_HOST}/portfolios`, body);
+          setTimeout(() => props.setReload(props.reload + 1), 100);
           props.onClose();
         }
         */
