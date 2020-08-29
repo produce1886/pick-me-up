@@ -8,7 +8,9 @@ export default function Button(props) {
     <Link href={props.link}>
       <A>
         <Wrapper>
-          <Text level={1}>{props.text}</Text>
+          <Text level={1} weight={props.weight} color={props.color}>
+            {props.text}
+          </Text>
         </Wrapper>
       </A>
     </Link>

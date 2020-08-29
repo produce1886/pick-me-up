@@ -178,6 +178,7 @@ export default function ModalUpdate(props) {
             tags={tags}
             setTags={setTags}
             onClick={update}
+            updating={true}
           ></Bottom>
         </Inner>
       </Wrapper>

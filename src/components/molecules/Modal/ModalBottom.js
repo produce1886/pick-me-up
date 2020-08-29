@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
-import WriteButton from "../Button/WriteBlock";
+import PillButton from "../Button/Pill";
 
 export default function ModalBottom(props) {
   let { tags } = props;
@@ -57,7 +57,12 @@ export default function ModalBottom(props) {
           ))}
         </TagWrapper>
         <ButtonWrapper onClick={props.onClick}>
-          <WriteButton></WriteButton>
+          <PillButton
+            weight={500}
+            color="#fff"
+            text={props.updating ? "글 수정하기" : "글 작성하기"}
+            link=""
+          ></PillButton>
         </ButtonWrapper>
       </Div>
     </Bottom>
