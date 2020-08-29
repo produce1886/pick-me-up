@@ -144,7 +144,7 @@ export default function Modalblock(props) {
             setRegion={setRegion}
             setProjectType={setProjectType}
             setTitle={setTitle}
-            name={state.userData.username}
+            title={title}
             profileImage={state.userData.image}
           ></Top>
           <Middle
@@ -152,6 +152,7 @@ export default function Modalblock(props) {
             setContent={setContent}
             setImages={setImages}
             images={images}
+            content={content}
           ></Middle>
           <Bottom
             type={props.type}
