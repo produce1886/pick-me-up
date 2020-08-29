@@ -8,11 +8,7 @@ import WriteButton from "../Button/WriteBlock";
 export default function ModalBottom(props) {
   let { tags } = props;
   const [tagInput, setTagInput] = useState("");
-  if (props.updateTags) {
-    {
-      Object.entries(props.updateTags).map((item, id) => console.log(item));
-    }
-  }
+
   const handleChange = (event) => {
     setTagInput(event.target.value);
   };
@@ -33,6 +29,7 @@ export default function ModalBottom(props) {
     newArray.splice(tagIndex, 1);
     props.setTags(newArray);
   };
+
   return (
     <Bottom>
       <Div>
@@ -48,18 +45,16 @@ export default function ModalBottom(props) {
             placeholder="태그를 입력하세요"
           ></Input>
         </IconTextWrapper>
-
         <TagWrapper>
-          {!props.isUpdate &&
-            tags.map((value, index) => (
-              <TagButton
-                key={index}
-                ismodal="modal"
-                text={value}
-                removeTag={() => removeTag(value)}
-                tagtype="modalwrite"
-              ></TagButton>
-            ))}
+          {tags.map((value, index) => (
+            <TagButton
+              key={index}
+              ismodal="modal"
+              text={value}
+              removeTag={() => removeTag(value)}
+              tagtype="modalwrite"
+            ></TagButton>
+          ))}
         </TagWrapper>
         <ButtonWrapper onClick={props.onClick}>
           <WriteButton></WriteButton>
