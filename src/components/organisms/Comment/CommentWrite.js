@@ -43,7 +43,7 @@ export default function CommentWrite(props) {
       }
     } else if (props.edit) {
       try {
-        if (props.type === "prtoject") {
+        if (props.type === "project") {
           axios.put(
             `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
             {
