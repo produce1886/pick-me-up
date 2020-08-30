@@ -20,6 +20,8 @@ export default function Project() {
           pid={router.query.pid}
           onClose={() => router.push(`/project`)}
           setUpdate={setUpdate}
+          reload={reload}
+          setReload={setReload}
         ></Modal>
       )}
       {update && (

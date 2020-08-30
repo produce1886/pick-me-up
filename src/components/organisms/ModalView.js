@@ -44,6 +44,8 @@ export default function ModalView(props) {
                   props.type === "project" ? data.projectTag : data.portfolioTag
                 }
                 setUpdate={props.setUpdate}
+                listReload={props.reload}
+                setListReload={props.setReload}
               ></Middle>
               <Bottom
                 commentsNum={data.commentsNum}

@@ -20,6 +20,8 @@ export default function Portfolio() {
           pid={router.query.pid}
           onClose={() => router.push(`/portfolio`)}
           setUpdate={setUpdate}
+          reload={reload}
+          setReload={setReload}
         ></Modal>
       )}
       {update && (
