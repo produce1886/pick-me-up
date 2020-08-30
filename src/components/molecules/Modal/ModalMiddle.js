@@ -6,7 +6,6 @@ export default function ModalMiddle(props) {
   const handleChange = (event) => {
     props.setContent(event.target.value);
   };
-
   return (
     <Middle height="36rem">
       <Textarea

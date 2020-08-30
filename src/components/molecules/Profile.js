@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Image from "../atoms/Icon/Profile";
 import Text from "../atoms/Text";
 import ImageHolder from "../atoms/ImageHolder/Profile";

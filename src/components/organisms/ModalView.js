@@ -8,7 +8,7 @@ import Middle from "../molecules/ModalView/Middle";
 import Bottom from "../molecules/ModalView/Bottom";
 
 export default function ModalView(props) {
-  const { data, isLoading } = getData(props.pid, props.type);
+  const { data, isLoading } = getData(props.pid, props.type, props.modalReload);
 
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -44,11 +44,16 @@ export default function ModalView(props) {
                   props.type === "project" ? data.projectTag : data.portfolioTag
                 }
                 setUpdate={props.setUpdate}
+                listReload={props.reload}
+                setListReload={props.setReload}
               ></Middle>
               <Bottom
+                type={props.type}
                 commentsNum={data.commentsNum}
                 comments={data.comments}
                 pid={data.id}
+                modalReload={props.modalReload}
+                setModalReload={props.setModalReload}
               ></Bottom>
             </>
           )}
@@ -58,7 +63,7 @@ export default function ModalView(props) {
   );
 }
 
-const getData = (pid, type) => {
+const getData = (pid, type, modalReload) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -83,9 +88,7 @@ const getData = (pid, type) => {
         console.error(error);
       }
     };
-    if (!data) {
-      fetchData();
-    }
-  }, []);
+    fetchData();
+  }, [modalReload]);
   return { data, isLoading };
 };
