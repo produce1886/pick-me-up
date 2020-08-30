@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Wrapper from "../../atoms/Button/Pill";
 
