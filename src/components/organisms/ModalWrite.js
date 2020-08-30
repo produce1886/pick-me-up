@@ -40,7 +40,7 @@ export default function ModalWrite(props) {
             image: image,
           };
           axios.post(`${process.env.API_HOST}/projects`, body);
-          setTimeout(() => props.setReload(props.reload + 1), 200);
+          setTimeout(() => props.setReload(props.reload + 1), 300);
           props.onClose();
         } else if (props.type === "portfolio") {
           let image = images.length > 0 ? images[0].data : "";
@@ -54,7 +54,7 @@ export default function ModalWrite(props) {
             image: image,
           };
           axios.post(`${process.env.API_HOST}/portfolios`, body);
-          setTimeout(() => props.setReload(props.reload + 1), 200);
+          setTimeout(() => props.setReload(props.reload + 1), 300);
           props.onClose();
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
@@ -71,7 +71,7 @@ export default function ModalWrite(props) {
             image: imageDataArray,
           };
           axios.post(`${process.env.API_HOST}/portfolios`, body);
-          setTimeout(() => props.setReload(props.reload + 1), 200);
+          setTimeout(() => props.setReload(props.reload + 1), 300);
           props.onClose();
         }
         */
