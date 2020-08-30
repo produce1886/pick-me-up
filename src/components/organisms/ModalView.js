@@ -48,6 +48,7 @@ export default function ModalView(props) {
                 setListReload={props.setReload}
               ></Middle>
               <Bottom
+                type={props.type}
                 commentsNum={data.commentsNum}
                 comments={data.comments}
                 pid={data.id}
