@@ -1,6 +1,5 @@
 import Icon from "../atoms/Icon/View";
 import Text from "../atoms/Text";
-import styled from "styled-components";
 
 export default function ViewCount(props) {
   return (
