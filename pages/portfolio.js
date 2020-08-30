@@ -8,7 +8,8 @@ import Footer from "../src/components/organisms/Footer";
 
 export default function Portfolio() {
   const router = useRouter();
-  const [update, setUpdate] = useState(false);
+  const [update, setUpdate] = useState(false); //수정
+  const [reload, setReload] = useState(0);
 
   return (
     <>
@@ -33,7 +34,11 @@ export default function Portfolio() {
         ></UpdateModal>
       )}
       <Gnb></Gnb>
-      <PortfolioBody viewVisible={!!router.query.pid}></PortfolioBody>
+      <PortfolioBody
+        viewVisible={!!router.query.pid}
+        reload={reload}
+        setReload={setReload}
+      ></PortfolioBody>
       <Footer></Footer>
     </>
   );
