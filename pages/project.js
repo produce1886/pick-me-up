@@ -10,6 +10,7 @@ export default function Project() {
   const router = useRouter();
   const [update, setUpdate] = useState(false); //수정
   const [reload, setReload] = useState(0);
+  const [modalReload, setModalReload] = useState(0);
 
   return (
     <>
@@ -22,6 +23,7 @@ export default function Project() {
           setUpdate={setUpdate}
           reload={reload}
           setReload={setReload}
+          modalReload={modalReload}
         ></Modal>
       )}
       {update && (
@@ -33,6 +35,8 @@ export default function Project() {
             router.push(`/project`);
           }}
           setUpdate={setUpdate}
+          modalReload={modalReload}
+          setModalReload={setModalReload}
         ></UpdateModal>
       )}
       <Gnb></Gnb>

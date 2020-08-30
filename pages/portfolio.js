@@ -10,10 +10,11 @@ export default function Portfolio() {
   const router = useRouter();
   const [update, setUpdate] = useState(false); //수정
   const [reload, setReload] = useState(0);
+  const [modalReload, setModalReload] = useState(0);
 
   return (
     <>
-      {router.query.pid && (
+      {router.query.pid && !update && (
         <Modal
           type="portfolio"
           visible={!!router.query.pid}
@@ -22,6 +23,7 @@ export default function Portfolio() {
           setUpdate={setUpdate}
           reload={reload}
           setReload={setReload}
+          modalReload={modalReload}
         ></Modal>
       )}
       {update && (
@@ -33,6 +35,8 @@ export default function Portfolio() {
             router.push(`/portfolio`);
           }}
           setUpdate={setUpdate}
+          modalReload={modalReload}
+          setModalReload={setModalReload}
         ></UpdateModal>
       )}
       <Gnb></Gnb>

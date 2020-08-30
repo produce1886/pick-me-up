@@ -61,7 +61,6 @@ export default function ModalBottom(props) {
             weight={500}
             color="#fff"
             text={props.updating ? "글 수정하기" : "글 작성하기"}
-            link=""
           ></PillButton>
         </ButtonWrapper>
       </Div>

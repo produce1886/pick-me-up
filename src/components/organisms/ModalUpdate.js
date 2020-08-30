@@ -56,6 +56,7 @@ export default function ModalUpdate(props) {
             image: image,
           };
           axios.put(`${process.env.API_HOST}/projects/${props.pid}`, body);
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
           props.setUpdate(false);
         } else if (props.type === "portfolio") {
           let image = images.length > 0 ? images[0].data : "";
@@ -68,6 +69,7 @@ export default function ModalUpdate(props) {
             image: image,
           };
           axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
           props.setUpdate(false);
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
@@ -83,6 +85,7 @@ export default function ModalUpdate(props) {
             image: imageDataArray,
           };
           axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
           props.setUpdate(false);
         }
         */
