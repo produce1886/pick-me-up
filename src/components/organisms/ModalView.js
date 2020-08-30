@@ -52,6 +52,8 @@ export default function ModalView(props) {
                 commentsNum={data.commentsNum}
                 comments={data.comments}
                 pid={data.id}
+                modalReload={props.modalReload}
+                setModalReload={props.setModalReload}
               ></Bottom>
             </>
           )}
@@ -86,9 +88,7 @@ const getData = (pid, type, modalReload) => {
         console.error(error);
       }
     };
-    if (!data) {
-      fetchData();
-    }
+    fetchData();
   }, [modalReload]);
   return { data, isLoading };
 };

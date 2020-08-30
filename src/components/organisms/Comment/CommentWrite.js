@@ -29,6 +29,8 @@ export default function CommentWrite(props) {
             email: user.userData.email,
             content: content,
           });
+          setContent("");
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
         } else if (props.type === "portfolio") {
           axios.post(
             `${process.env.API_HOST}/portfolios/${props.pid}/comments`,
@@ -37,6 +39,8 @@ export default function CommentWrite(props) {
               content: content,
             }
           );
+          setContent("");
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
         }
       } catch (error) {
         console.log(error);
@@ -50,6 +54,8 @@ export default function CommentWrite(props) {
               content: props.contentUpdate,
             }
           );
+          setContent("");
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 3000);
         } else if (props.type === "portfolio") {
           axios.put(
             `${process.env.API_HOST}/portfolios/${props.pid}/comments/${props.cid}`,
@@ -57,12 +63,13 @@ export default function CommentWrite(props) {
               content: props.contentUpdate,
             }
           );
+          setContent("");
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 3000);
         }
         props.setEdit(false);
       } catch (error) {
         console.log(error);
       }
-      //need to refresh
     }
   };
   return (

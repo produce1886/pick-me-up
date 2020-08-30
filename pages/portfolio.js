@@ -24,6 +24,7 @@ export default function Portfolio() {
           reload={reload}
           setReload={setReload}
           modalReload={modalReload}
+          setModalReload={setModalReload}
         ></Modal>
       )}
       {update && (

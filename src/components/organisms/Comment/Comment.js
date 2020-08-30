@@ -58,6 +58,8 @@ export default function Comment(props) {
           setContentUpdate={props.setContentUpdate}
           type={props.type}
           setClicked={setClicked}
+          modalReload={props.modalReload}
+          setModalReload={props.setModalReload}
         ></EditnDelete>
       )}
     </Wrapper>
