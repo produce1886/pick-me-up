@@ -6,7 +6,7 @@ import NoResult from "../molecules/NoResult";
 import BottomButtons from "../organisms/BottomButtons";
 
 export default function Projectlist(props) {
-  const { category, field, region, projectType, query, sort } = props;
+  const { category, field, region, projectType, query, sort, reload } = props;
   const [project, setProject] = useState([]);
   const [limit, setLimit] = useState(10);
   const isLoading = getProjectList(
@@ -17,7 +17,8 @@ export default function Projectlist(props) {
     query,
     sort,
     setProject,
-    limit
+    limit,
+    reload
   );
 
   const getList = (items) => {
@@ -65,7 +66,8 @@ const getProjectList = (
   query,
   sort,
   setProject,
-  limit
+  limit,
+  reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
   const sortColumn = {
@@ -100,7 +102,7 @@ const getProjectList = (
       }
     };
     fetchData();
-  }, [category, field, region, projectType, query, sort, limit]);
+  }, [category, field, region, projectType, query, sort, limit, reload]);
   return isLoading;
 };
 

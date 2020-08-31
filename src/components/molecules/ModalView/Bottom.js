@@ -36,6 +36,8 @@ export default function ModalBottom(props) {
               setCidUpdate={setCidUpdate}
               setContentUpdate={setContentUpdate}
               setEdit={setEdit}
+              modalReload={props.modalReload}
+              setModalReload={props.setModalReload}
             ></Comment>
           ))}
 
@@ -45,8 +47,11 @@ export default function ModalBottom(props) {
           contentUpdate={contentUpdate}
           setContentUpdate={setContentUpdate}
           edit={edit}
+          pid={props.pid}
           cid={cidUpdate}
           setEdit={setEdit}
+          modalReload={props.modalReload}
+          setModalReload={props.setModalReload}
         ></CommentWrite>
       </Bottom>
     </>

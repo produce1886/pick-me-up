@@ -46,6 +46,7 @@ export default function PortfolioBody(props) {
             field={field}
             query={query}
             sort={sort}
+            reload={props.reload}
           ></PortfolioList>
         </InnerWrapper>
         {isSignedIn && !writeVisible && !props.viewVisible && (
@@ -56,6 +57,8 @@ export default function PortfolioBody(props) {
             type="portfolio"
             visible={writeVisible}
             onClose={closeWrite}
+            reload={props.reload}
+            setReload={props.setReload}
           ></ModalWrite>
         )}
       </Wrapper>

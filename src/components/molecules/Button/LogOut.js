@@ -10,7 +10,7 @@ export default function SignOutButton() {
   const dispatch = useDispatch();
   const logoutHandler = useCallback((response) => {
     dispatch(logoutUser());
-    router.push(router.pathname);
+    setTimeout(() => router.push(router.pathname), 100);
   }, []);
 
   return (

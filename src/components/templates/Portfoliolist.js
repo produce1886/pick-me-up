@@ -6,7 +6,7 @@ import BottomButtons from "../organisms/BottomButtons";
 import NoResult from "../molecules/NoResult";
 
 export default function Portfoliolist(props) {
-  const { category, field, query, sort } = props;
+  const { category, field, query, sort, reload } = props;
   const [portfolio, setPortfolio] = useState([]);
   const [limit, setLimit] = useState(15);
   const isLoading = getPortfolioList(
@@ -15,7 +15,8 @@ export default function Portfoliolist(props) {
     query,
     sort,
     setPortfolio,
-    limit
+    limit,
+    reload
   );
 
   const getList = (items) => {
@@ -63,7 +64,8 @@ const getPortfolioList = (
   query,
   sort,
   setPortfolio,
-  limit
+  limit,
+  reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
   const sortColumn = {
@@ -96,7 +98,7 @@ const getPortfolioList = (
       }
     };
     fetchData();
-  }, [category, field, query, sort, limit]);
+  }, [category, field, query, sort, limit, reload]);
   return isLoading;
 };
 

@@ -52,6 +52,7 @@ export default function ProjectBody(props) {
             projectType={projectType}
             query={query}
             sort={sort}
+            reload={props.reload}
           ></ProjectList>
         </InnerWrapper>
       </Wrapper>
@@ -63,6 +64,8 @@ export default function ProjectBody(props) {
           type="project"
           visible={writeVisible}
           onClose={closeWrite}
+          reload={props.reload}
+          setReload={props.setReload}
         ></ModalWrite>
       )}
     </>
