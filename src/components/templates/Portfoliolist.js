@@ -91,7 +91,7 @@ const getPortfolioList = (
           `${process.env.API_HOST}/portfolios/list`,
           body
         );
-        setPortfolio(result.data);
+        setPortfolio(result.data.pagelist);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
