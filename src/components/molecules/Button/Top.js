@@ -1,4 +1,4 @@
-import Icon from "../../atoms/Icon/Arrow/up";
+import Icon from "../../atoms/Icon/Arrow/Up";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 
