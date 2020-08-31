@@ -3,7 +3,7 @@ import FilterInfo from "../FilterInfo";
 import Text from "../../atoms/Text";
 import Row from "../../atoms/Row";
 import Col from "../../atoms/Col";
-import Profile from "../Profile";
+import Profile from "../../molecules/Profile";
 
 export default function Top(props) {
   return (
@@ -16,8 +16,7 @@ export default function Top(props) {
         </FirstDiv>
         <FirstDiv>
           <Profile
-            direction="row"
-            size="0.8rem"
+            size="1rem"
             level={1}
             name={props.name}
             profileImage={props.profileImage}
@@ -62,4 +61,5 @@ const FirstDiv = styled.div`
   flex-direction: row;
   justify-content: left;
   margin: 0.1rem 0 0.2rem 0;
+  align-items: center;
 `;

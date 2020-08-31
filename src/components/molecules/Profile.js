@@ -6,10 +6,20 @@ import Wrapper from "../atoms/Profile";
 
 export default function Profile(props) {
   return (
-    <Wrapper direction={props.direction}>
+    <Wrapper>
       {props.profileImage ? (
         <ImageHolder size={props.size}>
-          <Img src={props.profileImage}></Img>
+          <img
+            src={props.profileImage}
+            style={{
+              width: `${props.size}`,
+              height: `${props.size}`,
+              borderRadius: `${props.size}`,
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          ></img>
         </ImageHolder>
       ) : (
         <Image
