@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Col from "../../atoms/Col";
-import Profile from "../Profile";
 import Rank from "../Rank";
+import Profile from "../../molecules/Profile";
 
 export default function Top(props) {
   return (
@@ -17,8 +17,7 @@ export default function Top(props) {
         <Row>
           <Div>
             <Profile
-              direction="row"
-              size="0.8rem"
+              size="0.9rem"
               level={1}
               name={props.name}
               profileImage={props.profileImage}

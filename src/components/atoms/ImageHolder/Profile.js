@@ -7,5 +7,6 @@ export default styled.div`
     height: ${props.size};
     border-radius: ${props.size};
     margin-right: ${props.noMargin ? "0" : "0.3rem"};
+    text-align: center;
   `}
 `;
