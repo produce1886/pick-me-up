@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { useRouter } from "next/router";
 import Wrapper from "../../atoms/CommentWrite";
 import styled from "styled-components";
 import Profile from "../../molecules/Profile";
@@ -9,8 +8,6 @@ import Icon from "../../atoms/Icon/Write";
 
 export default function CommentWrite(props) {
   const user = useSelector((state) => state.user);
-  const router = useRouter();
-  const pid = router.asPath.split("/")[2];
   const [content, setContent] = useState("");
   const onChangeHandler = (e) => {
     props.edit
@@ -28,15 +25,22 @@ export default function CommentWrite(props) {
     } else if (!props.edit) {
       try {
         if (props.type === "project") {
-          axios.post(`${process.env.API_HOST}/projects/${pid}/comments`, {
+          axios.post(`${process.env.API_HOST}/projects/${props.pid}/comments`, {
             email: user.userData.email,
             content: content,
           });
+          setContent("");
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
         } else if (props.type === "portfolio") {
-          axios.post(`${process.env.API_HOST}/portfolios/${pid}/comments`, {
-            email: user.userData.email,
-            content: content,
-          });
+          axios.post(
+            `${process.env.API_HOST}/portfolios/${props.pid}/comments`,
+            {
+              email: user.userData.email,
+              content: content,
+            }
+          );
+          setContent("");
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
         }
       } catch (error) {
         console.log(error);
@@ -45,24 +49,27 @@ export default function CommentWrite(props) {
       try {
         if (props.type === "project") {
           axios.put(
-            `${process.env.API_HOST}/projects/${pid}/comments/${props.cid}`,
+            `${process.env.API_HOST}/projects/${props.pid}/comments/${props.cid}`,
             {
               content: props.contentUpdate,
             }
           );
+          setContent("");
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 3000);
         } else if (props.type === "portfolio") {
           axios.put(
-            `${process.env.API_HOST}/portfolios/${pid}/comments/${props.cid}`,
+            `${process.env.API_HOST}/portfolios/${props.pid}/comments/${props.cid}`,
             {
               content: props.contentUpdate,
             }
           );
+          setContent("");
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 3000);
         }
         props.setEdit(false);
       } catch (error) {
         console.log(error);
       }
-      //need to refresh
     }
   };
   return (

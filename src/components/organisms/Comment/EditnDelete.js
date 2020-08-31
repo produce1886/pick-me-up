@@ -9,35 +9,30 @@ export default function EditnDelete(props) {
     { key: 0, title: "댓글 수정", type: "more", mode: "edit" },
     { key: 1, title: "댓글 삭제", type: "more", mode: "delete" },
   ];
-  const [comment, setComment] = useState();
 
   const deleteComment = () => {
-    const fetchData = async () => {
-      try {
-        if (props.type === "project") {
-          if (window.confirm("댓글을 삭제하시겠습니까?")) {
-            const result = await axios.delete(
-              `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
-            );
-            setComment(result.data);
-            props.setClicked(false);
-          }
-        } else if (props.type === "portfolio") {
-          if (window.confirm("댓글을 삭제하시겠습니까?")) {
-            const result = await axios.delete(
-              `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
-            );
-            setComment(result.data);
-            props.setClicked(false);
-          }
+    try {
+      if (props.type === "project") {
+        if (window.confirm("댓글을 삭제하시겠습니까?")) {
+          axios.delete(
+            `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
+          );
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
+          props.setClicked(false);
         }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        //need to refresh
+      } else if (props.type === "portfolio") {
+        if (window.confirm("댓글을 삭제하시겠습니까?")) {
+          axios.delete(
+            `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
+          );
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
+          props.setClicked(false);
+        }
       }
-    };
-    fetchData();
+    } catch (error) {
+      console.log(error);
+      alert("Error!");
+    }
   };
 
   const getComment = () => {
@@ -60,7 +55,6 @@ export default function EditnDelete(props) {
         }
       } catch (error) {
         console.log(error);
-      } finally {
       }
     };
     fetchData();

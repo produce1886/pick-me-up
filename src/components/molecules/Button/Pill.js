@@ -4,14 +4,25 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export default function Button(props) {
+  if (props.link) {
+    return (
+      <Link href={props.link}>
+        <A>
+          <Wrapper>
+            <Text level={1} weight={props.weight} color={props.color}>
+              {props.text}
+            </Text>
+          </Wrapper>
+        </A>
+      </Link>
+    );
+  }
   return (
-    <Link href={props.link}>
-      <A>
-        <Wrapper>
-          <Text level={1}>{props.text}</Text>
-        </Wrapper>
-      </A>
-    </Link>
+    <Wrapper>
+      <Text level={1} weight={props.weight} color={props.color}>
+        {props.text}
+      </Text>
+    </Wrapper>
   );
 }
 
