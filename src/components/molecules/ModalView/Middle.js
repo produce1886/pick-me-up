@@ -5,49 +5,34 @@ import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
-import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function ModalMiddle(props) {
   const router = useRouter();
   const user = useSelector((state) => state.user);
-  const [project, setProject] = useState();
-  const [portfolio, setPortfolio] = useState();
   const pid = props.pid;
   let date = props.date;
   date = date.replace("T", " ");
 
-  const deleteBlock = () => {
-    const fetchData = async () => {
-      try {
-        if (props.type === "project") {
-          if (window.confirm("게시글을 삭제하시겠습니까?")) {
-            const result = await axios.delete(
-              `${process.env.API_HOST}/projects/${pid}`
-            );
-            setProject(result.data);
-            router.push("/project");
-          }
-        } else if (props.type === "portfolio") {
-          if (window.confirm("게시글을 삭제하시겠습니까?")) {
-            const result = await axios.delete(
-              `${process.env.API_HOST}/portfolios/${pid}`
-            );
-            setPortfolio(result.data);
-            router.push("/portfolio");
-          }
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        if (props.type === "project") {
+  const deletePost = () => {
+    try {
+      if (props.type === "project") {
+        if (window.confirm("게시글을 삭제하시겠습니까?")) {
+          axios.delete(`${process.env.API_HOST}/projects/${pid}`);
+          setTimeout(() => props.setListReload(props.listReload + 1), 300);
           router.push("/project");
-        } else {
+        }
+      } else if (props.type === "portfolio") {
+        if (window.confirm("게시글을 삭제하시겠습니까?")) {
+          axios.delete(`${process.env.API_HOST}/portfolios/${pid}`);
+          setTimeout(() => props.setListReload(props.listReload + 1), 300);
           router.push("/portfolio");
         }
       }
-    };
-    fetchData();
+    } catch (error) {
+      alert("Error!");
+      console.log(error);
+    }
   };
 
   return (
@@ -85,7 +70,7 @@ export default function ModalMiddle(props) {
               게시글 수정
             </Text>
           </Button>
-          <Button onClick={deleteBlock}>
+          <Button onClick={deletePost}>
             <Text level={1} weight={500} color="#232735">
               게시글 삭제
             </Text>

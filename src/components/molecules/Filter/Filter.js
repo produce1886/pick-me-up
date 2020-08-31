@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Wrapper from "../../atoms/Filter/Filter";
@@ -53,9 +53,11 @@ export default function Filter(props) {
   let iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
   let backgroundAlign = "#ffffff";
 
-  if (!item && props.value) {
-    setSelected({ title: props.value });
-  }
+  useEffect(() => {
+    if (!item && props.value) {
+      setSelected({ title: props.value });
+    }
+  }, [props.value]);
 
   if (item) {
     icon = (

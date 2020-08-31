@@ -20,11 +20,7 @@ export default function Comment(props) {
   return (
     <Wrapper>
       <ProfileDiv>
-        <Profile
-          direction="row"
-          size="2rem"
-          profileImage={user.image}
-        ></Profile>
+        <Profile size="2rem" profileImage={user.image}></Profile>
       </ProfileDiv>
       <TextDiv>
         <InfoWrapper>
@@ -58,6 +54,8 @@ export default function Comment(props) {
           setContentUpdate={props.setContentUpdate}
           type={props.type}
           setClicked={setClicked}
+          modalReload={props.modalReload}
+          setModalReload={props.setModalReload}
         ></EditnDelete>
       )}
     </Wrapper>

@@ -3,16 +3,12 @@ import styled from "styled-components";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
-import WriteButton from "../Button/WriteBlock";
+import PillButton from "../Button/Pill";
 
 export default function ModalBottom(props) {
   let { tags } = props;
   const [tagInput, setTagInput] = useState("");
-  if (props.updateTags) {
-    {
-      Object.entries(props.updateTags).map((item, id) => console.log(item));
-    }
-  }
+
   const handleChange = (event) => {
     setTagInput(event.target.value);
   };
@@ -33,6 +29,7 @@ export default function ModalBottom(props) {
     newArray.splice(tagIndex, 1);
     props.setTags(newArray);
   };
+
   return (
     <Bottom>
       <Div>
@@ -48,21 +45,23 @@ export default function ModalBottom(props) {
             placeholder="태그를 입력하세요"
           ></Input>
         </IconTextWrapper>
-
         <TagWrapper>
-          {!props.isUpdate &&
-            tags.map((value, index) => (
-              <TagButton
-                key={index}
-                ismodal="modal"
-                text={value}
-                removeTag={() => removeTag(value)}
-                tagtype="modalwrite"
-              ></TagButton>
-            ))}
+          {tags.map((value, index) => (
+            <TagButton
+              key={index}
+              ismodal="modal"
+              text={value}
+              removeTag={() => removeTag(value)}
+              tagtype="modalwrite"
+            ></TagButton>
+          ))}
         </TagWrapper>
         <ButtonWrapper onClick={props.onClick}>
-          <WriteButton></WriteButton>
+          <PillButton
+            weight={500}
+            color="#fff"
+            text={props.updating ? "글 수정하기" : "글 작성하기"}
+          ></PillButton>
         </ButtonWrapper>
       </Div>
     </Bottom>

@@ -9,10 +9,7 @@ export default function PortfolioBlock(props) {
   const [show, setShow] = useState(false);
 
   return (
-    <Link
-      href={`/portfolio?pid=${props.item.id}`}
-      as={`/portfolio/${props.item.id}`}
-    >
+    <Link href={`/portfolio?pid=${props.item.id}`}>
       <A>
         <Wrapper
           onMouseOver={() => setShow(true)}
