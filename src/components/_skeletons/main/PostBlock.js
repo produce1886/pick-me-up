@@ -1,7 +1,7 @@
 import Wrapper from "../../atoms/PostBlock";
 import styled, { css } from "styled-components";
 
-export default function PostBlock() {
+export default function Skeleton() {
   return (
     <Wrapper>
       <Top>
