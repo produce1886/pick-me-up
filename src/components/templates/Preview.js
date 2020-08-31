@@ -89,7 +89,7 @@ const getProjects = (type) => {
           `${process.env.API_HOST}/projects/list`,
           body
         );
-        setProjects(result.data);
+        setProjects(result.data.pagelist);
 
         setIsLoading(false);
       } catch (error) {

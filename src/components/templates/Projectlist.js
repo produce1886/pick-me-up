@@ -95,7 +95,7 @@ const getProjectList = (
           `${process.env.API_HOST}/projects/list`,
           body
         );
-        setProject(result.data);
+        setProject(result.data.pagelist);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
