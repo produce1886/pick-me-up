@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
-import Profile from "../Profile";
 import ViewCount from "../ViewCount";
 import CommentCount from "../CommentCount";
+import Profile from "../../molecules/Profile";
 
 function Detail(props) {
   return (
@@ -14,10 +14,10 @@ function Detail(props) {
       </Row>
       <Row>
         <Profile
-          name={props.name}
-          size="0.8rem"
+          size="1rem"
           level={1}
-          profileImage={props.profile}
+          name={props.name}
+          profileImage={props.profileImage}
         ></Profile>
         <Div>
           <ViewCount count={props.viewNum}></ViewCount>

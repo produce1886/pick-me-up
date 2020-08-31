@@ -20,11 +20,7 @@ export default function Comment(props) {
   return (
     <Wrapper>
       <ProfileDiv>
-        <Profile
-          direction="row"
-          size="2rem"
-          profileImage={user.image}
-        ></Profile>
+        <Profile size="2rem" profileImage={user.image}></Profile>
       </ProfileDiv>
       <TextDiv>
         <InfoWrapper>
