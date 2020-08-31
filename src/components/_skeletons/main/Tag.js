@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export default function Tag() {
+export default function Skeleton() {
   return <Wrapper></Wrapper>;
 }
 
