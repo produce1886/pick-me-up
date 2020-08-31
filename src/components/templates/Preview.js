@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Postblock from "../organisms/Postblock";
+import Postblock from "../organisms/PostBlock";
 import Link from "next/link";
 import Text from "../atoms/Text";
 import Icon from "../atoms/Icon/Chevron/Right";
