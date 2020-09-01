@@ -9,7 +9,7 @@ export default function Portfoliolist(props) {
   const { category, field, query, sort, reload } = props;
   const [portfolio, setPortfolio] = useState([]);
   const [limit, setLimit] = useState(15);
-  const isLoading = getPortfolioList(
+  const { isLoading, dataNum } = getPortfolioList(
     category,
     field,
     query,
@@ -36,7 +36,7 @@ export default function Portfoliolist(props) {
   );
 
   const loadMoreHandler = () => {
-    let _limit = limit + limit;
+    let _limit = limit + 15;
     setLimit(_limit);
   };
 
@@ -53,7 +53,10 @@ export default function Portfoliolist(props) {
       <Wrapper>
         {!isLoading && portfolio.length > 0 && getList(portfolio)}
       </Wrapper>
-      <BottomButtons onClick={loadMoreHandler}></BottomButtons>
+      <BottomButtons
+        onClick={loadMoreHandler}
+        loadMoreVisible={limit <= dataNum}
+      ></BottomButtons>
     </>
   );
 }
@@ -68,6 +71,7 @@ const getPortfolioList = (
   reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [dataNum, setDataNum] = useState(0);
   const sortColumn = {
     최신순: "createdDate",
     댓글순: "commentsNum",
@@ -92,6 +96,7 @@ const getPortfolioList = (
           body
         );
         setPortfolio(result.data.pagelist);
+        setDataNum(result.data.nrOfElements);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -99,7 +104,7 @@ const getPortfolioList = (
     };
     fetchData();
   }, [category, field, query, sort, limit, reload]);
-  return isLoading;
+  return { isLoading, dataNum };
 };
 
 const Wrapper = styled.div`

@@ -9,7 +9,7 @@ export default function Projectlist(props) {
   const { category, field, region, projectType, query, sort, reload } = props;
   const [project, setProject] = useState([]);
   const [limit, setLimit] = useState(10);
-  const isLoading = getProjectList(
+  const { isLoading, dataNum } = getProjectList(
     category,
     field,
     region,
@@ -38,7 +38,7 @@ export default function Projectlist(props) {
   );
 
   const loadMoreHandler = () => {
-    let _limit = limit + limit;
+    let _limit = limit + 10;
     setLimit(_limit);
   };
 
@@ -53,7 +53,10 @@ export default function Projectlist(props) {
   return (
     <>
       <Wrapper>{!isLoading && project.length > 0 && getList(project)}</Wrapper>
-      <BottomButtons onClick={loadMoreHandler}></BottomButtons>
+      <BottomButtons
+        onClick={loadMoreHandler}
+        loadMoreVisible={limit <= dataNum}
+      ></BottomButtons>
     </>
   );
 }
@@ -70,6 +73,7 @@ const getProjectList = (
   reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [dataNum, setDataNum] = useState(0);
   const sortColumn = {
     최신순: "createdDate",
     댓글순: "commentsNum",
@@ -96,6 +100,7 @@ const getProjectList = (
           body
         );
         setProject(result.data.pagelist);
+        setDataNum(result.data.nrOfElements);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -103,7 +108,7 @@ const getProjectList = (
     };
     fetchData();
   }, [category, field, region, projectType, query, sort, limit, reload]);
-  return isLoading;
+  return { isLoading, dataNum };
 };
 
 const Wrapper = styled.div`
