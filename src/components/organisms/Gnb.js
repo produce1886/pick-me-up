@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Logo from "../molecules/Button/Logo";
-import Wrapper from "../atoms/gnb";
+import Wrapper from "../atoms/Gnb";
 import MainMenu from "../molecules/menu/Main";
 import LogInButton from "../molecules/Button/LogIn";
 import LogOutButton from "../molecules/Button/LogOut";

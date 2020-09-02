@@ -6,7 +6,7 @@ import Icon from "../atoms/Icon/Tag";
 import styled from "styled-components";
 import Text from "../atoms/Text";
 import Tag from "../molecules/Button/Tag";
-import Skeleton from "../_skeletons/index/Tag";
+import Skeleton from "../_skeletons/main/Tag";
 
 export default function HotTag() {
   const { tags, isLoading } = getHotTags();

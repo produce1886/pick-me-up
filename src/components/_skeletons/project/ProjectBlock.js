@@ -1,7 +1,7 @@
-import Wrapper from "../../atoms/PostBlock";
+import Wrapper from "src/components/atoms/ProjectBlock";
 import styled, { css } from "styled-components";
 
-export default function PostBlock() {
+export default function Skeleton() {
   return (
     <Wrapper>
       <Top>
@@ -10,10 +10,13 @@ export default function PostBlock() {
           <Profile></Profile>
           <Name></Name>
         </Row>
+        <Row justifyContent="flex-end">
+          <Date></Date>
+        </Row>
       </Top>
       <Bottom>
-        <Block width="6.6rem"></Block>
-        <Block width="6rem"></Block>
+        <Block width="19.6rem"></Block>
+        <Block width="17.4rem"></Block>
       </Bottom>
     </Wrapper>
   );
@@ -21,9 +24,9 @@ export default function PostBlock() {
 
 const Top = styled.div`
   width: 100%;
-  height: 3.6rem;
+  height: 4.8rem;
   border-bottom: 0.04rem solid #f0f1f3;
-  padding: 0.6rem 1rem 0.6rem 1rem;
+  padding: 0.8rem 1.2rem 0.8rem 1.2rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -32,7 +35,7 @@ const Top = styled.div`
 
 const Title = styled.div`
   width: 100%;
-  height: 0.9rem;
+  height: 0.8rem;
   border-radius: 0.12rem;
   background-color: #f0f1f3;
 `;
@@ -41,23 +44,32 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  ${(props) =>
+    css`
+      justify-content: ${props.justifyContent};
+    `};
 `;
 
 const Profile = styled.div`
-  width: 0.8rem;
-  height: 0.8rem;
-  border-radius: 0.4rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 0.6rem;
   background-color: #f0f1f3;
 `;
 
 const Name = styled.div`
-  width: 2rem;
-  height: 0.5rem;
+  width: 2.5rem;
+  height: 0.6rem;
   border-radius: 0.12rem;
   background-color: #f0f1f3;
-  margin-left: 0.24rem;
+  margin-left: 0.3rem;
 `;
-
+const Date = styled.div`
+  width: 3.28rem;
+  height: 0.48rem;
+  border-radius: 0.12rem;
+  background-color: #f0f1f3;
+`;
 const Bottom = styled.div`
   width: 100%;
   padding: 0.8rem 1rem 0 1rem;

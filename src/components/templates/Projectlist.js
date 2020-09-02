@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ProjectBlock from "../organisms/ProjectBlock";
 import NoResult from "../molecules/NoResult";
 import BottomButtons from "../organisms/BottomButtons";
+import Skeleton from "../_skeletons/project/ProjectBlock";
 
 export default function Projectlist(props) {
   const { category, field, region, projectType, query, sort, reload } = props;
@@ -49,7 +50,32 @@ export default function Projectlist(props) {
       </Wrapper>
     );
   }
-
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <Div>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Div>
+        <Div>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Div>
+        <Div>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Div>
+        <Div>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Div>
+        <Div>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Div>{" "}
+      </Wrapper>
+    );
+  }
   return (
     <>
       <Wrapper>{!isLoading && project.length > 0 && getList(project)}</Wrapper>
