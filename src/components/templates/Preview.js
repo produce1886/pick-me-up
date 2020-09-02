@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Postblock from "../organisms/Postblock";
+import Postblock from "../organisms/PostBlock";
 import Link from "next/link";
 import Text from "../atoms/Text";
 import Icon from "../atoms/Icon/Chevron/Right";
-import Skeleton from "../_skeletons/index/PostBlock";
+import Skeleton from "../_skeletons/main/PostBlock";
 
 export default function Preview(props) {
   const { projects, isLoading } = getProjects(props.type);
