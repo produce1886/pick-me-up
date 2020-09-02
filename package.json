@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "copy .env.dev .env && node server",
+    "dev": "cp .env.dev .env && node server",
     "build": "cp ./.env.prod ./.env && next build",
     "start": "cp ./.env.prod ./.env && node server"
   },
