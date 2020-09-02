@@ -12,6 +12,7 @@ export default function PortfolioBlock(props) {
     <Link href={`/portfolio?pid=${props.item.id}`}>
       <A>
         <Wrapper
+          skeleton={false}
           onMouseOver={() => setShow(true)}
           onMouseOut={() => setShow(false)}
         >

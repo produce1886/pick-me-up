@@ -6,6 +6,8 @@ import Inner from "../atoms/Modal/Inner";
 import Top from "../molecules/ModalView/Top";
 import Middle from "../molecules/ModalView/Middle";
 import Bottom from "../molecules/ModalView/Bottom";
+import ProjectSkeleton from "../_skeletons/project/ProjectView";
+import PortfolioSkeleton from "../_skeletons/portfolio/PortfolioView";
 
 export default function ModalView(props) {
   const { data, isLoading } = getData(props.pid, props.type, props.modalReload);
@@ -20,7 +22,12 @@ export default function ModalView(props) {
       <Overlay visible={props.visible} onClick={onMaskClick} />
       <Wrapper tabIndex="-1" visible={props.visible} onClick={onMaskClick}>
         <Inner>
-          {isLoading && <p>Loading...</p>}
+          {isLoading && !data && props.type === "project" && (
+            <ProjectSkeleton></ProjectSkeleton>
+          )}
+          {isLoading && !data && props.type === "portfolio" && (
+            <PortfolioSkeleton></PortfolioSkeleton>
+          )}
           {!isLoading && data && (
             <>
               <Top

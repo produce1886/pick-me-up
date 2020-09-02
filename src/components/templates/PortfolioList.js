@@ -4,6 +4,7 @@ import styled from "styled-components";
 import PortfolioBlock from "../organisms/PortfolioBlock";
 import BottomButtons from "../organisms/BottomButtons";
 import NoResult from "../molecules/NoResult";
+import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
 export default function Portfoliolist(props) {
   const { category, field, query, sort, reload } = props;
@@ -47,7 +48,37 @@ export default function Portfoliolist(props) {
       </Wrapper>
     );
   }
-
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <Row>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Row>
+        <Row>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Row>
+        <Row>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Row>
+        <Row>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Row>
+        <Row>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+          <Skeleton></Skeleton>
+        </Row>
+      </Wrapper>
+    );
+  }
   return (
     <>
       <Wrapper>
