@@ -25,11 +25,11 @@ export default function FilterSearch(props) {
 }
 
 const InnerWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  margin: 0 4rem 0 4rem;
+  margin: 0 auto;
   max-width: 1200px;
   width: 48rem;
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
   justify-content: space-between;
 `;
