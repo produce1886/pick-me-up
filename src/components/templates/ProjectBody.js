@@ -8,7 +8,7 @@ import WriteButton from "../molecules/Button/Write";
 import ModalWrite from "../organisms/ModalWrite";
 import { useSelector } from "react-redux";
 
-export default function ProjectBody(props) {
+function ProjectBody(props) {
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
@@ -17,13 +17,6 @@ export default function ProjectBody(props) {
   const [query, setQuery] = useState("");
   const [writeVisible, setWriteVisible] = useState(false);
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
-
-  const openWrite = () => {
-    setWriteVisible(true);
-  };
-  const closeWrite = () => {
-    setWriteVisible(false);
-  };
 
   return (
     <>
@@ -57,13 +50,13 @@ export default function ProjectBody(props) {
         </InnerWrapper>
       </Wrapper>
       {isSignedIn && !writeVisible && !props.viewVisible && (
-        <WriteButton openWrite={openWrite}></WriteButton>
+        <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
       )}
       {writeVisible && (
         <ModalWrite
           type="project"
           visible={writeVisible}
-          onClose={closeWrite}
+          onClose={() => setWriteVisible(false)}
           reload={props.reload}
           setReload={props.setReload}
         ></ModalWrite>
@@ -71,6 +64,8 @@ export default function ProjectBody(props) {
     </>
   );
 }
+
+export default React.memo(ProjectBody);
 
 const Div = styled.div`
   width: 100%;
@@ -85,8 +80,6 @@ const InnerWrapper = styled.div`
   margin: 0 4rem 0 4rem;
   max-width: 1200px;
   width: 48rem;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   position: relative;

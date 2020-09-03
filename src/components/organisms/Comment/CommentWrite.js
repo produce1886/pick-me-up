@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Icon from "../../atoms/Icon/Write";
 
-export default function CommentWrite(props) {
+function CommentWrite(props) {
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
   const onChangeHandler = (e) => {
@@ -94,6 +94,8 @@ export default function CommentWrite(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(CommentWrite);
 
 const Div = styled.div`
   width: 100%;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ProjectBlock from "../organisms/ProjectBlock";
@@ -6,7 +6,7 @@ import NoResult from "../molecules/NoResult";
 import BottomButtons from "../organisms/BottomButtons";
 import Skeleton from "../_skeletons/project/ProjectBlock";
 
-export default function Projectlist(props) {
+function ProjectList(props) {
   const { category, field, region, projectType, query, sort, reload } = props;
   const [project, setProject] = useState([]);
   const [limit, setLimit] = useState(10);
@@ -26,9 +26,9 @@ export default function Projectlist(props) {
     <ProjectBlock key={index} item={item}></ProjectBlock>
   ));
 
-  const loadMoreHandler = () => {
+  const loadMoreHandler = useCallback(() => {
     setLimit(limit + 10);
-  };
+  }, []);
 
   if (isLoading) {
     return (
@@ -65,6 +65,8 @@ export default function Projectlist(props) {
     </>
   );
 }
+
+export default React.memo(ProjectList);
 
 const getProjectList = (
   category,

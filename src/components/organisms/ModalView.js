@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
 import Wrapper from "../atoms/Modal/Wrapper";
@@ -9,14 +9,15 @@ import Bottom from "../molecules/ModalView/Bottom";
 import ProjectSkeleton from "../_skeletons/project/ProjectView";
 import PortfolioSkeleton from "../_skeletons/portfolio/PortfolioView";
 
-export default function ModalView(props) {
+function ModalView(props) {
   const { data, isLoading } = getData(props.pid, props.type, props.modalReload);
 
-  const onMaskClick = (e) => {
+  const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
       props.onClose();
     }
-  };
+  }, []);
+
   return (
     <>
       <Overlay visible={props.visible} onClick={onMaskClick} />
@@ -69,6 +70,8 @@ export default function ModalView(props) {
     </>
   );
 }
+
+export default React.memo(ModalView);
 
 const getData = (pid, type, modalReload) => {
   const [data, setData] = useState();

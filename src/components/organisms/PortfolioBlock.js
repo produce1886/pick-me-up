@@ -5,7 +5,7 @@ import Detail from "../molecules/PortfolioBlock/Detail";
 import Wrapper from "../atoms/PortfolioBlock";
 import { useState } from "react";
 
-export default function PortfolioBlock(props) {
+function PortfolioBlock(props) {
   const [show, setShow] = useState(false);
 
   return (
@@ -36,6 +36,8 @@ export default function PortfolioBlock(props) {
     </Link>
   );
 }
+
+export default React.memo(PortfolioBlock);
 
 const Img = styled.img`
   width: 100%;

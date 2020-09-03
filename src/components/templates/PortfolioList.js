@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import PortfolioBlock from "../organisms/PortfolioBlock";
@@ -6,7 +6,7 @@ import BottomButtons from "../organisms/BottomButtons";
 import NoResult from "../molecules/NoResult";
 import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
-export default function Portfoliolist(props) {
+function PortfolioList(props) {
   const { category, field, query, sort, reload } = props;
   const [portfolio, setPortfolio] = useState([]);
   const [limit, setLimit] = useState(15);
@@ -24,9 +24,9 @@ export default function Portfoliolist(props) {
     <PortfolioBlock key={index} item={item}></PortfolioBlock>
   ));
 
-  const loadMoreHandler = () => {
+  const loadMoreHandler = useCallback(() => {
     setLimit(limit + 15);
-  };
+  }, []);
 
   if (isLoading) {
     return (
@@ -68,6 +68,8 @@ export default function Portfoliolist(props) {
     </>
   );
 }
+
+export default React.memo(PortfolioList);
 
 const getPortfolioList = (
   category,

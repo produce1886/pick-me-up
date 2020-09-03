@@ -3,10 +3,11 @@ import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
 import Filters from "../Filter/FilterGroup";
 
-export default function ModalTop(props) {
+function ModalTop(props) {
   const onChangeHandler = (e) => {
     props.setTitle(e.target.value);
   };
+
   return (
     <Top height="6rem">
       <Div>
@@ -33,7 +34,6 @@ export default function ModalTop(props) {
             setProjectType={props.setProjectType}
           ></Filters>
         </TitleFilterWrapper>
-
         <ProfileWrapper>
           <Profile size="3rem" profileImage={props.profileImage}></Profile>
         </ProfileWrapper>
@@ -41,6 +41,8 @@ export default function ModalTop(props) {
     </Top>
   );
 }
+
+export default React.memo(ModalTop);
 
 const Div = styled.div`
   width: 100%;
@@ -50,11 +52,7 @@ const Div = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
-const TextDiv = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0 0.3rem 0 0;
-`;
+
 const ProfileWrapper = styled.div`
   width: 2.2rem;
   height: 100%;
@@ -63,6 +61,7 @@ const ProfileWrapper = styled.div`
   flex-direction: column;
   margin: 0 0.3rem 0 0;
 `;
+
 const TitleFilterWrapper = styled.div`
   width: 30rem;
   height: 100%;

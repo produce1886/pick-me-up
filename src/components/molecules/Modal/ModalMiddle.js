@@ -2,10 +2,11 @@ import styled from "styled-components";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";
 
-export default function ModalMiddle(props) {
+function ModalMiddle(props) {
   const handleChange = (event) => {
     props.setContent(event.target.value);
   };
+
   return (
     <Middle height="36rem">
       <Textarea
@@ -22,6 +23,8 @@ export default function ModalMiddle(props) {
     </Middle>
   );
 }
+
+export default React.memo(ModalMiddle);
 
 const Textarea = styled.textarea`
   background-color: transparent;
