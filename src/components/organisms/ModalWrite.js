@@ -8,7 +8,7 @@ import Top from "../molecules/Modal/ModalTop";
 import Middle from "../molecules/Modal/ModalMiddle";
 import Bottom from "../molecules/Modal/ModalBottom";
 
-export default function ModalWrite(props) {
+function ModalWrite(props) {
   const state = useSelector((state) => state.user);
   const email = state.userData.email;
   const [title, setTitle] = useState("");
@@ -169,3 +169,5 @@ export default function ModalWrite(props) {
     </>
   );
 }
+
+export default React.memo(ModalWrite);

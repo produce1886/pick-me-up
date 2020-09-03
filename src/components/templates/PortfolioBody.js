@@ -16,13 +16,6 @@ export default function PortfolioBody(props) {
   const [writeVisible, setWriteVisible] = useState(false);
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
 
-  const openWrite = () => {
-    setWriteVisible(true);
-  };
-  const closeWrite = () => {
-    setWriteVisible(false);
-  };
-
   return (
     <>
       <FilterSearch
@@ -50,13 +43,13 @@ export default function PortfolioBody(props) {
           ></PortfolioList>
         </InnerWrapper>
         {isSignedIn && !writeVisible && !props.viewVisible && (
-          <WriteButton openWrite={openWrite}></WriteButton>
+          <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
         )}
         {writeVisible && (
           <ModalWrite
             type="portfolio"
             visible={writeVisible}
-            onClose={closeWrite}
+            onClose={() => setWriteVisible(false)}
             reload={props.reload}
             setReload={props.setReload}
           ></ModalWrite>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Filter from "./Filter";
 import { PROJECTTYPE, FIELD, REGION, CATEGORY } from "./ItemData";
 
-export default function FilterGroup(props) {
+function FilterGroup(props) {
   const category = "카테고리";
   const region = "지역";
   const field = "구인분야";
@@ -61,6 +61,8 @@ export default function FilterGroup(props) {
     </FilterWrapper>
   );
 }
+
+export default React.memo(FilterGroup);
 
 const FilterWrapper = styled.div`
   width: fit-content;
