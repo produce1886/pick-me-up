@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
@@ -20,7 +20,7 @@ function ModalWrite(props) {
   const [images, setImages] = useState([]);
   const [tags, setTags] = useState([]);
 
-  const post = () => {
+  const post = useCallback(() => {
     let flag = checkIsNotEmpty();
     if (!flag) {
       return;
@@ -80,7 +80,7 @@ function ModalWrite(props) {
         alert("에러가 발생했습니다.");
       }
     }
-  };
+  }, [title, content, category, field, region, projectType, tags, images]);
 
   const isEmpty = function (value) {
     if (
@@ -124,11 +124,11 @@ function ModalWrite(props) {
     return true;
   };
 
-  const onMaskClick = (e) => {
+  const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
       props.onClose(e);
     }
-  };
+  }, []);
 
   return (
     <>
