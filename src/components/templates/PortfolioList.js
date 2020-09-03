@@ -8,38 +8,54 @@ import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
 export default function Portfoliolist(props) {
   const { category, field, query, sort, reload } = props;
+  const [skip, setSkip] = useState(0);
   const [portfolio, setPortfolio] = useState([]);
   const [limit, setLimit] = useState(15);
+  const [loadMore, setLoadMore] = useState(false);
   const { isLoading, dataNum } = getPortfolioList(
     category,
     field,
     query,
     sort,
+    portfolio,
     setPortfolio,
+    skip,
     limit,
+    loadMore,
+    setLoadMore,
     reload
   );
 
-  const getList = (items) => {
-    return (
-      <>
-        <Row>{items.slice(0, 3).map(getBlock)}</Row>
-        <Row>{items.slice(3, 6).map(getBlock)}</Row>
-        <Row>{items.slice(6, 9).map(getBlock)}</Row>
-        <Row>{items.slice(9, 12).map(getBlock)}</Row>
-        <Row>{items.slice(12, 15).map(getBlock)}</Row>
-      </>
-    );
-  };
-
-  const getBlock = (item, index) => (
+  const renderBlocks = portfolio.map((item, index) => (
     <PortfolioBlock key={index} item={item}></PortfolioBlock>
-  );
+  ));
 
   const loadMoreHandler = () => {
-    let _limit = limit + 15;
-    setLimit(_limit);
+    setLoadMore(true);
+    setSkip(skip + 1);
   };
+
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </Wrapper>
+    );
+  }
 
   if (!isLoading && portfolio.length === 0) {
     return (
@@ -48,45 +64,13 @@ export default function Portfoliolist(props) {
       </Wrapper>
     );
   }
-  if (isLoading) {
-    return (
-      <Wrapper>
-        <Row>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-        </Row>
-        <Row>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-        </Row>
-        <Row>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-        </Row>
-        <Row>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-        </Row>
-        <Row>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-          <Skeleton></Skeleton>
-        </Row>
-      </Wrapper>
-    );
-  }
+
   return (
     <>
-      <Wrapper>
-        {!isLoading && portfolio.length > 0 && getList(portfolio)}
-      </Wrapper>
+      <Wrapper>{!isLoading && portfolio.length > 0 && renderBlocks}</Wrapper>
       <BottomButtons
         onClick={loadMoreHandler}
-        loadMoreVisible={limit <= dataNum}
+        loadMoreVisible={portfolio.length < dataNum}
       ></BottomButtons>
     </>
   );
@@ -97,8 +81,12 @@ const getPortfolioList = (
   field,
   query,
   sort,
+  portfolio,
   setPortfolio,
+  skip,
   limit,
+  loadMore,
+  setLoadMore,
   reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -126,32 +114,29 @@ const getPortfolioList = (
           `${process.env.API_HOST}/portfolios/list`,
           body
         );
-        setPortfolio(result.data.pagelist);
+        if (loadMore) {
+          setPortfolio([...portfolio, ...result.data.pagelist]);
+        } else {
+          setPortfolio(result.data.pagelist);
+        }
         setDataNum(result.data.nrOfElements);
         setIsLoading(false);
+        setLoadMore(false);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [category, field, query, sort, limit, reload]);
+  }, [category, field, query, sort, skip, reload]);
   return { isLoading, dataNum };
 };
 
 const Wrapper = styled.div`
-  width: 48rem;
-  justify-content: center;
+  width: 100%;
+  justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   margin: 2rem 0 2rem 0;
-`;
-
-const Row = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  margin: 0.4rem 0 0.4rem 0;
-  justify-content: flex-start;
 `;
