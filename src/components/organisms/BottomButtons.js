@@ -8,10 +8,12 @@ export default function Bottom(props) {
     <Wrapper>
       <InnerWrapper>
         <TopButton></TopButton>
-        <MoreListButton
-          text="더 불러오기"
-          onClick={props.onClick}
-        ></MoreListButton>
+        {props.loadMoreVisible && (
+          <MoreListButton
+            text="더 불러오기"
+            onClick={props.onClick}
+          ></MoreListButton>
+        )}
       </InnerWrapper>
     </Wrapper>
   );

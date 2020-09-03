@@ -4,7 +4,7 @@ import Top from "../molecules/ProjectBlock/Top";
 import Bottom from "../molecules/ProjectBlock/Bottom";
 import Wrapper from "../atoms/ProjectBlock";
 
-export default function ProjectBlock(props) {
+function ProjectBlock(props) {
   const date = props.item.createdDate.split("T")[0];
 
   return (
@@ -33,6 +33,8 @@ export default function ProjectBlock(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(ProjectBlock);
 
 const Body = styled.div`
   width: 100%;

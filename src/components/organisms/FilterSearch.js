@@ -3,7 +3,7 @@ import Search from "../molecules/Input/Search";
 import Filters from "../molecules/Filter/FilterGroup";
 import Wrapper from "../atoms/FilterSearch";
 
-export default function FilterSearch(props) {
+function FilterSearch(props) {
   return (
     <Wrapper>
       <InnerWrapper>
@@ -24,12 +24,14 @@ export default function FilterSearch(props) {
   );
 }
 
+export default React.memo(FilterSearch);
+
 const InnerWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  margin: 0 4rem 0 4rem;
+  margin: 0 auto;
   max-width: 1200px;
   width: 48rem;
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
   justify-content: space-between;
 `;

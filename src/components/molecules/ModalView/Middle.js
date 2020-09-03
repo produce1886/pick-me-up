@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -7,14 +8,14 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import axios from "axios";
 
-export default function ModalMiddle(props) {
+function ModalMiddle(props) {
   const router = useRouter();
   const user = useSelector((state) => state.user);
   const pid = props.pid;
   let date = props.date;
   date = date.replace("T", " ");
 
-  const deletePost = () => {
+  const deletePost = useCallback(() => {
     try {
       if (props.type === "project") {
         if (window.confirm("게시글을 삭제하시겠습니까?")) {
@@ -33,7 +34,7 @@ export default function ModalMiddle(props) {
       alert("Error!");
       console.log(error);
     }
-  };
+  }, []);
 
   return (
     <Middle height="fit-content">
@@ -80,6 +81,9 @@ export default function ModalMiddle(props) {
     </Middle>
   );
 }
+
+export default React.memo(ModalMiddle);
+
 const DateWrapper = styled.div`
   width: 100%;
   height: 1rem;

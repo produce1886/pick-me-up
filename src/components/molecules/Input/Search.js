@@ -11,7 +11,7 @@ export default function Search(props) {
   };
 
   const doSearch = () => {
-    if (keyword) props.setQuery(keyword);
+    props.setQuery(keyword);
   };
 
   const enterHandler = (e) => {

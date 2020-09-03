@@ -29,7 +29,7 @@ function Detail(props) {
   );
 }
 
-export default Detail;
+export default React.memo(Detail);
 
 const DetailWrapper = styled.div`
   width: 100%;

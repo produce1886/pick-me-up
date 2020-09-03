@@ -5,13 +5,14 @@ import Detail from "../molecules/PortfolioBlock/Detail";
 import Wrapper from "../atoms/PortfolioBlock";
 import { useState } from "react";
 
-export default function PortfolioBlock(props) {
+function PortfolioBlock(props) {
   const [show, setShow] = useState(false);
 
   return (
     <Link href={`/portfolio?pid=${props.item.id}`}>
       <A>
         <Wrapper
+          skeleton={false}
           onMouseOver={() => setShow(true)}
           onMouseOut={() => setShow(false)}
         >
@@ -35,6 +36,8 @@ export default function PortfolioBlock(props) {
     </Link>
   );
 }
+
+export default React.memo(PortfolioBlock);
 
 const Img = styled.img`
   width: 100%;

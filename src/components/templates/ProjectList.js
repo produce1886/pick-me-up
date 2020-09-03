@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ProjectBlock from "../organisms/ProjectBlock";
 import NoResult from "../molecules/NoResult";
 import BottomButtons from "../organisms/BottomButtons";
+import Skeleton from "../_skeletons/project/ProjectBlock";
 
-export default function Projectlist(props) {
+function ProjectList(props) {
   const { category, field, region, projectType, query, sort, reload } = props;
   const [project, setProject] = useState([]);
   const [limit, setLimit] = useState(10);
-  const isLoading = getProjectList(
+  const { isLoading, dataNum } = getProjectList(
     category,
     field,
     region,
@@ -21,26 +22,30 @@ export default function Projectlist(props) {
     reload
   );
 
-  const getList = (items) => {
-    return (
-      <>
-        <Div>{items.slice(0, 2).map(getBlock)}</Div>
-        <Div>{items.slice(2, 4).map(getBlock)}</Div>
-        <Div>{items.slice(4, 6).map(getBlock)}</Div>
-        <Div>{items.slice(6, 8).map(getBlock)}</Div>
-        <Div>{items.slice(8, 10).map(getBlock)}</Div>
-      </>
-    );
-  };
-
-  const getBlock = (item, index) => (
+  const renderBlocks = project.map((item, index) => (
     <ProjectBlock key={index} item={item}></ProjectBlock>
-  );
+  ));
 
-  const loadMoreHandler = () => {
-    let _limit = limit + limit;
-    setLimit(_limit);
-  };
+  const loadMoreHandler = useCallback(() => {
+    setLimit(limit + 10);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </Wrapper>
+    );
+  }
 
   if (!isLoading && project.length === 0) {
     return (
@@ -52,11 +57,16 @@ export default function Projectlist(props) {
 
   return (
     <>
-      <Wrapper>{!isLoading && project.length > 0 && getList(project)}</Wrapper>
-      <BottomButtons onClick={loadMoreHandler}></BottomButtons>
+      <Wrapper>{!isLoading && project.length > 0 && renderBlocks}</Wrapper>
+      <BottomButtons
+        onClick={loadMoreHandler}
+        loadMoreVisible={project.length < dataNum}
+      ></BottomButtons>
     </>
   );
 }
+
+export default React.memo(ProjectList);
 
 const getProjectList = (
   category,
@@ -70,6 +80,7 @@ const getProjectList = (
   reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [dataNum, setDataNum] = useState(0);
   const sortColumn = {
     최신순: "createdDate",
     댓글순: "commentsNum",
@@ -96,6 +107,7 @@ const getProjectList = (
           body
         );
         setProject(result.data.pagelist);
+        setDataNum(result.data.nrOfElements);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -103,24 +115,16 @@ const getProjectList = (
     };
     fetchData();
   }, [category, field, region, projectType, query, sort, limit, reload]);
-  return isLoading;
+  return { isLoading, dataNum };
 };
 
 const Wrapper = styled.div`
   width: 100%;
   height: fit-content;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   margin: 0 0 2rem 0;
-`;
-
-const Div = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 `;

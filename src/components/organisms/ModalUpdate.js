@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
@@ -8,7 +8,7 @@ import Top from "../molecules/Modal/ModalTop";
 import Middle from "../molecules/Modal/ModalMiddle";
 import Bottom from "../molecules/Modal/ModalBottom";
 
-export default function ModalUpdate(props) {
+function ModalUpdate(props) {
   const state = useSelector((state) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -37,7 +37,7 @@ export default function ModalUpdate(props) {
     setTags(tagArray);
   }
 
-  const update = () => {
+  const update = useCallback(() => {
     let flag = checkIsNotEmpty();
     if (!flag) {
       return;
@@ -94,7 +94,7 @@ export default function ModalUpdate(props) {
         alert("에러가 발생했습니다.");
       }
     }
-  };
+  }, [title, content, category, field, region, projectType, tags, images]);
 
   const isEmpty = function (value) {
     if (
@@ -138,11 +138,11 @@ export default function ModalUpdate(props) {
     return true;
   };
 
-  const onMaskClick = (e) => {
+  const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
       props.onClose(e);
     }
-  };
+  }, []);
 
   return (
     <>
@@ -188,6 +188,8 @@ export default function ModalUpdate(props) {
     </>
   );
 }
+
+export default React.memo(ModalUpdate);
 
 const getData = (
   pid,
