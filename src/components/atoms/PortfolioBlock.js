@@ -10,7 +10,7 @@ export default styled.div`
   `}
   position: relative;
   box-sizing: border-box;
-  margin: 0 0.4rem 0 0.4rem;
+  margin: 0 0.4rem 0.8rem 0.4rem;
   overflow: hidden;
   display: flex;
   align-items: center;
