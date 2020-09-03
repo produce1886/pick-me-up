@@ -4,12 +4,13 @@ import styled from "styled-components";
 import PortfolioBlock from "../organisms/PortfolioBlock";
 import BottomButtons from "../organisms/BottomButtons";
 import NoResult from "../molecules/NoResult";
+import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
 export default function Portfoliolist(props) {
   const { category, field, query, sort, reload } = props;
   const [portfolio, setPortfolio] = useState([]);
   const [limit, setLimit] = useState(15);
-  const isLoading = getPortfolioList(
+  const { isLoading, dataNum } = getPortfolioList(
     category,
     field,
     query,
@@ -19,26 +20,35 @@ export default function Portfoliolist(props) {
     reload
   );
 
-  const getList = (items) => {
-    return (
-      <>
-        <Row>{items.slice(0, 3).map(getBlock)}</Row>
-        <Row>{items.slice(3, 6).map(getBlock)}</Row>
-        <Row>{items.slice(6, 9).map(getBlock)}</Row>
-        <Row>{items.slice(9, 12).map(getBlock)}</Row>
-        <Row>{items.slice(12, 15).map(getBlock)}</Row>
-      </>
-    );
-  };
-
-  const getBlock = (item, index) => (
+  const renderBlocks = portfolio.map((item, index) => (
     <PortfolioBlock key={index} item={item}></PortfolioBlock>
-  );
+  ));
 
   const loadMoreHandler = () => {
-    let _limit = limit + limit;
-    setLimit(_limit);
+    setLimit(limit + 15);
   };
+
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </Wrapper>
+    );
+  }
 
   if (!isLoading && portfolio.length === 0) {
     return (
@@ -50,10 +60,11 @@ export default function Portfoliolist(props) {
 
   return (
     <>
-      <Wrapper>
-        {!isLoading && portfolio.length > 0 && getList(portfolio)}
-      </Wrapper>
-      <BottomButtons onClick={loadMoreHandler}></BottomButtons>
+      <Wrapper>{!isLoading && portfolio.length > 0 && renderBlocks}</Wrapper>
+      <BottomButtons
+        onClick={loadMoreHandler}
+        loadMoreVisible={portfolio.length < dataNum}
+      ></BottomButtons>
     </>
   );
 }
@@ -68,6 +79,7 @@ const getPortfolioList = (
   reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [dataNum, setDataNum] = useState(0);
   const sortColumn = {
     최신순: "createdDate",
     댓글순: "commentsNum",
@@ -92,6 +104,7 @@ const getPortfolioList = (
           body
         );
         setPortfolio(result.data.pagelist);
+        setDataNum(result.data.nrOfElements);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -99,23 +112,15 @@ const getPortfolioList = (
     };
     fetchData();
   }, [category, field, query, sort, limit, reload]);
-  return isLoading;
+  return { isLoading, dataNum };
 };
 
 const Wrapper = styled.div`
-  width: 48rem;
-  justify-content: center;
+  width: 100%;
+  justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
   margin: 2rem 0 2rem 0;
-`;
-
-const Row = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  margin: 0.4rem 0 0.4rem 0;
-  justify-content: flex-start;
 `;
