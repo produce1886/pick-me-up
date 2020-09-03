@@ -85,8 +85,6 @@ const InnerWrapper = styled.div`
   margin: 0 4rem 0 4rem;
   max-width: 1200px;
   width: 48rem;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   position: relative;

@@ -8,7 +8,7 @@ import PortfolioList from "./PortfolioList";
 import WriteButton from "../molecules/Button/Write";
 import ModalWrite from "../organisms/ModalWrite";
 
-export default function PortfolioBody(props) {
+function PortfolioBody(props) {
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [sort, setSort] = useState("최신순");
@@ -59,6 +59,8 @@ export default function PortfolioBody(props) {
   );
 }
 
+export default React.memo(PortfolioBody);
+
 const Wrapper = styled.div`
   background-color: #f5edff;
   width: 100%;
@@ -73,8 +75,6 @@ const InnerWrapper = styled.div`
   margin: 0 4rem 0 4rem;
   max-width: 1200px;
   width: 48rem;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
 `;
