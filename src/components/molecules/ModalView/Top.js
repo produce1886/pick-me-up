@@ -2,9 +2,9 @@ import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
 import ProfileHolder from "../../atoms/ImageHolder/Profile";
-import Filterinfo from "../FilterInfo";
+import FilterInfo from "../FilterInfo";
 
-export default function ModalTop(props) {
+function ModalTop(props) {
   return (
     <Top>
       <TitleFilterWrapper>
@@ -13,13 +13,13 @@ export default function ModalTop(props) {
             {props.title}
           </Text>
         </TitleWrapper>
-        <Filterinfo
+        <FilterInfo
           type={props.type}
           category={props.category}
           field={props.field}
           region={props.region}
           projectCategory={props.projectCategory}
-        ></Filterinfo>
+        ></FilterInfo>
       </TitleFilterWrapper>
       <ProfileBox>
         <ProfileHolder size="3rem" noMargin={true}>
@@ -29,6 +29,8 @@ export default function ModalTop(props) {
     </Top>
   );
 }
+
+export default React.memo(ModalTop);
 
 const TitleWrapper = styled.div`
   width: 100%;

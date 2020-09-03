@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Text from "../atoms/Text";
 
-export default function FilterInfo(props) {
+function FilterInfo(props) {
   return (
     <Wrapper>
       <>
@@ -46,6 +46,8 @@ export default function FilterInfo(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(FilterInfo);
 
 const Wrapper = styled.div`
   width: fit-content;

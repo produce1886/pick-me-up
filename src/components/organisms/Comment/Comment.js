@@ -7,15 +7,12 @@ import EditnDelete from "../Comment/EditnDelete";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function Comment(props) {
+function Comment(props) {
   const [clicked, setClicked] = useState(false);
   let date = props.date;
   date = date.replace("T", " ");
   const user = props.userInfo;
   const loginUser = useSelector((state) => state.user.userData);
-  const openMenu = () => {
-    setClicked(!clicked);
-  };
 
   return (
     <Wrapper>
@@ -34,7 +31,7 @@ export default function Comment(props) {
             </Text>
           </Div>
           {loginUser.email === user.email && (
-            <ButtonWrapper onClick={() => openMenu()}>
+            <ButtonWrapper onClick={() => setClicked(!clicked)}>
               <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
             </ButtonWrapper>
           )}
@@ -61,6 +58,8 @@ export default function Comment(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(Comment);
 
 const ProfileDiv = styled.div`
   width: fit-content;
