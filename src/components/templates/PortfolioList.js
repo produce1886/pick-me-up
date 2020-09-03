@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import PortfolioBlock from "../organisms/PortfolioBlock";
@@ -24,9 +24,9 @@ function PortfolioList(props) {
     <PortfolioBlock key={index} item={item}></PortfolioBlock>
   ));
 
-  const loadMoreHandler = () => {
+  const loadMoreHandler = useCallback(() => {
     setLimit(limit + 15);
-  };
+  }, []);
 
   if (isLoading) {
     return (
