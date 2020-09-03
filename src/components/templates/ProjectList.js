@@ -24,6 +24,7 @@ export default function Projectlist(props) {
     skip,
     limit,
     loadMore,
+    setLoadMore,
     reload
   );
 
@@ -32,9 +33,8 @@ export default function Projectlist(props) {
   ));
 
   const loadMoreHandler = () => {
-    let _skip = skip + limit;
     setLoadMore(true);
-    setSkip(_skip);
+    setSkip(skip + 1);
   };
 
   if (isLoading) {
@@ -67,7 +67,7 @@ export default function Projectlist(props) {
       <Wrapper>{!isLoading && project.length > 0 && renderBlocks}</Wrapper>
       <BottomButtons
         onClick={loadMoreHandler}
-        loadMoreVisible={limit <= dataNum}
+        loadMoreVisible={project.length < dataNum}
       ></BottomButtons>
     </>
   );
@@ -85,6 +85,7 @@ const getProjectList = (
   skip,
   limit,
   loadMore,
+  setLoadMore,
   reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -121,6 +122,7 @@ const getProjectList = (
         }
         setDataNum(result.data.nrOfElements);
         setIsLoading(false);
+        setLoadMore(false);
       } catch (error) {
         console.error(error);
       }
