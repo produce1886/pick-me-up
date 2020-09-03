@@ -1,7 +1,7 @@
 import Icon from "../atoms/Icon/Comment";
 import Text from "../atoms/Text";
 
-export default function CommentCount(props) {
+function CommentCount(props) {
   return (
     <>
       <Icon
@@ -14,3 +14,4 @@ export default function CommentCount(props) {
     </>
   );
 }
+export default React.memo(CommentCount);

@@ -3,7 +3,7 @@ import Wrapper from "../../atoms/Button/Tag";
 import styled from "styled-components";
 import IconX from "../../atoms/Icon/X";
 
-export default function Button(props) {
+function Button(props) {
   let background = "#c8acee";
   let bordercolor = "#c8acee";
   let textcolor = "#fff";
@@ -43,6 +43,8 @@ export default function Button(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(Button);
 
 const IconButton = styled.div`
   width: fit-content;

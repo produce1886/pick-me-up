@@ -5,7 +5,7 @@ import Row from "../../atoms/Row";
 import Col from "../../atoms/Col";
 import Profile from "../../molecules/Profile";
 
-export default function Top(props) {
+function Top(props) {
   return (
     <Wrapper>
       <Col>
@@ -40,6 +40,8 @@ export default function Top(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(Top);
 
 const Wrapper = styled.div`
   width: 100%;

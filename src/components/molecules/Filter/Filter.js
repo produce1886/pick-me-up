@@ -9,7 +9,7 @@ import Icondown from "../../atoms/Icon/Filter/Down";
 import IconX from "../../atoms/Icon/X";
 import DropdownMenu from "../Filter/DropdownMenu";
 
-export default function Filter(props) {
+function Filter(props) {
   const iconStyle = {
     width: "0.6rem",
     height: "0.4rem",
@@ -130,6 +130,8 @@ export default function Filter(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(Filter);
 
 const Button = styled.div`
   display: flex;

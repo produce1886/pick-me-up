@@ -4,7 +4,7 @@ import Text from "../atoms/Text";
 import ImageHolder from "../atoms/ImageHolder/Profile";
 import Wrapper from "../atoms/Profile";
 
-export default function Profile(props) {
+function Profile(props) {
   return (
     <Wrapper>
       {props.profileImage ? (
@@ -37,6 +37,8 @@ export default function Profile(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(Profile);
 
 const Img = styled.img`
   width: 100%;

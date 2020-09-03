@@ -6,7 +6,6 @@ export default styled.div`
   font-family: inherit;
   border: none;
   border-radius: 0.2rem;
-  padding: 0 0.4rem 0 0.4rem;
   margin: 0 0.8rem 0 0;
   display: flex;
   flex-direction: row;
