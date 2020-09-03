@@ -8,21 +8,15 @@ import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
 export default function Portfoliolist(props) {
   const { category, field, query, sort, reload } = props;
-  const [skip, setSkip] = useState(0);
   const [portfolio, setPortfolio] = useState([]);
   const [limit, setLimit] = useState(15);
-  const [loadMore, setLoadMore] = useState(false);
   const { isLoading, dataNum } = getPortfolioList(
     category,
     field,
     query,
     sort,
-    portfolio,
     setPortfolio,
-    skip,
     limit,
-    loadMore,
-    setLoadMore,
     reload
   );
 
@@ -31,8 +25,7 @@ export default function Portfoliolist(props) {
   ));
 
   const loadMoreHandler = () => {
-    setLoadMore(true);
-    setSkip(skip + 1);
+    setLimit(limit + 15);
   };
 
   if (isLoading) {
@@ -81,12 +74,8 @@ const getPortfolioList = (
   field,
   query,
   sort,
-  portfolio,
   setPortfolio,
-  skip,
   limit,
-  loadMore,
-  setLoadMore,
   reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -114,20 +103,15 @@ const getPortfolioList = (
           `${process.env.API_HOST}/portfolios/list`,
           body
         );
-        if (loadMore) {
-          setPortfolio([...portfolio, ...result.data.pagelist]);
-        } else {
-          setPortfolio(result.data.pagelist);
-        }
+        setPortfolio(result.data.pagelist);
         setDataNum(result.data.nrOfElements);
         setIsLoading(false);
-        setLoadMore(false);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [category, field, query, sort, skip, reload]);
+  }, [category, field, query, sort, limit, reload]);
   return { isLoading, dataNum };
 };
 

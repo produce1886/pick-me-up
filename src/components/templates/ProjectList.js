@@ -9,9 +9,7 @@ import Skeleton from "../_skeletons/project/ProjectBlock";
 export default function Projectlist(props) {
   const { category, field, region, projectType, query, sort, reload } = props;
   const [project, setProject] = useState([]);
-  const [skip, setSkip] = useState(0);
   const [limit, setLimit] = useState(10);
-  const [loadMore, setLoadMore] = useState(false);
   const { isLoading, dataNum } = getProjectList(
     category,
     field,
@@ -19,12 +17,8 @@ export default function Projectlist(props) {
     projectType,
     query,
     sort,
-    project,
     setProject,
-    skip,
     limit,
-    loadMore,
-    setLoadMore,
     reload
   );
 
@@ -33,8 +27,7 @@ export default function Projectlist(props) {
   ));
 
   const loadMoreHandler = () => {
-    setLoadMore(true);
-    setSkip(skip + 1);
+    setLimit(limit + 10);
   };
 
   if (isLoading) {
@@ -80,12 +73,8 @@ const getProjectList = (
   projectType,
   query,
   sort,
-  project,
   setProject,
-  skip,
   limit,
-  loadMore,
-  setLoadMore,
   reload
 ) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -97,7 +86,7 @@ const getProjectList = (
   };
 
   let body = {
-    page: skip,
+    page: 0,
     size: limit,
     sortColumn: sortColumn[sort],
     category: category,
@@ -115,20 +104,15 @@ const getProjectList = (
           `${process.env.API_HOST}/projects/list`,
           body
         );
-        if (loadMore) {
-          setProject([...project, ...result.data.pagelist]);
-        } else {
-          setProject(result.data.pagelist);
-        }
+        setProject(result.data.pagelist);
         setDataNum(result.data.nrOfElements);
         setIsLoading(false);
-        setLoadMore(false);
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
-  }, [category, field, region, projectType, query, sort, skip, reload]);
+  }, [category, field, region, projectType, query, sort, limit, reload]);
   return { isLoading, dataNum };
 };
 
