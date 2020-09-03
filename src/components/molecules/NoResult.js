@@ -13,7 +13,7 @@ function NoResult() {
         죄송합니다.
       </Text>
       <Text color="#d3d4d8" level={12} weight="bold">
-        발견된 프로젝트가 없습니다.
+        발견된 게시글이 없습니다.
       </Text>
     </Div>
   );
