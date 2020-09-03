@@ -6,7 +6,7 @@ import BottomButtons from "../organisms/BottomButtons";
 import NoResult from "../molecules/NoResult";
 import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
-export default function Portfoliolist(props) {
+function PortfolioList(props) {
   const { category, field, query, sort, reload } = props;
   const [portfolio, setPortfolio] = useState([]);
   const [limit, setLimit] = useState(15);
@@ -68,6 +68,8 @@ export default function Portfoliolist(props) {
     </>
   );
 }
+
+export default React.memo(PortfolioList);
 
 const getPortfolioList = (
   category,

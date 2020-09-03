@@ -3,7 +3,7 @@ import Search from "../molecules/Input/Search";
 import Filters from "../molecules/Filter/FilterGroup";
 import Wrapper from "../atoms/FilterSearch";
 
-export default function FilterSearch(props) {
+function FilterSearch(props) {
   return (
     <Wrapper>
       <InnerWrapper>
@@ -23,6 +23,8 @@ export default function FilterSearch(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(FilterSearch);
 
 const InnerWrapper = styled.div`
   margin: 0 auto;
