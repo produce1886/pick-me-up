@@ -2,7 +2,7 @@ import Wrapper from "../../atoms/Filter/FilterItem";
 import { useState } from "react";
 import Text from "../../atoms/Text";
 
-export default function FilterItem(props) {
+function FilterItem(props) {
   const [mouseon, setColor] = useState(false);
 
   return (
@@ -22,3 +22,5 @@ export default function FilterItem(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(FilterItem);

@@ -1,13 +1,15 @@
 import Icon from "../../atoms/Icon/Write";
 import styled from "styled-components";
 
-export default function WriteButton(props) {
+function WriteButton(props) {
   return (
     <ButtonWrapper onClick={props.openWrite}>
       <Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
     </ButtonWrapper>
   );
 }
+
+export default React.memo(WriteButton);
 
 const ButtonWrapper = styled.button`
   width: 2.4rem;

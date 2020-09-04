@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
 import Wrapper from "../atoms/Modal/Wrapper";
 import Inner from "../atoms/Modal/Inner";
-import Top from "../molecules/Modal/ModalTop";
-import Middle from "../molecules/Modal/ModalMiddle";
-import Bottom from "../molecules/Modal/ModalBottom";
+import Top from "../molecules/ModalWrite/Top";
+import Middle from "../molecules/ModalWrite/Middle";
+import Bottom from "../molecules/ModalWrite/Bottom";
 
-export default function ModalWrite(props) {
+function ModalWrite(props) {
   const state = useSelector((state) => state.user);
   const email = state.userData.email;
   const [title, setTitle] = useState("");
@@ -20,7 +20,7 @@ export default function ModalWrite(props) {
   const [images, setImages] = useState([]);
   const [tags, setTags] = useState([]);
 
-  const post = () => {
+  const post = useCallback(() => {
     let flag = checkIsNotEmpty();
     if (!flag) {
       return;
@@ -80,7 +80,7 @@ export default function ModalWrite(props) {
         alert("에러가 발생했습니다.");
       }
     }
-  };
+  }, [title, content, category, field, region, projectType, tags, images]);
 
   const isEmpty = function (value) {
     if (
@@ -124,11 +124,11 @@ export default function ModalWrite(props) {
     return true;
   };
 
-  const onMaskClick = (e) => {
+  const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
       props.onClose(e);
     }
-  };
+  }, []);
 
   return (
     <>
@@ -169,3 +169,5 @@ export default function ModalWrite(props) {
     </>
   );
 }
+
+export default React.memo(ModalWrite);

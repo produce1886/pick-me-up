@@ -1,9 +1,9 @@
+import { useCallback } from "react";
 import ItemWrapper from "../../molecules/Filter/FilterItem";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
-import { useState } from "react";
 import axios from "axios";
 
-export default function EditnDelete(props) {
+function EditnDelete(props) {
   const pid = parseInt(props.pid, 10);
   const data = [
     { key: 0, title: "댓글 수정", type: "more", mode: "edit" },
@@ -60,18 +60,23 @@ export default function EditnDelete(props) {
     fetchData();
   };
 
-  const UpdateComment = () => {
+  const updateComment = () => {
     getComment();
     props.setEdit(true);
     props.setClicked(false);
   };
-  const setSelected = (item) => {
-    if (item.key === 1) {
-      deleteComment();
-    } else if (item.key === 0) {
-      UpdateComment();
-    }
-  };
+
+  const setSelected = useCallback(
+    (item) => {
+      if (item.key === 1) {
+        deleteComment();
+      } else if (item.key === 0) {
+        updateComment();
+      }
+    },
+    [item]
+  );
+
   return (
     <Wrapper
       zIndex="100"
@@ -92,3 +97,5 @@ export default function EditnDelete(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(EditnDelete);

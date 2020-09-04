@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Wrapper from "../../atoms/Input/Search";
 import Icon from "../../atoms/Icon/Search";
 import styled from "styled-components";
 
@@ -11,7 +10,7 @@ export default function Search(props) {
   };
 
   const doSearch = () => {
-    if (keyword) props.setQuery(keyword);
+    props.setQuery(keyword);
   };
 
   const enterHandler = (e) => {
@@ -60,4 +59,17 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   margin: 0 0.5rem 0 0;
+`;
+
+const Wrapper = styled.div`
+  width: 10.32rem;
+  height: 1.6rem;
+  border-radius: 2rem;
+  background-color: #f0f1f3;
+  align-items: center;
+  border: 0.04rem solid #d3d4d8;
+  padding: 0.4rem 0.8rem 0.4rem 0.8rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
 `;

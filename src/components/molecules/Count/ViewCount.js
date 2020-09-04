@@ -1,7 +1,7 @@
-import Icon from "../atoms/Icon/View";
-import Text from "../atoms/Text";
+import Icon from "../../atoms/Icon/View";
+import Text from "../../atoms/Text";
 
-export default function ViewCount(props) {
+function ViewCount(props) {
   return (
     <>
       <Icon style={{ width: "1rem", height: "0.7rem" }} fill="#c8acee"></Icon>
@@ -11,3 +11,5 @@ export default function ViewCount(props) {
     </>
   );
 }
+
+export default React.memo(ViewCount);

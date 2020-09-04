@@ -5,7 +5,7 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
 
-export default function ModalBottom(props) {
+function ModalBottom(props) {
   let { tags } = props;
   const [tagInput, setTagInput] = useState("");
 
@@ -67,6 +67,8 @@ export default function ModalBottom(props) {
     </Bottom>
   );
 }
+
+export default React.memo(ModalBottom);
 
 const ButtonWrapper = styled.div`
   width: 5rem;

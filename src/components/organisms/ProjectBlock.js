@@ -2,9 +2,9 @@ import styled from "styled-components";
 import Text from "../atoms/Text";
 import Top from "../molecules/ProjectBlock/Top";
 import Bottom from "../molecules/ProjectBlock/Bottom";
-import Wrapper from "../atoms/ProjectBlock";
+import Wrapper from "../atoms/Wrapper/ProjectBlock";
 
-export default function ProjectBlock(props) {
+function ProjectBlock(props) {
   const date = props.item.createdDate.split("T")[0];
 
   return (
@@ -33,6 +33,8 @@ export default function ProjectBlock(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(ProjectBlock);
 
 const Body = styled.div`
   width: 100%;

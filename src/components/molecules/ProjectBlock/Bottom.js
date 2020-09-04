@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import ViewCount from "../ViewCount";
-import CommentCount from "../CommentCount";
+import ViewCount from "../Count/ViewCount";
+import CommentCount from "../Count/CommentCount";
 import MoreButton from "../Button/More";
 import TagButton from "../Button/Tag";
 
-export default function Bottom(props) {
+function Bottom(props) {
   const renderTags = props.tags.map((item, index) => {
     return <TagButton text={item.tag} key={index}></TagButton>;
   });
@@ -25,6 +25,8 @@ export default function Bottom(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(Bottom);
 
 const Wrapper = styled.div`
   width: 100%;

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useState } from "react";
 import Text from "../../atoms/Text";
-import Comment from "../../organisms/Comment/Comment";
-import CommentWrite from "../../organisms/Comment/CommentWrite";
+import Comment from "../../molecules/Comment/Comment";
+import CommentWrite from "../../molecules/Comment/CommentWrite";
 
-export default function ModalBottom(props) {
+function ModalBottom(props) {
   //수정 댓글 아이디 받아오는 state
   const [cidUpdate, setCidUpdate] = useState("");
   //수정 댓글 본문 받아오는 state
@@ -12,51 +12,50 @@ export default function ModalBottom(props) {
   const [edit, setEdit] = useState(false);
 
   return (
-    <>
-      <Bottom>
-        <Div>
-          <Text level={4} weight={500} color="#9c69e2">
-            {props.commentsNum}
-          </Text>
-          &nbsp;
-          <Text level={4} weight={500} color="#232735">
-            {props.commentsNum < 2 ? "Comment" : "Comments"}
-          </Text>
-        </Div>
-        {props.comments &&
-          props.comments.map((item, index) => (
-            <Comment
-              type={props.type}
-              comment={item.content}
-              date={item.createdDate}
-              userInfo={item.user}
-              id={item.id}
-              key={index}
-              pid={props.pid}
-              setCidUpdate={setCidUpdate}
-              setContentUpdate={setContentUpdate}
-              setEdit={setEdit}
-              modalReload={props.modalReload}
-              setModalReload={props.setModalReload}
-            ></Comment>
-          ))}
-
-        <CommentWrite
-          type={props.type}
-          pid={props.pid}
-          contentUpdate={contentUpdate}
-          setContentUpdate={setContentUpdate}
-          edit={edit}
-          pid={props.pid}
-          cid={cidUpdate}
-          setEdit={setEdit}
-          modalReload={props.modalReload}
-          setModalReload={props.setModalReload}
-        ></CommentWrite>
-      </Bottom>
-    </>
+    <Bottom>
+      <Div>
+        <Text level={4} weight={500} color="#9c69e2">
+          {props.commentsNum}
+        </Text>
+        &nbsp;
+        <Text level={4} weight={500} color="#232735">
+          {props.commentsNum < 2 ? "Comment" : "Comments"}
+        </Text>
+      </Div>
+      {props.comments &&
+        props.comments.map((item, index) => (
+          <Comment
+            type={props.type}
+            comment={item.content}
+            date={item.createdDate}
+            userInfo={item.user}
+            id={item.id}
+            key={index}
+            pid={props.pid}
+            setCidUpdate={setCidUpdate}
+            setContentUpdate={setContentUpdate}
+            setEdit={setEdit}
+            modalReload={props.modalReload}
+            setModalReload={props.setModalReload}
+          ></Comment>
+        ))}
+      <CommentWrite
+        type={props.type}
+        pid={props.pid}
+        contentUpdate={contentUpdate}
+        setContentUpdate={setContentUpdate}
+        edit={edit}
+        pid={props.pid}
+        cid={cidUpdate}
+        setEdit={setEdit}
+        modalReload={props.modalReload}
+        setModalReload={props.setModalReload}
+      ></CommentWrite>
+    </Bottom>
   );
 }
+
+export default React.memo(ModalBottom);
 
 const Div = styled.div`
   align-items: center;

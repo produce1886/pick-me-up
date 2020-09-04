@@ -2,10 +2,10 @@ import styled from "styled-components";
 import Link from "next/link";
 import Text from "../atoms/Text";
 import Detail from "../molecules/PortfolioBlock/Detail";
-import Wrapper from "../atoms/PortfolioBlock";
+import Wrapper from "../atoms/Wrapper/PortfolioBlock";
 import { useState } from "react";
 
-export default function PortfolioBlock(props) {
+function PortfolioBlock(props) {
   const [show, setShow] = useState(false);
 
   return (
@@ -36,6 +36,8 @@ export default function PortfolioBlock(props) {
     </Link>
   );
 }
+
+export default React.memo(PortfolioBlock);
 
 const Img = styled.img`
   width: 100%;

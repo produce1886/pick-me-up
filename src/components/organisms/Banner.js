@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Wrapper from "../atoms/Banner/Wrapper";
 import Item from "../molecules/BannerItem";
 import Carousel from "nuka-carousel";
