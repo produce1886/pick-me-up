@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 import Text from "../../atoms/Text";
-import Comment from "../../organisms/Comment/Comment";
-import CommentWrite from "../../organisms/Comment/CommentWrite";
+import Comment from "../../molecules/Comment/Comment";
+import CommentWrite from "../../molecules/Comment/CommentWrite";
 
 function ModalBottom(props) {
   //수정 댓글 아이디 받아오는 state
