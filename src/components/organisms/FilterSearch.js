@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Search from "../molecules/Input/Search";
 import Filters from "../molecules/Filter/FilterGroup";
-import Wrapper from "../atoms/FilterSearch";
 
 function FilterSearch(props) {
   return (
@@ -34,4 +33,18 @@ const InnerWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+`;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 3rem;
+  font-family: inherit;
+  border: none;
+  border-radius: 0.2rem;
+  margin: 0 0.8rem 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 `;

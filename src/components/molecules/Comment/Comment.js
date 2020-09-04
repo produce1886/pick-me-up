@@ -1,4 +1,3 @@
-import Wrapper from "../../atoms/Comment";
 import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Text from "../../atoms/Text";
@@ -119,4 +118,15 @@ const ButtonWrapper = styled.button`
   box-sizing: border-box;
   border-radius: 0.2rem;
   padding: unset;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  position: relative;
+  box-sizing: border-box;
+  margin: 0.2rem 0;
 `;
