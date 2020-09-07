@@ -1,4 +1,3 @@
-import Wrapper from "../atoms/Footer";
 import styled from "styled-components";
 import Logo from "../atoms/Image/Logo";
 import Text from "../atoms/Text";
@@ -34,4 +33,16 @@ const InnerWrapper = styled.div`
 
 const TextWrapper = styled.div`
   width: 7.8rem;
+`;
+
+const Wrapper = styled.footer`
+  width: 100%;
+  height: 8rem;
+  background-color: #f0f1f3;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  padding: 1.8rem 4rem 1.8rem 4rem;
 `;

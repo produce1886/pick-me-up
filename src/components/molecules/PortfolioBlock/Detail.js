@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
-import ViewCount from "../ViewCount";
-import CommentCount from "../CommentCount";
+import ViewCount from "../Count/ViewCount";
+import CommentCount from "../Count/CommentCount";
 import Profile from "../../molecules/Profile";
 
 function Detail(props) {

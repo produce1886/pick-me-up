@@ -1,4 +1,4 @@
-import Wrapper from "src/components/atoms/ProjectBlock";
+import Wrapper from "src/components/atoms/Wrapper/ProjectBlock";
 import styled, { css } from "styled-components";
 
 export default function Skeleton() {

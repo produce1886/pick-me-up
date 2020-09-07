@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Text from "../atoms/Text";
 import Top from "../molecules/ProjectBlock/Top";
 import Bottom from "../molecules/ProjectBlock/Bottom";
-import Wrapper from "../atoms/ProjectBlock";
+import Wrapper from "../atoms/Wrapper/ProjectBlock";
 
 function ProjectBlock(props) {
   const date = props.item.createdDate.split("T")[0];

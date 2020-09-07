@@ -1,5 +1,5 @@
-import Icon from "../atoms/Icon/Comment";
-import Text from "../atoms/Text";
+import Icon from "../../atoms/Icon/Comment";
+import Text from "../../atoms/Text";
 
 function CommentCount(props) {
   return (

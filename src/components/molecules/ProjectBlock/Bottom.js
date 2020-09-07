@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import ViewCount from "../ViewCount";
-import CommentCount from "../CommentCount";
+import ViewCount from "../Count/ViewCount";
+import CommentCount from "../Count/CommentCount";
 import MoreButton from "../Button/More";
 import TagButton from "../Button/Tag";
 

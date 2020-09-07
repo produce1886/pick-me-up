@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import Wrapper from "../../atoms/CommentWrite";
 import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Icon from "../../atoms/Icon/Write";
@@ -149,4 +148,14 @@ const Textarea = styled.textarea`
   input:-ms-input-placeholder {
     color: #d3d4d8;
   }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 3.3rem;
+  position: relative;
+  box-sizing: border-box;
 `;

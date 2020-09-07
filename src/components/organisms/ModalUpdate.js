@@ -4,9 +4,9 @@ import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
 import Wrapper from "../atoms/Modal/Wrapper";
 import Inner from "../atoms/Modal/Inner";
-import Top from "../molecules/Modal/ModalTop";
-import Middle from "../molecules/Modal/ModalMiddle";
-import Bottom from "../molecules/Modal/ModalBottom";
+import Top from "../molecules/ModalWrite/Top";
+import Middle from "../molecules/ModalWrite/Middle";
+import Bottom from "../molecules/ModalWrite/Bottom";
 
 function ModalUpdate(props) {
   const state = useSelector((state) => state.user);

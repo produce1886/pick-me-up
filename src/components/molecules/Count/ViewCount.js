@@ -1,5 +1,5 @@
-import Icon from "../atoms/Icon/View";
-import Text from "../atoms/Text";
+import Icon from "../../atoms/Icon/View";
+import Text from "../../atoms/Text";
 
 function ViewCount(props) {
   return (

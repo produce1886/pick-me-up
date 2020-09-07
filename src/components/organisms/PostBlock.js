@@ -1,4 +1,4 @@
-import Wrapper from "../atoms/PostBlock";
+import Wrapper from "../atoms/Wrapper/PostBlock";
 import Top from "../molecules/PostBlock/Top";
 import Bottom from "../molecules/PostBlock/Bottom";
 import styled from "styled-components";

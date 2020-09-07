@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Text from "../atoms/Text";
 import Detail from "../molecules/PortfolioBlock/Detail";
-import Wrapper from "../atoms/PortfolioBlock";
+import Wrapper from "../atoms/Wrapper/PortfolioBlock";
 import { useState } from "react";
 
 function PortfolioBlock(props) {
