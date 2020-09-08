@@ -12,9 +12,6 @@ React.js, Next.js, TypeScript, Redux
 <li>댓글을 사용한 소통 기능 (커뮤니티 기능) (Communication with posts and comments)
 </ul>
 
-Startup and project team member job posting upload function
-Portfolio upload function
-Communication function using comments (community function)
 ## 팀 구성원 (Team Members)
 <ul>
 <li>프론트엔드 개발(Front-end): <a href="github.com/chorom-ham">함초롬</a>, <a href="github.com/leesoeun98">이소은</a>
