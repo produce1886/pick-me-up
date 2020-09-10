@@ -64,11 +64,12 @@ export default React.memo(PortfolioBody);
 const Wrapper = styled.div`
   background-color: #f5edff;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  min-height: 30rem;
 `;
 
 const InnerWrapper = styled.div`
