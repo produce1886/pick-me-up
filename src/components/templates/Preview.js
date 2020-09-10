@@ -134,6 +134,6 @@ const Col = styled.div`
   flex-direction: column;
   box-sizing: border-box;
   margin: 0 4rem 0 4rem;
-  max-width: 1200px;
+  max-width: 92%;
   width: 48rem;
 `;

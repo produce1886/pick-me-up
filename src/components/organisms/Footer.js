@@ -7,32 +7,38 @@ export default function Footer() {
     <Wrapper>
       <InnerWrapper>
         <Logo style={{ width: "5rem", height: "1.5rem" }}></Logo>
-        <TextWrapper>
+        <Div>
           <Text level={1} weight={500} color="#232735">
-            &nbsp;&nbsp;&nbsp;기획자와 개발자, 디자이너들의
-            &nbsp;&nbsp;&nbsp;네트워킹 플랫폼
+            기획자와 개발자, 디자이너들의
           </Text>
-        </TextWrapper>
-        <Text level={0} color="#232735">
-          &nbsp;&nbsp;&nbsp;© 2020 pickmeup. All rights reserved.
-        </Text>
+          <Text level={1} weight={500} color="#232735">
+            네트워킹 플랫폼
+          </Text>
+          <Text level={0} color="#232735">
+            © 2020 pickmeup. All rights reserved.
+          </Text>
+        </Div>
       </InnerWrapper>
     </Wrapper>
   );
 }
 
+const Div = styled.div`
+  margin-left: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  height: 2.5rem;
+  justify-content: space-between;
+`;
+
 const InnerWrapper = styled.div`
-  max-width: 1200px;
+  max-width: 92%;
   width: 48rem;
   height: 4.4rem;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   justify-content: space-between;
-`;
-
-const TextWrapper = styled.div`
-  width: 7.8rem;
 `;
 
 const Wrapper = styled.footer`
