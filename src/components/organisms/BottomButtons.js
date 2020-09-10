@@ -22,7 +22,7 @@ const InnerWrapper = styled.div`
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
-  max-width: 1200px;
+  max-width: 92%;
   width: 48rem;
   position: relative;
   align-items: center;
