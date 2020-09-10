@@ -22,7 +22,7 @@ export default function Footer() {
 }
 
 const InnerWrapper = styled.div`
-  max-width: 1200px;
+  max-width: 92%;
   width: 48rem;
   height: 4.4rem;
   display: flex;

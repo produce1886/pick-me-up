@@ -27,7 +27,7 @@ export default React.memo(FilterSearch);
 
 const InnerWrapper = styled.div`
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 92%;
   width: 48rem;
   align-items: center;
   box-sizing: border-box;
