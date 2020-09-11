@@ -3,4 +3,4 @@ import user from "./user";
 
 const rootReducer = combineReducers({ user });
 
-export default rootReducer; // used as reducer in _app.js
+export default rootReducer;
