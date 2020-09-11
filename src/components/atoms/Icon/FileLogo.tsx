@@ -23,4 +23,4 @@ function Icon({ style, fill }: IconProps) {
   );
 }
 
-export default Icon;
+export default React.memo(Icon);
