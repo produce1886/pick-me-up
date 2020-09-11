@@ -1,6 +1,7 @@
 import React from "react";
+import IconProps from "../Icon/icon";
 
-function Icon({ style }) {
+function Logo({ style, fill }: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -59,4 +60,4 @@ function Icon({ style }) {
   );
 }
 
-export default Icon;
+export default React.memo(Logo);
