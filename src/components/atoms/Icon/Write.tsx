@@ -1,6 +1,7 @@
 import React from "react";
+import IconProps from "./icon";
 
-function Icon({ style }) {
+function Icon({ style, fill }: IconProps) {
   return (
     <svg
       style={style}

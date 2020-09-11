@@ -1,20 +1,23 @@
 import React from "react";
+import IconProps from "./icon";
 
-function Icon({ style, fill }) {
+function Icon({ style, fill }: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       style={style}
       fill="none"
-      viewBox="0 0 24 24"
+      viewBox="0 0 21 20"
     >
-      <path
+      <g
         stroke={fill}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
-        d="M18 6L6 18M6 6l12 12"
-      ></path>
+      >
+        <path d="M9.2 17a8 8 0 100-16 8 8 0 000 16z"></path>
+        <path d="M19.199 19l-4.35-4.35"></path>
+      </g>
     </svg>
   );
 }
