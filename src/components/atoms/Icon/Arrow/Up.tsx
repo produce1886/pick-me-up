@@ -1,6 +1,7 @@
 import React from "react";
+import IconProps from "../icon";
 
-function Icon({ style, fill }) {
+function Icon({ style, fill }: IconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,10 +14,10 @@ function Icon({ style, fill }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
-        d="M18 6L6 18M6 6l12 12"
+        d="M12 21V5m-7 7l7-7 7 7"
       ></path>
     </svg>
   );
 }
 
-export default Icon;
+export default React.memo(Icon);
