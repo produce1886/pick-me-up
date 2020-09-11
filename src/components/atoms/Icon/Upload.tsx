@@ -1,6 +1,7 @@
 import React from "react";
+import IconProps from "./icon";
 
-function Icon({ style, fill }) {
+function Icon({ style, fill }: IconProps) {
   return (
     <svg
       version="1.1"
@@ -30,4 +31,4 @@ function Icon({ style, fill }) {
   );
 }
 
-export default Icon;
+export default React.memo(Icon);

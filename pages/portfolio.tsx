@@ -8,9 +8,9 @@ import Footer from "../src/components/organisms/Footer";
 
 export default function Portfolio() {
   const router = useRouter();
-  const [update, setUpdate] = useState(false); //수정
-  const [reload, setReload] = useState(0);
-  const [modalReload, setModalReload] = useState(0);
+  const [update, setUpdate] = useState<boolean>(false); //수정
+  const [reload, setReload] = useState<number>(0);
+  const [modalReload, setModalReload] = useState<number>(0);
 
   return (
     <>
