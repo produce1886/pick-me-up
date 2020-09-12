@@ -1,7 +1,7 @@
-import SkeletonTop from "src/components/atoms/Modal/Top";
-import SkeletonMiddle from "src/components/atoms/Modal/Middle";
-import SkeletonBottom from "src/components/atoms/Modal/Bottom";
-import TagIcon from "src/components/atoms/Icon/Tag";
+import SkeletonTop from "../../atoms/Modal/Top";
+import SkeletonMiddle from "../../atoms/Modal/Middle";
+import SkeletonBottom from "../../atoms/Modal/Bottom";
+import TagIcon from "../../atoms/Icon/Tag";
 import styled, { css } from "styled-components";
 
 export default function Skeleton() {
