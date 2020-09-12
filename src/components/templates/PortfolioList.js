@@ -26,7 +26,7 @@ function PortfolioList(props) {
 
   const loadMoreHandler = useCallback(() => {
     setLimit(limit + 15);
-  }, []);
+  }, [limit]);
 
   if (isLoading) {
     return (
