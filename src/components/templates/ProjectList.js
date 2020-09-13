@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import ProjectBlock from "../organisms/ProjectBlock";
 import NoResult from "../molecules/NoResult";
-import BottomButtons from "../organisms/BottomButtons";
+import MoreListButton from "../molecules/Button/MoreList";
 import Skeleton from "../_skeletons/project/ProjectBlock";
 
 function ProjectList(props) {
@@ -58,10 +58,16 @@ function ProjectList(props) {
   return (
     <>
       <Wrapper>{!isLoading && project.length > 0 && renderBlocks}</Wrapper>
-      <BottomButtons
-        onClick={loadMoreHandler}
-        loadMoreVisible={project.length < dataNum}
-      ></BottomButtons>
+      <MoreWrapper>
+        <MoreInnerWrapper>
+          {project.length < dataNum && (
+            <MoreListButton
+              text="더 불러오기"
+              onClick={loadMoreHandler}
+            ></MoreListButton>
+          )}
+        </MoreInnerWrapper>
+      </MoreWrapper>
     </>
   );
 }
@@ -127,4 +133,28 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin: 0 0 2rem 0;
+  porsition: relative;
+`;
+
+const MoreInnerWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  max-width: 92%;
+  width: 48rem;
+  height: 2rem;
+  position: relative;
+  justify-content: center;
+  align-itmes: center;
+`;
+const MoreWrapper = styled.div`
+  background-color: transparent;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  padding: 0 1.8rem 0 0;
 `;

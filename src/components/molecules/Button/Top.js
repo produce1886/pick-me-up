@@ -29,6 +29,7 @@ const A = styled.a``;
 
 const Button = styled.button`
   width: fit-content;
+  height: 2.4rem;
   justify-content: center;
   align-items: center;
   bottom: 0;
@@ -36,4 +37,8 @@ const Button = styled.button`
   flex-direction: column;
   background-color: transparent;
   border: none;
+  position: fixed;
+  top: 50%;
+  left: 10%;
+  z-index: 999;
 `;

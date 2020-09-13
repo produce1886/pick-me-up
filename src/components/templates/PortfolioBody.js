@@ -6,6 +6,7 @@ import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
 import PortfolioList from "./PortfolioList";
 import WriteButton from "../molecules/Button/Write";
+import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
 
 function PortfolioBody(props) {
@@ -42,6 +43,7 @@ function PortfolioBody(props) {
             reload={props.reload}
           ></PortfolioList>
         </InnerWrapper>
+        <TopButton></TopButton>
         {isSignedIn && !writeVisible && !props.viewVisible && (
           <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
         )}
