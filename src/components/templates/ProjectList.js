@@ -28,7 +28,7 @@ function ProjectList(props) {
 
   const loadMoreHandler = useCallback(() => {
     setLimit(limit + 10);
-  }, []);
+  }, [limit]);
 
   if (isLoading) {
     return (
