@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useCallback, SetStateAction, Dispatch } from "react";
+import { useSelector, DefaultRootState } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
 import Wrapper from "../atoms/Modal/Wrapper";
@@ -7,9 +7,20 @@ import Inner from "../atoms/Modal/Inner";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
+import { State } from "../../types/User";
+import ModalProps from "../../types/Modal";
 
-function ModalWrite(props) {
-  const state = useSelector((state) => state.user);
+//게시글 생성 시에는 이미지의 타입이 File이지만, post할 때 File.data: string을 보내므로
+//ModalUpdate와 ModalView에서는 image를 모두 string[]로 변경
+//-> 문제는 ModalUpdate 시에는 setImages()로 File객체를 다시보내야하는데...이땐 어케 할거냐
+//-> dropzone의 preview는 file.data라 string이긴함
+type File = Blob & {
+  invalid: boolean;
+  data: string;
+};
+
+function ModalWrite(props: ModalProps) {
+  const state = useSelector((state: { user: State }) => state.user);
   const email = state.userData.email;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -17,8 +28,8 @@ function ModalWrite(props) {
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
-  const [images, setImages] = useState([]);
-  const [tags, setTags] = useState([]);
+  const [images, setImages] = useState<File[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
 
   const post = useCallback(() => {
     let flag = checkIsNotEmpty();
@@ -82,6 +93,7 @@ function ModalWrite(props) {
     }
   }, [title, content, category, field, region, projectType, tags, images]);
 
+  /*
   const isEmpty = function (value) {
     if (
       value == "" ||
@@ -93,31 +105,31 @@ function ModalWrite(props) {
     } else {
       return false;
     }
-  };
+  };*/
 
   const checkIsNotEmpty = () => {
     let flag = false;
-    if (isEmpty(title)) {
+    if (!title) {
       alert("제목을 입력하세요");
       return flag;
     }
-    if (isEmpty(content)) {
+    if (!content) {
       alert("내용을 입력하세요");
       return flag;
     }
-    if (isEmpty(category)) {
+    if (!category) {
       alert("카테고리를 선택해주세요");
       return flag;
     }
-    if (isEmpty(field)) {
+    if (!field) {
       alert("구인분야를 선택해주세요");
       return flag;
     }
-    if (isEmpty(region) && props.type === "project") {
+    if (!region && props.type === "project") {
       alert("지역을 선택해주세요");
       return flag;
     }
-    if (isEmpty(projectType) && props.type === "project") {
+    if (!projectType && props.type === "project") {
       alert("프로젝트 종류를 선택해주세요");
       return flag;
     }
@@ -126,19 +138,14 @@ function ModalWrite(props) {
 
   const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
-      props.onClose(e);
+      props.onClose();
     }
   }, []);
 
   return (
     <>
       <Overlay visible={props.visible} onClick={onMaskClick} />
-      <Wrapper
-        tabIndex="-1"
-        visible={props.visible}
-        height="62rem"
-        onClick={onMaskClick}
-      >
+      <Wrapper visible={props.visible} onClick={onMaskClick}>
         <Inner>
           <Top
             type={props.type}
