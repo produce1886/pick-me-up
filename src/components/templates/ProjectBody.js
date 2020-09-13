@@ -5,6 +5,7 @@ import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
 import ProjectList from "./ProjectList";
 import WriteButton from "../molecules/Button/Write";
+import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
 import { useSelector } from "react-redux";
 
@@ -49,6 +50,7 @@ function ProjectBody(props) {
           ></ProjectList>
         </InnerWrapper>
       </Wrapper>
+      <TopButton></TopButton>
       {isSignedIn && !writeVisible && !props.viewVisible && (
         <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
       )}

@@ -27,7 +27,7 @@ export default function Project() {
           setModalReload={setModalReload}
         ></Modal>
       )}
-      {update && (
+      {router.query.pid && update && (
         <UpdateModal
           type="project"
           pid={router.query.pid}
