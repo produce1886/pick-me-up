@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
 import Wrapper from "../atoms/Modal/Wrapper";
@@ -8,8 +8,10 @@ import Middle from "../molecules/ModalView/Middle";
 import Bottom from "../molecules/ModalView/Bottom";
 import ProjectSkeleton from "../_skeletons/project/ProjectView";
 import PortfolioSkeleton from "../_skeletons/portfolio/PortfolioView";
+import { ModalProps } from "../../types/Modal";
+import DataProps from "../../types/Data";
 
-function ModalView(props) {
+function ModalView(props: ModalProps) {
   const { data, isLoading } = getData(props.pid, props.type, props.modalReload);
 
   const onMaskClick = useCallback((e) => {
@@ -21,7 +23,7 @@ function ModalView(props) {
   return (
     <>
       <Overlay visible={props.visible} onClick={onMaskClick} />
-      <Wrapper tabIndex="-1" visible={props.visible} onClick={onMaskClick}>
+      <Wrapper visible={props.visible} onClick={onMaskClick}>
         <Inner>
           {isLoading && !data && props.type === "project" && (
             <ProjectSkeleton></ProjectSkeleton>
@@ -73,8 +75,12 @@ function ModalView(props) {
 
 export default React.memo(ModalView);
 
-const getData = (pid, type, modalReload) => {
-  const [data, setData] = useState();
+const getData = (
+  pid: string | string[],
+  type: "project" | "portfolio",
+  modalReload: number
+) => {
+  const [data, setData] = useState<DataProps>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

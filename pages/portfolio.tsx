@@ -27,7 +27,7 @@ export default function Portfolio() {
           setModalReload={setModalReload}
         ></Modal>
       )}
-      {update && (
+      {router.query.pid && update && (
         <UpdateModal
           type="portfolio"
           pid={router.query.pid}
