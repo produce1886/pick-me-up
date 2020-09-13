@@ -7,7 +7,7 @@ import Inner from "../atoms/Modal/Inner";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
-import ModalProps from "../../types/Modal";
+import { ModalUpdateProps } from "../../types/Modal";
 import DataProps from "../../types/Data";
 import { State } from "../../types/User";
 
@@ -16,7 +16,7 @@ type File = Blob & {
   data: string;
 };
 
-function ModalUpdate(props: ModalProps) {
+function ModalUpdate(props: ModalUpdateProps) {
   const state = useSelector((state: { user: State }) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");

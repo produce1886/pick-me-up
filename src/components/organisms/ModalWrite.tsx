@@ -1,5 +1,5 @@
-import React, { useState, useCallback, SetStateAction, Dispatch } from "react";
-import { useSelector, DefaultRootState } from "react-redux";
+import React, { useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
 import Wrapper from "../atoms/Modal/Wrapper";
@@ -8,7 +8,7 @@ import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import { State } from "../../types/User";
-import ModalProps from "../../types/Modal";
+import { ModalProps } from "../../types/Modal";
 
 //게시글 생성 시에는 이미지의 타입이 File이지만, post할 때 File.data: string을 보내므로
 //ModalUpdate와 ModalView에서는 image를 모두 string[]로 변경
