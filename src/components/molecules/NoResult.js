@@ -24,7 +24,9 @@ const Div = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  width: 100%;
+  padding: 3rem;
+  box-sizing: border-box;
 `;
 
 export default NoResult;

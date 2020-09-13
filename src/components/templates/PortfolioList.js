@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import PortfolioBlock from "../organisms/PortfolioBlock";
-import BottomButtons from "../organisms/BottomButtons";
+import MoreListButton from "../molecules/Button/MoreList";
 import NoResult from "../molecules/NoResult";
 import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
@@ -26,7 +26,7 @@ function PortfolioList(props) {
 
   const loadMoreHandler = useCallback(() => {
     setLimit(limit + 15);
-  }, []);
+  }, [limit]);
 
   if (isLoading) {
     return (
@@ -61,10 +61,16 @@ function PortfolioList(props) {
   return (
     <>
       <Wrapper>{!isLoading && portfolio.length > 0 && renderBlocks}</Wrapper>
-      <BottomButtons
-        onClick={loadMoreHandler}
-        loadMoreVisible={portfolio.length < dataNum}
-      ></BottomButtons>
+      <MoreWrapper>
+        <MoreInnerWrapper>
+          {portfolio.length < dataNum && (
+            <MoreListButton
+              text="더 불러오기"
+              onClick={loadMoreHandler}
+            ></MoreListButton>
+          )}
+        </MoreInnerWrapper>
+      </MoreWrapper>
     </>
   );
 }
@@ -125,4 +131,27 @@ const Wrapper = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin: 2rem 0 2rem 0;
+`;
+
+const MoreInnerWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  max-width: 92%;
+  width: 48rem;
+  height: 2rem;
+  position: relative;
+  justify-content: center;
+  align-itmes: center;
+`;
+const MoreWrapper = styled.div`
+  background-color: transparent;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  padding: 0 1.8rem 0 0;
 `;

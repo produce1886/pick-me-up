@@ -6,6 +6,7 @@ import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
 import PortfolioList from "./PortfolioList";
 import WriteButton from "../molecules/Button/Write";
+import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
 
 function PortfolioBody(props) {
@@ -42,6 +43,7 @@ function PortfolioBody(props) {
             reload={props.reload}
           ></PortfolioList>
         </InnerWrapper>
+        <TopButton></TopButton>
         {isSignedIn && !writeVisible && !props.viewVisible && (
           <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
         )}
@@ -64,16 +66,17 @@ export default React.memo(PortfolioBody);
 const Wrapper = styled.div`
   background-color: #f5edff;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  min-height: 30rem;
 `;
 
 const InnerWrapper = styled.div`
   margin: 0 4rem 0 4rem;
-  max-width: 1200px;
+  max-width: 92%;
   width: 48rem;
   align-items: center;
   box-sizing: border-box;

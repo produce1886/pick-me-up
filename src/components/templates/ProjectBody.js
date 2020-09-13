@@ -5,6 +5,7 @@ import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
 import ProjectList from "./ProjectList";
 import WriteButton from "../molecules/Button/Write";
+import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
 import { useSelector } from "react-redux";
 
@@ -49,6 +50,7 @@ function ProjectBody(props) {
           ></ProjectList>
         </InnerWrapper>
       </Wrapper>
+      <TopButton></TopButton>
       {isSignedIn && !writeVisible && !props.viewVisible && (
         <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
       )}
@@ -78,7 +80,7 @@ const Div = styled.div`
 
 const InnerWrapper = styled.div`
   margin: 0 4rem 0 4rem;
-  max-width: 1200px;
+  max-width: 92%;
   width: 48rem;
   align-items: center;
   box-sizing: border-box;
@@ -88,10 +90,11 @@ const InnerWrapper = styled.div`
 
 const Wrapper = styled.div`
   background-color: #f0f8fd;
-  justify-content: center;
   width: 100%;
+  min-height: 30rem;
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   box-sizing: border-box;
 `;
