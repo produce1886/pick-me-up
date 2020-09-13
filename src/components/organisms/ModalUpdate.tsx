@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
@@ -7,17 +7,26 @@ import Inner from "../atoms/Modal/Inner";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
+import ModalProps from "../../types/Modal";
+import DataProps from "../../types/Data";
+import { State } from "../../types/User";
 
-function ModalUpdate(props) {
-  const state = useSelector((state) => state.user);
+type File = Blob & {
+  invalid: boolean;
+  data: string;
+};
+
+function ModalUpdate(props: ModalProps) {
+  const state = useSelector((state: { user: State }) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
-  const [images, setImages] = useState([]);
-  const [tags, setTags] = useState([]);
+  const [images, setImages] = useState<string[]>([]);
+  //const [images, setImages] = useState<File[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
   const { isLoading } = getData(
     props.pid,
     props.type,
@@ -31,12 +40,20 @@ function ModalUpdate(props) {
     setTags
   );
 
+  /*
+ * 원래 jsx 코드
+ * 
   if (tags.length > 0 && typeof tags[0] === "object") {
-    let tagArray = [];
+    let tagArray:string[] = [];
     tags.map((value) => tagArray.push(value.tag));
     setTags(tagArray);
   }
-
+*/
+  if (tags.length > 0 && typeof tags[0] === "object") {
+    let tagArray: string[] = [];
+    tags.map((value: string) => tagArray.push(value));
+    setTags(tagArray);
+  }
   const update = useCallback(() => {
     let flag = checkIsNotEmpty();
     if (!flag) {
@@ -44,7 +61,8 @@ function ModalUpdate(props) {
     } else {
       try {
         if (props.type === "project") {
-          let image = images.length > 0 ? images[0].data : "";
+          //let image = images.length > 0 ? images[0].data : "";
+          let image = images.length > 0 ? images[0] : "";
           let body = {
             title: title,
             content: content,
@@ -59,7 +77,8 @@ function ModalUpdate(props) {
           setTimeout(() => props.setModalReload(props.modalReload + 1), 400);
           props.setUpdate(false);
         } else if (props.type === "portfolio") {
-          let image = images.length > 0 ? images[0].data : "";
+          //let image = images.length > 0 ? images[0].data : "";
+          let image = images.length > 0 ? images[0] : "";
           let body = {
             title: title,
             content: content,
@@ -96,42 +115,29 @@ function ModalUpdate(props) {
     }
   }, [title, content, category, field, region, projectType, tags, images]);
 
-  const isEmpty = function (value) {
-    if (
-      value == "" ||
-      value == null ||
-      value == undefined ||
-      (value != null && typeof value == "object" && !Object.keys(value).length)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const checkIsNotEmpty = () => {
     let flag = false;
-    if (isEmpty(title)) {
+    if (!title) {
       alert("제목을 입력하세요");
       return flag;
     }
-    if (isEmpty(content)) {
+    if (!content) {
       alert("내용을 입력하세요");
       return flag;
     }
-    if (isEmpty(category)) {
+    if (!category) {
       alert("카테고리를 선택해주세요");
       return flag;
     }
-    if (isEmpty(field)) {
+    if (!field) {
       alert("구인분야를 선택해주세요");
       return flag;
     }
-    if (isEmpty(region) && props.type === "project") {
+    if (!region && props.type === "project") {
       alert("지역을 선택해주세요");
       return flag;
     }
-    if (isEmpty(projectType) && props.type === "project") {
+    if (!projectType && props.type === "project") {
       alert("프로젝트 종류를 선택해주세요");
       return flag;
     }
@@ -140,19 +146,14 @@ function ModalUpdate(props) {
 
   const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
-      props.onClose(e);
+      props.onClose();
     }
   }, []);
 
   return (
     <>
       <Overlay visible={!isLoading} onClick={onMaskClick} />
-      <Wrapper
-        tabIndex="-1"
-        visible={!isLoading}
-        height="62rem"
-        onClick={onMaskClick}
-      >
+      <Wrapper visible={!isLoading} onClick={onMaskClick}>
         <Inner>
           <Top
             type={props.type}
@@ -192,18 +193,19 @@ function ModalUpdate(props) {
 export default React.memo(ModalUpdate);
 
 const getData = (
-  pid,
-  type,
-  setTitle,
-  setContent,
-  setCategory,
-  setField,
-  setRegion,
-  setProjectType,
-  setImages,
-  setTags
+  pid: string | string[],
+  type: "project" | "portfolio",
+  setTitle: React.Dispatch<React.SetStateAction<string>>,
+  setContent: React.Dispatch<React.SetStateAction<string>>,
+  setCategory: React.Dispatch<React.SetStateAction<string>>,
+  setField: React.Dispatch<React.SetStateAction<string>>,
+  setRegion: React.Dispatch<React.SetStateAction<string>>,
+  setProjectType: React.Dispatch<React.SetStateAction<string>>,
+  //  setImages: React.Dispatch<React.SetStateAction<File[]>>,
+  setImages: React.Dispatch<React.SetStateAction<string[]>>,
+  setTags: React.Dispatch<React.SetStateAction<string[]>>
 ) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<DataProps>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -211,7 +213,7 @@ const getData = (
       setIsLoading(true);
       try {
         if (type === "project") {
-          const result = await axios.get(
+          const result = await axios.get<DataProps>(
             `${process.env.API_HOST}/projects/${pid}`
           );
           setData(result.data);
@@ -221,13 +223,20 @@ const getData = (
           setField(result.data.huntingField);
           setRegion(result.data.region);
           setProjectType(result.data.projectCategory);
-          if (result.data.image != "") {
+          /*if (!result.data.image) {
             setImages([{ data: result.data.image }]);
+          }*/
+          if (!result.data.image) {
+            setImages([result.data.image]);
           }
-          setTags(result.data.projectTag);
+          let jsonProjectTagArray: string[] = [];
+          jsonProjectTagArray = Object.entries(result.data.projectTag).map(
+            ([value]) => value
+          );
+          setTags(jsonProjectTagArray);
           setIsLoading(false);
         } else if (type === "portfolio") {
-          const result = await axios.get(
+          const result = await axios.get<DataProps>(
             `${process.env.API_HOST}/portfolios/${pid}`
           );
           setData(result.data);
@@ -235,10 +244,17 @@ const getData = (
           setContent(result.data.content);
           setCategory(result.data.category);
           setField(result.data.huntingField);
+          /*if (result.data.image != "") {
+            setImages([{ data: image }]);
+          }*/
           if (result.data.image != "") {
-            setImages([{ data: result.data.image }]);
+            setImages([result.data.image]);
           }
-          setTags(result.data.portfolioTag);
+          let jsonPortfolioTagArray: string[] = [];
+          jsonPortfolioTagArray = Object.entries(result.data.portfolioTag).map(
+            ([value]) => value
+          );
+          setTags(jsonPortfolioTagArray);
           setIsLoading(false);
         }
       } catch (error) {
