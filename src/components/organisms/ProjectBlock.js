@@ -13,6 +13,7 @@ function ProjectBlock(props) {
         title={props.item.title}
         name={props.item.user.username}
         date={date}
+        uid={props.item.user.id}
         profileImage={props.item.user.image}
         category={props.item.category}
         field={props.item.huntingField}
