@@ -7,7 +7,7 @@ export default function Main() {
     <Wrapper>
       <InnerWrapper>
         <Button>
-          <Link href="project">
+          <Link href="/project">
             <A>
               <Text level={3} weight={500} color="#232735">
                 프로젝트
@@ -16,7 +16,7 @@ export default function Main() {
           </Link>
         </Button>
         <Button>
-          <Link href="portfolio">
+          <Link href="/portfolio">
             <A>
               <Text level={3} weight={500} color="#232735">
                 포트폴리오
