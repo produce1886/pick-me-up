@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Col from "../../atoms/Col";
@@ -16,12 +17,16 @@ function Top(props) {
         </Row>
         <Row>
           <Div>
-            <Profile
-              size="0.9rem"
-              level={1}
-              name={props.name}
-              profileImage={props.profileImage}
-            ></Profile>
+            <Link href="/profile/[userid]" as={`/profile/${props.uid}`}>
+              <A>
+                <Profile
+                  size="0.9rem"
+                  level={1}
+                  name={props.name}
+                  profileImage={props.profileImage}
+                ></Profile>
+              </A>
+            </Link>
             <Text level={1} color="#232735">
               {props.date}
             </Text>
@@ -58,3 +63,5 @@ const Row = styled.div`
   overflow: hidden;
   margin-top: 0.2rem;
 `;
+
+const A = styled.a``;

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 import FilterInfo from "../FilterInfo";
 import Text from "../../atoms/Text";
@@ -15,12 +16,16 @@ function Top(props) {
           </Text>
         </FirstDiv>
         <FirstDiv>
-          <Profile
-            size="1rem"
-            level={1}
-            name={props.name}
-            profileImage={props.profileImage}
-          ></Profile>
+          <Link href="/profile/[userid]" as={`/profile/${props.uid}`}>
+            <A>
+              <Profile
+                size="1rem"
+                level={1}
+                name={props.name}
+                profileImage={props.profileImage}
+              ></Profile>
+            </A>
+          </Link>
         </FirstDiv>
         <Row>
           <Div>
@@ -65,3 +70,5 @@ const FirstDiv = styled.div`
   margin: 0.1rem 0 0.2rem 0;
   align-items: center;
 `;
+
+const A = styled.a``;
