@@ -3,7 +3,7 @@ import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";
 import Edit from "../../atoms/Icon/Edit";
 import Thumbnail from "../../atoms/Icon/ThumbNail";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React, { useState } from "react";
 function DefaultInfo(props) {
   const [title, setTitle] = useState("");
@@ -26,10 +26,17 @@ function DefaultInfo(props) {
         <Text weight={600} level={3} color="#232735">
           프로필 사진
         </Text>
-        <Camera
-          style={{ width: "0.88rem", height: "0.72rem" }}
-          fill="#232735"
-        ></Camera>
+        <label for="upload">
+          <ProfileInput
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            id="upload"
+          ></ProfileInput>
+          <Camera
+            style={{ width: "0.88rem", height: "0.72rem" }}
+            fill="#232735"
+          ></Camera>
+        </label>
       </Div>
       <Thumbnail
         style={{
@@ -64,6 +71,8 @@ function DefaultInfo(props) {
         type="text"
         //value={props.username}
         onChange={onChangeTitleHandler}
+        width="6rem"
+        maxLength="13"
       ></Input>
       <Div>
         <Text weight={600} level={3} color="#232735">
@@ -79,6 +88,8 @@ function DefaultInfo(props) {
         type="text"
         //value={props.introduce}
         onChange={onChangeIntroduceHandler}
+        width="22rem"
+        maxLength="55"
       ></Input>
     </Wrapper>
   );
@@ -123,14 +134,25 @@ const DivTitle = styled.div`
 `;
 
 const Input = styled.input`
-  background-color: transparent;
-  border: none;
-  padding: unset;
-  box-sizing: border-box;
-  width: 6rem;
-  outline: none;
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 0.64rem;
-  margin: 0 0 0.3rem 0;
-  text-align: center;
+  ${(props) => css`
+    background-color: #f0f1f3;
+    border-radius: 0.6rem;
+    border: 0.04rem solid #d3d4d8;
+    padding: unset;
+    box-sizing: border-box;
+    width: ${props.width};
+    outline: none;
+    font-family: "Noto Sans KR", sans-serif;
+    font-size: 0.64rem;
+    margin: 0 0 0.3rem 0;
+    text-align: center;
+    align-items: center;
+    height: 1.2rem;
+    maxLength=${props.maxLength};
+            
+  `}
+`;
+
+const ProfileInput = styled.input`
+  display: none;
 `;
