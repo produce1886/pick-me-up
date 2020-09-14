@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Top from "../organisms/Profile/Top";
 import Tab from "../organisms/Profile/Tab";
 import Info from "../organisms/Profile/Info";
+import Portfolio from "../organisms/Profile/Portfolio";
+import Project from "../organisms/Profile/Project";
 
 function ProfileBody() {
   const [selected, setSelected] = useState(0);
@@ -11,7 +13,11 @@ function ProfileBody() {
     <Wrapper>
       <Top></Top>
       <Tab selected={selected} setSelected={setSelected}></Tab>
-      <BodyWrapper>{selected === 0 && <Info></Info>}</BodyWrapper>
+      <BodyWrapper>
+        {selected === 0 && <Info></Info>}
+        {selected === 1 && <Project></Project>}
+        {selected === 2 && <Portfolio></Portfolio>}
+      </BodyWrapper>
     </Wrapper>
   );
 }
