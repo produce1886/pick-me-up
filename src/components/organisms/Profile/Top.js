@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Text from "../../atoms/Text";
+import EditButton from "../../molecules/Button/Edit";
 
 function Top() {
   return (
@@ -7,6 +8,9 @@ function Top() {
       <Background></Background>
       <ProfileHolder></ProfileHolder>
       <InfoWrapper>
+        <ButtonWrapper>
+          <EditButton></EditButton>
+        </ButtonWrapper>
         <Text level={6} weight="bold" color="#232735">
           Username
         </Text>
@@ -38,12 +42,19 @@ const InfoWrapper = styled.div`
   width: 48rem;
   box-sizing: border-box;
   min-height: 6rem;
-  padding: 2.5rem 0 1rem 0;
+  padding: 0.72rem 0 1rem 0;
   margin: 0 4rem 0 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 92%;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.2rem;
 `;
 
 const ProfileHolder = styled.div`

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 import Profile from "../../molecules/Profile";
 import Text from "../../atoms/Text";
@@ -15,15 +16,23 @@ function Comment(props) {
 
   return (
     <Wrapper>
-      <ProfileDiv>
-        <Profile size="2rem" profileImage={user.image}></Profile>
-      </ProfileDiv>
+      <Link href="/profile/[userid]" as={`/profile/${props.id}`}>
+        <A>
+          <ProfileDiv>
+            <Profile size="2rem" profileImage={user.image}></Profile>
+          </ProfileDiv>
+        </A>
+      </Link>
       <TextDiv>
         <InfoWrapper>
           <Div>
-            <Text level={2} name="name" weight={800} align="center">
-              {user.username}
-            </Text>
+            <Link href="/profile/[userid]" as={`/profile/${props.id}`}>
+              <A>
+                <Text level={2} name="name" weight={800} align="center">
+                  {user.username}
+                </Text>
+              </A>
+            </Link>
             &nbsp;
             <Text level={1} color="#d3d4d8">
               {date}
@@ -130,3 +139,5 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   margin: 0.2rem 0;
 `;
+
+const A = styled.a``;
