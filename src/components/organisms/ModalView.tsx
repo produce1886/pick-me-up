@@ -36,6 +36,7 @@ function ModalView(props: ModalProps) {
               <Top
                 type={props.type}
                 title={data.title}
+                uid={data.user.id}
                 name={data.user.username}
                 profileImage={data.user.image}
                 category={data.category}
