@@ -2,6 +2,7 @@ import Overlay from "../../atoms/Modal/Overlay";
 import Wrapper from "../../atoms/Modal/Wrapper";
 import Text from "../../atoms/Text";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
+import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import styled, { css } from "styled-components";
 import React, { useState, useCallback } from "react";
 function EditModal(props) {
@@ -16,6 +17,7 @@ function EditModal(props) {
       <Wrapper visible={props.visible} onClick={onMaskClick}>
         <Inner>
           <DefaultInfo></DefaultInfo>
+          <OptionInfo></OptionInfo>
         </Inner>
       </Wrapper>
     </>
@@ -24,7 +26,6 @@ function EditModal(props) {
 
 export default EditModal;
 
-//width 수정필요
 const Inner = styled.div`
   width: 100%;
   height: fit-content;
