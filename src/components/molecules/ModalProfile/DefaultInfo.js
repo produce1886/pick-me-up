@@ -6,16 +6,14 @@ import Thumbnail from "../../atoms/Icon/ThumbNail";
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
 function DefaultInfo(props) {
-  const [introduce, setIntroduce] = useState("안녕하세요");
   const [editIntroduce, setEditIntroduce] = useState(false);
   const [editUsername, setEditUsername] = useState(false);
-  const [username, setUsername] = useState("이화연");
 
   const onChangeUsernameHandler = (e) => {
-    setUsername(e.target.value);
+    props.setUsername(e.target.value);
   };
   const onChangeIntroduceHandler = (e) => {
-    setIntroduce(e.target.value);
+    props.setIntroduce(e.target.value);
   };
   return (
     <Wrapper>
@@ -74,7 +72,7 @@ function DefaultInfo(props) {
         <Input
           placeholder="username"
           type="text"
-          value={username}
+          value={props.username}
           onChange={onChangeUsernameHandler}
           width="6rem"
           maxLength="8"
@@ -82,7 +80,7 @@ function DefaultInfo(props) {
       )}
       {!editUsername && (
         <Text level={2} color="#232735" align="center">
-          {username}
+          {props.username}
         </Text>
       )}
       <Div>
@@ -100,7 +98,7 @@ function DefaultInfo(props) {
         <Input
           placeholder="introduce textbox"
           type="text"
-          value={introduce}
+          value={props.introduce}
           onChange={onChangeIntroduceHandler}
           width="25rem"
           maxLength="35"
@@ -108,7 +106,7 @@ function DefaultInfo(props) {
       )}
       {!editIntroduce && (
         <Text level={2} color="#232735" align="center">
-          {introduce}
+          {props.introduce}
         </Text>
       )}
     </Wrapper>
