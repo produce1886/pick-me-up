@@ -9,10 +9,15 @@ import styled, { css } from "styled-components";
 import React, { useState } from "react";
 import { University } from "../../molecules/ModalProfile/Contents";
 function OptionInfo(props) {
-  const [birth, setBirth] = useState("YYYY.MM.DD");
   const [editBirth, setEditBirth] = useState(false);
   const onChangeBirthHandler = (e) => {
-    setBirth(e.target.value);
+    props.setBirth(e.target.value);
+  };
+  const AddEduBackground = () => {
+    props.setEduBackground([
+      ...props.eduBackground,
+      { university: "", major: "" },
+    ]);
   };
   return (
     <Wrapper>
@@ -41,7 +46,7 @@ function OptionInfo(props) {
             <Input
               placeholder="YYYY.MM.DD"
               type="text"
-              value={birth}
+              value={props.birth}
               onChange={onChangeBirthHandler}
               width="21.5rem"
             ></Input>
@@ -49,7 +54,7 @@ function OptionInfo(props) {
           {!editBirth && (
             <Row>
               <Text level={3} color="#232735" align="left" width="20rem">
-                {birth}
+                {props.birth}
               </Text>
             </Row>
           )}
@@ -75,8 +80,17 @@ function OptionInfo(props) {
             학력
           </Text>
         </DivTitle>
-        <University></University>
-        <PlusCir></PlusCir>
+        {props.eduBackground.map((value, index) => (
+          <University
+            index={index}
+            university={value.university}
+            major={value.major}
+            value={value}
+            setContents={props.setEduBackground}
+            contents={props.eduBackground}
+          ></University>
+        ))}
+        <PlusCir create={AddEduBackground}></PlusCir>
       </Div>
       <Div>
         <DivTitle>
@@ -200,7 +214,15 @@ const ButtonWrapper = styled.button`
   padding: unset;
   outline: none;
 `;
-
+const PlusWrapper = styled.div`
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  border: none;
+  margin: unset;
+  padding: unset;
+  outline: none;
+`;
 const CheckBox = styled.input`
   ${(props) => css`
     background-color: #c8acee;
