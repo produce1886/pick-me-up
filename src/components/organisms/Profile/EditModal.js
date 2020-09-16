@@ -5,7 +5,16 @@ import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import styled, { css } from "styled-components";
 import React, { useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 function EditModal(props) {
+  const state = useSelector((state) => state.user);
+  const email = state.userData.email;
+  const [image, setImage] = useState("");
+  const [username, setUsername] = useState("이화연");
+  const [introduce, setIntroduce] = useState("안녕하세요");
+  const [birth, setBirth] = useState("YYYY.MM.DD");
+  const [eduBackground, setEduBackground] = useState([]);
+
   const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
       props.onClose();
@@ -16,8 +25,20 @@ function EditModal(props) {
       <Overlay visible={props.visible} onClick={onMaskClick}></Overlay>
       <Wrapper visible={props.visible} onClick={onMaskClick}>
         <Inner>
-          <DefaultInfo></DefaultInfo>
-          <OptionInfo></OptionInfo>
+          <DefaultInfo
+            image={image}
+            setImage={setImage}
+            username={username}
+            setUsername={setUsername}
+            introduce={introduce}
+            setIntroduce={setIntroduce}
+          ></DefaultInfo>
+          <OptionInfo
+            birth={birth}
+            setBirth={setBirth}
+            eduBackground={eduBackground}
+            setEduBackground={setEduBackground}
+          ></OptionInfo>
         </Inner>
       </Wrapper>
     </>
