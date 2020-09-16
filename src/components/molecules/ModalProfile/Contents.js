@@ -4,14 +4,35 @@ import Edit from "../../atoms/Icon/Edit";
 import X from "../../atoms/Icon/X";
 import React, { useState } from "react";
 export function University(props) {
-  const [univ, setUniv] = useState("이화여자대학교");
-  const [major, setMajor] = useState("융합콘텐츠학");
-  const [editUniv, setEditUniv] = useState(false);
+  const cloneDeep = require("lodash/clonedeep");
+
+  const [univ, setUniv] = useState(props.university);
+  const [major, setMajor] = useState(props.major);
+  const [editUniv, setEditUniv] = useState(true);
+  console.log(props);
   const onChangeUnivHandler = (e) => {
     setUniv(e.target.value);
   };
   const onChangeMajorHandler = (e) => {
     setMajor(e.target.value);
+  };
+  const removeContent = () => {
+    const removecontents = cloneDeep(props.contents);
+    removecontents.splice(props.index, 1);
+    props.setContents(removecontents);
+    console.log(props.contents);
+  };
+  const EditUniv = () => {
+    setEditUniv(!editUniv);
+    setUniversity();
+  };
+  const setUniversity = () => {
+    if (univ.length > 0 && major.length > 0) {
+      const newcontent = { university: univ, major: major };
+      const newcontents = cloneDeep(props.contents);
+      newcontents[props.index] = newcontent;
+      props.setContents(newcontents);
+    }
   };
   return (
     <Content>
@@ -19,14 +40,14 @@ export function University(props) {
       {editUniv && (
         <>
           <Input
-            placeholder="YYYY.MM.DD"
+            placeholder="학교"
             type="text"
             value={univ}
             onChange={onChangeUnivHandler}
             width="9rem"
           ></Input>
           <Input
-            placeholder="YYYY.MM.DD"
+            placeholder="전공"
             type="text"
             value={major}
             onChange={onChangeMajorHandler}
@@ -41,13 +62,17 @@ export function University(props) {
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => setEditUniv(!editUniv)}>
+      <ButtonWrapper onClick={() => EditUniv()}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
           fill="#232735"
         ></Edit>
       </ButtonWrapper>
-      <ButtonWrapper>
+      <ButtonWrapper
+        onClick={() => {
+          removeContent();
+        }}
+      >
         <X style={{ width: "1.2rem", height: "1.2rem" }} fill="#232735"></X>
       </ButtonWrapper>
     </Content>

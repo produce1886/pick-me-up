@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 
 function PlusCirButton(props) {
   return (
-    <ButtonWrapper onClick={props.openWrite}>
+    <ButtonWrapper onClick={props.create}>
       <Plus
         style={{ width: "0.8rem", height: "0.8rem", marginRight: "0.4rem" }}
         fill="#8B90A0"
