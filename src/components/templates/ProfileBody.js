@@ -5,6 +5,7 @@ import Tab from "../organisms/Profile/Tab";
 import Info from "../organisms/Profile/Info";
 import Portfolio from "../organisms/Profile/Portfolio";
 import Project from "../organisms/Profile/Project";
+import EditButton from "../molecules/Button/Edit";
 import EditModal from "../organisms/Profile/EditModal";
 
 function ProfileBody() {
@@ -12,7 +13,8 @@ function ProfileBody() {
   const [editvisible, setEditVisible] = useState(false);
   return (
     <Wrapper>
-      <Top></Top>
+      <Top setEditVisible={setEditVisible}></Top>
+
       {editvisible && (
         <EditModal
           visible={editvisible}
