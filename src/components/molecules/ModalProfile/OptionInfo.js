@@ -1,13 +1,17 @@
 import Text from "../../atoms/Text";
 import Birth from "../../atoms/Icon/Birth";
 import Univ from "../../atoms/Icon/Univ";
-import Area from "../../atoms/Icon/Area";
+import AreaIcon from "../../atoms/Icon/Area";
 import Heart from "../../atoms/Icon/Heart";
 import Edit from "../../atoms/Icon/Edit";
 import PlusCir from "../../molecules/Button/PlusCir";
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
-import { University } from "../../molecules/ModalProfile/Contents";
+import {
+  University,
+  Area,
+  Interest,
+} from "../../molecules/ModalProfile/Contents";
 function OptionInfo(props) {
   const [editBirth, setEditBirth] = useState(false);
   const onChangeBirthHandler = (e) => {
@@ -19,6 +23,13 @@ function OptionInfo(props) {
       { university: "", major: "" },
     ]);
   };
+  const AddArea = () => {
+    props.setAreas([...props.areas, ""]);
+  };
+  const AddInterest = () => {
+    props.setInterests([...props.interests, ""]);
+  };
+  console.log(props);
   return (
     <Wrapper>
       <Title>
@@ -48,11 +59,12 @@ function OptionInfo(props) {
               type="text"
               value={props.birth}
               onChange={onChangeBirthHandler}
-              width="21.5rem"
+              width="20rem"
+              marginRight="4rem"
             ></Input>
           )}
           {!editBirth && (
-            <Row>
+            <Row marginRight="4rem">
               <Text level={3} color="#232735" align="left" width="20rem">
                 {props.birth}
               </Text>
@@ -82,31 +94,44 @@ function OptionInfo(props) {
         </DivTitle>
         {props.eduBackground.map((value, index) => (
           <University
+            key={index}
             index={index}
-            university={value.university}
-            major={value.major}
             value={value}
-            setContents={props.setEduBackground}
-            contents={props.eduBackground}
+            setEduBackground={props.setEduBackground}
+            eduBackground={props.eduBackground}
           ></University>
         ))}
-        <PlusCir create={AddEduBackground}></PlusCir>
+        <PlusWrapper>
+          <PlusCir create={AddEduBackground}></PlusCir>
+        </PlusWrapper>
       </Div>
       <Div>
         <DivTitle>
-          <Area
+          <AreaIcon
             style={{
               width: "0.72rem",
               height: "0.8rem",
               marginRight: "0.32rem",
             }}
             fill="#d3d4d8"
-          ></Area>
+          ></AreaIcon>
           <Text weight={600} level={3} color="#232735">
             활동지역
           </Text>
         </DivTitle>
-        <PlusCir></PlusCir>
+        {props.areas.map((value, index) => (
+          <Area
+            key={index}
+            index={index}
+            value={value}
+            setAreas={props.setAreas}
+            areas={props.areas}
+            zIndex={2000 - index}
+          ></Area>
+        ))}
+        <PlusWrapper>
+          <PlusCir create={AddArea}></PlusCir>
+        </PlusWrapper>
       </Div>
       <Div>
         <DivTitle>
@@ -122,7 +147,19 @@ function OptionInfo(props) {
             관심분야
           </Text>
         </DivTitle>
-        <PlusCir></PlusCir>
+        {props.interests.map((value, index) => (
+          <Interest
+            key={index}
+            index={index}
+            value={value}
+            setInterests={props.setInterests}
+            interests={props.interests}
+            zIndex={2000 - index}
+          ></Interest>
+        ))}
+        <PlusWrapper>
+          <PlusCir create={AddInterest}></PlusCir>
+        </PlusWrapper>
       </Div>
     </Wrapper>
   );
@@ -140,10 +177,12 @@ const Wrapper = styled.div`
 `;
 
 const Row = styled.div`
-  width: 20rem;
-  padding-left: 2rem;
-  text-align: center;
-  padding-bottom: 0.2rem;
+  ${(props) => css`
+    width: 20rem;
+    text-align: center;
+    padding-bottom: 0.2rem;
+    margin-right: ${props.marginRight};
+  `}
 `;
 
 const Div = styled.div`
@@ -178,14 +217,14 @@ const Title = styled.div`
   padding-bottom: 0.32rem;
 `;
 const Content = styled.div`
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   text-align: center;
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 1.2rem;
-  margin: 0.6rem 0;
+  margin: 0.3rem 0;
   padding-left: 0.5rem;
   box-sizing: border-box;
 `;
@@ -201,8 +240,9 @@ const Input = styled.input`
     font-size: 0.64rem;
     align-items: center;
     height: 1.2rem;
-    maxLength=${props.maxLength};
+    maxlength: ${props.maxLength};
     padding-left: 1rem;
+    margin-right: ${props.marginRight};
   `}
 `;
 const ButtonWrapper = styled.button`
@@ -215,12 +255,9 @@ const ButtonWrapper = styled.button`
   outline: none;
 `;
 const PlusWrapper = styled.div`
-  width: fit-content;
+  width: 100%;
   height: fit-content;
   background-color: transparent;
-  border: none;
-  margin: unset;
-  padding: unset;
   outline: none;
 `;
 const CheckBox = styled.input`
@@ -233,5 +270,6 @@ const CheckBox = styled.input`
     align-items: center;
     height: 1.1rem;
     margin: unset;
+    margin-right: 0.84rem;
   `}
 `;
