@@ -2,41 +2,44 @@ import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import Edit from "../../atoms/Icon/Edit";
 import X from "../../atoms/Icon/X";
-import React, { useState } from "react";
+import EditUserFilter from "../Filter/EditUserFilter";
+import React, { useState, useEffect } from "react";
+import { FIELD, REGION } from "../Filter/ItemData";
+
 export function University(props) {
   const cloneDeep = require("lodash/clonedeep");
-
-  const [univ, setUniv] = useState(props.university);
-  const [major, setMajor] = useState(props.major);
+  const [univ, setUniv] = useState(props.value.university);
+  const [major, setMajor] = useState(props.value.major);
   const [editUniv, setEditUniv] = useState(true);
   console.log(props);
+
   const onChangeUnivHandler = (e) => {
     setUniv(e.target.value);
   };
   const onChangeMajorHandler = (e) => {
     setMajor(e.target.value);
   };
-  const removeContent = () => {
-    const removecontents = cloneDeep(props.contents);
-    removecontents.splice(props.index, 1);
-    props.setContents(removecontents);
-    console.log(props.contents);
+  const removeContent = (value) => {
+    const currentIndex = props.eduBackground.indexOf(value);
+    let removecontents = cloneDeep(props.eduBackground);
+    removecontents.splice(currentIndex, 1);
+    props.setEduBackground(removecontents);
   };
   const EditUniv = () => {
     setEditUniv(!editUniv);
-    setUniversity();
+    setContents();
   };
-  const setUniversity = () => {
+  const setContents = () => {
     if (univ.length > 0 && major.length > 0) {
       const newcontent = { university: univ, major: major };
-      const newcontents = cloneDeep(props.contents);
+      const newcontents = cloneDeep(props.eduBackground);
       newcontents[props.index] = newcontent;
-      props.setContents(newcontents);
+      props.setEduBackground(newcontents);
     }
   };
   return (
     <Content>
-      <CheckBox type="checkbox" id="birth"></CheckBox>
+      <CheckBox type="checkbox" id="education"></CheckBox>
       {editUniv && (
         <>
           <Input
@@ -44,33 +47,149 @@ export function University(props) {
             type="text"
             value={univ}
             onChange={onChangeUnivHandler}
-            width="9rem"
+            width="9.7rem"
+            marginRight="0.6rem"
           ></Input>
           <Input
             placeholder="전공"
             type="text"
             value={major}
             onChange={onChangeMajorHandler}
-            width="9rem"
+            width="9.7rem"
+            marginRight="2.3rem"
           ></Input>
         </>
       )}
       {!editUniv && (
-        <Row>
-          <Text level={3} color="#232735" align="left" width="15rem">
+        <Row marginRight="2.3rem">
+          <Text level={3} color="#232735" align="left" width="19.4rem">
             {univ} {major}
           </Text>
         </Row>
       )}
       <ButtonWrapper onClick={() => EditUniv()}>
         <Edit
-          style={{ width: "0.8rem", height: "0.8rem" }}
+          style={{ width: "0.8rem", height: "0.8rem", marginRight: "0.6rem" }}
           fill="#232735"
         ></Edit>
       </ButtonWrapper>
       <ButtonWrapper
         onClick={() => {
-          removeContent();
+          removeContent(props.value);
+        }}
+      >
+        <X style={{ width: "1.2rem", height: "1.2rem" }} fill="#232735"></X>
+      </ButtonWrapper>
+    </Content>
+  );
+}
+
+export function Area(props) {
+  const region = "지역";
+  const [editArea, setEditArea] = useState(true);
+  const [area, setArea] = useState("");
+  const EditArea = () => {
+    setEditArea(!editArea);
+    setContents();
+  };
+  const removeContent = (value) => {
+    const currentIndex = props.areas.indexOf(value);
+    let removecontents = [...props.areas];
+    removecontents.splice(currentIndex, 1);
+    props.setAreas(removecontents);
+  };
+  const setContents = () => {
+    if (area.length > 0) {
+      let newcontents = [...props.areas];
+      newcontents[props.index] = area;
+      props.setAreas(newcontents);
+    }
+  };
+  return (
+    <Content>
+      <CheckBox type="checkbox" id="area"></CheckBox>
+      {editArea && (
+        <EditUserFilter
+          onClick={setArea}
+          data={REGION}
+          title={region}
+          zIndex={props.zIndex}
+          type="area"
+        ></EditUserFilter>
+      )}
+      {!editArea && (
+        <Row marginRight="2.3rem">
+          <Text level={3} color="#232735" align="left" width="19rem">
+            {area}
+          </Text>
+        </Row>
+      )}
+      <ButtonWrapper onClick={() => EditArea()}>
+        <Edit
+          style={{ width: "0.8rem", height: "0.8rem", marginRight: "0.6rem" }}
+          fill="#232735"
+        ></Edit>
+      </ButtonWrapper>
+      <ButtonWrapper
+        onClick={() => {
+          removeContent(props.value);
+        }}
+      >
+        <X style={{ width: "1.2rem", height: "1.2rem" }} fill="#232735"></X>
+      </ButtonWrapper>
+    </Content>
+  );
+}
+
+export function Interest(props) {
+  const field = "관심 분야";
+  const [editInterest, setEditInterest] = useState(true);
+  const [interest, setInterest] = useState("");
+  const EditInterest = () => {
+    setEditInterest(!editInterest);
+    setContents();
+  };
+  const removeContent = (value) => {
+    const currentIndex = props.interests.indexOf(value);
+    let removecontents = [...props.interests];
+    removecontents.splice(currentIndex, 1);
+    props.setInterests(removecontents);
+  };
+  const setContents = () => {
+    if (interest.length > 0) {
+      let newcontents = [...props.interests];
+      newcontents[props.index] = interest;
+      props.setInterests(newcontents);
+    }
+  };
+  return (
+    <Content>
+      <CheckBox type="checkbox" id="interest"></CheckBox>
+      {editInterest && (
+        <EditUserFilter
+          onClick={setInterest}
+          data={FIELD}
+          title={field}
+          zIndex={props.zIndex}
+          type="interest"
+        ></EditUserFilter>
+      )}
+      {!editInterest && (
+        <Row marginRight="2.3rem">
+          <Text level={3} color="#232735" align="left" width="19rem">
+            {interest}
+          </Text>
+        </Row>
+      )}
+      <ButtonWrapper onClick={() => EditInterest()}>
+        <Edit
+          style={{ width: "0.8rem", height: "0.8rem", marginRight: "0.6rem" }}
+          fill="#232735"
+        ></Edit>
+      </ButtonWrapper>
+      <ButtonWrapper
+        onClick={() => {
+          removeContent(props.value);
         }}
       >
         <X style={{ width: "1.2rem", height: "1.2rem" }} fill="#232735"></X>
@@ -80,14 +199,14 @@ export function University(props) {
 }
 
 const Content = styled.div`
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   text-align: center;
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 1.2rem;
-  margin: 0.6rem 0;
+  margin: 0.3rem 0;
   padding-left: 0.5rem;
   box-sizing: border-box;
 `;
@@ -103,10 +222,13 @@ const ButtonWrapper = styled.button`
 `;
 
 const Row = styled.div`
-  width: 20rem;
-  padding-left: 2rem;
-  text-align: center;
-  padding-bottom: 0.2rem;
+  ${(props) => css`
+    width: 20rem;
+    text-align: center;
+    padding-bottom: 0.2rem;
+    align-items: center;
+    margin-right: ${props.marginRight};
+  `}
 `;
 
 const Input = styled.input`
@@ -121,8 +243,9 @@ const Input = styled.input`
     font-size: 0.64rem;
     align-items: center;
     height: 1.2rem;
-    maxLength=${props.maxLength};
+    maxlength: ${props.maxLength};
     padding-left: 1rem;
+    margin-right: ${props.marginRight};
   `}
 `;
 
@@ -135,4 +258,5 @@ const CheckBox = styled.input`
   align-items: center;
   height: 1.1rem;
   margin: unset;
+  margin-right: 0.84rem;
 `;
