@@ -23,10 +23,10 @@ const ButtonWrapper = styled.button`
   flex-direction: row;
   align-items: center;
   outline: none;
-  width: 100%;
+  width: 5rem;
   height: 1rem;
   background-color: transparent;
   border: none;
   box-sizing: border-box;
-  padding: 1rem 0 1rem 0.5rem;
+  padding: 1rem 0 0.5rem 0.5rem;
 `;
