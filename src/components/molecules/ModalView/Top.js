@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
@@ -22,9 +23,13 @@ function ModalTop(props) {
         ></FilterInfo>
       </TitleFilterWrapper>
       <ProfileBox>
-        <ProfileHolder size="3rem" noMargin={true}>
-          <Img src={props.profileImage}></Img>
-        </ProfileHolder>
+        <Link href="/profile/[userid]" as={`/profile/${props.uid}`}>
+          <A>
+            <ProfileHolder size="3rem" noMargin={true}>
+              <Img src={props.profileImage}></Img>
+            </ProfileHolder>
+          </A>
+        </Link>
       </ProfileBox>
     </Top>
   );
@@ -60,3 +65,5 @@ const Img = styled.img`
   width: 100%;
   height: 100%;
 `;
+
+const A = styled.a``;

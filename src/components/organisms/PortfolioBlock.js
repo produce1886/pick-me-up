@@ -26,7 +26,8 @@ function PortfolioBlock(props) {
           <Detail
             y={show ? "-3rem" : "3rem"}
             title={props.item.title}
-            profile={props.item.user.image}
+            uid={props.item.user.id}
+            profileImage={props.item.user.image}
             name={props.item.user.username}
             viewNum={props.item.viewNum}
             commentsNum={props.item.commentsNum}

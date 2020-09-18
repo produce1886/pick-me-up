@@ -14,6 +14,7 @@ export default function PostBlock(props) {
         rank={props.rank}
         title={props.item.title}
         date={date}
+        uid={props.item.user.id}
         name={props.item.user.username}
         profileImage={props.item.user.image}
       ></Top>

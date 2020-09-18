@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import ViewCount from "../Count/ViewCount";
@@ -13,12 +14,16 @@ function Detail(props) {
         </Text>
       </Row>
       <Row>
-        <Profile
-          size="1rem"
-          level={1}
-          name={props.name}
-          profileImage={props.profileImage}
-        ></Profile>
+        <Link href="/profile/[userid]" as={`/profile/${props.uid}`}>
+          <A>
+            <Profile
+              size="1rem"
+              level={1}
+              name={props.name}
+              profileImage={props.profileImage}
+            ></Profile>
+          </A>
+        </Link>
         <Div>
           <ViewCount count={props.viewNum}></ViewCount>
           &nbsp;
@@ -64,3 +69,5 @@ const Div = styled.div`
   flex-direction: row;
   align-items: center;
 `;
+
+const A = styled.a``;

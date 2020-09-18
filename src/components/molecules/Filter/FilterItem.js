@@ -16,7 +16,12 @@ function FilterItem(props) {
       }}
       backgroundColor={mouseon ? "#f5edff" : "#ffffff"}
     >
-      <Text line="1rem" level={3} color="#232735" align="left">
+      <Text
+        line="1rem"
+        level={3}
+        color={props.selectedtitle === props.item.title ? "#9c69e2" : "#232735"}
+        align="left"
+      >
         {props.item.title}
       </Text>
     </Wrapper>
