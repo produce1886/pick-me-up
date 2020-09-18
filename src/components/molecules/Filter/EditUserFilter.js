@@ -4,6 +4,12 @@ import Text from "../../atoms/Text";
 import Icondown from "../../atoms/Icon/Filter/Down";
 import ItemWrapper from "../Filter/FilterItem";
 function EditUserFilter(props) {
+  let selectedtitle;
+  if (item) {
+    selectedtitle = item.title;
+  } else {
+    selectedtitle = props.title;
+  }
   const iconStyle = {
     width: "0.6rem",
     height: "0.4rem",
@@ -48,7 +54,8 @@ function EditUserFilter(props) {
               key={index}
               item={value}
               setSelected={setSelected}
-              width="19.2rem"
+              selectedtitle={selectedtitle}
+              width="21rem"
               height="1.2rem"
             ></ItemWrapper>
           ))}
@@ -60,15 +67,9 @@ function EditUserFilter(props) {
 
 export default EditUserFilter;
 
-const Button = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
-
 const DropdownMenuWrapper = styled.div`
   ${(props) => css`
-    width: 19.2rem;
+    width: 21rem;
     height: fit-content;
     border: none;
     border-radius: 0.4rem;
@@ -84,17 +85,18 @@ const DropdownMenuWrapper = styled.div`
     box-shadow: 0rem 0.2rem 0.5rem rgba(0, 0, 0, 0.1),
       0.7rem 0 0.5rem rgba(0, 0, 0, 0.1);
     z-index: ${props.zIndex};
+    margin-bottom: 1rem;
   `}
 `;
 const FilterWrapper = styled.div`
-  width: 20rem;
+  width: 21.5rem;
   height: 1.2rem;
   font-family: inherit;
   border: none;
   background-color: #f0f1f3;
   border-radius: 0.32rem;
   padding: 0 0.6rem 0 0.8rem;
-  margin-right: 2.3rem;
+  margin-right: 2.4rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
