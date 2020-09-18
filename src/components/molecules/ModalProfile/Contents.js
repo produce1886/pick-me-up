@@ -7,35 +7,13 @@ import React, { useState, useEffect } from "react";
 import { FIELD, REGION } from "../Filter/ItemData";
 
 export function University(props) {
-  const cloneDeep = require("lodash/clonedeep");
-  const [univ, setUniv] = useState(props.value.university);
-  const [major, setMajor] = useState(props.value.major);
   const [editUniv, setEditUniv] = useState(true);
-  console.log(props);
 
   const onChangeUnivHandler = (e) => {
-    setUniv(e.target.value);
+    props.setUniversity(e.target.value);
   };
   const onChangeMajorHandler = (e) => {
-    setMajor(e.target.value);
-  };
-  const removeContent = (value) => {
-    const currentIndex = props.eduBackground.indexOf(value);
-    let removecontents = cloneDeep(props.eduBackground);
-    removecontents.splice(currentIndex, 1);
-    props.setEduBackground(removecontents);
-  };
-  const EditUniv = () => {
-    setEditUniv(!editUniv);
-    setContents();
-  };
-  const setContents = () => {
-    if (univ.length > 0 && major.length > 0) {
-      const newcontent = { university: univ, major: major };
-      const newcontents = cloneDeep(props.eduBackground);
-      newcontents[props.index] = newcontent;
-      props.setEduBackground(newcontents);
-    }
+    props.setMajor(e.target.value);
   };
   return (
     <Content>
@@ -45,154 +23,97 @@ export function University(props) {
           <Input
             placeholder="학교"
             type="text"
-            value={univ}
+            value={props.university}
             onChange={onChangeUnivHandler}
-            width="9.7rem"
+            width="10.5rem"
             marginRight="0.6rem"
           ></Input>
           <Input
             placeholder="전공"
             type="text"
-            value={major}
+            value={props.major}
             onChange={onChangeMajorHandler}
-            width="9.7rem"
+            width="10.5rem"
             marginRight="2.3rem"
           ></Input>
         </>
       )}
       {!editUniv && (
-        <Row marginRight="2.3rem">
-          <Text level={3} color="#232735" align="left" width="19.4rem">
-            {univ} {major}
+        <Row marginRight="2.4rem" paddingLeft="1rem">
+          <Text level={3} color="#232735" align="left" width="20.5rem">
+            {props.university} {props.major}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => EditUniv()}>
+      <ButtonWrapper onClick={() => setEditUniv(!editUniv)}>
         <Edit
-          style={{ width: "0.8rem", height: "0.8rem", marginRight: "0.6rem" }}
+          style={{ width: "0.8rem", height: "0.8rem" }}
           fill="#232735"
         ></Edit>
-      </ButtonWrapper>
-      <ButtonWrapper
-        onClick={() => {
-          removeContent(props.value);
-        }}
-      >
-        <X style={{ width: "1.2rem", height: "1.2rem" }} fill="#232735"></X>
       </ButtonWrapper>
     </Content>
   );
 }
 
 export function Area(props) {
-  const region = "지역";
+  const title = props.area;
   const [editArea, setEditArea] = useState(true);
-  const [area, setArea] = useState("");
-  const EditArea = () => {
-    setEditArea(!editArea);
-    setContents();
-  };
-  const removeContent = (value) => {
-    const currentIndex = props.areas.indexOf(value);
-    let removecontents = [...props.areas];
-    removecontents.splice(currentIndex, 1);
-    props.setAreas(removecontents);
-  };
-  const setContents = () => {
-    if (area.length > 0) {
-      let newcontents = [...props.areas];
-      newcontents[props.index] = area;
-      props.setAreas(newcontents);
-    }
-  };
   return (
     <Content>
       <CheckBox type="checkbox" id="area"></CheckBox>
       {editArea && (
         <EditUserFilter
-          onClick={setArea}
+          onClick={props.setArea}
           data={REGION}
-          title={region}
+          title={title}
           zIndex={props.zIndex}
           type="area"
         ></EditUserFilter>
       )}
       {!editArea && (
-        <Row marginRight="2.3rem">
-          <Text level={3} color="#232735" align="left" width="19rem">
-            {area}
+        <Row marginRight="2.4rem" paddingLeft="1rem">
+          <Text level={3} color="#232735" align="left" width="20.5rem">
+            {props.area}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => EditArea()}>
+      <ButtonWrapper onClick={() => setEditArea(!editArea)}>
         <Edit
-          style={{ width: "0.8rem", height: "0.8rem", marginRight: "0.6rem" }}
+          style={{ width: "0.8rem", height: "0.8rem" }}
           fill="#232735"
         ></Edit>
-      </ButtonWrapper>
-      <ButtonWrapper
-        onClick={() => {
-          removeContent(props.value);
-        }}
-      >
-        <X style={{ width: "1.2rem", height: "1.2rem" }} fill="#232735"></X>
       </ButtonWrapper>
     </Content>
   );
 }
 
 export function Interest(props) {
-  const field = "관심 분야";
+  const title = props.interest;
   const [editInterest, setEditInterest] = useState(true);
-  const [interest, setInterest] = useState("");
-  const EditInterest = () => {
-    setEditInterest(!editInterest);
-    setContents();
-  };
-  const removeContent = (value) => {
-    const currentIndex = props.interests.indexOf(value);
-    let removecontents = [...props.interests];
-    removecontents.splice(currentIndex, 1);
-    props.setInterests(removecontents);
-  };
-  const setContents = () => {
-    if (interest.length > 0) {
-      let newcontents = [...props.interests];
-      newcontents[props.index] = interest;
-      props.setInterests(newcontents);
-    }
-  };
   return (
     <Content>
       <CheckBox type="checkbox" id="interest"></CheckBox>
       {editInterest && (
         <EditUserFilter
-          onClick={setInterest}
+          onClick={props.setInterest}
           data={FIELD}
-          title={field}
+          title={title}
           zIndex={props.zIndex}
           type="interest"
         ></EditUserFilter>
       )}
       {!editInterest && (
-        <Row marginRight="2.3rem">
-          <Text level={3} color="#232735" align="left" width="19rem">
-            {interest}
+        <Row marginRight="2.4rem" paddingLeft="1rem">
+          <Text level={3} color="#232735" align="left" width="20.5rem">
+            {props.interest}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => EditInterest()}>
+      <ButtonWrapper onClick={() => setEditInterest(!editInterest)}>
         <Edit
-          style={{ width: "0.8rem", height: "0.8rem", marginRight: "0.6rem" }}
+          style={{ width: "0.8rem", height: "0.8rem" }}
           fill="#232735"
         ></Edit>
-      </ButtonWrapper>
-      <ButtonWrapper
-        onClick={() => {
-          removeContent(props.value);
-        }}
-      >
-        <X style={{ width: "1.2rem", height: "1.2rem" }} fill="#232735"></X>
       </ButtonWrapper>
     </Content>
   );
@@ -223,11 +144,11 @@ const ButtonWrapper = styled.button`
 
 const Row = styled.div`
   ${(props) => css`
-    width: 20rem;
+    width: fit-content;
     text-align: center;
     padding-bottom: 0.2rem;
-    align-items: center;
     margin-right: ${props.marginRight};
+    padding-left: ${props.paddingLeft};
   `}
 `;
 
