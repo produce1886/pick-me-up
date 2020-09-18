@@ -13,9 +13,10 @@ function EditModal(props) {
   const [username, setUsername] = useState("이화연");
   const [introduce, setIntroduce] = useState("안녕하세요");
   const [birth, setBirth] = useState("YYYY.MM.DD");
-  const [eduBackground, setEduBackground] = useState([]);
-  const [areas, setAreas] = useState([]);
-  const [interests, setInterests] = useState([]);
+  const [university, setUniversity] = useState("");
+  const [major, setMajor] = useState("");
+  const [area, setArea] = useState("지역");
+  const [interest, setInterest] = useState("관심 분야");
 
   const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
@@ -38,12 +39,14 @@ function EditModal(props) {
           <OptionInfo
             birth={birth}
             setBirth={setBirth}
-            eduBackground={eduBackground}
-            setEduBackground={setEduBackground}
-            areas={areas}
-            setAreas={setAreas}
-            interests={interests}
-            setInterests={setInterests}
+            setMajor={setMajor}
+            setUniversity={setUniversity}
+            university={university}
+            major={major}
+            area={area}
+            setArea={setArea}
+            interest={interest}
+            setInterest={setInterest}
           ></OptionInfo>
         </Inner>
       </Wrapper>

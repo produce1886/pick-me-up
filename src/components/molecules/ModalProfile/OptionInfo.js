@@ -4,7 +4,6 @@ import Univ from "../../atoms/Icon/Univ";
 import AreaIcon from "../../atoms/Icon/Area";
 import Heart from "../../atoms/Icon/Heart";
 import Edit from "../../atoms/Icon/Edit";
-import PlusCir from "../../molecules/Button/PlusCir";
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
 import {
@@ -17,19 +16,7 @@ function OptionInfo(props) {
   const onChangeBirthHandler = (e) => {
     props.setBirth(e.target.value);
   };
-  const AddEduBackground = () => {
-    props.setEduBackground([
-      ...props.eduBackground,
-      { university: "", major: "" },
-    ]);
-  };
-  const AddArea = () => {
-    props.setAreas([...props.areas, ""]);
-  };
-  const AddInterest = () => {
-    props.setInterests([...props.interests, ""]);
-  };
-  console.log(props);
+
   return (
     <Wrapper>
       <Title>
@@ -59,13 +46,13 @@ function OptionInfo(props) {
               type="text"
               value={props.birth}
               onChange={onChangeBirthHandler}
-              width="20rem"
-              marginRight="4rem"
+              width="21.5rem"
+              marginRight="2.4rem"
             ></Input>
           )}
           {!editBirth && (
-            <Row marginRight="4rem">
-              <Text level={3} color="#232735" align="left" width="20rem">
+            <Row marginRight="2.4rem" paddingLeft="1rem">
+              <Text level={3} color="#232735" align="left" width="20.5rem">
                 {props.birth}
               </Text>
             </Row>
@@ -92,18 +79,12 @@ function OptionInfo(props) {
             학력
           </Text>
         </DivTitle>
-        {props.eduBackground.map((value, index) => (
-          <University
-            key={index}
-            index={index}
-            value={value}
-            setEduBackground={props.setEduBackground}
-            eduBackground={props.eduBackground}
-          ></University>
-        ))}
-        <PlusWrapper>
-          <PlusCir create={AddEduBackground}></PlusCir>
-        </PlusWrapper>
+        <University
+          setUniversity={props.setUniversity}
+          university={props.university}
+          setMajor={props.setMajor}
+          major={props.major}
+        ></University>
       </Div>
       <Div>
         <DivTitle>
@@ -119,19 +100,7 @@ function OptionInfo(props) {
             활동지역
           </Text>
         </DivTitle>
-        {props.areas.map((value, index) => (
-          <Area
-            key={index}
-            index={index}
-            value={value}
-            setAreas={props.setAreas}
-            areas={props.areas}
-            zIndex={2000 - index}
-          ></Area>
-        ))}
-        <PlusWrapper>
-          <PlusCir create={AddArea}></PlusCir>
-        </PlusWrapper>
+        <Area setArea={props.setArea} area={props.area} zIndex={2000}></Area>
       </Div>
       <Div>
         <DivTitle>
@@ -147,19 +116,11 @@ function OptionInfo(props) {
             관심분야
           </Text>
         </DivTitle>
-        {props.interests.map((value, index) => (
-          <Interest
-            key={index}
-            index={index}
-            value={value}
-            setInterests={props.setInterests}
-            interests={props.interests}
-            zIndex={2000 - index}
-          ></Interest>
-        ))}
-        <PlusWrapper>
-          <PlusCir create={AddInterest}></PlusCir>
-        </PlusWrapper>
+        <Interest
+          setInterest={props.setInterest}
+          interest={props.interest}
+          zIndex={1999}
+        ></Interest>
       </Div>
     </Wrapper>
   );
@@ -178,10 +139,11 @@ const Wrapper = styled.div`
 
 const Row = styled.div`
   ${(props) => css`
-    width: 20rem;
+    width: fit-content;
     text-align: center;
     padding-bottom: 0.2rem;
     margin-right: ${props.marginRight};
+    padding-left: ${props.paddingLeft};
   `}
 `;
 
@@ -203,6 +165,7 @@ const DivTitle = styled.div`
   width: fit-content;
   justify-content: left;
   width: 100%;
+  height: 1.5rem;
   padding-left: 1rem;
 `;
 
@@ -252,12 +215,6 @@ const ButtonWrapper = styled.button`
   border: none;
   margin: unset;
   padding: unset;
-  outline: none;
-`;
-const PlusWrapper = styled.div`
-  width: 100%;
-  height: fit-content;
-  background-color: transparent;
   outline: none;
 `;
 const CheckBox = styled.input`
