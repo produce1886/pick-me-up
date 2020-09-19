@@ -6,14 +6,17 @@ import Thumbnail from "../../atoms/Icon/ThumbNail";
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
 function DefaultInfo(props) {
-  const [editIntroduce, setEditIntroduce] = useState(true);
-  const [editUsername, setEditUsername] = useState(true);
+  const [editIntroduce, setEditIntroduce] = useState(false);
+  const [editUsername, setEditUsername] = useState(false);
 
   const onChangeUsernameHandler = (e) => {
     props.setUsername(e.target.value);
   };
   const onChangeIntroduceHandler = (e) => {
     props.setIntroduce(e.target.value);
+  };
+  const onChangeImageHandler = (e) => {
+    props.setImage(URL.createObjectURL(e.target.files[0]));
   };
   return (
     <Wrapper>
@@ -26,11 +29,13 @@ function DefaultInfo(props) {
         <Text weight={600} level={3} color="#232735">
           프로필 사진
         </Text>
+
         <label for="upload">
           <ProfileInput
             type="file"
             accept="image/png, image/jpeg, image/jpg"
             id="upload"
+            onChange={onChangeImageHandler}
           ></ProfileInput>
           <Camera
             style={{ width: "0.88rem", height: "0.72rem" }}
@@ -38,15 +43,26 @@ function DefaultInfo(props) {
           ></Camera>
         </label>
       </Div>
-      <Thumbnail
-        style={{
-          width: "3.6rem",
-          height: "3.6rem",
-          marginTop: "0.6rem",
-          marginBottom: "1rem",
-        }}
-        fill="#d3d4d8"
-      ></Thumbnail>
+      {props.image ? (
+        <img
+          src={props.image}
+          style={{
+            width: "3.6rem",
+            height: "3.6rem",
+            borderRadius: "50%",
+          }}
+        />
+      ) : (
+        <Thumbnail
+          style={{
+            width: "3.6rem",
+            height: "3.6rem",
+            marginTop: "0.6rem",
+            marginBottom: "1rem",
+          }}
+          fill="#d3d4d8"
+        ></Thumbnail>
+      )}
       <Content>
         <Div>
           <DivTitle>
