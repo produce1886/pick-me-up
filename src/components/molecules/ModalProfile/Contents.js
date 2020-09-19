@@ -1,9 +1,8 @@
 import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import Edit from "../../atoms/Icon/Edit";
-import X from "../../atoms/Icon/X";
 import EditUserFilter from "../Filter/EditUserFilter";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FIELD, REGION } from "../Filter/ItemData";
 
 export function University(props) {
@@ -15,9 +14,18 @@ export function University(props) {
   const onChangeMajorHandler = (e) => {
     props.setMajor(e.target.value);
   };
+  console.log(props.UniversitySecurity);
   return (
     <Content>
-      <CheckBox type="checkbox" id="education"></CheckBox>
+      <ToggleSwitchWrapper>
+        <Toggle
+          toggled={props.UniversitySecurity}
+          onClick={props.setUniversitySecurity}
+        >
+          <ToggleBall toggled={props.UniversitySecurity}></ToggleBall>
+          <RippleBg visible={props.UniversitySecurity}></RippleBg>
+        </Toggle>
+      </ToggleSwitchWrapper>
       {editUniv && (
         <>
           <Input
@@ -58,9 +66,15 @@ export function University(props) {
 export function Area(props) {
   const title = props.area;
   const [editArea, setEditArea] = useState(true);
+  console.log(props.areaSecurity);
   return (
     <Content>
-      <CheckBox type="checkbox" id="area"></CheckBox>
+      <ToggleSwitchWrapper>
+        <Toggle toggled={props.areaSecurity} onClick={props.setAreaSecurity}>
+          <ToggleBall toggled={props.areaSecurity}></ToggleBall>
+          <RippleBg visible={props.areaSecurity}></RippleBg>
+        </Toggle>
+      </ToggleSwitchWrapper>
       {editArea && (
         <EditUserFilter
           onClick={props.setArea}
@@ -90,9 +104,18 @@ export function Area(props) {
 export function Interest(props) {
   const title = props.interest;
   const [editInterest, setEditInterest] = useState(true);
+  console.log(props.interestSecurity);
   return (
     <Content>
-      <CheckBox type="checkbox" id="interest"></CheckBox>
+      <ToggleSwitchWrapper>
+        <Toggle
+          toggled={props.interestSecurity}
+          onClick={props.setInterestSecurity}
+        >
+          <ToggleBall toggled={props.interestSecurity}></ToggleBall>
+          <RippleBg visible={props.interestSecurity}></RippleBg>
+        </Toggle>
+      </ToggleSwitchWrapper>
       {editInterest && (
         <EditUserFilter
           onClick={props.setInterest}
@@ -170,14 +193,54 @@ const Input = styled.input`
   `}
 `;
 
-const CheckBox = styled.input`
-  background-color: #c8acee;
-  border-radius: 2rem;
-  border: none;
-  width: 2rem;
-  outline: none;
+const Toggle = styled.div`
+  display: flex;
   align-items: center;
+  overflow: hidden;
+  position: relative;
+  transform: translate3d(0, 0, 0);
+  background-color: #f0f1f3;
   height: 1.1rem;
-  margin: unset;
+  width: 2rem;
+  border-radius: 2rem;
+  padding: 0.08rem;
+  border: none;
   margin-right: 0.84rem;
+`;
+const ToggleBall = styled.div`
+  z-index: 2;
+  border-radius: 50%;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(1, 0.19, 0.15, 0.7);
+  transition-delay: 0.1s;
+  will-change: transform;
+  background-color: #ffffff;
+  border: 1px solid #f0f1f3;
+  height: 1rem;
+  width: 1rem;
+  transform: ${(props) =>
+    props.toggled ? `translateX(0.9rem)` : "translateX(0rem)"};
+  &:active {
+    background-color: #f0f1f3;
+  }
+`;
+const RippleBg = styled.div`
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(circle, #c8acee 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  pointer-events: none;
+  transition: transform 0.5s, opacity 0.3s ease;
+  transform: ${(props) => (props.visible ? "scale(10, 10)" : "scale(0, 0)")};
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  position: absolute;
+  z-index: 1;
+`;
+
+const ToggleSwitchWrapper = styled.div`
+  diplay: flex;
+  flex-direction: column;
 `;

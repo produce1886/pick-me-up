@@ -39,7 +39,15 @@ function OptionInfo(props) {
           </Text>
         </DivTitle>
         <Content>
-          <CheckBox type="checkbox" id="birth"></CheckBox>
+          <ToggleSwitchWrapper>
+            <Toggle
+              toggled={props.birthSecurity}
+              onClick={props.setBirthSecurity}
+            >
+              <ToggleBall toggled={props.birthSecurity}></ToggleBall>
+              <RippleBg visible={props.birthSecurity}></RippleBg>
+            </Toggle>
+          </ToggleSwitchWrapper>
           {editBirth && (
             <Input
               placeholder="YYYY.MM.DD"
@@ -80,6 +88,8 @@ function OptionInfo(props) {
           </Text>
         </DivTitle>
         <University
+          UniversitySecurity={props.UniversitySecurity}
+          setUniversitySecurity={props.setUniversitySecurity}
           setUniversity={props.setUniversity}
           university={props.university}
           setMajor={props.setMajor}
@@ -100,7 +110,13 @@ function OptionInfo(props) {
             활동지역
           </Text>
         </DivTitle>
-        <Area setArea={props.setArea} area={props.area} zIndex={2000}></Area>
+        <Area
+          areaSecurity={props.areaSecurity}
+          setAreaSecurity={props.setAreaSecurity}
+          setArea={props.setArea}
+          area={props.area}
+          zIndex={2000}
+        ></Area>
       </Div>
       <Div>
         <DivTitle>
@@ -117,6 +133,8 @@ function OptionInfo(props) {
           </Text>
         </DivTitle>
         <Interest
+          interestSecurity={props.interestSecurity}
+          setInterestSecurity={props.setInterestSecurity}
           setInterest={props.setInterest}
           interest={props.interest}
           zIndex={1999}
@@ -217,16 +235,54 @@ const ButtonWrapper = styled.button`
   padding: unset;
   outline: none;
 `;
-const CheckBox = styled.input`
-  ${(props) => css`
-    background-color: #c8acee;
-    border-radius: 2rem;
-    border: none;
-    width: 2rem;
-    outline: none;
-    align-items: center;
-    height: 1.1rem;
-    margin: unset;
-    margin-right: 0.84rem;
-  `}
+const Toggle = styled.div`
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  transform: translate3d(0, 0, 0);
+  background-color: #f0f1f3;
+  height: 1.1rem;
+  width: 2rem;
+  border-radius: 2rem;
+  padding: 0.08rem;
+  border: none;
+  margin-right: 0.84rem;
+`;
+const ToggleBall = styled.div`
+  z-index: 2;
+  border-radius: 50%;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s cubic-bezier(1, 0.19, 0.15, 0.7);
+  transition-delay: 0.1s;
+  will-change: transform;
+  background-color: #ffffff;
+  border: 1px solid #f0f1f3;
+  height: 1rem;
+  width: 1rem;
+  transform: ${(props) =>
+    props.toggled ? `translateX(0.9rem)` : "translateX(0rem)"};
+  &:active {
+    background-color: #f0f1f3;
+  }
+`;
+const RippleBg = styled.div`
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(circle, #c8acee 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  pointer-events: none;
+  transition: transform 0.5s, opacity 0.3s ease;
+  transform: ${(props) => (props.visible ? "scale(10, 10)" : "scale(0, 0)")};
+  opacity: ${(props) => (props.visible ? 1 : 0)};
+  position: absolute;
+  z-index: 1;
+`;
+
+const ToggleSwitchWrapper = styled.div`
+  diplay: flex;
+  flex-direction: column;
 `;
