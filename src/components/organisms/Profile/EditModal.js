@@ -1,20 +1,25 @@
 import Overlay from "../../atoms/Modal/Overlay";
 import Wrapper from "../../atoms/Modal/Wrapper";
-import Text from "../../atoms/Text";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
+import X from "../../atoms/Icon/X";
+import PillButton from "../../molecules/Button/Pill";
 import styled, { css } from "styled-components";
 import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 function EditModal(props) {
+  const [birthSecurity, setBirthSecurity] = useState(false);
+  const [areaSecurity, setAreaSecurity] = useState(false);
+  const [interestSecurity, setInterestSecurity] = useState(false);
+  const [UniversitySecurity, setUniversitySecurity] = useState(false);
   const state = useSelector((state) => state.user);
   const email = state.userData.email;
   const [image, setImage] = useState("");
-  const [username, setUsername] = useState("이화연");
-  const [introduce, setIntroduce] = useState("안녕하세요");
-  const [birth, setBirth] = useState("YYYY.MM.DD");
-  const [university, setUniversity] = useState("");
-  const [major, setMajor] = useState("");
+  const [username, setUsername] = useState("username");
+  const [introduce, setIntroduce] = useState("introduce textbox");
+  const [birth, setBirth] = useState("YYYY. MM. DD");
+  const [university, setUniversity] = useState("학교");
+  const [major, setMajor] = useState("전공");
   const [area, setArea] = useState("지역");
   const [interest, setInterest] = useState("관심 분야");
 
@@ -27,6 +32,19 @@ function EditModal(props) {
     <>
       <Overlay visible={props.visible} onClick={onMaskClick}></Overlay>
       <Wrapper visible={props.visible} onClick={onMaskClick}>
+        <ButtonWrapper onClick={() => props.onClose()}>
+          <X
+            style={{
+              width: "1.2rem",
+              height: "1.2rem",
+              zIndex: 200,
+              top: "2.3rem",
+              position: "absolute",
+              right: "0.5rem",
+            }}
+            fill="#232735"
+          ></X>
+        </ButtonWrapper>
         <Inner>
           <DefaultInfo
             image={image}
@@ -37,6 +55,16 @@ function EditModal(props) {
             setIntroduce={setIntroduce}
           ></DefaultInfo>
           <OptionInfo
+            birthSecurity={birthSecurity}
+            setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
+            areaSecurity={areaSecurity}
+            setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
+            interestSecurity={interestSecurity}
+            setInterestSecurity={() => setInterestSecurity(!interestSecurity)}
+            UniversitySecurity={UniversitySecurity}
+            setUniversitySecurity={() =>
+              setUniversitySecurity(!UniversitySecurity)
+            }
             birth={birth}
             setBirth={setBirth}
             setMajor={setMajor}
@@ -48,6 +76,9 @@ function EditModal(props) {
             interest={interest}
             setInterest={setInterest}
           ></OptionInfo>
+          <ButtonWrapper bottom="1.5rem">
+            <PillButton weight={500} color="#fff" text="수정하기"></PillButton>
+          </ButtonWrapper>
         </Inner>
       </Wrapper>
     </>
@@ -67,4 +98,18 @@ const Inner = styled.div`
   position: relative;
   padding: 1rem 5rem;
   margin-bottom: 5rem;
+`;
+
+const ButtonWrapper = styled.button`
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  border: none;
+  margin: unset;
+  padding: unset;
+  outline: none;
+  position: absolute;
+  bottom: ${(props) => props.bottom};
+  top: ${(props) => props.top};
+  right: 1.5rem;
 `;

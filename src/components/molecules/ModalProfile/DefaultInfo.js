@@ -6,8 +6,8 @@ import Thumbnail from "../../atoms/Icon/ThumbNail";
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
 function DefaultInfo(props) {
-  const [editIntroduce, setEditIntroduce] = useState(false);
-  const [editUsername, setEditUsername] = useState(false);
+  const [editIntroduce, setEditIntroduce] = useState(true);
+  const [editUsername, setEditUsername] = useState(true);
 
   const onChangeUsernameHandler = (e) => {
     props.setUsername(e.target.value);
@@ -47,68 +47,72 @@ function DefaultInfo(props) {
         }}
         fill="#d3d4d8"
       ></Thumbnail>
-      <Div>
-        <DivTitle>
-          <User
-            style={{
-              width: "0.72rem",
-              height: "0.8rem",
-              marginRight: "0.32rem",
-            }}
-            fill="#d3d4d8"
-          ></User>
-          <Text weight={600} level={3} color="#232735">
-            닉네임
+      <Content>
+        <Div>
+          <DivTitle>
+            <User
+              style={{
+                width: "0.72rem",
+                height: "0.8rem",
+                marginRight: "0.32rem",
+              }}
+              fill="#d3d4d8"
+            ></User>
+            <Text weight={600} level={3} color="#232735">
+              닉네임
+            </Text>
+          </DivTitle>
+          <ButtonWrapper onClick={() => setEditUsername(!editUsername)}>
+            <Edit
+              style={{ width: "0.8rem", height: "0.8rem" }}
+              fill="#232735"
+            ></Edit>
+          </ButtonWrapper>
+        </Div>
+        {editUsername && (
+          <Input
+            placeholder="username"
+            type="text"
+            value={props.username}
+            onChange={onChangeUsernameHandler}
+            width="6rem"
+            maxLength="8"
+          ></Input>
+        )}
+        {!editUsername && (
+          <Text level={3} color="#232735" align="center">
+            {props.username}
           </Text>
-        </DivTitle>
-        <ButtonWrapper onClick={() => setEditUsername(!editUsername)}>
-          <Edit
-            style={{ width: "0.8rem", height: "0.8rem" }}
-            fill="#232735"
-          ></Edit>
-        </ButtonWrapper>
-      </Div>
-      {editUsername && (
-        <Input
-          placeholder="username"
-          type="text"
-          value={props.username}
-          onChange={onChangeUsernameHandler}
-          width="6rem"
-          maxLength="8"
-        ></Input>
-      )}
-      {!editUsername && (
-        <Text level={2} color="#232735" align="center">
-          {props.username}
-        </Text>
-      )}
-      <Div>
-        <Text weight={600} level={3} color="#232735">
-          나를 소개할 한 마디
-        </Text>
-        <ButtonWrapper onClick={() => setEditIntroduce(!editIntroduce)}>
-          <Edit
-            style={{ width: "0.8rem", height: "0.8rem" }}
-            fill="#232735"
-          ></Edit>
-        </ButtonWrapper>
-      </Div>
-      {editIntroduce && (
-        <Input
-          placeholder="introduce textbox"
-          type="text"
-          value={props.introduce}
-          onChange={onChangeIntroduceHandler}
-          width="25rem"
-          maxLength="35"
-        ></Input>
-      )}
-      {!editIntroduce && (
-        <Text level={2} color="#232735" align="center">
-          {props.introduce}
-        </Text>
-      )}
+        )}
+      </Content>
+      <Content>
+        <Div>
+          <Text weight={600} level={3} color="#232735">
+            나를 소개할 한 마디
+          </Text>
+          <ButtonWrapper onClick={() => setEditIntroduce(!editIntroduce)}>
+            <Edit
+              style={{ width: "0.8rem", height: "0.8rem" }}
+              fill="#232735"
+            ></Edit>
+          </ButtonWrapper>
+        </Div>
+        {editIntroduce && (
+          <Input
+            placeholder="introduce textbox"
+            type="text"
+            value={props.introduce}
+            onChange={onChangeIntroduceHandler}
+            width="25rem"
+            maxLength="35"
+          ></Input>
+        )}
+        {!editIntroduce && (
+          <Text level={3} color="#232735" align="center">
+            {props.introduce}
+          </Text>
+        )}
+      </Content>
     </Wrapper>
   );
 }
@@ -183,4 +187,14 @@ const ButtonWrapper = styled.button`
   margin: unset;
   padding: unset;
   outline: none;
+`;
+
+const Content = styled.div`
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 4.5rem;
+  box-sizing: border-box;
 `;
