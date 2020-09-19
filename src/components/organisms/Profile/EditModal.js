@@ -3,6 +3,7 @@ import Wrapper from "../../atoms/Modal/Wrapper";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import X from "../../atoms/Icon/X";
+import PillButton from "../../molecules/Button/Pill";
 import styled, { css } from "styled-components";
 import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
@@ -36,10 +37,10 @@ function EditModal(props) {
             style={{
               width: "1.2rem",
               height: "1.2rem",
-              position: "absolute",
-              right: "1.5rem",
-              top: "3.8rem",
               zIndex: 200,
+              top: "2.3rem",
+              position: "absolute",
+              right: "0.5rem",
             }}
             fill="#232735"
           ></X>
@@ -75,6 +76,9 @@ function EditModal(props) {
             interest={interest}
             setInterest={setInterest}
           ></OptionInfo>
+          <ButtonWrapper bottom="1.5rem">
+            <PillButton weight={500} color="#fff" text="수정하기"></PillButton>
+          </ButtonWrapper>
         </Inner>
       </Wrapper>
     </>
@@ -104,4 +108,8 @@ const ButtonWrapper = styled.button`
   margin: unset;
   padding: unset;
   outline: none;
+  position: absolute;
+  bottom: ${(props) => props.bottom};
+  top: ${(props) => props.top};
+  right: 1.5rem;
 `;
