@@ -46,7 +46,7 @@ function EditModal(props) {
         major: major,
         area: area,
         introduce: introduce,
-        image: "",
+        image: image,
         interests: interest,
         sex_security: null,
         birth_security: birthSecurity,
@@ -105,7 +105,7 @@ function EditModal(props) {
       fetchData();
     }
   }, []);
-  console.log(data);
+
   return (
     <>
       <Overlay visible={props.visible} onClick={onMaskClick}></Overlay>
