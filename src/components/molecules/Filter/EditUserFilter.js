@@ -5,8 +5,10 @@ import Icondown from "../../atoms/Icon/Filter/Down";
 import ItemWrapper from "../Filter/FilterItem";
 function EditUserFilter(props) {
   let selectedtitle;
-  if (item) {
-    selectedtitle = item.title;
+  if (props.type === "interest" && props.interest) {
+    selectedtitle = props.interest;
+  } else if (props.type === "area" && props.area) {
+    selectedtitle = props.area;
   } else {
     selectedtitle = props.title;
   }
@@ -40,7 +42,7 @@ function EditUserFilter(props) {
   return (
     <FilterWrapper onClick={() => openMenu()}>
       <Text line={props.line} level={1} color="#232735">
-        {item ? item.title : props.title}
+        {selectedtitle}
       </Text>
       {icon}
       {clicked && (

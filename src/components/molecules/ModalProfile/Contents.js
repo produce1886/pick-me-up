@@ -63,7 +63,7 @@ export function University(props) {
 }
 
 export function Area(props) {
-  const title = props.area;
+  const title = "지역";
   const [editArea, setEditArea] = useState(false);
   return (
     <Content>
@@ -80,6 +80,7 @@ export function Area(props) {
           title={title}
           zIndex={props.zIndex}
           type="area"
+          area={props.area}
         ></EditUserFilter>
       )}
       {!editArea && (
@@ -100,7 +101,7 @@ export function Area(props) {
 }
 
 export function Interest(props) {
-  const title = props.interest;
+  const title = "관심 분야";
   const [editInterest, setEditInterest] = useState(false);
   return (
     <Content>
@@ -120,6 +121,7 @@ export function Interest(props) {
           title={title}
           zIndex={props.zIndex}
           type="interest"
+          interest={props.interest}
         ></EditUserFilter>
       )}
       {!editInterest && (
