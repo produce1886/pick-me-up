@@ -1,12 +1,15 @@
 import Overlay from "../../atoms/Modal/Overlay";
 import Wrapper from "../../atoms/Modal/Wrapper";
-import Text from "../../atoms/Text";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import styled, { css } from "styled-components";
 import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 function EditModal(props) {
+  const [birthSecurity, setBirthSecurity] = useState(false);
+  const [areaSecurity, setAreaSecurity] = useState(false);
+  const [interestSecurity, setInterestSecurity] = useState(false);
+  const [UniversitySecurity, setUniversitySecurity] = useState(false);
   const state = useSelector((state) => state.user);
   const email = state.userData.email;
   const [image, setImage] = useState("");
@@ -37,6 +40,16 @@ function EditModal(props) {
             setIntroduce={setIntroduce}
           ></DefaultInfo>
           <OptionInfo
+            birthSecurity={birthSecurity}
+            setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
+            areaSecurity={areaSecurity}
+            setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
+            interestSecurity={interestSecurity}
+            setInterestSecurity={() => setInterestSecurity(!interestSecurity)}
+            UniversitySecurity={UniversitySecurity}
+            setUniversitySecurity={() =>
+              setUniversitySecurity(!UniversitySecurity)
+            }
             birth={birth}
             setBirth={setBirth}
             setMajor={setMajor}
