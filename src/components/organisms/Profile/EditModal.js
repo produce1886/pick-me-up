@@ -110,7 +110,7 @@ function EditModal(props) {
     <>
       <Overlay visible={props.visible} onClick={onMaskClick}></Overlay>
       <Wrapper visible={props.visible} onClick={onMaskClick}>
-        <ButtonWrapper onClick={() => props.onClose()}>
+        <ButtonWrapper onClick={() => props.onClose()} right="2.4rem">
           <X
             style={{
               width: "1.2rem",
@@ -118,7 +118,6 @@ function EditModal(props) {
               zIndex: 200,
               top: "2.3rem",
               position: "absolute",
-              right: "0.5rem",
             }}
             fill="#232735"
           ></X>
@@ -158,7 +157,7 @@ function EditModal(props) {
                 interest={interest}
                 setInterest={setInterest}
               ></OptionInfo>
-              <ButtonWrapper bottom="1.5rem" onClick={put}>
+              <ButtonWrapper bottom="1.5rem" onClick={put} right="1.4rem">
                 <PillButton
                   weight={500}
                   color="#fff"
@@ -199,5 +198,5 @@ const ButtonWrapper = styled.button`
   position: absolute;
   bottom: ${(props) => props.bottom};
   top: ${(props) => props.top};
-  right: 1.5rem;
+  right: ${(props) => props.right};
 `;
