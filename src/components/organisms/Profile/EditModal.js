@@ -2,6 +2,7 @@ import Overlay from "../../atoms/Modal/Overlay";
 import Wrapper from "../../atoms/Modal/Wrapper";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
+import X from "../../atoms/Icon/X";
 import styled, { css } from "styled-components";
 import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
@@ -30,6 +31,19 @@ function EditModal(props) {
     <>
       <Overlay visible={props.visible} onClick={onMaskClick}></Overlay>
       <Wrapper visible={props.visible} onClick={onMaskClick}>
+        <ButtonWrapper onClick={() => props.onClose()}>
+          <X
+            style={{
+              width: "1.2rem",
+              height: "1.2rem",
+              position: "absolute",
+              right: "1.5rem",
+              top: "3.8rem",
+              zIndex: 200,
+            }}
+            fill="#232735"
+          ></X>
+        </ButtonWrapper>
         <Inner>
           <DefaultInfo
             image={image}
@@ -80,4 +94,14 @@ const Inner = styled.div`
   position: relative;
   padding: 1rem 5rem;
   margin-bottom: 5rem;
+`;
+
+const ButtonWrapper = styled.button`
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  border: none;
+  margin: unset;
+  padding: unset;
+  outline: none;
 `;
