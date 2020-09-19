@@ -14,7 +14,6 @@ export function University(props) {
   const onChangeMajorHandler = (e) => {
     props.setMajor(e.target.value);
   };
-  console.log(props.UniversitySecurity);
   return (
     <Content>
       <ToggleSwitchWrapper>
@@ -66,7 +65,6 @@ export function University(props) {
 export function Area(props) {
   const title = props.area;
   const [editArea, setEditArea] = useState(true);
-  console.log(props.areaSecurity);
   return (
     <Content>
       <ToggleSwitchWrapper>
@@ -104,7 +102,6 @@ export function Area(props) {
 export function Interest(props) {
   const title = props.interest;
   const [editInterest, setEditInterest] = useState(true);
-  console.log(props.interestSecurity);
   return (
     <Content>
       <ToggleSwitchWrapper>
