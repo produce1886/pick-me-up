@@ -13,11 +13,11 @@ function EditModal(props) {
   const state = useSelector((state) => state.user);
   const email = state.userData.email;
   const [image, setImage] = useState("");
-  const [username, setUsername] = useState("이화연");
-  const [introduce, setIntroduce] = useState("안녕하세요");
-  const [birth, setBirth] = useState("YYYY.MM.DD");
-  const [university, setUniversity] = useState("");
-  const [major, setMajor] = useState("");
+  const [username, setUsername] = useState("username");
+  const [introduce, setIntroduce] = useState("introduce textbox");
+  const [birth, setBirth] = useState("YYYY. MM. DD");
+  const [university, setUniversity] = useState("학교");
+  const [major, setMajor] = useState("전공");
   const [area, setArea] = useState("지역");
   const [interest, setInterest] = useState("관심 분야");
 

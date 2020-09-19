@@ -12,7 +12,7 @@ import {
   Interest,
 } from "../../molecules/ModalProfile/Contents";
 function OptionInfo(props) {
-  const [editBirth, setEditBirth] = useState(false);
+  const [editBirth, setEditBirth] = useState(true);
   const onChangeBirthHandler = (e) => {
     props.setBirth(e.target.value);
   };

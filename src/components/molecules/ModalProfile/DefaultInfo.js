@@ -6,8 +6,8 @@ import Thumbnail from "../../atoms/Icon/ThumbNail";
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
 function DefaultInfo(props) {
-  const [editIntroduce, setEditIntroduce] = useState(false);
-  const [editUsername, setEditUsername] = useState(false);
+  const [editIntroduce, setEditIntroduce] = useState(true);
+  const [editUsername, setEditUsername] = useState(true);
 
   const onChangeUsernameHandler = (e) => {
     props.setUsername(e.target.value);
@@ -80,7 +80,7 @@ function DefaultInfo(props) {
           ></Input>
         )}
         {!editUsername && (
-          <Text level={2} color="#232735" align="center">
+          <Text level={3} color="#232735" align="center">
             {props.username}
           </Text>
         )}
@@ -108,7 +108,7 @@ function DefaultInfo(props) {
           ></Input>
         )}
         {!editIntroduce && (
-          <Text level={2} color="#232735" align="center">
+          <Text level={3} color="#232735" align="center">
             {props.introduce}
           </Text>
         )}
