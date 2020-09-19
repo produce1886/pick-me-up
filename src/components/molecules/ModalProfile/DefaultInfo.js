@@ -6,8 +6,8 @@ import Thumbnail from "../../atoms/Icon/ThumbNail";
 import styled, { css } from "styled-components";
 import React, { useState } from "react";
 function DefaultInfo(props) {
-  const [editIntroduce, setEditIntroduce] = useState(true);
-  const [editUsername, setEditUsername] = useState(true);
+  const [editIntroduce, setEditIntroduce] = useState(false);
+  const [editUsername, setEditUsername] = useState(false);
 
   const onChangeUsernameHandler = (e) => {
     props.setUsername(e.target.value);

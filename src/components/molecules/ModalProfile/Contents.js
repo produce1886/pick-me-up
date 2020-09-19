@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { FIELD, REGION } from "../Filter/ItemData";
 
 export function University(props) {
-  const [editUniv, setEditUniv] = useState(true);
+  const [editUniv, setEditUniv] = useState(false);
 
   const onChangeUnivHandler = (e) => {
     props.setUniversity(e.target.value);
@@ -64,7 +64,7 @@ export function University(props) {
 
 export function Area(props) {
   const title = props.area;
-  const [editArea, setEditArea] = useState(true);
+  const [editArea, setEditArea] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
@@ -101,7 +101,7 @@ export function Area(props) {
 
 export function Interest(props) {
   const title = props.interest;
-  const [editInterest, setEditInterest] = useState(true);
+  const [editInterest, setEditInterest] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
