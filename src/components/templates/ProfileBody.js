@@ -5,13 +5,22 @@ import Tab from "../organisms/Profile/Tab";
 import Info from "../organisms/Profile/Info";
 import Portfolio from "../organisms/Profile/Portfolio";
 import Project from "../organisms/Profile/Project";
+import EditButton from "../molecules/Button/Edit";
+import EditModal from "../organisms/Profile/EditModal";
 
 function ProfileBody() {
   const [selected, setSelected] = useState(0);
-
+  const [editvisible, setEditVisible] = useState(false);
   return (
     <Wrapper>
-      <Top></Top>
+      <Top setEditVisible={setEditVisible}></Top>
+
+      {editvisible && (
+        <EditModal
+          visible={editvisible}
+          onClose={() => setEditVisible(false)}
+        ></EditModal>
+      )}
       <Tab selected={selected} setSelected={setSelected}></Tab>
       <BodyWrapper>
         {selected === 0 && <Info></Info>}

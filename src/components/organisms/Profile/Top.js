@@ -2,13 +2,17 @@ import styled from "styled-components";
 import Text from "../../atoms/Text";
 import EditButton from "../../molecules/Button/Edit";
 
-function Top() {
+function Top(props) {
   return (
     <Wrapper>
       <Background></Background>
       <ProfileHolder></ProfileHolder>
       <InfoWrapper>
-        <ButtonWrapper>
+        <ButtonWrapper
+          onClick={() => {
+            props.setEditVisible(true);
+          }}
+        >
           <EditButton></EditButton>
         </ButtonWrapper>
         <Text level={6} weight="bold" color="#232735">

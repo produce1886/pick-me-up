@@ -12,6 +12,7 @@ export default styled.button`
   color: #fff;
   border: none;
   padding: 0 0.75rem 0 0.75rem;
+  outline: none;
   ${(props) =>
     css`
       position: ${props.center ? "absolute" : "none"};
