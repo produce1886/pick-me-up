@@ -46,8 +46,8 @@ export function University(props) {
         </>
       )}
       {!editUniv && (
-        <Row marginRight="2.4rem" paddingLeft="1rem">
-          <Text level={3} color="#232735" align="left" width="20.5rem">
+        <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
+          <Text level={3} color="#232735" align="left">
             {props.university} {props.major}
           </Text>
         </Row>
@@ -84,8 +84,8 @@ export function Area(props) {
         ></EditUserFilter>
       )}
       {!editArea && (
-        <Row marginRight="2.4rem" paddingLeft="1rem">
-          <Text level={3} color="#232735" align="left" width="20.5rem">
+        <Row marginRight="3rem" paddingLeft="1rem" width="21.5rem">
+          <Text level={3} color="#232735" align="left">
             {props.area}
           </Text>
         </Row>
@@ -125,8 +125,8 @@ export function Interest(props) {
         ></EditUserFilter>
       )}
       {!editInterest && (
-        <Row marginRight="2.4rem" paddingLeft="1rem">
-          <Text level={3} color="#232735" align="left" width="20.5rem">
+        <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
+          <Text level={3} color="#232735" align="left">
             {props.interest}
           </Text>
         </Row>
@@ -142,7 +142,7 @@ export function Interest(props) {
 }
 
 const Content = styled.div`
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   display: flex;
@@ -166,11 +166,12 @@ const ButtonWrapper = styled.button`
 
 const Row = styled.div`
   ${(props) => css`
-    width: fit-content;
+    width: ${props.width};
     text-align: center;
     padding-bottom: 0.2rem;
     margin-right: ${props.marginRight};
     padding-left: ${props.paddingLeft};
+    box-sizing: border-box;
   `}
 `;
 

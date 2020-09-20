@@ -59,8 +59,8 @@ function OptionInfo(props) {
             ></Input>
           )}
           {!editBirth && (
-            <Row marginRight="2.4rem" paddingLeft="1rem">
-              <Text level={3} color="#232735" align="left" width="20.5rem">
+            <Row marginRight="2.4rem" paddingLeft="1rem" width="18.5rem">
+              <Text level={3} color="#232735" align="left">
                 {props.birth}
               </Text>
             </Row>
@@ -157,7 +157,7 @@ const Wrapper = styled.div`
 
 const Row = styled.div`
   ${(props) => css`
-    width: fit-content;
+    width: ${props.width};
     text-align: center;
     padding-bottom: 0.2rem;
     margin-right: ${props.marginRight};
@@ -198,7 +198,7 @@ const Title = styled.div`
   padding-bottom: 0.32rem;
 `;
 const Content = styled.div`
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   display: flex;
