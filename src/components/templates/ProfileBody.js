@@ -18,7 +18,11 @@ function ProfileBody() {
 
   return (
     <Wrapper>
-      <Top setEditVisible={setEditVisible}></Top>
+      <Top
+        setEditVisible={setEditVisible}
+        isLoading={isLoading}
+        {...data}
+      ></Top>
       {editvisible && (
         <EditModal
           visible={editvisible}
