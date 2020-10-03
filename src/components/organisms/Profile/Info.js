@@ -46,34 +46,32 @@ function Info(props) {
           </Text>
         </Div>
       )}
-      <Div>
-        <Univ
-          style={{ width: "0.8rem", height: "0.72rem" }}
-          fill="#d3d4d8"
-        ></Univ>
-        <Row>
-          {university && university_security && (
-            <>
-              <Text level={3} color="#232735" weight="bold">
-                {university}
-              </Text>
-              <Text level={3} color="#232735">
-                에서&nbsp;
-              </Text>
-            </>
-          )}
-          {major && major_security && (
-            <>
-              <Text level={3} color="#232735" weight="bold">
-                {major}
-              </Text>
-              <Text level={3} color="#232735">
-                &nbsp;전공
-              </Text>
-            </>
-          )}
-        </Row>
-      </Div>
+      {university && university_security && (
+        <Div>
+          <Univ
+            style={{ width: "0.8rem", height: "0.72rem" }}
+            fill="#d3d4d8"
+          ></Univ>
+          <Row>
+            <Text level={3} color="#232735" weight="bold">
+              {university}
+            </Text>
+            {major && (
+              <>
+                <Text level={3} color="#232735">
+                  에서&nbsp;
+                </Text>
+                <Text level={3} color="#232735" weight="bold">
+                  {major}
+                </Text>
+                <Text level={3} color="#232735">
+                  &nbsp;전공
+                </Text>
+              </>
+            )}
+          </Row>
+        </Div>
+      )}
       {area && area_security && (
         <Div>
           <Area
