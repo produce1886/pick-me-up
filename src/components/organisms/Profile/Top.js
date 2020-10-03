@@ -20,7 +20,7 @@ function Top(props) {
         <Text level={6} weight="bold" color="#232735">
           {props.username}
         </Text>
-        {props.introduce_security === 1 && (
+        {props.introduce_security && (
           <Text level={3} color="#8b90a0">
             {props.introduce}
           </Text>

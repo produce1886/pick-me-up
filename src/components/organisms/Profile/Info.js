@@ -35,7 +35,7 @@ function Info(props) {
           </Text>
         </Div>
       )}
-      {birth && birth_security === 1 && (
+      {birth && birth_security && (
         <Div>
           <Birth
             style={{ width: "0.8rem", height: "0.8rem" }}
@@ -46,38 +46,35 @@ function Info(props) {
           </Text>
         </Div>
       )}
-      {(university && university_security === 1) ||
-        (major && major_security === 1 && (
-          <Div>
-            <Univ
-              style={{ width: "0.8rem", height: "0.72rem" }}
-              fill="#d3d4d8"
-            ></Univ>
-            <Row>
-              {university && university_security === 1 && (
-                <>
-                  <Text level={3} color="#232735" weight="bold">
-                    {university}
-                  </Text>
-                  <Text level={3} color="#232735">
-                    에서&nbsp;
-                  </Text>
-                </>
-              )}
-              {major && major_security === 1 && (
-                <>
-                  <Text level={3} color="#232735" weight="bold">
-                    {major}
-                  </Text>
-                  <Text level={3} color="#232735">
-                    &nbsp;전공
-                  </Text>
-                </>
-              )}
-            </Row>
-          </Div>
-        ))}
-      {area && area_security === 1 && (
+      <Div>
+        <Univ
+          style={{ width: "0.8rem", height: "0.72rem" }}
+          fill="#d3d4d8"
+        ></Univ>
+        <Row>
+          {university && university_security && (
+            <>
+              <Text level={3} color="#232735" weight="bold">
+                {university}
+              </Text>
+              <Text level={3} color="#232735">
+                에서&nbsp;
+              </Text>
+            </>
+          )}
+          {major && major_security && (
+            <>
+              <Text level={3} color="#232735" weight="bold">
+                {major}
+              </Text>
+              <Text level={3} color="#232735">
+                &nbsp;전공
+              </Text>
+            </>
+          )}
+        </Row>
+      </Div>
+      {area && area_security && (
         <Div>
           <Area
             style={{ width: "0.6rem", height: "0.72rem" }}
@@ -88,7 +85,7 @@ function Info(props) {
           </Text>
         </Div>
       )}
-      {interests && interests_security === 1 && (
+      {interests && interests_security && (
         <Div>
           <Heart
             style={{ width: "0.83rem", height: "0.72rem" }}
