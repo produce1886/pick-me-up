@@ -2,21 +2,29 @@ import styled from "styled-components";
 import Text from "../../atoms/Text";
 import EditButton from "../../molecules/Button/Edit";
 
-function Top() {
+function Top(props) {
   return (
     <Wrapper>
       <Background></Background>
-      <ProfileHolder></ProfileHolder>
+      <ProfileHolder>
+        <Img src={props.image}></Img>
+      </ProfileHolder>
       <InfoWrapper>
-        <ButtonWrapper>
+        <ButtonWrapper
+          onClick={() => {
+            props.setEditVisible(true);
+          }}
+        >
           <EditButton></EditButton>
         </ButtonWrapper>
         <Text level={6} weight="bold" color="#232735">
-          Username
+          {props.username}
         </Text>
-        <Text level={3} color="#8b90a0">
-          introduce
-        </Text>
+        {props.introduce_security && (
+          <Text level={3} color="#8b90a0">
+            {props.introduce}
+          </Text>
+        )}
       </InfoWrapper>
     </Wrapper>
   );
@@ -65,4 +73,9 @@ const ProfileHolder = styled.div`
   background-color: #d3d4d8;
   position: absolute;
   top: 4.6rem;
+`;
+
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
 `;
