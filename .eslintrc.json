@@ -20,17 +20,16 @@
     "prettier/@typescript-eslint"
   ],
   "rules": {
+    "import/extensions": ["off"],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": [
-      "error",
-      { "variables": false }
-    ],
     "prettier/prettier": [
       "error",
       {
         "endOfLine": "auto"
       }
     ],
-    "import/extensions": ["off"]
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-use-before-define": ["error", { "variables": false }]
   }
 }
