@@ -21,6 +21,7 @@
     "prettier/@typescript-eslint"
   ],
   "rules": {
+    "no-alert": "off",
     "import/no-unresolved": "off",
     "import/extensions": ["off"],
     "no-use-before-define": "off",
