@@ -41,8 +41,8 @@ function ModalUpdate({
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
-  //const [images, setImages] = useState<string[]>([]);
-  const [images, setImages] = useState<File[]>([]);
+  // const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const { isLoading } = getData(
     pid,
@@ -67,42 +67,41 @@ function ModalUpdate({
   }
 */
   if (tags.length > 0 && typeof tags[0] === "object") {
-    let tagArray: string[] = [];
+    const tagArray: string[] = [];
     tags.map((value: string) => tagArray.push(value));
     setTags(tagArray);
   }
   const update = useCallback(() => {
-    let flag = checkIsNotEmpty();
+    const flag = checkIsNotEmpty();
     if (!flag) {
-      return;
     } else {
       try {
         if (modalType === "project") {
-          //let image = images.length > 0 ? images[0].data : "";
-          let image = images.length > 0 ? images[0] : "";
-          let body = {
-            title: title,
-            content: content,
-            category: category,
+          // let image = images.length > 0 ? images[0].data : "";
+          const image = images.length > 0 ? images[0] : "";
+          const body = {
+            title,
+            content,
+            category,
             huntingField: field,
-            region: region,
+            region,
             projectCategory: projectType,
-            tags: tags,
-            image: image,
+            tags,
+            image,
           };
           axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setUpdate(false);
         } else if (modalType === "portfolio") {
-          //let image = images.length > 0 ? images[0].data : "";
-          let image = images.length > 0 ? images[0] : "";
-          let body = {
-            title: title,
-            content: content,
-            category: category,
+          // let image = images.length > 0 ? images[0].data : "";
+          const image = images.length > 0 ? images[0] : "";
+          const body = {
+            title,
+            content,
+            category,
             huntingField: field,
-            tags: tags,
-            image: image,
+            tags,
+            image,
           };
           axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
           setTimeout(() => setModalReload(modalReload + 1), 400);
@@ -133,7 +132,7 @@ function ModalUpdate({
   }, [title, content, category, field, region, projectType, tags, images]);
 
   const checkIsNotEmpty = () => {
-    let flag = false;
+    const flag = false;
     if (!title) {
       alert("제목을 입력하세요");
       return flag;
@@ -175,10 +174,6 @@ function ModalUpdate({
           <Top
             modalType={modalType}
             title={title}
-            category={category}
-            field={field}
-            region={region}
-            projectType={projectType}
             setCategory={setCategory}
             setField={setField}
             setRegion={setRegion}
@@ -238,9 +233,9 @@ const getData = (
           setField(result.data.huntingField);
           setRegion(result.data.region);
           setProjectType(result.data.projectCategory);
-          /*if (!result.data.image) {
+          /* if (!result.data.image) {
             setImages([{ data: result.data.image }]);
-          }*/
+          } */
           if (!result.data.image) {
             setImages([result.data.image]);
           }
@@ -259,10 +254,10 @@ const getData = (
           setContent(result.data.content);
           setCategory(result.data.category);
           setField(result.data.huntingField);
-          /*if (result.data.image != "") {
+          /* if (result.data.image != "") {
             setImages([{ data: image }]);
-          }*/
-          if (result.data.image != "") {
+          } */
+          if (result.data.image !== "") {
             setImages([result.data.image]);
           }
           let jsonPortfolioTagArray: string[] = [];
@@ -273,7 +268,7 @@ const getData = (
           setIsLoading(false);
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
     if (!data) {
