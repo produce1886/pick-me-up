@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Colors from "@colors";
 import ButtonProps from "../../atoms/Button/button";
-import PlusIcon from "../../atoms/Icon/PlusCir";
+import PlusIcon from "../../atoms/Icon/PlusCircle";
 import Text from "../../atoms/Text";
 
 function AddButton(props: ButtonProps) {
