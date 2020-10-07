@@ -1,6 +1,6 @@
+import Carousel from "nuka-carousel";
 import Wrapper from "../atoms/Banner/Wrapper";
 import Item from "../molecules/BannerItem";
-import Carousel from "nuka-carousel";
 
 export default function Banner() {
   return (

@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import React, { Dispatch, SetStateAction } from "react";
 import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
 import Filters from "../Filter/FilterGroup";
-import React, { Dispatch, SetStateAction } from "react";
 import { ModalType } from "../../../types/Modal";
 
 type ModalTopProps = {
