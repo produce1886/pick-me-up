@@ -73,8 +73,7 @@ function ModalUpdate({
   }
   const update = useCallback(() => {
     const flag = checkIsNotEmpty();
-    if (!flag) {
-    } else {
+    if (flag) {
       try {
         if (modalType === "project") {
           // let image = images.length > 0 ? images[0].data : "";

@@ -37,8 +37,7 @@ function ModalWrite({
 
   const post = useCallback(() => {
     const flag = checkIsNotEmpty();
-    if (!flag) {
-    } else {
+    if (flag) {
       try {
         if (modalType === "project") {
           const image = images.length > 0 ? images[0] : "";

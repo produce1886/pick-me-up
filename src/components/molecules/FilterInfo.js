@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { React } from "react";
 import Text from "../atoms/Text";
 
 function FilterInfo(props) {

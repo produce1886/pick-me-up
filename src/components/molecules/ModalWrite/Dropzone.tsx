@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Text from "../../atoms/Text";
+import Text from "../../atoms/Text/index";
 import Upload from "../../atoms/Icon/Upload";
 import Close from "../../atoms/Icon/Close";
 import { ImageFile } from "../../../types/Modal";
