@@ -1,7 +1,17 @@
 import styled, { css } from "styled-components";
 
+type TextProps = {
+  width?: number;
+  height?: number;
+  weight?: number;
+  align?: number;
+  level?: number;
+  deco?: string;
+  line?: number;
+  color?: string;
+};
 export default styled.p`
-  ${(props) => css`
+  ${(props: TextProps) => css`
     width: ${props.width};
     height: ${props.height};
     font-weight: ${props.weight};
