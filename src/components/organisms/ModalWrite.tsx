@@ -8,58 +8,64 @@ import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import { State } from "../../types/User";
-import { ModalProps, ModalType, File } from "../../types/Modal";
+import { ModalType } from "../../types/Modal";
 
-function ModalWrite(
-  modalType: ModalType,
-  visible: boolean,
-  onClose: () => void,
-  setReload: Dispatch<SetStateAction<number>>,
-  reload: number
-) {
+type ModalWriteProps = {
+  modalType: ModalType;
+  visible: boolean;
+  onClose: () => void;
+  setReload: Dispatch<SetStateAction<number>>;
+  reload: number;
+};
+function ModalWrite({
+  modalType,
+  visible,
+  onClose,
+  setReload,
+  reload,
+}: ModalWriteProps) {
   const state = useSelector((state: { user: State }) => state.user);
-  const email = state.userData.email;
+  const { email } = state.userData;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
-  const [images, setImages] = useState<FileType[]>([]);
+  const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
 
   const post = useCallback(() => {
-    let flag = checkIsNotEmpty();
+    const flag = checkIsNotEmpty();
     if (!flag) {
-      return;
     } else {
       try {
         if (modalType === "project") {
-          let image = images.length > 0 ? images[0].data : "";
-          let body = {
-            title: title,
-            content: content,
-            email: email,
-            category: category,
+          const image = images.length > 0 ? images[0] : "";
+          const body = {
+            title,
+            content,
+            email,
+            category,
             huntingField: field,
-            region: region,
+            region,
             projectCategory: projectType,
-            tags: tags,
-            image: image,
+            tags,
+            image,
           };
           axios.post(`${process.env.API_HOST}/projects`, body);
           setTimeout(() => setReload(reload + 1), 300);
           onClose();
         } else if (modalType === "portfolio") {
-          let image = images.length > 0 ? images[0].data : "";
-          let body = {
-            title: title,
-            content: content,
-            email: email,
-            category: category,
+          const image = images.length > 0 ? images[0] : "";
+          const body = {
+            title,
+            content,
+            email,
+            category,
             huntingField: field,
-            tags: tags,
-            image: image,
+            tags,
+            image,
           };
           axios.post(`${process.env.API_HOST}/portfolios`, body);
           setTimeout(() => setReload(reload + 1), 300);
@@ -102,10 +108,10 @@ function ModalWrite(
     } else {
       return false;
     }
-  };*/
+  }; */
 
   const checkIsNotEmpty = () => {
-    let flag = false;
+    const flag = false;
     if (!title) {
       alert("제목을 입력하세요");
       return flag;
