@@ -6,7 +6,7 @@ import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
 
 function ModalBottom(props) {
-  let { tags } = props;
+  const { tags } = props;
   const [tagInput, setTagInput] = useState("");
 
   const handleChange = (event) => {
@@ -25,7 +25,7 @@ function ModalBottom(props) {
 
   const removeTag = (value) => {
     const tagIndex = tags.indexOf(value);
-    let newArray = [...tags];
+    const newArray = [...tags];
     newArray.splice(tagIndex, 1);
     props.setTags(newArray);
   };
@@ -49,10 +49,10 @@ function ModalBottom(props) {
           {tags.map((value, index) => (
             <TagButton
               key={index}
-              ismodal="modal"
+              isModal={true}
               text={value}
-              removeTag={() => removeTag(value)}
-              tagtype="modalwrite"
+              onClick={() => removeTag(value)}
+              tagType="MODAL_WRITE"
             ></TagButton>
           ))}
         </TagWrapper>

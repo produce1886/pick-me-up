@@ -9,6 +9,7 @@ type TagButtonProps = {
 export default styled.button`
   width: fit-content;
   height: 1rem;
+  display: flex;
   border-radius: 0.5rem;
   justify-content: center;
   align-items: center;

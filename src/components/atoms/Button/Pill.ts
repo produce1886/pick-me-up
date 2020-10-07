@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 type PillButtonProps = {
-  center: boolean;
+  center?: boolean;
 };
 
 export default styled.button`

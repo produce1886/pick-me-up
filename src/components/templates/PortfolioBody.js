@@ -45,7 +45,7 @@ function PortfolioBody(props) {
         </InnerWrapper>
         <TopButton></TopButton>
         {isSignedIn && !writeVisible && !props.viewVisible && (
-          <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
+          <WriteButton onClick={() => setWriteVisible(true)}></WriteButton>
         )}
         {writeVisible && (
           <ModalWrite

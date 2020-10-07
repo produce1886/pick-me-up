@@ -1,22 +1,25 @@
-import Plus from "../../atoms/Icon/PlusCir";
+import React from "react";
+import styled from "styled-components";
+import Colors from "@colors";
+import ButtonProps from "../../atoms/Button/button";
+import PlusIcon from "../../atoms/Icon/PlusCir";
 import Text from "../../atoms/Text";
-import styled, { css } from "styled-components";
 
-function PlusCirButton(props) {
+function AddButton(props: ButtonProps) {
   return (
-    <ButtonWrapper onClick={props.create}>
-      <Plus
+    <ButtonWrapper onClick={props.onClick}>
+      <PlusIcon
         style={{ width: "0.8rem", height: "0.8rem", marginRight: "0.4rem" }}
-        fill="#8B90A0"
-      ></Plus>
-      <Text level={1} color="#8b90a0">
+        fill={Colors.DEEP_GREY}
+      ></PlusIcon>
+      <Text level={1} color={Colors.DEEP_GREY}>
         추가
       </Text>
     </ButtonWrapper>
   );
 }
 
-export default React.memo(PlusCirButton);
+export default React.memo(AddButton);
 
 const ButtonWrapper = styled.button`
   display: flex;

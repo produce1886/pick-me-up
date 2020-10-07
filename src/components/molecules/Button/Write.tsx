@@ -1,9 +1,11 @@
-import Icon from "../../atoms/Icon/Write";
+import React from "react";
 import styled from "styled-components";
+import ButtonProps from "../../atoms/Button/button";
+import Icon from "../../atoms/Icon/Write";
 
-function WriteButton(props) {
+function WriteButton(props: ButtonProps) {
   return (
-    <ButtonWrapper onClick={props.openWrite}>
+    <ButtonWrapper onClick={props.onClick}>
       <Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
     </ButtonWrapper>
   );

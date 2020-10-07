@@ -1,14 +1,15 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import Colors from "../Colors";
 
-type TextProps = {
+export type TextProps = {
   children: string | string[];
   level?: number;
   width?: number | string;
   height?: number | string;
   weight?: number | string;
   align?: string;
-  color?: string;
+  color?: Colors;
   deco?: string;
   line?: number | string;
 };
