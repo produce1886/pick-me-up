@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ViewCount from "../Count/ViewCount";
 import CommentCount from "../Count/CommentCount";
-import MoreButton from "../Button/More";
+import MoreButton from "../Button/ViewMore";
 import TagButton from "../Button/Tag";
 
 function Bottom(props) {

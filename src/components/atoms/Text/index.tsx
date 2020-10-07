@@ -1,16 +1,24 @@
+import React from "react";
 import styled, { css } from "styled-components";
+import Colors from "../Colors";
 
-type TextProps = {
-  width?: number;
-  height?: number;
-  weight?: number;
-  align?: number;
+export type TextProps = {
+  children: string | string[];
   level?: number;
+  width?: number | string;
+  height?: number | string;
+  weight?: number | string;
+  align?: string;
+  color?: Colors;
   deco?: string;
-  line?: number;
-  color?: string;
+  line?: number | string;
 };
-export default styled.p`
+
+function Text(props: TextProps) {
+  return <StyledText {...props}>{props.children}</StyledText>;
+}
+
+const StyledText = styled.p`
   ${(props: TextProps) => css`
     width: ${props.width};
     height: ${props.height};
@@ -25,3 +33,5 @@ export default styled.p`
     line-height: ${props.line};
   `}
 `;
+
+export default React.memo(Text);

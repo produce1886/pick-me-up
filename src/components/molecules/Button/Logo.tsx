@@ -1,6 +1,7 @@
-import Logo from "../../atoms/Image/Logo";
+import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import Logo from "../../atoms/Image/Logo";
 
 export default function LogoButton() {
   return (

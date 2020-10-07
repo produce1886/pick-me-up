@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Colors from "@src/components/atoms/Colors/index";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
-import React from "react";
 
 type ModalBottomProps = {
   tags: string[];
@@ -21,7 +21,7 @@ function ModalBottom({ tags, setTags, onClick, updating }: ModalBottomProps) {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key != "Enter") return;
+    if (e.key !== "Enter") return;
     if (tags.length < 5 && tagInput.length > 0) {
       setTags([...tags, tagInput]);
       setTagInput("");
@@ -32,7 +32,7 @@ function ModalBottom({ tags, setTags, onClick, updating }: ModalBottomProps) {
 
   const removeTag = (value: string) => {
     const tagIndex = tags.indexOf(value);
-    let newArray = [...tags];
+    const newArray = [...tags];
     newArray.splice(tagIndex, 1);
     setTags(newArray);
   };
@@ -56,17 +56,17 @@ function ModalBottom({ tags, setTags, onClick, updating }: ModalBottomProps) {
           {tags.map((value, index) => (
             <TagButton
               key={index}
-              ismodal="modal"
+              isModal={true}
               text={value}
-              removeTag={() => removeTag(value)}
-              tagtype="modalwrite"
+              onClick={() => removeTag(value)}
+              tagType="MODAL_WRITE"
             ></TagButton>
           ))}
         </TagWrapper>
         <ButtonWrapper onClick={onClick}>
           <PillButton
             weight={500}
-            color="#fff"
+            color={Colors.WHITE}
             text={updating ? "글 수정하기" : "글 작성하기"}
           ></PillButton>
         </ButtonWrapper>

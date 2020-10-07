@@ -1,9 +1,11 @@
-import Text from "../../atoms/Text";
-import Wrapper from "../../atoms/Button/Pill";
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import ButtonProps from "../../atoms/Button/button";
+import Text from "../../atoms/Text";
+import Wrapper from "../../atoms/Button/Pill";
 
-export default function Button(props) {
+function PillButton(props: ButtonProps) {
   if (props.link) {
     return (
       <Link href={props.link}>
@@ -25,5 +27,7 @@ export default function Button(props) {
     </Wrapper>
   );
 }
+
+export default React.memo(PillButton);
 
 const A = styled.a``;

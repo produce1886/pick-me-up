@@ -1,16 +1,13 @@
+import styled, { css } from "styled-components";
+import React, { useState } from "react";
 import Text from "../../atoms/Text";
 import Birth from "../../atoms/Icon/Birth";
-import Univ from "../../atoms/Icon/Univ";
+import Univ from "../../atoms/Icon/University";
 import AreaIcon from "../../atoms/Icon/Area";
 import Heart from "../../atoms/Icon/Heart";
 import Edit from "../../atoms/Icon/Edit";
-import styled, { css } from "styled-components";
-import React, { useState } from "react";
-import {
-  University,
-  Area,
-  Interest,
-} from "../../molecules/ModalProfile/Contents";
+import { University, Area, Interest } from "./Contents";
+
 function OptionInfo(props) {
   const [editBirth, setEditBirth] = useState(false);
   const onChangeBirthHandler = (e) => {
