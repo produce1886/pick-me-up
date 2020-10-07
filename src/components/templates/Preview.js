@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Postblock from "../organisms/PostBlock";
 import Link from "next/link";
+import Postblock from "../organisms/PostBlock";
 import Text from "../atoms/Text";
 import Icon from "../atoms/Icon/Chevron/Right";
 import Skeleton from "../_skeletons/main/PostBlock";
@@ -70,7 +70,7 @@ const getProjects = (type) => {
     sort = "viewNum";
   }
 
-  let body = {
+  const body = {
     page: 0,
     size: 4,
     sortColumn: `${sort}`,
