@@ -12,7 +12,11 @@ import { ModalProps } from "../../types/Modal";
 import DataProps from "../../types/Data";
 
 function ModalView(props: ModalProps) {
-  const { data, isLoading } = getData(props.pid, props.type, props.modalReload);
+  const { data, isLoading } = getData(
+    props.pid,
+    props.types,
+    props.modalReload
+  );
 
   const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
@@ -25,16 +29,16 @@ function ModalView(props: ModalProps) {
       <Overlay visible={props.visible} onClick={onMaskClick} />
       <Wrapper visible={props.visible} onClick={onMaskClick}>
         <Inner>
-          {isLoading && !data && props.type === "project" && (
+          {isLoading && !data && props.types === "project" && (
             <ProjectSkeleton></ProjectSkeleton>
           )}
-          {isLoading && !data && props.type === "portfolio" && (
+          {isLoading && !data && props.types === "portfolio" && (
             <PortfolioSkeleton></PortfolioSkeleton>
           )}
           {!isLoading && data && (
             <>
               <Top
-                type={props.type}
+                type={props.types}
                 title={data.title}
                 uid={data.user.id}
                 name={data.user.username}
@@ -45,21 +49,23 @@ function ModalView(props: ModalProps) {
                 projectCategory={data.projectCategory}
               ></Top>
               <Middle
-                type={props.type}
+                type={props.types}
                 date={data.createdDate}
                 content={data.content}
                 image={data.image}
                 userEmail={data.user.email}
                 pid={data.id}
                 tags={
-                  props.type === "project" ? data.projectTag : data.portfolioTag
+                  props.types === "project"
+                    ? data.projectTag
+                    : data.portfolioTag
                 }
                 setUpdate={props.setUpdate}
                 listReload={props.reload}
                 setListReload={props.setReload}
               ></Middle>
               <Bottom
-                type={props.type}
+                type={props.types}
                 commentsNum={data.commentsNum}
                 comments={data.comments}
                 pid={data.id}

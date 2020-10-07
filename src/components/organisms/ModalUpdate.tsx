@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
@@ -7,16 +13,27 @@ import Inner from "../atoms/Modal/Inner";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
-import { ModalUpdateProps } from "../../types/Modal";
 import DataProps from "../../types/Data";
 import { State } from "../../types/User";
+import { ModalType } from "../../types/Modal";
 
-type File = Blob & {
-  invalid: boolean;
-  data: string;
+type ModalUpdateProps = {
+  modalType: ModalType;
+  pid: string | string[];
+  onClose: () => void;
+  setUpdate: Dispatch<SetStateAction<boolean>>;
+  modalReload: number;
+  setModalReload: Dispatch<SetStateAction<number>>;
 };
 
-function ModalUpdate(props: ModalUpdateProps) {
+function ModalUpdate({
+  pid,
+  modalType,
+  onClose,
+  setUpdate,
+  modalReload,
+  setModalReload,
+}: ModalUpdateProps) {
   const state = useSelector((state: { user: State }) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -24,12 +41,12 @@ function ModalUpdate(props: ModalUpdateProps) {
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
-  const [images, setImages] = useState<string[]>([]);
-  //const [images, setImages] = useState<File[]>([]);
+  //const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const { isLoading } = getData(
-    props.pid,
-    props.type,
+    pid,
+    modalType,
     setTitle,
     setContent,
     setCategory,
@@ -60,7 +77,7 @@ function ModalUpdate(props: ModalUpdateProps) {
       return;
     } else {
       try {
-        if (props.type === "project") {
+        if (modalType === "project") {
           //let image = images.length > 0 ? images[0].data : "";
           let image = images.length > 0 ? images[0] : "";
           let body = {
@@ -73,10 +90,10 @@ function ModalUpdate(props: ModalUpdateProps) {
             tags: tags,
             image: image,
           };
-          axios.put(`${process.env.API_HOST}/projects/${props.pid}`, body);
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 400);
-          props.setUpdate(false);
-        } else if (props.type === "portfolio") {
+          axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
+          setTimeout(() => setModalReload(modalReload + 1), 400);
+          setUpdate(false);
+        } else if (modalType === "portfolio") {
           //let image = images.length > 0 ? images[0].data : "";
           let image = images.length > 0 ? images[0] : "";
           let body = {
@@ -87,9 +104,9 @@ function ModalUpdate(props: ModalUpdateProps) {
             tags: tags,
             image: image,
           };
-          axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 400);
-          props.setUpdate(false);
+          axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
+          setTimeout(() => setModalReload(modalReload + 1), 400);
+          setUpdate(false);
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
         else if (props.type === "portfolio") {
@@ -133,11 +150,11 @@ function ModalUpdate(props: ModalUpdateProps) {
       alert("구인분야를 선택해주세요");
       return flag;
     }
-    if (!region && props.type === "project") {
+    if (!region && modalType === "project") {
       alert("지역을 선택해주세요");
       return flag;
     }
-    if (!projectType && props.type === "project") {
+    if (!projectType && modalType === "project") {
       alert("프로젝트 종류를 선택해주세요");
       return flag;
     }
@@ -146,7 +163,7 @@ function ModalUpdate(props: ModalUpdateProps) {
 
   const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
-      props.onClose();
+      onClose();
     }
   }, []);
 
@@ -156,7 +173,7 @@ function ModalUpdate(props: ModalUpdateProps) {
       <Wrapper visible={!isLoading} onClick={onMaskClick}>
         <Inner>
           <Top
-            type={props.type}
+            modalType={modalType}
             title={title}
             category={category}
             field={field}
@@ -170,15 +187,13 @@ function ModalUpdate(props: ModalUpdateProps) {
             profileImage={state.userData.image}
           ></Top>
           <Middle
-            type={props.type}
+            modalType={modalType}
             setContent={setContent}
             setImages={setImages}
             images={images}
             content={content}
           ></Middle>
           <Bottom
-            type={props.type}
-            onClose={props.onClose}
             tags={tags}
             setTags={setTags}
             onClick={update}

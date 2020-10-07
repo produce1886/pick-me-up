@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Overlay from "../atoms/Modal/Overlay";
@@ -8,18 +8,15 @@ import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import { State } from "../../types/User";
-import { ModalProps } from "../../types/Modal";
+import { ModalProps, ModalType, File } from "../../types/Modal";
 
-//게시글 생성 시에는 이미지의 타입이 File이지만, post할 때 File.data: string을 보내므로
-//ModalUpdate와 ModalView에서는 image를 모두 string[]로 변경
-//-> 문제는 ModalUpdate 시에는 setImages()로 File객체를 다시보내야하는데...이땐 어케 할거냐
-//-> dropzone의 preview는 file.data라 string이긴함
-type File = Blob & {
-  invalid: boolean;
-  data: string;
-};
-
-function ModalWrite(props: ModalProps) {
+function ModalWrite(
+  modalType: ModalType,
+  visible: boolean,
+  onClose: () => void,
+  setReload: Dispatch<SetStateAction<number>>,
+  reload: number
+) {
   const state = useSelector((state: { user: State }) => state.user);
   const email = state.userData.email;
   const [title, setTitle] = useState("");
@@ -28,7 +25,7 @@ function ModalWrite(props: ModalProps) {
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<FileType[]>([]);
   const [tags, setTags] = useState<string[]>([]);
 
   const post = useCallback(() => {
@@ -37,7 +34,7 @@ function ModalWrite(props: ModalProps) {
       return;
     } else {
       try {
-        if (props.type === "project") {
+        if (modalType === "project") {
           let image = images.length > 0 ? images[0].data : "";
           let body = {
             title: title,
@@ -51,9 +48,9 @@ function ModalWrite(props: ModalProps) {
             image: image,
           };
           axios.post(`${process.env.API_HOST}/projects`, body);
-          setTimeout(() => props.setReload(props.reload + 1), 300);
-          props.onClose();
-        } else if (props.type === "portfolio") {
+          setTimeout(() => setReload(reload + 1), 300);
+          onClose();
+        } else if (modalType === "portfolio") {
           let image = images.length > 0 ? images[0].data : "";
           let body = {
             title: title,
@@ -65,8 +62,8 @@ function ModalWrite(props: ModalProps) {
             image: image,
           };
           axios.post(`${process.env.API_HOST}/portfolios`, body);
-          setTimeout(() => props.setReload(props.reload + 1), 300);
-          props.onClose();
+          setTimeout(() => setReload(reload + 1), 300);
+          onClose();
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
         else if (props.type === "portfolio") {
@@ -125,11 +122,11 @@ function ModalWrite(props: ModalProps) {
       alert("구인분야를 선택해주세요");
       return flag;
     }
-    if (!region && props.type === "project") {
+    if (!region && modalType === "project") {
       alert("지역을 선택해주세요");
       return flag;
     }
-    if (!projectType && props.type === "project") {
+    if (!projectType && modalType === "project") {
       alert("프로젝트 종류를 선택해주세요");
       return flag;
     }
@@ -138,17 +135,17 @@ function ModalWrite(props: ModalProps) {
 
   const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
-      props.onClose();
+      onClose();
     }
   }, []);
 
   return (
     <>
-      <Overlay visible={props.visible} onClick={onMaskClick} />
-      <Wrapper visible={props.visible} onClick={onMaskClick}>
+      <Overlay visible={visible} onClick={onMaskClick} />
+      <Wrapper visible={visible} onClick={onMaskClick}>
         <Inner>
           <Top
-            type={props.type}
+            modalType={modalType}
             setCategory={setCategory}
             setField={setField}
             setRegion={setRegion}
@@ -158,18 +155,17 @@ function ModalWrite(props: ModalProps) {
             profileImage={state.userData.image}
           ></Top>
           <Middle
-            type={props.type}
+            modalType={modalType}
             setContent={setContent}
             setImages={setImages}
             images={images}
             content={content}
           ></Middle>
           <Bottom
-            type={props.type}
-            onClose={props.onClose}
             onClick={post}
             tags={tags}
             setTags={setTags}
+            updating={false}
           ></Bottom>
         </Inner>
       </Wrapper>
