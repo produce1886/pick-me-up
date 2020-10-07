@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { React } from "react";
 import TabButton from "../../molecules/Button/Tab";
 
 function Tab(props) {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import Colors from "@src/components/atoms/Colors";
 import Text from "../../atoms/Text/index";
 import Upload from "../../atoms/Icon/Upload";
 import Close from "../../atoms/Icon/Close";
@@ -76,6 +77,7 @@ export default function Dropzone({
     reader.onloadend = () => {
       inputFile.invalid = false; // add a new property called invalid
       inputFile.data = reader.result as string;
+      // File의 type을 ImageFile로 수정하였고, images state의 type은 string으로 모두 변경함
       setPreview([...preview, inputFile]);
     };
     reader.readAsDataURL(inputFile);
@@ -136,7 +138,7 @@ export default function Dropzone({
             marginBottom: "0.5rem",
           }}
         ></Upload>
-        <Text level={3} color="#8b90a0">
+        <Text level={3} color={Colors.LIGHT_BLUE_GREY}>
           파일을 드래그해 놓아주세요.
         </Text>
       </DropContainer>

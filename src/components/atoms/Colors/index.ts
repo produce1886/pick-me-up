@@ -12,6 +12,7 @@ enum Colors {
   LIGHT_GREY = "#F0F1F3",
   WHITE = "#FFFFFF",
   ALPHA_BLACK = "#000000",
+  LIGHT_BLUE_GREY = "#8B90A0",
 }
 
 export default Colors;
