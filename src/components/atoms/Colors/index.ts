@@ -9,9 +9,9 @@ enum Colors {
   BLACK = "#232735",
   DEEP_GREY = "#8B90A0",
   GREY = "#D3D4D8",
-  LIGHT_GREY = "F0F1F3",
-  WHITE = "FFFFFF",
-  ALPHA_BLACK = "000000",
+  LIGHT_GREY = "#F0F1F3",
+  WHITE = "#FFFFFF",
+  ALPHA_BLACK = "#000000",
 }
 
 export default Colors;
