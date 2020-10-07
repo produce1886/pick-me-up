@@ -2,40 +2,58 @@ import styled from "styled-components";
 import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
 import Filters from "../Filter/FilterGroup";
+import React, { Dispatch, SetStateAction } from "react";
+import { ModalType } from "../../../types/Modal";
 
-function ModalTop(props) {
-  const onChangeHandler = (e) => {
-    props.setTitle(e.target.value);
+type ModalTopProps = {
+  modalType: ModalType;
+  setCategory: Dispatch<SetStateAction<string>>;
+  setField: React.Dispatch<React.SetStateAction<string>>;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
+  setProjectType: React.Dispatch<React.SetStateAction<string>>;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  title: string;
+  profileImage: string;
+};
+
+function ModalTop({
+  modalType,
+  setCategory,
+  setField,
+  setRegion,
+  setProjectType,
+  setTitle,
+  title,
+  profileImage,
+}: ModalTopProps) {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
 
   return (
-    <Top height="6rem">
+    <Top>
       <Div>
         <TitleFilterWrapper>
           <Input
             placeholder="제목을 입력하세요"
             type="text"
-            value={props.title}
+            value={title}
             onChange={onChangeHandler}
           ></Input>
           <Filters
-            type={props.type}
+            modalType={modalType}
             width="fit-content"
             height="1rem"
             line="1rem"
             level={1}
-            category={props.category}
-            field={props.field}
-            region={props.region}
-            projectType={props.projectType}
-            setCategory={props.setCategory}
-            setField={props.setField}
-            setRegion={props.setRegion}
-            setProjectType={props.setProjectType}
+            setCategory={setCategory}
+            setField={setField}
+            setRegion={setRegion}
+            setProjectType={setProjectType}
           ></Filters>
         </TitleFilterWrapper>
         <ProfileWrapper>
-          <Profile size="3rem" profileImage={props.profileImage}></Profile>
+          <Profile size="3rem" profileImage={profileImage}></Profile>
         </ProfileWrapper>
       </Div>
     </Top>
