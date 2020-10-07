@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Birth from "../../atoms/Icon/Birth";
-import Univ from "../../atoms/Icon/Univ";
+import Univ from "../../atoms/Icon/University";
 import Area from "../../atoms/Icon/Area";
 import Heart from "../../atoms/Icon/Heart";
 import Row from "../../atoms/Row";

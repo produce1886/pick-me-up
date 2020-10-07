@@ -1,10 +1,9 @@
 import React from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import Router from "next/router";
 import styled, { createGlobalStyle } from "styled-components";
-import { wrapper } from "../src/_store";
 import dotenv from "dotenv";
+import { wrapper } from "../src/_store";
 
 dotenv.config();
 
