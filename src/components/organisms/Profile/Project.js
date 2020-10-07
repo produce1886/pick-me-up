@@ -1,7 +1,8 @@
-import List from "../../templates/ProjectList";
 import styled from "styled-components";
+import { React } from "react";
+import List from "../../templates/ProjectList";
 
-function Project(props) {
+function Project() {
   return (
     <Wrapper>
       <List
