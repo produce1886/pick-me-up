@@ -8,11 +8,15 @@ import Middle from "../molecules/ModalView/Middle";
 import Bottom from "../molecules/ModalView/Bottom";
 import ProjectSkeleton from "../_skeletons/project/ProjectView";
 import PortfolioSkeleton from "../_skeletons/portfolio/PortfolioView";
-import { ModalProps } from "../../types/Modal";
+import { ModalProps, ModalType } from "../../types/Modal";
 import DataProps from "../../types/Data";
 
 function ModalView(props: ModalProps) {
-  const { data, isLoading } = getData(props.pid, props.type, props.modalReload);
+  const { data, isLoading } = getData(
+    props.pid,
+    props.modalType,
+    props.modalReload
+  );
 
   const onMaskClick = useCallback((e) => {
     if (e.target === e.currentTarget) {
@@ -25,16 +29,16 @@ function ModalView(props: ModalProps) {
       <Overlay visible={props.visible} onClick={onMaskClick} />
       <Wrapper visible={props.visible} onClick={onMaskClick}>
         <Inner>
-          {isLoading && !data && props.type === "project" && (
+          {isLoading && !data && props.modalType === "project" && (
             <ProjectSkeleton></ProjectSkeleton>
           )}
-          {isLoading && !data && props.type === "portfolio" && (
+          {isLoading && !data && props.modalType === "portfolio" && (
             <PortfolioSkeleton></PortfolioSkeleton>
           )}
           {!isLoading && data && (
             <>
               <Top
-                type={props.type}
+                type={props.modalType}
                 title={data.title}
                 uid={data.user.id}
                 name={data.user.username}
@@ -45,21 +49,23 @@ function ModalView(props: ModalProps) {
                 projectCategory={data.projectCategory}
               ></Top>
               <Middle
-                type={props.type}
+                type={props.modalType}
                 date={data.createdDate}
                 content={data.content}
                 image={data.image}
                 userEmail={data.user.email}
                 pid={data.id}
                 tags={
-                  props.type === "project" ? data.projectTag : data.portfolioTag
+                  props.modalType === "project"
+                    ? data.projectTag
+                    : data.portfolioTag
                 }
                 setUpdate={props.setUpdate}
                 listReload={props.reload}
                 setListReload={props.setReload}
               ></Middle>
               <Bottom
-                type={props.type}
+                type={props.modalType}
                 commentsNum={data.commentsNum}
                 comments={data.comments}
                 pid={data.id}
@@ -78,7 +84,7 @@ export default React.memo(ModalView);
 
 const getData = (
   pid: string | string[],
-  type: "project" | "portfolio",
+  modalType: ModalType,
   modalReload: number
 ) => {
   const [data, setData] = useState<DataProps>();
@@ -88,13 +94,13 @@ const getData = (
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        if (type === "project") {
+        if (modalType === "project") {
           const result = await axios.get(
             `${process.env.API_HOST}/projects/${pid}`
           );
           setData(result.data);
           setIsLoading(false);
-        } else if (type === "portfolio") {
+        } else if (modalType === "portfolio") {
           const result = await axios.get(
             `${process.env.API_HOST}/portfolios/${pid}`
           );

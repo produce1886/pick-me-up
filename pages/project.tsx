@@ -8,7 +8,7 @@ import Footer from "../src/components/organisms/Footer";
 
 export default function Project() {
   const router = useRouter();
-  const [update, setUpdate] = useState<boolean>(false); //수정
+  const [update, setUpdate] = useState<boolean>(false);
   const [reload, setReload] = useState<number>(0);
   const [modalReload, setModalReload] = useState<number>(0);
 
@@ -16,7 +16,7 @@ export default function Project() {
     <>
       {router.query.pid && !update && (
         <Modal
-          type="project"
+          modalType="project"
           visible={!!router.query.pid}
           pid={router.query.pid}
           onClose={() => router.push(`/project`)}
@@ -29,7 +29,7 @@ export default function Project() {
       )}
       {router.query.pid && update && (
         <UpdateModal
-          type="project"
+          modalType="project"
           pid={router.query.pid}
           onClose={() => {
             setUpdate(false);

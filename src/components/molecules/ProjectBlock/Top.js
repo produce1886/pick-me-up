@@ -1,10 +1,11 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { React } from "react";
 import FilterInfo from "../FilterInfo";
 import Text from "../../atoms/Text";
 import Row from "../../atoms/Row";
 import Col from "../../atoms/Col";
-import Profile from "../../molecules/Profile";
+import Profile from "../Profile";
 
 function Top(props) {
   return (

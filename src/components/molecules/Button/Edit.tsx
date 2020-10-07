@@ -1,16 +1,18 @@
+import React from "react";
+import styled from "styled-components";
+import Colors from "@colors";
 import EditIcon from "../../atoms/Icon/Edit";
 import Text from "../../atoms/Text";
-import styled from "styled-components";
 
 function Edit() {
   return (
     <Button>
-      <Text level={0} color="#232735">
+      <Text level={0} color={Colors.BLACK}>
         내 정보 수정
       </Text>
       <EditIcon
         style={{ width: "0.72rem", height: "0.72rem", marginLeft: "0.16rem" }}
-        fill="#232735"
+        fill={Colors.BLACK}
       ></EditIcon>
     </Button>
   );

@@ -1,8 +1,8 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, React } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import PortfolioBlock from "../organisms/PortfolioBlock";
-import MoreListButton from "../molecules/Button/MoreList";
+import MoreListButton from "../molecules/Button/LoadMore";
 import NoResult from "../molecules/NoResult";
 import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
@@ -64,10 +64,7 @@ function PortfolioList(props) {
       <MoreWrapper>
         <MoreInnerWrapper>
           {portfolio.length < dataNum && (
-            <MoreListButton
-              text="더 불러오기"
-              onClick={loadMoreHandler}
-            ></MoreListButton>
+            <MoreListButton onClick={loadMoreHandler}></MoreListButton>
           )}
         </MoreInnerWrapper>
       </MoreWrapper>
@@ -94,11 +91,11 @@ const getPortfolioList = (
     조회순: "viewNum",
   };
 
-  let body = {
+  const body = {
     page: 0,
     size: limit,
     sortColumn: sortColumn[sort],
-    category: category,
+    category,
     huntingField: field,
     keyword: query,
   };

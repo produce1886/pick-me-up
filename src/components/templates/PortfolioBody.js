@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import FilterSearch from "../organisms/FilterSearch";
@@ -20,7 +20,7 @@ function PortfolioBody(props) {
   return (
     <>
       <FilterSearch
-        type="portfolio"
+        modalType="portfolio"
         setCategory={setCategory}
         setField={setField}
         setQuery={setQuery}
@@ -45,11 +45,11 @@ function PortfolioBody(props) {
         </InnerWrapper>
         <TopButton></TopButton>
         {isSignedIn && !writeVisible && !props.viewVisible && (
-          <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
+          <WriteButton onClick={() => setWriteVisible(true)}></WriteButton>
         )}
         {writeVisible && (
           <ModalWrite
-            type="portfolio"
+            modalType="portfolio"
             visible={writeVisible}
             onClose={() => setWriteVisible(false)}
             reload={props.reload}

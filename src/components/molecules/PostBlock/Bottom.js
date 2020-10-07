@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { React } from "react";
 import ViewCount from "../Count/ViewCount";
 import CommentCount from "../Count/CommentCount";
-import MoreButton from "../Button/More";
+import MoreButton from "../Button/ViewMore";
 
 function Bottom(props) {
   return (
@@ -35,4 +36,3 @@ const Div = styled.div`
   flex-direction: row;
   align-items: center;
 `;
-const A = styled.a``;

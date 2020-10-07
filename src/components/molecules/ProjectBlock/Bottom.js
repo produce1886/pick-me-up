@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { React } from "react";
 import ViewCount from "../Count/ViewCount";
 import CommentCount from "../Count/CommentCount";
-import MoreButton from "../Button/More";
+import MoreButton from "../Button/ViewMore";
 import TagButton from "../Button/Tag";
 
 function Bottom(props) {
@@ -65,5 +66,3 @@ const Row = styled.div`
   flex-direction: row;
   justify-content: left;
 `;
-
-const A = styled.a``;

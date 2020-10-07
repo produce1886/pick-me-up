@@ -1,33 +1,40 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Colors from "@src/components/atoms/Colors/index";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
 
-function ModalBottom(props) {
-  let { tags } = props;
+type ModalBottomProps = {
+  tags: string[];
+  setTags: React.Dispatch<React.SetStateAction<string[]>>;
+  onClick: () => void;
+  updating: boolean;
+};
+function ModalBottom({ tags, setTags, onClick, updating }: ModalBottomProps) {
+  // let { tags } = props;
   const [tagInput, setTagInput] = useState("");
 
-  const handleChange = (event) => {
-    setTagInput(event.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTagInput(e.target.value);
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key != "Enter") return;
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== "Enter") return;
     if (tags.length < 5 && tagInput.length > 0) {
-      props.setTags([...tags, tagInput]);
+      setTags([...tags, tagInput]);
       setTagInput("");
     } else if (tags.length === 5) {
       alert("태그는 5개까지 가능합니다.");
     }
   };
 
-  const removeTag = (value) => {
+  const removeTag = (value: string) => {
     const tagIndex = tags.indexOf(value);
-    let newArray = [...tags];
+    const newArray = [...tags];
     newArray.splice(tagIndex, 1);
-    props.setTags(newArray);
+    setTags(newArray);
   };
 
   return (
@@ -49,18 +56,18 @@ function ModalBottom(props) {
           {tags.map((value, index) => (
             <TagButton
               key={index}
-              ismodal="modal"
+              isModal={true}
               text={value}
-              removeTag={() => removeTag(value)}
-              tagtype="modalwrite"
+              onClick={() => removeTag(value)}
+              tagType="MODAL_WRITE"
             ></TagButton>
           ))}
         </TagWrapper>
-        <ButtonWrapper onClick={props.onClick}>
+        <ButtonWrapper onClick={onClick}>
           <PillButton
             weight={500}
-            color="#fff"
-            text={props.updating ? "글 수정하기" : "글 작성하기"}
+            color={Colors.WHITE}
+            text={updating ? "글 수정하기" : "글 작성하기"}
           ></PillButton>
         </ButtonWrapper>
       </Div>

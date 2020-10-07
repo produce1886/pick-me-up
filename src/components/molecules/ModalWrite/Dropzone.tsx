@@ -1,53 +1,62 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Text from "../../atoms/Text";
+import Text from "../../atoms/Text/index";
 import Upload from "../../atoms/Icon/Upload";
 import Close from "../../atoms/Icon/Close";
+import { ImageFile } from "../../../types/Modal";
 
-export default function Dropzone(props) {
+type DropzoneProps = {
+  modalType: string;
+  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  images: string[];
+};
+
+export default function Dropzone({
+  modalType,
+  setImages,
+  images,
+}: DropzoneProps) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [preview, setPreview] = useState([]);
 
   useEffect(() => {
-    setSelectedFiles(props.images);
-    setPreview(props.images);
-  }, [props.images]);
+    setSelectedFiles(images);
+    setPreview(images);
+  }, [images]);
 
-  const dragOver = (e) => {
-    e.preventDefault();
+  const dragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
   };
 
-  const dragEnter = (e) => {
-    e.preventDefault();
+  const dragEnter = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
   };
 
-  const dragLeave = (e) => {
-    e.preventDefault();
+  const dragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
   };
 
-  const fileDrop = (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files.length > 0 && props.type === "project") {
+  const fileDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const { files } = event.dataTransfer;
+    if (files.length > 0 && modalType === "project") {
       if (selectedFiles.length === 1) {
         alert("이미지는 1개까지 가능합니다.");
       } else {
-        for (let i = 0; i < files.length; i++) {
+        for (let i = 0; i < files.length; i += 1) {
           handleFile(files[i]);
         }
       }
+    } else if (selectedFiles.length === 5) {
+      alert("이미지는 5개까지 가능합니다.");
     } else {
-      if (selectedFiles.length === 5) {
-        alert("이미지는 5개까지 가능합니다.");
-      } else {
-        for (let i = 0; i < files.length; i++) {
-          handleFile(files[i]);
-        }
+      for (let i = 0; i < files.length; i += 1) {
+        handleFile(files[i]);
       }
     }
   };
 
-  const validateFile = (file) => {
+  const validateFile = (file: ImageFile) => {
     const validTypes = [
       "image/jpeg",
       "image/jpg",
@@ -61,56 +70,55 @@ export default function Dropzone(props) {
     return true;
   };
 
-  const processImage = (file) => {
-    let reader = new FileReader();
+  const processImage = (file: ImageFile) => {
+    const reader = new FileReader();
+    const inputFile = file;
     reader.onloadend = () => {
-      file["invalid"] = false; // add a new property called invalid
-      file["data"] = reader.result;
-      setPreview([...preview, file]);
+      inputFile.invalid = false; // add a new property called invalid
+      inputFile.data = reader.result as string;
+      setPreview([...preview, inputFile]);
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(inputFile);
   };
 
-  const handleFile = (file) => {
+  const handleFile = (file: ImageFile) => {
     if (validateFile(file)) {
       processImage(file);
       setSelectedFiles([...selectedFiles, file]);
-      props.setImages([...props.images, file]);
+      setImages([...images, file.data]);
     } else {
       alert("파일 형식이 올바르지 않습니다.");
     }
   };
 
-  const removeFile = (file) => {
+  const removeFile = (file: ImageFile) => {
     const currentIndex = selectedFiles.indexOf(file);
-    let newArray = [...selectedFiles];
+    const newArray = [...selectedFiles];
     newArray.splice(currentIndex, 1);
     setSelectedFiles(newArray);
     setPreview(newArray);
-    props.setImages(newArray);
+    setImages(newArray);
   };
 
   const renderPreviewImages = () => {
-    if (preview.length > 0) {
-      return (
-        <PreviewContainer>
-          {preview.map((file, i) => (
-            <PreviewImage key={i}>
-              <XButton onClick={() => removeFile(file)}>
-                <Close
-                  style={{ width: "1rem", height: "1rem" }}
-                  fill="#232735"
-                ></Close>
-              </XButton>
-              <Img
-                src={file.data}
-                style={{ width: "5rem", height: "5rem", marginRight: "1rem" }}
-              />
-            </PreviewImage>
-          ))}
-        </PreviewContainer>
-      );
-    }
+    return (
+      <PreviewContainer>
+        {preview.map((file, i) => (
+          <PreviewImage key={i}>
+            <XButton onClick={() => removeFile(file)}>
+              <Close
+                style={{ width: "1rem", height: "1rem" }}
+                fill="#232735"
+              ></Close>
+            </XButton>
+            <Img
+              src={file.data}
+              style={{ width: "5rem", height: "5rem", marginRight: "1rem" }}
+            />
+          </PreviewImage>
+        ))}
+      </PreviewContainer>
+    );
   };
 
   return (
@@ -132,7 +140,7 @@ export default function Dropzone(props) {
           파일을 드래그해 놓아주세요.
         </Text>
       </DropContainer>
-      {renderPreviewImages()}
+      {preview.length > 0 && renderPreviewImages()}
     </Container>
   );
 }

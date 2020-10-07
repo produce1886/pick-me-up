@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 import FilterSearch from "../organisms/FilterSearch";
 import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
@@ -7,7 +8,6 @@ import ProjectList from "./ProjectList";
 import WriteButton from "../molecules/Button/Write";
 import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
-import { useSelector } from "react-redux";
 
 function ProjectBody(props) {
   const [category, setCategory] = useState("");
@@ -22,7 +22,7 @@ function ProjectBody(props) {
   return (
     <>
       <FilterSearch
-        type="project"
+        modalType="project"
         setCategory={setCategory}
         setField={setField}
         setRegion={setRegion}
@@ -52,11 +52,11 @@ function ProjectBody(props) {
       </Wrapper>
       <TopButton></TopButton>
       {isSignedIn && !writeVisible && !props.viewVisible && (
-        <WriteButton openWrite={() => setWriteVisible(true)}></WriteButton>
+        <WriteButton onClick={() => setWriteVisible(true)}></WriteButton>
       )}
       {writeVisible && (
         <ModalWrite
-          type="project"
+          modalType="project"
           visible={writeVisible}
           onClose={() => setWriteVisible(false)}
           reload={props.reload}

@@ -1,15 +1,15 @@
 import Link from "next/link";
 import styled from "styled-components";
-import Profile from "../../molecules/Profile";
-import Text from "../../atoms/Text";
-import Icon from "../../atoms/Icon/optionmore";
-import EditnDelete from "../Comment/EditnDelete";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import Profile from "../Profile";
+import Text from "../../atoms/Text";
+import Icon from "../../atoms/Icon/MoreOption";
+import EditnDelete from "./EditnDelete";
 
 function Comment(props) {
   const [clicked, setClicked] = useState(false);
-  let date = props.date;
+  let { date } = props;
   date = date.replace("T", " ");
   const user = props.userInfo;
   const loginUser = useSelector((state) => state.user.userData);

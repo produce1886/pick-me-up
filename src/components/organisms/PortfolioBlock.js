@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Link from "next/link";
+import { useState, React } from "react";
 import Text from "../atoms/Text";
 import Detail from "../molecules/PortfolioBlock/Detail";
 import Wrapper from "../atoms/Wrapper/PortfolioBlock";
-import { useState } from "react";
 
 function PortfolioBlock(props) {
   const [show, setShow] = useState(false);
