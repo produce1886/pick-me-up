@@ -1,31 +1,41 @@
+import React from "react";
 import styled, { css } from "styled-components";
-import Wrapper from "../atoms/Banner/Item";
-import Text from "../atoms/Text";
-import Pill from "../molecules/Button/Pill";
+import Colors from "@src/components/atoms/Colors";
+import Pill from "../Button/Pill";
+import Text from "../../atoms/Text";
 
-export default function Item(props) {
+type BannerItemProps = {
+  color: Colors;
+  type: "프로젝트" | "포트폴리오";
+};
+
+type RowProps = {
+  width?: string;
+};
+
+export default function Item({ color, type }: BannerItemProps) {
   return (
-    <Wrapper color={props.color}>
+    <Wrapper color={color}>
       <InnerWrapper>
         <Col>
           <Row>
             <Text level={18} weight="bold" color="#232735">
-              {props.type}
+              {type}
             </Text>
             <Text level={8} weight="bold" color="#8b90a0">
               &nbsp;&nbsp;
-              {props.type === "프로젝트" && "Project"}
-              {props.type === "포트폴리오" && "Portfolio"}
+              {type === "프로젝트" && "Project"}
+              {type === "포트폴리오" && "Portfolio"}
             </Text>
           </Row>
-          {props.type === "프로젝트" && (
+          {type === "프로젝트" && (
             <Row width="12rem">
               <Text level={3} color="#232735">
                 척하면 척, 당신이 꿈꿨던 이상적인 팀을 픽미업에서 만들어보세요.
               </Text>
             </Row>
           )}
-          {props.type === "포트폴리오" && (
+          {type === "포트폴리오" && (
             <Row width="9.5rem">
               <Text level={3} color="#232735">
                 당신만의 특별한 포트폴리오를 픽미업에서 공유해보세요.
@@ -33,20 +43,31 @@ export default function Item(props) {
             </Row>
           )}
           <Row>
-            {props.type === "프로젝트" && (
-              <Pill link="project" text="바로가기"></Pill>
+            {type === "프로젝트" && (
+              <Pill link="/project" text="바로가기"></Pill>
             )}
-            {props.type === "포트폴리오" && (
-              <Pill link="portfolio" text="바로가기"></Pill>
+            {type === "포트폴리오" && (
+              <Pill link="/portfolio" text="바로가기"></Pill>
             )}
           </Row>
         </Col>
-        {props.type === "프로젝트" && <Img src="Image/Project.png"></Img>}
-        {props.type === "포트폴리오" && <Img src="Image/Portfolio.png"></Img>}
+        {type === "프로젝트" && <Img src="Image/Project.png"></Img>}
+        {type === "포트폴리오" && <Img src="Image/Portfolio.png"></Img>}
       </InnerWrapper>
     </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 18.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${(props) => css`
+    background-color: ${props.color};
+  `}
+`;
 
 const InnerWrapper = styled.div`
   max-width: 92%;
@@ -63,10 +84,10 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 0 1.2rem 0;
-  ${(props) => css`
+  align-items: baseline;
+  ${(props: RowProps) => css`
     width: ${props.width};
   `}
-  align-items: baseline;
 `;
 
 const Col = styled.div`
