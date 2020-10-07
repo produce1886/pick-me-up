@@ -1,7 +1,7 @@
 import React from "react";
 import IconProps from "./icon";
 
-function Icon({ style, fill }: IconProps) {
+function Icon({ style }: IconProps) {
   return (
     <svg
       version="1.1"

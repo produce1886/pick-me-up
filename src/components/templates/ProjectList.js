@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import ProjectBlock from "../organisms/ProjectBlock";
 import NoResult from "../molecules/NoResult";
-import MoreListButton from "../molecules/Button/MoreList";
+import MoreListButton from "../molecules/Button/LoadMore";
 import Skeleton from "../_skeletons/project/ProjectBlock";
 
 function ProjectList(props) {
@@ -60,10 +60,7 @@ function ProjectList(props) {
       <Wrapper>{!isLoading && project.length > 0 && renderBlocks}</Wrapper>
       {project.length < dataNum && (
         <MoreWrapper>
-          <MoreListButton
-            text="더 불러오기"
-            onClick={loadMoreHandler}
-          ></MoreListButton>
+          <MoreListButton onClick={loadMoreHandler}></MoreListButton>
         </MoreWrapper>
       )}
     </>
@@ -91,13 +88,13 @@ const getProjectList = (
     조회순: "viewNum",
   };
 
-  let body = {
+  const body = {
     page: 0,
     size: limit,
     sortColumn: sortColumn[sort],
-    category: category,
+    category,
     huntingField: field,
-    region: region,
+    region,
     projectCategory: projectType,
     keyword: query,
   };

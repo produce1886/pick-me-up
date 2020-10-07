@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
 
+type PillButtonProps = {
+  center?: boolean;
+};
+
 export default styled.button`
   width: fit-content;
   height: 1.5rem;
@@ -13,7 +17,7 @@ export default styled.button`
   border: none;
   padding: 0 0.75rem 0 0.75rem;
   outline: none;
-  ${(props) =>
+  ${(props: PillButtonProps) =>
     css`
       position: ${props.center ? "absolute" : "none"};
       left: ${props.center ? "45.5%" : "none"};

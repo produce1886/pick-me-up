@@ -1,14 +1,14 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../../_actions/user";
 import { useRouter } from "next/router";
+import { loginUser } from "@src/_actions/user";
 
-export default function SignInButton() {
+export default function LogInButton() {
   const router = useRouter();
   const dispatch = useDispatch();
   const loginHandler = useCallback((response) => {
-    let userData = {
+    const userData = {
       username: response.profileObj.name,
       email: response.profileObj.email,
       image: response.profileObj.imageUrl,
