@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ModalType, FileType } from "../../../types/Modal";
+import { ModalType } from "../../../types/Modal";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";
 
@@ -9,7 +9,7 @@ type ModalMiddleProps = {
   content: string;
   modalType: ModalType;
   images: string[];
-  setImages: React.Dispatch<React.SetStateAction<FileType[]>>;
+  setImages: React.Dispatch<React.SetStateAction<string[]>>;
 };
 function ModalMiddle({
   setContent,
@@ -18,7 +18,7 @@ function ModalMiddle({
   images,
   setImages,
 }: ModalMiddleProps) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   };
 
@@ -27,7 +27,7 @@ function ModalMiddle({
       <Textarea
         placeholder="내용을 입력하세요"
         onChange={(e) => {
-          handleChange;
+          handleChange(e);
         }}
         value={content}
       ></Textarea>
