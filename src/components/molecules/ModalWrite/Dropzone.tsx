@@ -4,7 +4,7 @@ import Colors from "@colors";
 import Text from "../../atoms/Text/index";
 import Upload from "../../atoms/Icon/Upload";
 import Close from "../../atoms/Icon/Close";
-import { ImageFile } from "../../../types/Modal";
+import { ImageFile } from "../../atoms/Modal/ModalType";
 
 type DropzoneProps = {
   modalType: string;

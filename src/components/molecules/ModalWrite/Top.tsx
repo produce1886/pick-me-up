@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
 import Filters from "../Filter/FilterGroup";
-import { ModalType } from "../../../types/Modal";
+import { ModalType } from "../../atoms/Modal/ModalType";
 
 type ModalTopProps = {
   modalType: ModalType;

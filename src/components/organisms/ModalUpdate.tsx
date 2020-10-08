@@ -15,7 +15,7 @@ import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import DataProps from "../../types/Data";
 import { State } from "../../types/User";
-import { ModalType } from "../../types/Modal";
+import { ModalType } from "../atoms/Modal/ModalType";
 
 type ModalUpdateProps = {
   modalType: ModalType;

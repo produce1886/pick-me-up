@@ -8,7 +8,7 @@ import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import { State } from "../../types/User";
-import { ModalType } from "../../types/Modal";
+import { ModalType } from "../atoms/Modal/ModalType";
 
 type ModalWriteProps = {
   modalType: ModalType;
@@ -95,20 +95,6 @@ function ModalWrite({
     }
   }, [title, content, category, field, region, projectType, tags, images]);
 
-  /*
-  const isEmpty = function (value) {
-    if (
-      value == "" ||
-      value == null ||
-      value == undefined ||
-      (value != null && typeof value == "object" && !Object.keys(value).length)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }; */
-
   const checkIsNotEmpty = () => {
     const flag = false;
     if (!title) {
@@ -138,7 +124,7 @@ function ModalWrite({
     return true;
   };
 
-  const onMaskClick = useCallback((e) => {
+  const onMaskClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }

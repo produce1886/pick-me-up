@@ -8,7 +8,7 @@ import Middle from "../molecules/ModalView/Middle";
 import Bottom from "../molecules/ModalView/Bottom";
 import ProjectSkeleton from "../_skeletons/project/ProjectView";
 import PortfolioSkeleton from "../_skeletons/portfolio/PortfolioView";
-import { ModalProps, ModalType } from "../../types/Modal";
+import { ModalProps, ModalType } from "../atoms/Modal/ModalType";
 import DataProps from "../../types/Data";
 
 function ModalView(props: ModalProps) {

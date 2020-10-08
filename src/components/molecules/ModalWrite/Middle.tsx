@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ModalType } from "../../../types/Modal";
+import { ModalType } from "../../atoms/Modal/ModalType";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";
 
