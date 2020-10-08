@@ -57,7 +57,7 @@ function ProjectBody(props) {
       {writeVisible && (
         <ModalWrite
           modalType="project"
-          visible={writeVisible}
+          isVisible={writeVisible}
           onClose={() => setWriteVisible(false)}
           reload={props.reload}
           setReload={props.setReload}
