@@ -12,6 +12,7 @@ type ModalBottomProps = {
   onClick: () => void;
   updating: boolean;
 };
+
 function ModalBottom({ tags, setTags, onClick, updating }: ModalBottomProps) {
   // let { tags } = props;
   const [tagInput, setTagInput] = useState("");

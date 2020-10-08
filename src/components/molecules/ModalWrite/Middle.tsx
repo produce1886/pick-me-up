@@ -11,6 +11,7 @@ type ModalMiddleProps = {
   images: string[];
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
 };
+
 function ModalMiddle({
   setContent,
   content,
