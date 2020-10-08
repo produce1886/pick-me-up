@@ -1,5 +1,5 @@
+import React from "react";
 import styled from "styled-components";
-import { React } from "react";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Birth from "../../atoms/Icon/Birth";

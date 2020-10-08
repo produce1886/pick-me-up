@@ -1,5 +1,5 @@
+import React from "react";
 import styled from "styled-components";
-import { React } from "react";
 import ViewCount from "../Count/ViewCount";
 import CommentCount from "../Count/CommentCount";
 import MoreButton from "../Button/ViewMore";

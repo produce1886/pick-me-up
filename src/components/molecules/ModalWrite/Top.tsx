@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import React, { Dispatch, SetStateAction } from "react";
+import styled from "styled-components";
 import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
 import Filters from "../Filter/FilterGroup";

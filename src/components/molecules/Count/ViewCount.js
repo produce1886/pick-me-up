@@ -1,3 +1,4 @@
+import React from "react";
 import Icon from "../../atoms/Icon/View";
 import Text from "../../atoms/Text";
 

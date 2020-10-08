@@ -1,18 +1,18 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import axios from "axios";
 import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
-import axios from "axios";
 
 function ModalMiddle(props) {
   const router = useRouter();
   const user = useSelector((state) => state.user);
-  const pid = props.pid;
-  let date = props.date;
+  const { pid } = props;
+  let { date } = props;
   date = date.replace("T", " ");
 
   const deletePost = useCallback(() => {

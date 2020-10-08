@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import Profile from "../Profile";
 import Text from "../../atoms/Text";
