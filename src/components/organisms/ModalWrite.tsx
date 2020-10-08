@@ -1,25 +1,23 @@
 import React, { useState, useCallback, Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import Overlay from "../atoms/Modal/Overlay";
-import Wrapper from "../atoms/Modal/Wrapper";
-import Inner from "../atoms/Modal/Inner";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import { State } from "../../types/User";
 import { ModalType } from "../atoms/Modal/ModalType";
+import Modal from "../atoms/Modal/index";
 
 type ModalWriteProps = {
   modalType: ModalType;
-  visible: boolean;
+  isVisible: boolean;
   onClose: () => void;
   setReload: Dispatch<SetStateAction<number>>;
   reload: number;
 };
 function ModalWrite({
   modalType,
-  visible,
+  isVisible,
   onClose,
   setReload,
   reload,
@@ -124,43 +122,32 @@ function ModalWrite({
     return true;
   };
 
-  const onMaskClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  }, []);
-
   return (
-    <>
-      <Overlay visible={visible} onClick={onMaskClick} />
-      <Wrapper visible={visible} onClick={onMaskClick}>
-        <Inner>
-          <Top
-            modalType={modalType}
-            setCategory={setCategory}
-            setField={setField}
-            setRegion={setRegion}
-            setProjectType={setProjectType}
-            setTitle={setTitle}
-            title={title}
-            profileImage={state.userData.image}
-          ></Top>
-          <Middle
-            modalType={modalType}
-            setContent={setContent}
-            setImages={setImages}
-            images={images}
-            content={content}
-          ></Middle>
-          <Bottom
-            onClick={post}
-            tags={tags}
-            setTags={setTags}
-            isUpdate={false}
-          ></Bottom>
-        </Inner>
-      </Wrapper>
-    </>
+    <Modal isVisible={isVisible} onClose={onClose}>
+      <Top
+        modalType={modalType}
+        setCategory={setCategory}
+        setField={setField}
+        setRegion={setRegion}
+        setProjectType={setProjectType}
+        setTitle={setTitle}
+        title={title}
+        profileImage={state.userData.image}
+      ></Top>
+      <Middle
+        modalType={modalType}
+        setContent={setContent}
+        setImages={setImages}
+        images={images}
+        content={content}
+      ></Middle>
+      <Bottom
+        onClick={post}
+        tags={tags}
+        setTags={setTags}
+        isUpdate={false}
+      ></Bottom>
+    </Modal>
   );
 }
 

@@ -7,15 +7,13 @@ import React, {
 } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import Overlay from "../atoms/Modal/Overlay";
-import Wrapper from "../atoms/Modal/Wrapper";
-import Inner from "../atoms/Modal/Inner";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import DataProps from "../../types/Data";
 import { State } from "../../types/User";
 import { ModalType } from "../atoms/Modal/ModalType";
+import Modal from "../atoms/Modal/index";
 
 type ModalUpdateProps = {
   modalType: ModalType;
@@ -159,43 +157,32 @@ function ModalUpdate({
     return true;
   };
 
-  const onMaskClick = useCallback((e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  }, []);
-
   return (
-    <>
-      <Overlay visible={!isLoading} onClick={onMaskClick} />
-      <Wrapper visible={!isLoading} onClick={onMaskClick}>
-        <Inner>
-          <Top
-            modalType={modalType}
-            title={title}
-            setCategory={setCategory}
-            setField={setField}
-            setRegion={setRegion}
-            setProjectType={setProjectType}
-            setTitle={setTitle}
-            profileImage={state.userData.image}
-          ></Top>
-          <Middle
-            modalType={modalType}
-            setContent={setContent}
-            setImages={setImages}
-            images={images}
-            content={content}
-          ></Middle>
-          <Bottom
-            tags={tags}
-            setTags={setTags}
-            onClick={update}
-            isUpdate={true}
-          ></Bottom>
-        </Inner>
-      </Wrapper>
-    </>
+    <Modal isVisible={!isLoading} onClose={onClose}>
+      <Top
+        modalType={modalType}
+        title={title}
+        setCategory={setCategory}
+        setField={setField}
+        setRegion={setRegion}
+        setProjectType={setProjectType}
+        setTitle={setTitle}
+        profileImage={state.userData.image}
+      ></Top>
+      <Middle
+        modalType={modalType}
+        setContent={setContent}
+        setImages={setImages}
+        images={images}
+        content={content}
+      ></Middle>
+      <Bottom
+        tags={tags}
+        setTags={setTags}
+        onClick={update}
+        isUpdate={true}
+      ></Bottom>
+    </Modal>
   );
 }
 
