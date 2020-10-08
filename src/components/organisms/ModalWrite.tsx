@@ -170,7 +170,7 @@ function ModalWrite({
             onClick={post}
             tags={tags}
             setTags={setTags}
-            updating={false}
+            isUpdate={false}
           ></Bottom>
         </Inner>
       </Wrapper>

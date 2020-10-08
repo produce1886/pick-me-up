@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import List from "../../templates/PortfolioList";
 
 function Portfolio() {

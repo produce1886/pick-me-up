@@ -191,7 +191,7 @@ function ModalUpdate({
             tags={tags}
             setTags={setTags}
             onClick={update}
-            updating={true}
+            isUpdate={true}
           ></Bottom>
         </Inner>
       </Wrapper>

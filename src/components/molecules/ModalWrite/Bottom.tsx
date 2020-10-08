@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Colors from "@src/components/atoms/Colors/index";
+import Colors from "@colors";
 import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
@@ -10,10 +10,10 @@ type ModalBottomProps = {
   tags: string[];
   setTags: React.Dispatch<React.SetStateAction<string[]>>;
   onClick: () => void;
-  updating: boolean;
+  isUpdate: boolean;
 };
-function ModalBottom({ tags, setTags, onClick, updating }: ModalBottomProps) {
-  // let { tags } = props;
+
+function ModalBottom({ tags, setTags, onClick, isUpdate }: ModalBottomProps) {
   const [tagInput, setTagInput] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +67,7 @@ function ModalBottom({ tags, setTags, onClick, updating }: ModalBottomProps) {
           <PillButton
             weight={500}
             color={Colors.WHITE}
-            text={updating ? "글 수정하기" : "글 작성하기"}
+            text={isUpdate ? "글 수정하기" : "글 작성하기"}
           ></PillButton>
         </ButtonWrapper>
       </Div>

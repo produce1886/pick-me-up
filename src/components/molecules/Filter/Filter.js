@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Wrapper from "../../atoms/Filter/Filter";
@@ -7,7 +7,7 @@ import Iconupline from "../../atoms/Icon/Chevron/Up";
 import Iconup from "../../atoms/Icon/Filter/Up";
 import Icondown from "../../atoms/Icon/Filter/Down";
 import IconX from "../../atoms/Icon/X";
-import DropdownMenu from "../Filter/DropdownMenu";
+import DropdownMenu from "./DropdownMenu";
 
 function Filter(props) {
   const iconStyle = {

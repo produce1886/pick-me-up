@@ -1,6 +1,6 @@
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { React } from "react";
 import Text from "../../atoms/Text";
 import Col from "../../atoms/Col";
 import Rank from "../Rank";

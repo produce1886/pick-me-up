@@ -1,7 +1,7 @@
-import { useCallback } from "react";
-import ItemWrapper from "../../molecules/Filter/FilterItem";
-import Wrapper from "../../atoms/Filter/DropDownMenu";
+import React, { useCallback } from "react";
 import axios from "axios";
+import ItemWrapper from "../Filter/FilterItem";
+import Wrapper from "../../atoms/Filter/DropDownMenu";
 
 function EditnDelete(props) {
   const pid = parseInt(props.pid, 10);

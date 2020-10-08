@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import Image from "../atoms/Icon/Profile";
 import Text from "../atoms/Text";
 import ImageHolder from "../atoms/ImageHolder/Profile";

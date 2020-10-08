@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Colors from "@src/components/atoms/Colors";
+import Colors from "@colors";
 import Text from "../../atoms/Text/index";
 import Upload from "../../atoms/Icon/Upload";
 import Close from "../../atoms/Icon/Close";
@@ -138,7 +138,7 @@ export default function Dropzone({
             marginBottom: "0.5rem",
           }}
         ></Upload>
-        <Text level={3} color={Colors.LIGHT_BLUE_GREY}>
+        <Text level={3} color={Colors.DEEP_GREY}>
           파일을 드래그해 놓아주세요.
         </Text>
       </DropContainer>

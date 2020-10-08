@@ -1,4 +1,4 @@
-import { useState, React } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import FilterSearch from "../organisms/FilterSearch";

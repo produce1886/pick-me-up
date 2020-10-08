@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import { useState, React } from "react";
 import Text from "../atoms/Text";
 import Detail from "../molecules/PortfolioBlock/Detail";
 import Wrapper from "../atoms/Wrapper/PortfolioBlock";

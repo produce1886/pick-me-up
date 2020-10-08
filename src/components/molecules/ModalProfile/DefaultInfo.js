@@ -1,10 +1,11 @@
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";
 import Edit from "../../atoms/Icon/Edit";
 import Thumbnail from "../../atoms/Icon/ThumbNail";
-import styled, { css } from "styled-components";
-import React, { useState } from "react";
+
 function DefaultInfo(props) {
   const [editIntroduce, setEditIntroduce] = useState(false);
   const [editUsername, setEditUsername] = useState(false);
