@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 export type ModalProps = {
   modalType: ModalType;
-  visible: boolean;
+  isVisible: boolean;
   pid: string | string[];
   onClose: () => void;
   setUpdate: Dispatch<SetStateAction<boolean>>;
