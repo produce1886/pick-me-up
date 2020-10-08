@@ -1,7 +1,7 @@
+import styled from "styled-components";
 import Wrapper from "../atoms/Wrapper/PostBlock";
 import Top from "../molecules/PostBlock/Top";
 import Bottom from "../molecules/PostBlock/Bottom";
-import styled from "styled-components";
 import Text from "../atoms/Text";
 
 export default function PostBlock(props) {

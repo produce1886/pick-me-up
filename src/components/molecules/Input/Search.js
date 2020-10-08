@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Icon from "../../atoms/Icon/Search";
 import styled from "styled-components";
+import Icon from "../../atoms/Icon/Search";
 
 export default function Search(props) {
   const [keyword, setKeyword] = useState();

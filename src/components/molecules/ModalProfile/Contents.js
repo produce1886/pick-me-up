@@ -1,8 +1,8 @@
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import Edit from "../../atoms/Icon/Edit";
 import EditUserFilter from "../Filter/EditUserFilter";
-import React, { useState } from "react";
 import { FIELD, REGION } from "../Filter/ItemData";
 
 export function University(props) {

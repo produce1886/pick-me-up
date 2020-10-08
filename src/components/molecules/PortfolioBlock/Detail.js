@@ -1,9 +1,10 @@
+import React from "react";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import ViewCount from "../Count/ViewCount";
 import CommentCount from "../Count/CommentCount";
-import Profile from "../../molecules/Profile";
+import Profile from "../Profile";
 
 function Detail(props) {
   return (

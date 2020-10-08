@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export default styled.div`
   width: 100%;
-  ${(props) => css`
+  ${(props: { height: string }) => css`
     height: ${props.height};
   `}
   background-color: #ffffff;

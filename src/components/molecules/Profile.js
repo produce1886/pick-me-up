@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import React from "react";
 import Image from "../atoms/Icon/Profile";
 import Text from "../atoms/Text";
 import ImageHolder from "../atoms/ImageHolder/Profile";
@@ -39,8 +39,3 @@ function Profile(props) {
 }
 
 export default React.memo(Profile);
-
-const Img = styled.img`
-  width: 100%;
-  height: 100%;
-`;

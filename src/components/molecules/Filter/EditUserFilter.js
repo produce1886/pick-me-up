@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import Icondown from "../../atoms/Icon/Filter/Down";
-import ItemWrapper from "../Filter/FilterItem";
+import ItemWrapper from "./FilterItem";
+
 function EditUserFilter(props) {
   let selectedtitle;
   if (props.type === "interest" && props.interest) {

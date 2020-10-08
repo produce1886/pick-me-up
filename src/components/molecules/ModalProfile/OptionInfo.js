@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
 import React, { useState } from "react";
+import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import Birth from "../../atoms/Icon/Birth";
 import Univ from "../../atoms/Icon/University";

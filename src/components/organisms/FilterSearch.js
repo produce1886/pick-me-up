@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import Search from "../molecules/Input/Search";
 import Filters from "../molecules/Filter/FilterGroup";

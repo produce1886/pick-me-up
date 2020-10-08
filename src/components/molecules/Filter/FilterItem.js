@@ -1,5 +1,5 @@
+import React, { useState } from "react";
 import Wrapper from "../../atoms/Filter/FilterItem";
-import { useState } from "react";
 import Text from "../../atoms/Text";
 
 function FilterItem(props) {
