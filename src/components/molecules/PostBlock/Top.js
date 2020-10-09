@@ -1,9 +1,10 @@
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import Col from "../../atoms/Col";
 import Rank from "../Rank";
-import Profile from "../../molecules/Profile";
+import Profile from "../Profile";
 
 function Top(props) {
   return (

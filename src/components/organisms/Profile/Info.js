@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
@@ -15,11 +16,10 @@ function Info(props) {
     major,
     area,
     interests,
-    birth_security,
-    university_security,
-    major_security,
-    area_security,
-    interests_security,
+    birthSecurity,
+    universitySecurity,
+    areaSecurity,
+    interestsSecurity,
   } = props;
 
   return (
@@ -35,7 +35,7 @@ function Info(props) {
           </Text>
         </Div>
       )}
-      {birth && birth_security && (
+      {birth && birthSecurity && (
         <Div>
           <Birth
             style={{ width: "0.8rem", height: "0.8rem" }}
@@ -46,7 +46,7 @@ function Info(props) {
           </Text>
         </Div>
       )}
-      {university && university_security && (
+      {university && universitySecurity && (
         <Div>
           <Univ
             style={{ width: "0.8rem", height: "0.72rem" }}
@@ -72,7 +72,7 @@ function Info(props) {
           </Row>
         </Div>
       )}
-      {area && area_security && (
+      {area && areaSecurity && (
         <Div>
           <Area
             style={{ width: "0.6rem", height: "0.72rem" }}
@@ -83,7 +83,7 @@ function Info(props) {
           </Text>
         </Div>
       )}
-      {interests && interests_security && (
+      {interests && interestsSecurity && (
         <Div>
           <Heart
             style={{ width: "0.83rem", height: "0.72rem" }}

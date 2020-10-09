@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import ViewCount from "../Count/ViewCount";
 import CommentCount from "../Count/CommentCount";
@@ -65,5 +66,3 @@ const Row = styled.div`
   flex-direction: row;
   justify-content: left;
 `;
-
-const A = styled.a``;

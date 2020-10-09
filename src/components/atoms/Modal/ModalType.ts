@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
 
 export type ModalProps = {
-  type: "project" | "portfolio";
-  visible: boolean;
+  modalType: ModalType;
+  isVisible: boolean;
   pid: string | string[];
   onClose: () => void;
   setUpdate: Dispatch<SetStateAction<boolean>>;
@@ -12,11 +12,9 @@ export type ModalProps = {
   setModalReload: Dispatch<SetStateAction<number>>;
 };
 
-export type ModalUpdateProps = {
-  type: "project" | "portfolio";
-  pid: string | string[];
-  onClose: () => void;
-  setUpdate: Dispatch<SetStateAction<boolean>>;
-  modalReload: number;
-  setModalReload: Dispatch<SetStateAction<number>>;
+export type ModalType = "project" | "portfolio";
+
+export type ImageFile = Blob & {
+  invalid?: boolean;
+  data?: string;
 };
