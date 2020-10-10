@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Row from "../atoms/Row";
-import Col from "../atoms/Col";
-import Icon from "../atoms/Icon/Tag";
 import styled from "styled-components";
+import Row from "../atoms/Row";
+import Col from "../atoms/Wrapper/Col";
+import Icon from "../atoms/Icon/Tag";
 import Text from "../atoms/Text";
 import Tag from "../molecules/Button/Tag";
 import Skeleton from "../_skeletons/main/Tag";

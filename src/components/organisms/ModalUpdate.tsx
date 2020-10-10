@@ -1,22 +1,37 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import Overlay from "../atoms/Modal/Overlay";
-import Wrapper from "../atoms/Modal/Wrapper";
-import Inner from "../atoms/Modal/Inner";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
-import { ModalUpdateProps } from "../../types/Modal";
 import DataProps from "../../types/Data";
 import { State } from "../../types/User";
+import { ModalType } from "../atoms/Modal/ModalType";
+import Modal from "../atoms/Modal/index";
 
-type File = Blob & {
-  invalid: boolean;
-  data: string;
+type ModalUpdateProps = {
+  modalType: ModalType;
+  pid: string | string[];
+  onClose: () => void;
+  setUpdate: Dispatch<SetStateAction<boolean>>;
+  modalReload: number;
+  setModalReload: Dispatch<SetStateAction<number>>;
 };
 
-function ModalUpdate(props: ModalUpdateProps) {
+function ModalUpdate({
+  pid,
+  modalType,
+  onClose,
+  setUpdate,
+  modalReload,
+  setModalReload,
+}: ModalUpdateProps) {
   const state = useSelector((state: { user: State }) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -24,12 +39,12 @@ function ModalUpdate(props: ModalUpdateProps) {
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
+  // const [images, setImages] = useState<string[]>([]);
   const [images, setImages] = useState<string[]>([]);
-  //const [images, setImages] = useState<File[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const { isLoading } = getData(
-    props.pid,
-    props.type,
+    pid,
+    modalType,
     setTitle,
     setContent,
     setCategory,
@@ -50,46 +65,44 @@ function ModalUpdate(props: ModalUpdateProps) {
   }
 */
   if (tags.length > 0 && typeof tags[0] === "object") {
-    let tagArray: string[] = [];
+    const tagArray: string[] = [];
     tags.map((value: string) => tagArray.push(value));
     setTags(tagArray);
   }
   const update = useCallback(() => {
-    let flag = checkIsNotEmpty();
-    if (!flag) {
-      return;
-    } else {
+    const flag = checkIsNotEmpty();
+    if (flag) {
       try {
-        if (props.type === "project") {
-          //let image = images.length > 0 ? images[0].data : "";
-          let image = images.length > 0 ? images[0] : "";
-          let body = {
-            title: title,
-            content: content,
-            category: category,
+        if (modalType === "project") {
+          // let image = images.length > 0 ? images[0].data : "";
+          const image = images.length > 0 ? images[0] : "";
+          const body = {
+            title,
+            content,
+            category,
             huntingField: field,
-            region: region,
+            region,
             projectCategory: projectType,
-            tags: tags,
-            image: image,
+            tags,
+            image,
           };
-          axios.put(`${process.env.API_HOST}/projects/${props.pid}`, body);
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 400);
-          props.setUpdate(false);
-        } else if (props.type === "portfolio") {
-          //let image = images.length > 0 ? images[0].data : "";
-          let image = images.length > 0 ? images[0] : "";
-          let body = {
-            title: title,
-            content: content,
-            category: category,
+          axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
+          setTimeout(() => setModalReload(modalReload + 1), 400);
+          setUpdate(false);
+        } else if (modalType === "portfolio") {
+          // let image = images.length > 0 ? images[0].data : "";
+          const image = images.length > 0 ? images[0] : "";
+          const body = {
+            title,
+            content,
+            category,
             huntingField: field,
-            tags: tags,
-            image: image,
+            tags,
+            image,
           };
-          axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 400);
-          props.setUpdate(false);
+          axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
+          setTimeout(() => setModalReload(modalReload + 1), 400);
+          setUpdate(false);
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
         else if (props.type === "portfolio") {
@@ -116,7 +129,7 @@ function ModalUpdate(props: ModalUpdateProps) {
   }, [title, content, category, field, region, projectType, tags, images]);
 
   const checkIsNotEmpty = () => {
-    let flag = false;
+    const flag = false;
     if (!title) {
       alert("제목을 입력하세요");
       return flag;
@@ -133,60 +146,43 @@ function ModalUpdate(props: ModalUpdateProps) {
       alert("구인분야를 선택해주세요");
       return flag;
     }
-    if (!region && props.type === "project") {
+    if (!region && modalType === "project") {
       alert("지역을 선택해주세요");
       return flag;
     }
-    if (!projectType && props.type === "project") {
+    if (!projectType && modalType === "project") {
       alert("프로젝트 종류를 선택해주세요");
       return flag;
     }
     return true;
   };
 
-  const onMaskClick = useCallback((e) => {
-    if (e.target === e.currentTarget) {
-      props.onClose();
-    }
-  }, []);
-
   return (
-    <>
-      <Overlay visible={!isLoading} onClick={onMaskClick} />
-      <Wrapper visible={!isLoading} onClick={onMaskClick}>
-        <Inner>
-          <Top
-            type={props.type}
-            title={title}
-            category={category}
-            field={field}
-            region={region}
-            projectType={projectType}
-            setCategory={setCategory}
-            setField={setField}
-            setRegion={setRegion}
-            setProjectType={setProjectType}
-            setTitle={setTitle}
-            profileImage={state.userData.image}
-          ></Top>
-          <Middle
-            type={props.type}
-            setContent={setContent}
-            setImages={setImages}
-            images={images}
-            content={content}
-          ></Middle>
-          <Bottom
-            type={props.type}
-            onClose={props.onClose}
-            tags={tags}
-            setTags={setTags}
-            onClick={update}
-            updating={true}
-          ></Bottom>
-        </Inner>
-      </Wrapper>
-    </>
+    <Modal isVisible={!isLoading} onClose={onClose}>
+      <Top
+        modalType={modalType}
+        title={title}
+        setCategory={setCategory}
+        setField={setField}
+        setRegion={setRegion}
+        setProjectType={setProjectType}
+        setTitle={setTitle}
+        profileImage={state.userData.image}
+      ></Top>
+      <Middle
+        modalType={modalType}
+        setContent={setContent}
+        setImages={setImages}
+        images={images}
+        content={content}
+      ></Middle>
+      <Bottom
+        tags={tags}
+        setTags={setTags}
+        onClick={update}
+        isUpdate={true}
+      ></Bottom>
+    </Modal>
   );
 }
 
@@ -223,9 +219,9 @@ const getData = (
           setField(result.data.huntingField);
           setRegion(result.data.region);
           setProjectType(result.data.projectCategory);
-          /*if (!result.data.image) {
+          /* if (!result.data.image) {
             setImages([{ data: result.data.image }]);
-          }*/
+          } */
           if (!result.data.image) {
             setImages([result.data.image]);
           }
@@ -244,10 +240,10 @@ const getData = (
           setContent(result.data.content);
           setCategory(result.data.category);
           setField(result.data.huntingField);
-          /*if (result.data.image != "") {
+          /* if (result.data.image != "") {
             setImages([{ data: image }]);
-          }*/
-          if (result.data.image != "") {
+          } */
+          if (result.data.image !== "") {
             setImages([result.data.image]);
           }
           let jsonPortfolioTagArray: string[] = [];
@@ -258,7 +254,7 @@ const getData = (
           setIsLoading(false);
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
     if (!data) {

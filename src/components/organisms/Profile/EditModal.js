@@ -1,14 +1,15 @@
+import React, { useState, useCallback, useEffect } from "react";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import axios from "axios";
 import Overlay from "../../atoms/Modal/Overlay";
 import Wrapper from "../../atoms/Modal/Wrapper";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import X from "../../atoms/Icon/X";
 import PillButton from "../../molecules/Button/Pill";
-import styled, { css } from "styled-components";
-import React, { useState, useCallback, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
-import axios from "axios";
+
 function EditModal(props) {
   const router = useRouter();
   const uid = router.query.userid;
@@ -17,7 +18,7 @@ function EditModal(props) {
   const [interestSecurity, setInterestSecurity] = useState(false);
   const [UniversitySecurity, setUniversitySecurity] = useState(false);
   const state = useSelector((state) => state.user);
-  const email = state.userData.email;
+  const { email } = state.userData;
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");
   const [introduce, setIntroduce] = useState("");
@@ -37,16 +38,16 @@ function EditModal(props) {
 
   const put = useCallback(() => {
     try {
-      let body = {
-        email: email,
-        username: username,
+      const body = {
+        email,
+        username,
         sex: "",
-        birth: birth,
-        university: university,
-        major: major,
-        area: area,
-        introduce: introduce,
-        image: image,
+        birth,
+        university,
+        major,
+        area,
+        introduce,
+        image,
         interests: interest,
         sex_security: null,
         birth_security: birthSecurity,

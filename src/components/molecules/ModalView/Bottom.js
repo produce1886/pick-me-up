@@ -1,13 +1,13 @@
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import Text from "../../atoms/Text";
-import Comment from "../../molecules/Comment/Comment";
-import CommentWrite from "../../molecules/Comment/CommentWrite";
+import Comment from "../Comment/Comment";
+import CommentWrite from "../Comment/CommentWrite";
 
 function ModalBottom(props) {
-  //수정 댓글 아이디 받아오는 state
+  // 수정 댓글 아이디 받아오는 state
   const [cidUpdate, setCidUpdate] = useState("");
-  //수정 댓글 본문 받아오는 state
+  // 수정 댓글 본문 받아오는 state
   const [contentUpdate, setContentUpdate] = useState("");
   const [edit, setEdit] = useState(false);
 

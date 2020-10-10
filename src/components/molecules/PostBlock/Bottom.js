@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import ViewCount from "../Count/ViewCount";
 import CommentCount from "../Count/CommentCount";
@@ -35,4 +36,3 @@ const Div = styled.div`
   flex-direction: row;
   align-items: center;
 `;
-const A = styled.a``;

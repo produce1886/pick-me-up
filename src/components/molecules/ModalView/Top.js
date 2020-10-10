@@ -1,8 +1,8 @@
+import React from "react";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
-import ProfileHolder from "../../atoms/ImageHolder/Profile";
 import FilterInfo from "../FilterInfo";
 
 function ModalTop(props) {
@@ -59,6 +59,15 @@ const ProfileBox = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
+`;
+
+const ProfileHolder = styled.div`
+  overflow: hidden;
+  ${(props) => css`
+    width: ${props.size};
+    height: ${props.size};
+    border-radius: ${props.size};
+  `}
 `;
 
 const Img = styled.img`

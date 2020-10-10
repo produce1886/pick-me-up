@@ -1,10 +1,11 @@
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";
 import Edit from "../../atoms/Icon/Edit";
-import Thumbnail from "../../atoms/Icon/ThumbNail";
-import styled, { css } from "styled-components";
-import React, { useState } from "react";
+import ProfileIcon from "../../atoms/Icon/Profile";
+
 function DefaultInfo(props) {
   const [editIntroduce, setEditIntroduce] = useState(false);
   const [editUsername, setEditUsername] = useState(false);
@@ -53,7 +54,7 @@ function DefaultInfo(props) {
           }}
         />
       ) : (
-        <Thumbnail
+        <ProfileIcon
           style={{
             width: "3.6rem",
             height: "3.6rem",
@@ -61,7 +62,7 @@ function DefaultInfo(props) {
             marginBottom: "1rem",
           }}
           fill="#d3d4d8"
-        ></Thumbnail>
+        ></ProfileIcon>
       )}
       <Content>
         <Div>

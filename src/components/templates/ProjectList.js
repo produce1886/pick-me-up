@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ProjectBlock from "../organisms/ProjectBlock";

@@ -11,7 +11,7 @@ import EditModal from "../organisms/Profile/EditModal";
 
 function ProfileBody() {
   const router = useRouter();
-  const userid = router.query.userid;
+  const { userid } = router.query;
   const { isLoading, data } = useGetPersonalInfoAPI(userid);
   const [selected, setSelected] = useState(0);
   const [editvisible, setEditVisible] = useState(false);

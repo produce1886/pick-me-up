@@ -1,8 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import styled from "styled-components";
-import Profile from "../../molecules/Profile";
+import Profile from "../Profile";
 import Icon from "../../atoms/Icon/Write";
 
 function CommentWrite(props) {
@@ -20,13 +20,12 @@ function CommentWrite(props) {
     }
     if (content.length < 1 && props.contentUpdate < 1) {
       alert("댓글을 작성해주세요");
-      return;
     } else if (!props.edit) {
       try {
         if (props.type === "project") {
           axios.post(`${process.env.API_HOST}/projects/${props.pid}/comments`, {
             email: user.userData.email,
-            content: content,
+            content,
           });
           setContent("");
           setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
@@ -35,7 +34,7 @@ function CommentWrite(props) {
             `${process.env.API_HOST}/portfolios/${props.pid}/comments`,
             {
               email: user.userData.email,
-              content: content,
+              content,
             }
           );
           setContent("");

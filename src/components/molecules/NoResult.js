@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import Icon from "../atoms/Icon/Search";
 import Text from "../atoms/Text";
-import styled from "styled-components";
 
 function NoResult() {
   return (
