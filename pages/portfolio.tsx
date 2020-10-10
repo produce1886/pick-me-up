@@ -8,34 +8,34 @@ import Footer from "../src/components/organisms/Footer";
 
 export default function Portfolio() {
   const router = useRouter();
-  const [update, setUpdate] = useState<boolean>(false); //수정
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [reload, setReload] = useState<number>(0);
   const [modalReload, setModalReload] = useState<number>(0);
 
   return (
     <>
-      {router.query.pid && !update && (
+      {router.query.pid && !isUpdate && (
         <Modal
-          type="portfolio"
-          visible={!!router.query.pid}
+          modalType="portfolio"
+          isVisible={!!router.query.pid}
           pid={router.query.pid}
           onClose={() => router.push(`/portfolio`)}
-          setUpdate={setUpdate}
+          setIsUpdate={setIsUpdate}
           reload={reload}
           setReload={setReload}
           modalReload={modalReload}
           setModalReload={setModalReload}
         ></Modal>
       )}
-      {router.query.pid && update && (
+      {router.query.pid && isUpdate && (
         <UpdateModal
-          type="portfolio"
+          modalType="portfolio"
           pid={router.query.pid}
           onClose={() => {
-            setUpdate(false);
+            setIsUpdate(false);
             router.push(`/portfolio`);
           }}
-          setUpdate={setUpdate}
+          setIsUpdate={setIsUpdate}
           modalReload={modalReload}
           setModalReload={setModalReload}
         ></UpdateModal>

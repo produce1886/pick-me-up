@@ -14,12 +14,13 @@ import DataProps from "../../types/Data";
 import { State } from "../../types/User";
 import { ModalType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
+import checkIsNotEmpty from "../../lib/utils/CheckIsNotEmpty";
 
 type ModalUpdateProps = {
   modalType: ModalType;
   pid: string | string[];
   onClose: () => void;
-  setUpdate: Dispatch<SetStateAction<boolean>>;
+  setIsUpdate: Dispatch<SetStateAction<boolean>>;
   modalReload: number;
   setModalReload: Dispatch<SetStateAction<number>>;
 };
@@ -28,18 +29,17 @@ function ModalUpdate({
   pid,
   modalType,
   onClose,
-  setUpdate,
+  setIsUpdate,
   modalReload,
   setModalReload,
 }: ModalUpdateProps) {
-  const state = useSelector((state: { user: State }) => state.user);
+  const userState = useSelector((state: { user: State }) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
-  // const [images, setImages] = useState<string[]>([]);
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const { isLoading } = getData(
@@ -55,26 +55,25 @@ function ModalUpdate({
     setTags
   );
 
-  /*
- * 원래 jsx 코드
- * 
-  if (tags.length > 0 && typeof tags[0] === "object") {
-    let tagArray:string[] = [];
-    tags.map((value) => tagArray.push(value.tag));
-    setTags(tagArray);
-  }
-*/
   if (tags.length > 0 && typeof tags[0] === "object") {
     const tagArray: string[] = [];
     tags.map((value: string) => tagArray.push(value));
     setTags(tagArray);
   }
+
   const update = useCallback(() => {
-    const flag = checkIsNotEmpty();
+    const flag = checkIsNotEmpty(
+      title,
+      content,
+      category,
+      field,
+      region,
+      projectType,
+      modalType
+    );
     if (flag) {
       try {
         if (modalType === "project") {
-          // let image = images.length > 0 ? images[0].data : "";
           const image = images.length > 0 ? images[0] : "";
           const body = {
             title,
@@ -88,9 +87,8 @@ function ModalUpdate({
           };
           axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
           setTimeout(() => setModalReload(modalReload + 1), 400);
-          setUpdate(false);
+          setIsUpdate(false);
         } else if (modalType === "portfolio") {
-          // let image = images.length > 0 ? images[0].data : "";
           const image = images.length > 0 ? images[0] : "";
           const body = {
             title,
@@ -102,7 +100,7 @@ function ModalUpdate({
           };
           axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
           setTimeout(() => setModalReload(modalReload + 1), 400);
-          setUpdate(false);
+          setIsUpdate(false);
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
         else if (props.type === "portfolio") {
@@ -128,35 +126,6 @@ function ModalUpdate({
     }
   }, [title, content, category, field, region, projectType, tags, images]);
 
-  const checkIsNotEmpty = () => {
-    const flag = false;
-    if (!title) {
-      alert("제목을 입력하세요");
-      return flag;
-    }
-    if (!content) {
-      alert("내용을 입력하세요");
-      return flag;
-    }
-    if (!category) {
-      alert("카테고리를 선택해주세요");
-      return flag;
-    }
-    if (!field) {
-      alert("구인분야를 선택해주세요");
-      return flag;
-    }
-    if (!region && modalType === "project") {
-      alert("지역을 선택해주세요");
-      return flag;
-    }
-    if (!projectType && modalType === "project") {
-      alert("프로젝트 종류를 선택해주세요");
-      return flag;
-    }
-    return true;
-  };
-
   return (
     <Modal isVisible={!isLoading} onClose={onClose}>
       <Top
@@ -167,7 +136,7 @@ function ModalUpdate({
         setRegion={setRegion}
         setProjectType={setProjectType}
         setTitle={setTitle}
-        profileImage={state.userData.image}
+        profileImage={userState.userData.image}
       ></Top>
       <Middle
         modalType={modalType}
@@ -197,7 +166,6 @@ const getData = (
   setField: React.Dispatch<React.SetStateAction<string>>,
   setRegion: React.Dispatch<React.SetStateAction<string>>,
   setProjectType: React.Dispatch<React.SetStateAction<string>>,
-  //  setImages: React.Dispatch<React.SetStateAction<File[]>>,
   setImages: React.Dispatch<React.SetStateAction<string[]>>,
   setTags: React.Dispatch<React.SetStateAction<string[]>>
 ) => {
@@ -219,9 +187,6 @@ const getData = (
           setField(result.data.huntingField);
           setRegion(result.data.region);
           setProjectType(result.data.projectCategory);
-          /* if (!result.data.image) {
-            setImages([{ data: result.data.image }]);
-          } */
           if (!result.data.image) {
             setImages([result.data.image]);
           }
@@ -240,9 +205,6 @@ const getData = (
           setContent(result.data.content);
           setCategory(result.data.category);
           setField(result.data.huntingField);
-          /* if (result.data.image != "") {
-            setImages([{ data: image }]);
-          } */
           if (result.data.image !== "") {
             setImages([result.data.image]);
           }

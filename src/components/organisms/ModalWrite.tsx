@@ -7,6 +7,7 @@ import Bottom from "../molecules/ModalWrite/Bottom";
 import { State } from "../../types/User";
 import { ModalType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
+import checkIsNotEmpty from "../../lib/utils/CheckIsNotEmpty";
 
 type ModalWriteProps = {
   modalType: ModalType;
@@ -15,6 +16,7 @@ type ModalWriteProps = {
   setReload: Dispatch<SetStateAction<number>>;
   reload: number;
 };
+
 function ModalWrite({
   modalType,
   isVisible,
@@ -22,8 +24,8 @@ function ModalWrite({
   setReload,
   reload,
 }: ModalWriteProps) {
-  const state = useSelector((state: { user: State }) => state.user);
-  const { email } = state.userData;
+  const userState = useSelector((state: { user: State }) => state.user);
+  const { email } = userState.userData;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -34,7 +36,15 @@ function ModalWrite({
   const [tags, setTags] = useState<string[]>([]);
 
   const post = useCallback(() => {
-    const flag = checkIsNotEmpty();
+    const flag = checkIsNotEmpty(
+      title,
+      content,
+      category,
+      field,
+      region,
+      projectType,
+      modalType
+    );
     if (flag) {
       try {
         if (modalType === "project") {
@@ -93,35 +103,6 @@ function ModalWrite({
     }
   }, [title, content, category, field, region, projectType, tags, images]);
 
-  const checkIsNotEmpty = () => {
-    const flag = false;
-    if (!title) {
-      alert("제목을 입력하세요");
-      return flag;
-    }
-    if (!content) {
-      alert("내용을 입력하세요");
-      return flag;
-    }
-    if (!category) {
-      alert("카테고리를 선택해주세요");
-      return flag;
-    }
-    if (!field) {
-      alert("구인분야를 선택해주세요");
-      return flag;
-    }
-    if (!region && modalType === "project") {
-      alert("지역을 선택해주세요");
-      return flag;
-    }
-    if (!projectType && modalType === "project") {
-      alert("프로젝트 종류를 선택해주세요");
-      return flag;
-    }
-    return true;
-  };
-
   return (
     <Modal isVisible={isVisible} onClose={onClose}>
       <Top
@@ -132,7 +113,7 @@ function ModalWrite({
         setProjectType={setProjectType}
         setTitle={setTitle}
         title={title}
-        profileImage={state.userData.image}
+        profileImage={userState.userData.image}
       ></Top>
       <Middle
         modalType={modalType}
