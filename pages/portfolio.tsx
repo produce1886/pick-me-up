@@ -16,8 +16,8 @@ export default function Portfolio() {
     <>
       {router.query.pid && !update && (
         <Modal
-          type="portfolio"
-          visible={!!router.query.pid}
+          modalType="portfolio"
+          isVisible={!!router.query.pid}
           pid={router.query.pid}
           onClose={() => router.push(`/portfolio`)}
           setUpdate={setUpdate}
@@ -29,7 +29,7 @@ export default function Portfolio() {
       )}
       {router.query.pid && update && (
         <UpdateModal
-          type="portfolio"
+          modalType="portfolio"
           pid={router.query.pid}
           onClose={() => {
             setUpdate(false);
