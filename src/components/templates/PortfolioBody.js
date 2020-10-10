@@ -20,7 +20,7 @@ function PortfolioBody(props) {
   return (
     <>
       <FilterSearch
-        modalType="portfolio"
+        type="portfolio"
         setCategory={setCategory}
         setField={setField}
         setQuery={setQuery}

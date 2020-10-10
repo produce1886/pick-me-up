@@ -22,7 +22,7 @@ function ProjectBody(props) {
   return (
     <>
       <FilterSearch
-        modalType="project"
+        type="project"
         setCategory={setCategory}
         setField={setField}
         setRegion={setRegion}
