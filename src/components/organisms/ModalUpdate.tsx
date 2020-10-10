@@ -14,6 +14,7 @@ import DataProps from "../../types/Data";
 import { State } from "../../types/User";
 import { ModalType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
+import checkIsNotEmpty from "../../lib/utils/CheckIsNotEmpty";
 
 type ModalUpdateProps = {
   modalType: ModalType;
@@ -59,12 +60,20 @@ function ModalUpdate({
     tags.map((value: string) => tagArray.push(value));
     setTags(tagArray);
   }
+
   const update = useCallback(() => {
-    const flag = checkIsNotEmpty();
+    const flag = checkIsNotEmpty(
+      title,
+      content,
+      category,
+      field,
+      region,
+      projectType,
+      modalType
+    );
     if (flag) {
       try {
         if (modalType === "project") {
-          // let image = images.length > 0 ? images[0].data : "";
           const image = images.length > 0 ? images[0] : "";
           const body = {
             title,
@@ -80,7 +89,6 @@ function ModalUpdate({
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setIsUpdate(false);
         } else if (modalType === "portfolio") {
-          // let image = images.length > 0 ? images[0].data : "";
           const image = images.length > 0 ? images[0] : "";
           const body = {
             title,
@@ -117,35 +125,6 @@ function ModalUpdate({
       }
     }
   }, [title, content, category, field, region, projectType, tags, images]);
-
-  const checkIsNotEmpty = () => {
-    const flag = false;
-    if (!title) {
-      alert("제목을 입력하세요");
-      return flag;
-    }
-    if (!content) {
-      alert("내용을 입력하세요");
-      return flag;
-    }
-    if (!category) {
-      alert("카테고리를 선택해주세요");
-      return flag;
-    }
-    if (!field) {
-      alert("구인분야를 선택해주세요");
-      return flag;
-    }
-    if (!region && modalType === "project") {
-      alert("지역을 선택해주세요");
-      return flag;
-    }
-    if (!projectType && modalType === "project") {
-      alert("프로젝트 종류를 선택해주세요");
-      return flag;
-    }
-    return true;
-  };
 
   return (
     <Modal isVisible={!isLoading} onClose={onClose}>
