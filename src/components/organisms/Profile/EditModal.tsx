@@ -1,23 +1,36 @@
 import React, { useState, useCallback, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Overlay from "../../atoms/Modal/Overlay";
-import Wrapper from "../../atoms/Modal/Wrapper";
+import Colors from "@colors";
+import Modal from "../../atoms/Modal/index";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import X from "../../atoms/Icon/X";
 import PillButton from "../../molecules/Button/Pill";
+import { State } from "../../../types/User";
 
-function EditModal(props) {
+type ButtonWrapperProps = {
+  bottom?: string;
+  top?: string;
+  right?: string;
+};
+
+type EditModalProps = {
+  isVisible: boolean;
+  onClose: () => void;
+};
+
+function EditModal(props: EditModalProps) {
   const router = useRouter();
   const uid = router.query.userid;
+  const sexSecurity = false;
   const [birthSecurity, setBirthSecurity] = useState(false);
   const [areaSecurity, setAreaSecurity] = useState(false);
   const [interestSecurity, setInterestSecurity] = useState(false);
   const [UniversitySecurity, setUniversitySecurity] = useState(false);
-  const userState = useSelector((state) => state.user);
+  const userState = useSelector((state: { user: State }) => state.user);
   const { email } = userState.userData;
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");
@@ -29,12 +42,6 @@ function EditModal(props) {
   const [interest, setInterest] = useState("관심 분야");
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
-
-  const onMaskClick = useCallback((e) => {
-    if (e.target === e.currentTarget) {
-      props.onClose();
-    }
-  }, []);
 
   const put = useCallback(() => {
     try {
@@ -49,7 +56,7 @@ function EditModal(props) {
         introduce,
         image,
         interests: interest,
-        sex_security: null,
+        sex_security: sexSecurity,
         birth_security: birthSecurity,
         university_security: UniversitySecurity,
         major_security: UniversitySecurity,
@@ -108,8 +115,7 @@ function EditModal(props) {
 
   return (
     <>
-      <Overlay visible={props.visible} onClick={onMaskClick}></Overlay>
-      <Wrapper visible={props.visible} onClick={onMaskClick}>
+      <Modal isVisible={props.isVisible} onClose={props.onClose}>
         <ButtonWrapper onClick={() => props.onClose()} right="2.4rem">
           <X
             style={{
@@ -160,14 +166,14 @@ function EditModal(props) {
               <ButtonWrapper bottom="1.5rem" onClick={put} right="1.4rem">
                 <PillButton
                   weight={500}
-                  color="#fff"
+                  color={Colors.WHITE}
                   text="수정하기"
                 ></PillButton>
               </ButtonWrapper>
             </>
           )}
         </Inner>
-      </Wrapper>
+      </Modal>
     </>
   );
 }
@@ -188,15 +194,17 @@ const Inner = styled.div`
 `;
 
 const ButtonWrapper = styled.button`
-  width: fit-content;
-  height: fit-content;
-  background-color: transparent;
-  border: none;
-  margin: unset;
-  padding: unset;
-  outline: none;
-  position: absolute;
-  bottom: ${(props) => props.bottom};
-  top: ${(props) => props.top};
-  right: ${(props) => props.right};
+  ${(props: ButtonWrapperProps) => css`
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+    margin: unset;
+    padding: unset;
+    outline: none;
+    position: absolute;
+    bottom: ${props.bottom};
+    top: ${props.top};
+    right: ${props.right};
+  `}
 `;
