@@ -1,9 +1,9 @@
 import { AnyAction } from "redux";
-import { LOGIN_USER, LOGOUT_USER } from "../_actions/types";
 import Cookies from "js-cookie";
+import { LOGIN_USER, LOGOUT_USER } from "../_actions/types";
 import { State } from "../types/User";
 
-let userData = Cookies.get("userData");
+const userData = Cookies.get("userData");
 
 let initialState: State;
 
