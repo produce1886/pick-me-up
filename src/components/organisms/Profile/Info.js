@@ -6,7 +6,7 @@ import Birth from "../../atoms/Icon/Birth";
 import Univ from "../../atoms/Icon/University";
 import Area from "../../atoms/Icon/Area";
 import Heart from "../../atoms/Icon/Heart";
-import Row from "../../atoms/Row";
+import Row from "../../atoms/Wrapper/Row";
 
 function Info(props) {
   const {
