@@ -19,7 +19,7 @@ type ModalUpdateProps = {
   modalType: ModalType;
   pid: string | string[];
   onClose: () => void;
-  setUpdate: Dispatch<SetStateAction<boolean>>;
+  setIsUpdate: Dispatch<SetStateAction<boolean>>;
   modalReload: number;
   setModalReload: Dispatch<SetStateAction<number>>;
 };
@@ -28,7 +28,7 @@ function ModalUpdate({
   pid,
   modalType,
   onClose,
-  setUpdate,
+  setIsUpdate,
   modalReload,
   setModalReload,
 }: ModalUpdateProps) {
@@ -39,7 +39,6 @@ function ModalUpdate({
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
-  // const [images, setImages] = useState<string[]>([]);
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const { isLoading } = getData(
@@ -55,15 +54,6 @@ function ModalUpdate({
     setTags
   );
 
-  /*
- * 원래 jsx 코드
- * 
-  if (tags.length > 0 && typeof tags[0] === "object") {
-    let tagArray:string[] = [];
-    tags.map((value) => tagArray.push(value.tag));
-    setTags(tagArray);
-  }
-*/
   if (tags.length > 0 && typeof tags[0] === "object") {
     const tagArray: string[] = [];
     tags.map((value: string) => tagArray.push(value));
@@ -88,7 +78,7 @@ function ModalUpdate({
           };
           axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
           setTimeout(() => setModalReload(modalReload + 1), 400);
-          setUpdate(false);
+          setIsUpdate(false);
         } else if (modalType === "portfolio") {
           // let image = images.length > 0 ? images[0].data : "";
           const image = images.length > 0 ? images[0] : "";
@@ -102,7 +92,7 @@ function ModalUpdate({
           };
           axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
           setTimeout(() => setModalReload(modalReload + 1), 400);
-          setUpdate(false);
+          setIsUpdate(false);
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
         else if (props.type === "portfolio") {
@@ -197,7 +187,6 @@ const getData = (
   setField: React.Dispatch<React.SetStateAction<string>>,
   setRegion: React.Dispatch<React.SetStateAction<string>>,
   setProjectType: React.Dispatch<React.SetStateAction<string>>,
-  //  setImages: React.Dispatch<React.SetStateAction<File[]>>,
   setImages: React.Dispatch<React.SetStateAction<string[]>>,
   setTags: React.Dispatch<React.SetStateAction<string[]>>
 ) => {
@@ -219,9 +208,6 @@ const getData = (
           setField(result.data.huntingField);
           setRegion(result.data.region);
           setProjectType(result.data.projectCategory);
-          /* if (!result.data.image) {
-            setImages([{ data: result.data.image }]);
-          } */
           if (!result.data.image) {
             setImages([result.data.image]);
           }
@@ -240,9 +226,6 @@ const getData = (
           setContent(result.data.content);
           setCategory(result.data.category);
           setField(result.data.huntingField);
-          /* if (result.data.image != "") {
-            setImages([{ data: image }]);
-          } */
           if (result.data.image !== "") {
             setImages([result.data.image]);
           }
