@@ -15,6 +15,7 @@ type ModalWriteProps = {
   setReload: Dispatch<SetStateAction<number>>;
   reload: number;
 };
+
 function ModalWrite({
   modalType,
   isVisible,
