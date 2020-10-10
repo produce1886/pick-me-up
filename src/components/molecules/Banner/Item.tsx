@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Colors from "@src/components/atoms/Colors";
+import Colors from "@colors";
 import Pill from "../Button/Pill";
 import Text from "../../atoms/Text";
 
@@ -19,10 +19,10 @@ export default function Item({ color, type }: BannerItemProps) {
       <InnerWrapper>
         <Col>
           <Row>
-            <Text level={18} weight="bold" color="#232735">
+            <Text level={18} weight="bold" color={Colors.BLACK}>
               {type}
             </Text>
-            <Text level={8} weight="bold" color="#8b90a0">
+            <Text level={8} weight="bold" color={Colors.DEEP_GREY}>
               &nbsp;&nbsp;
               {type === "프로젝트" && "Project"}
               {type === "포트폴리오" && "Portfolio"}
@@ -30,14 +30,14 @@ export default function Item({ color, type }: BannerItemProps) {
           </Row>
           {type === "프로젝트" && (
             <Row width="12rem">
-              <Text level={3} color="#232735">
+              <Text level={3} color={Colors.BLACK}>
                 척하면 척, 당신이 꿈꿨던 이상적인 팀을 픽미업에서 만들어보세요.
               </Text>
             </Row>
           )}
           {type === "포트폴리오" && (
             <Row width="9.5rem">
-              <Text level={3} color="#232735">
+              <Text level={3} color={Colors.BLACK}>
                 당신만의 특별한 포트폴리오를 픽미업에서 공유해보세요.
               </Text>
             </Row>

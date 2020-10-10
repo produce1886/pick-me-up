@@ -1,11 +1,11 @@
-import { LOGIN_USER, LOGOUT_USER } from "./types";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { LOGIN_USER, LOGOUT_USER } from "./types";
 import { State as UserState } from "../types/User";
 
-type data = UserState["userData"];
+type dataType = UserState["userData"];
 
-export function loginUser(data: data) {
+export function loginUser(data: dataType) {
   Cookies.set("userData", data, { expires: 0.1 });
   axios.post(`${process.env.API_HOST}/login`, data);
 

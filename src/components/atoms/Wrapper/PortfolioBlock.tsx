@@ -5,9 +5,6 @@ export default styled.div`
   height: 15.2rem;
   border-radius: 0.32rem;
   box-shadow: 0 0.1rem 0.32rem 0 rgba(0, 0, 0, 0.1);
-  ${(props) => css`
-    background-color: ${props.skeleton ? "#ffffff" : "#d3d4d8"};
-  `}
   position: relative;
   box-sizing: border-box;
   margin: 0 0.4rem 0.8rem 0.4rem;
@@ -15,4 +12,7 @@ export default styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${(props: { isSkeleton: boolean }) => css`
+    background-color: ${props.isSkeleton ? "#ffffff" : "#d3d4d8"};
+  `}
 `;

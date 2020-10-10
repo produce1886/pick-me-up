@@ -1,5 +1,5 @@
 import ItemWrapper from "./FilterItem";
-import Hover from "../../atoms/Filter/FilterItem";
+import Hover from "../../atoms/Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
 import Text from "../../atoms/Text";
 

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import Colors from "../Colors";
 
 export type TextProps = {
-  children: string | string[];
+  children?: string | string[];
   level?: number;
   width?: number | string;
   height?: number | string;
