@@ -32,7 +32,7 @@ function ModalUpdate({
   modalReload,
   setModalReload,
 }: ModalUpdateProps) {
-  const state = useSelector((state: { user: State }) => state.user);
+  const userState = useSelector((state: { user: State }) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -167,7 +167,7 @@ function ModalUpdate({
         setRegion={setRegion}
         setProjectType={setProjectType}
         setTitle={setTitle}
-        profileImage={state.userData.image}
+        profileImage={userState.userData.image}
       ></Top>
       <Middle
         modalType={modalType}

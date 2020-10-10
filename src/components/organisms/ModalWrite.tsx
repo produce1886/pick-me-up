@@ -22,8 +22,8 @@ function ModalWrite({
   setReload,
   reload,
 }: ModalWriteProps) {
-  const state = useSelector((state: { user: State }) => state.user);
-  const { email } = state.userData;
+  const userState = useSelector((state: { user: State }) => state.user);
+  const { email } = userState.userData;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -132,7 +132,7 @@ function ModalWrite({
         setProjectType={setProjectType}
         setTitle={setTitle}
         title={title}
-        profileImage={state.userData.image}
+        profileImage={userState.userData.image}
       ></Top>
       <Middle
         modalType={modalType}

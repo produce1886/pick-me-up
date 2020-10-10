@@ -17,8 +17,8 @@ function EditModal(props) {
   const [areaSecurity, setAreaSecurity] = useState(false);
   const [interestSecurity, setInterestSecurity] = useState(false);
   const [UniversitySecurity, setUniversitySecurity] = useState(false);
-  const state = useSelector((state) => state.user);
-  const { email } = state.userData;
+  const userState = useSelector((state) => state.user);
+  const { email } = userState.userData;
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");
   const [introduce, setIntroduce] = useState("");
@@ -61,7 +61,6 @@ function EditModal(props) {
       props.onClose();
     } catch (error) {
       console.log(error);
-      alert("에러가 발생했습니다.");
     }
   }, [
     email,
