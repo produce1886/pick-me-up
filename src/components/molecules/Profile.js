@@ -1,37 +1,27 @@
 import React from "react";
-import styled from "styled-components";
-import Image from "../atoms/Icon/Profile";
+import styled, { css } from "styled-components";
+import Colors from "@colors";
+import ProfileIcon from "../atoms/Icon/Profile";
 import Text from "../atoms/Text";
-import ImageHolder from "../atoms/ImageHolder/Profile";
 
 function Profile(props) {
   return (
     <Wrapper>
       {props.profileImage ? (
         <ImageHolder size={props.size}>
-          <img
-            src={props.profileImage}
-            style={{
-              width: `${props.size}`,
-              height: `${props.size}`,
-              borderRadius: `${props.size}`,
-              display: "block",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          ></img>
+          <Img src={props.profileImage}></Img>
         </ImageHolder>
       ) : (
-        <Image
+        <ProfileIcon
           style={{
             width: `${props.size}`,
             height: `${props.size}`,
             marginRight: "0.3rem",
           }}
-          fill="#d3d4d8"
-        ></Image>
+          fill={Colors.GREY}
+        ></ProfileIcon>
       )}
-      <Text level={props.level} color="#232735" weight={props.weight}>
+      <Text level={props.level} color={Colors.BLACK} weight={props.weight}>
         {props.name}
       </Text>
     </Wrapper>
@@ -47,7 +37,20 @@ const Wrapper = styled.div`
   flex-direction: row;
 `;
 
+const ImageHolder = styled.div`
+  overflow: hidden;
+  margin-right: 0.3rem;
+  ${(props) => css`
+    width: ${props.size};
+    height: ${props.size};
+    border-radius: ${props.size};
+  `}
+`;
+
 const Img = styled.img`
   width: 100%;
   height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 `;
