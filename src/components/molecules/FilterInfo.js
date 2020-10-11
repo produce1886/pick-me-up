@@ -22,7 +22,7 @@ function FilterInfo(props) {
           </Text>
         </Textdiv>
       </>
-      {props.type === "project" && (
+      {props.modalType === "project" && (
         <>
           <Textdiv>
             <Text level={0} color="#8b90a0">

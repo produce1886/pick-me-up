@@ -5,7 +5,7 @@ export type ModalProps = {
   isVisible: boolean;
   pid: string | string[];
   onClose: () => void;
-  setUpdate: Dispatch<SetStateAction<boolean>>;
+  setIsUpdate: Dispatch<SetStateAction<boolean>>;
   setReload: Dispatch<SetStateAction<number>>;
   reload: number;
   modalReload: number;

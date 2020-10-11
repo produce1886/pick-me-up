@@ -49,7 +49,7 @@ function ModalView(props: ModalProps) {
                 ? data.projectTag
                 : data.portfolioTag
             }
-            setUpdate={props.setUpdate}
+            setUpdate={props.setIsUpdate}
             listReload={props.reload}
             setListReload={props.setReload}
           ></Middle>

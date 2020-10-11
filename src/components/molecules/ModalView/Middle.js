@@ -31,7 +31,6 @@ function ModalMiddle(props) {
         }
       }
     } catch (error) {
-      alert("Error!");
       console.log(error);
     }
   }, []);

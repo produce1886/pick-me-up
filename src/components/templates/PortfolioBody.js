@@ -50,7 +50,7 @@ function PortfolioBody(props) {
         {writeVisible && (
           <ModalWrite
             modalType="portfolio"
-            visible={writeVisible}
+            isVisible={writeVisible}
             onClose={() => setWriteVisible(false)}
             reload={props.reload}
             setReload={props.setReload}

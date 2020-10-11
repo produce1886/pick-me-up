@@ -7,7 +7,7 @@ import LogOutButton from "../molecules/Button/LogOut";
 import Profile from "../molecules/Profile";
 
 export default function GlobalNavigationBar() {
-  const state = useSelector((state) => state.user);
+  const userState = useSelector((state) => state.user);
 
   return (
     <Wrapper>
@@ -17,13 +17,13 @@ export default function GlobalNavigationBar() {
         </LogoWrapper>
         <MainMenu></MainMenu>
         <ProfileWrapper>
-          {state.isSignedIn ? (
+          {userState.isSignedIn ? (
             <>
               <Profile
                 level={1}
                 size="1.4rem"
-                name={state.userData.username}
-                profileImage={state.userData.image}
+                name={userState.userData.username}
+                profileImage={userState.userData.image}
               ></Profile>
               <LogOutButton></LogOutButton>
             </>

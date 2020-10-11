@@ -33,7 +33,7 @@ function FilterGroup(props) {
         onClick={props.setField}
         value={props.field}
       ></Filter>
-      {props.type === "project" && (
+      {props.modalType === "project" && (
         <>
           <Filter
             width={props.width}
