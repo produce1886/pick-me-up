@@ -66,16 +66,13 @@ function EditnDelete(props) {
     props.setClicked(false);
   };
 
-  const setSelected = useCallback(
-    (item) => {
-      if (item.key === 1) {
-        deleteComment();
-      } else if (item.key === 0) {
-        updateComment();
-      }
-    },
-    [item]
-  );
+  const setSelected = useCallback((item) => {
+    if (item.key === 1) {
+      deleteComment();
+    } else if (item.key === 0) {
+      updateComment();
+    }
+  }, []);
 
   return (
     <Wrapper

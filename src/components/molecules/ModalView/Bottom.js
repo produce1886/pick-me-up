@@ -28,7 +28,7 @@ function ModalBottom(props) {
             type={props.type}
             comment={item.content}
             date={item.createdDate}
-            userInfo={item.user}
+            {...item.user}
             id={item.id}
             key={index}
             pid={props.pid}
