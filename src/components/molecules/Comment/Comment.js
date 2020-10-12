@@ -31,7 +31,7 @@ function Comment(props) {
             {props.username}
           </Text>
           &nbsp;
-          <Text level={1} color={Colors.GREY}>
+          <Text level={1} color={Colors.DEEP_GREY}>
             {date}
           </Text>
           {currentUserEmail === props.email && (
