@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import Profile from "@src/components/molecules/Profile";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";
 import Edit from "../../atoms/Icon/Edit";
-import ProfileIcon from "../../atoms/Icon/Profile";
 
 function DefaultInfo(props) {
   const [editIntroduce, setEditIntroduce] = useState(false);
@@ -44,26 +44,7 @@ function DefaultInfo(props) {
           ></Camera>
         </label>
       </Div>
-      {props.image ? (
-        <img
-          src={props.image}
-          style={{
-            width: "3.6rem",
-            height: "3.6rem",
-            borderRadius: "50%",
-          }}
-        />
-      ) : (
-        <ProfileIcon
-          style={{
-            width: "3.6rem",
-            height: "3.6rem",
-            marginTop: "0.6rem",
-            marginBottom: "1rem",
-          }}
-          fill="#d3d4d8"
-        ></ProfileIcon>
-      )}
+      <Profile profileImage={props.image} size="3.6rem" margin="0" />
       <Content>
         <Div>
           <DivTitle>
