@@ -31,7 +31,7 @@ function Top(props) {
         <Row>
           <Div>
             <FilterInfo
-              type="project"
+              modalType="project"
               category={props.category}
               field={props.field}
               region={props.region}
