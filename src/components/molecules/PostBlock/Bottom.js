@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import ViewCount from "../Count/ViewCount";
-import CommentCount from "../Count/CommentCount";
+import ViewCount from "../Count/View";
+import CommentCount from "../Count/Comment";
 import MoreButton from "../Button/ViewMore";
 
 function Bottom(props) {
