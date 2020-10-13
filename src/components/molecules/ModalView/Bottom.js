@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Comment from "../Comment/Comment";
 import CommentWrite from "../Comment/CommentWrite";
@@ -14,11 +15,11 @@ function ModalBottom(props) {
   return (
     <Bottom>
       <Div>
-        <Text level={4} weight={500} color="#9c69e2">
+        <Text level={4} weight={500} color={Colors.DEEP_PURPLE}>
           {props.commentsNum}
         </Text>
         &nbsp;
-        <Text level={4} weight={500} color="#232735">
+        <Text level={4} weight={500} color={Colors.BLACK}>
           {props.commentsNum < 2 ? "Comment" : "Comments"}
         </Text>
       </Div>

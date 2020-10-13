@@ -1,3 +1,4 @@
+import Colors from "@colors";
 import ItemWrapper from "./FilterItem";
 import Hover from "../../atoms/Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
@@ -13,8 +14,13 @@ export default function DropdownMenu(props) {
       height="fit-content"
     >
       {props.activeMenu !== "align" && (
-        <Hover backgroundColor="#ffffff" width="5.2rem" height="1.6rem">
-          <Text line="1.08rem" level={3} color="#9c69e2" align="left">
+        <Hover backgroundColor={Colors.WHITE} width="5.2rem" height="1.6rem">
+          <Text
+            line="1.08rem"
+            level={3}
+            color={Colors.DEEP_PURPLE}
+            align="left"
+          >
             전체보기
           </Text>
         </Hover>

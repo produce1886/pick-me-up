@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "@colors";
 import Link from "next/link";
 import Text from "../../atoms/Text";
 
@@ -9,7 +10,7 @@ export default function Main() {
         <Button>
           <Link href="/project">
             <A>
-              <Text level={3} weight={500} color="#232735">
+              <Text level={3} weight={500} color={Colors.BLACK}>
                 프로젝트
               </Text>
             </A>
@@ -18,7 +19,7 @@ export default function Main() {
         <Button>
           <Link href="/portfolio">
             <A>
-              <Text level={3} weight={500} color="#232735">
+              <Text level={3} weight={500} color={Colors.BLACK}>
                 포트폴리오
               </Text>
             </A>

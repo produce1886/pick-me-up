@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Colors from "@colors";
 import Wrapper from "../../atoms/Filter/Item";
 import Text from "../../atoms/Text";
 
@@ -14,12 +15,16 @@ function FilterItem(props) {
       onClick={() => {
         props.setSelected(props.item);
       }}
-      backgroundColor={mouseon ? "#f5edff" : "#ffffff"}
+      backgroundColor={mouseon ? Colors.LIGHT_PURPLE : Colors.WHITE}
     >
       <Text
         line="1rem"
         level={3}
-        color={props.selectedtitle === props.item.title ? "#9c69e2" : "#232735"}
+        color={
+          props.selectedtitle === props.item.title
+            ? Colors.DEEP_PURPLE
+            : Colors.BLACK
+        }
         align="left"
       >
         {props.item.title}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Edit from "../../atoms/Icon/Edit";
 import EditUserFilter from "../Filter/EditUserFilter";
@@ -47,7 +48,7 @@ export function University(props) {
       )}
       {!editUniv && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
-          <Text level={3} color="#232735" align="left">
+          <Text level={3} color={Colors.BLACK} align="left">
             {props.university} {props.major}
           </Text>
         </Row>
@@ -55,7 +56,7 @@ export function University(props) {
       <ButtonWrapper onClick={() => setEditUniv(!editUniv)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
-          fill="#232735"
+          fill={Colors.BLACK}
         ></Edit>
       </ButtonWrapper>
     </Content>
@@ -85,7 +86,7 @@ export function Area(props) {
       )}
       {!editArea && (
         <Row marginRight="3rem" paddingLeft="1rem" width="21.5rem">
-          <Text level={3} color="#232735" align="left">
+          <Text level={3} color={Colors.BLACK} align="left">
             {props.area}
           </Text>
         </Row>
@@ -93,7 +94,7 @@ export function Area(props) {
       <ButtonWrapper onClick={() => setEditArea(!editArea)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
-          fill="#232735"
+          fill={Colors.BLACK}
         ></Edit>
       </ButtonWrapper>
     </Content>
@@ -126,7 +127,7 @@ export function Interest(props) {
       )}
       {!editInterest && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
-          <Text level={3} color="#232735" align="left">
+          <Text level={3} color={Colors.BLACK} align="left">
             {props.interest}
           </Text>
         </Row>
@@ -134,7 +135,7 @@ export function Interest(props) {
       <ButtonWrapper onClick={() => setEditInterest(!editInterest)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
-          fill="#232735"
+          fill={Colors.BLACK}
         ></Edit>
       </ButtonWrapper>
     </Content>

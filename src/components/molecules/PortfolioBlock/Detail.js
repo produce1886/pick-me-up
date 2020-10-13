@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import ViewCount from "../Count/View";
 import CommentCount from "../Count/Comment";
@@ -10,7 +11,7 @@ function Detail(props) {
   return (
     <DetailWrapper y={props.y}>
       <Row>
-        <Text level={3} weight="bold" color="#232735">
+        <Text level={3} weight="bold" color={Colors.BLACK}>
           {props.title}
         </Text>
       </Row>

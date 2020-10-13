@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Icondown from "../../atoms/Icon/Filter/Down";
 import ItemWrapper from "./FilterItem";
@@ -20,7 +21,7 @@ function EditUserFilter(props) {
   };
   const [clicked, setClicked] = useState(false);
   const [item, setItem] = useState("");
-  const icon = <Icondown style={iconStyle} fill="#232735"></Icondown>;
+  const icon = <Icondown style={iconStyle} fill={Colors.BLACK}></Icondown>;
   const setSelected = (item) => {
     if (item) {
       props.onClick(item.title);
@@ -42,7 +43,7 @@ function EditUserFilter(props) {
 
   return (
     <FilterWrapper onClick={() => openMenu()}>
-      <Text line={props.line} level={1} color="#232735">
+      <Text line={props.line} level={1} color={Colors.BLACK}>
         {selectedtitle}
       </Text>
       {icon}

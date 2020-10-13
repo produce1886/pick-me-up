@@ -43,7 +43,7 @@ function ModalBottom({ tags, setTags, onClick, isUpdate }: ModalBottomProps) {
         <IconTextWrapper>
           <Icon
             style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }}
-            fill="#232735"
+            fill={Colors.BLACK}
           ></Icon>
           <Input
             onChange={handleChange}

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
 import FilterInfo from "../FilterInfo";
@@ -10,7 +11,7 @@ function ModalTop(props) {
     <Top>
       <TitleFilterWrapper>
         <TitleWrapper>
-          <Text level={12} color="#9c69e2" weight={800}>
+          <Text level={12} color={Colors.DEEP_PURPLE} weight={800}>
             {props.title}
           </Text>
         </TitleWrapper>

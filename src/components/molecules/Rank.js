@@ -1,13 +1,17 @@
 import styled from "styled-components";
+import Colors from "@colors";
 import Icon from "../atoms/Icon/Rank";
 import Text from "../atoms/Text";
 
 export default function Rank(props) {
   return (
     <Wrapper>
-      <Icon fill="#f063b8" style={{ width: "1.8rem", height: "2.4rem" }}></Icon>
+      <Icon
+        fill={Colors.PINK}
+        style={{ width: "1.8rem", height: "2.4rem" }}
+      ></Icon>
       <Div>
-        <Text level={6} weight="bold" color="#fff">
+        <Text level={6} weight="bold" color={Colors.WHITE}>
           {props.number}
         </Text>
       </Div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Wrapper from "../../atoms/Filter/Wrapper";
 import Icondownline from "../../atoms/Icon/Chevron/Down";
@@ -48,10 +49,12 @@ function Filter(props) {
     setClicked(!clicked);
   };
 
-  let background = "#ffffff";
-  let icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
-  let iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
-  let backgroundAlign = "#ffffff";
+  let background = Colors.WHITE;
+  let icon = (
+    <Icondownline style={iconStyle} fill={Colors.DEEP_GREY}></Icondownline>
+  );
+  let iconAlign = <Icondown style={iconStyle} fill={Colors.BLACK}></Icondown>;
+  let backgroundAlign = Colors.WHITE;
 
   useEffect(() => {
     if (!item && props.value) {
@@ -62,24 +65,26 @@ function Filter(props) {
   if (item) {
     icon = (
       <Button onClick={resetFilter}>
-        <IconX style={iconXStyle} fill="#232735"></IconX>
+        <IconX style={iconXStyle} fill={Colors.BLACK}></IconX>
       </Button>
     );
     iconAlign = (
       <Button onClick={resetFilter}>
-        <IconX style={iconXStyle} fill="#232735"></IconX>
+        <IconX style={iconXStyle} fill={Colors.BLACK}></IconX>
       </Button>
     );
-    background = "#d3d4d8";
-    backgroundAlign = "#d3d4d8";
+    background = Colors.GREY;
+    backgroundAlign = Colors.GREY;
   } else if (clicked) {
-    icon = <Iconupline style={iconStyle} fill="#8b90a0"></Iconupline>;
-    background = "#f0f1f3";
-    iconAlign = <Iconup style={iconStyle} fill="#232735"></Iconup>;
+    icon = <Iconupline style={iconStyle} fill={Colors.DEEP_GREY}></Iconupline>;
+    background = Colors.LIGHT_GREY;
+    iconAlign = <Iconup style={iconStyle} fill={Colors.BLACK}></Iconup>;
   } else {
-    background = "#ffffff";
-    icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
-    iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
+    background = Colors.WHITE;
+    icon = (
+      <Icondownline style={iconStyle} fill={Colors.DEEP_GREY}></Icondownline>
+    );
+    iconAlign = <Icondown style={iconStyle} fill={Colors.BLACK}></Icondown>;
   }
   if (props.title === "최신순") {
     return (
@@ -88,10 +93,10 @@ function Filter(props) {
         width="6rem"
         height="1.6rem"
         border={clicked ? "0.08rem" : "0.04rem"}
-        borderColor={clicked ? "#c8acee" : "#d3d4d8"}
+        borderColor={clicked ? Colors.PURPLE : Colors.GREY}
         backgroundColor={backgroundAlign}
       >
-        <Text line="1.08rem" level={3} color="#232735">
+        <Text line="1.08rem" level={3} color={Colors.BLACK}>
           {item ? item.title : props.title}
         </Text>
         {iconAlign}
@@ -113,10 +118,10 @@ function Filter(props) {
       height={props.height}
       max-height="1.6rem"
       border="0.04rem"
-      borderColor="#d3d4d8"
+      borderColor={Colors.GREY}
       backgroundColor={background}
     >
-      <Text line={props.line} level={props.level} color="#232735">
+      <Text line={props.line} level={props.level} color={Colors.BLACK}>
         {item ? item.title : props.title}
       </Text>
       {icon}

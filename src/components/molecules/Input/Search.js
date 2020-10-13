@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import Icon from "../../atoms/Icon/Search";
 
 export default function Search(props) {
@@ -25,7 +26,7 @@ export default function Search(props) {
             width: "0.7rem",
             height: "0.7rem",
           }}
-          fill="#8b90a0"
+          fill={Colors.DEEP_GREY}
         ></Icon>
       </Button>
       <Input

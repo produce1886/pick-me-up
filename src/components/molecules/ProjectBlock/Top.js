@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import Colors from "@colors";
 import FilterInfo from "../FilterInfo";
 import Text from "../../atoms/Text";
 import Row from "../../atoms/Wrapper/Row";
@@ -12,7 +13,7 @@ function Top(props) {
     <Wrapper>
       <Col>
         <FirstDiv>
-          <Text level={6} weight="bold" color="#9c69e2" line={1.17}>
+          <Text level={6} weight="bold" color={Colors.DEEP_PURPLE} line={1.17}>
             {props.title}
           </Text>
         </FirstDiv>
@@ -37,7 +38,7 @@ function Top(props) {
               region={props.region}
               projectCategory={props.projectCategory}
             ></FilterInfo>
-            <Text level={1} color="#232735">
+            <Text level={1} color={Colors.BLACK}>
               {props.date}
             </Text>
           </Div>
