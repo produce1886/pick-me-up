@@ -39,17 +39,17 @@ const REGION = [
   { key: 16, title: "충북", type: "region" },
 ];
 
-const PROJECTTYPE = [
-  { key: 0, title: "공모전", type: "projecttype" },
-  { key: 1, title: "창업", type: "projecttype" },
-  { key: 2, title: "프로젝트", type: "projecttype" },
-  { key: 3, title: "기타", type: "projecttype" },
+const PROJECT_TYPE = [
+  { key: 0, title: "공모전", type: "projectType" },
+  { key: 1, title: "창업", type: "projectType" },
+  { key: 2, title: "프로젝트", type: "projectType" },
+  { key: 3, title: "기타", type: "projectType" },
 ];
 
 const ALIGN = [
-  { id: 0, title: "최신순", key: "align" },
-  { id: 1, title: "조회순", key: "align" },
-  { id: 2, title: "댓글순", key: "align" },
+  { key: 0, title: "최신순", type: "align" },
+  { key: 1, title: "조회순", type: "align" },
+  { key: 2, title: "댓글순", type: "align" },
 ];
 
-export { CATEGORY, FIELD, REGION, ALIGN, PROJECTTYPE };
+export { CATEGORY, FIELD, REGION, PROJECT_TYPE, ALIGN };

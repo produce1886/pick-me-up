@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Filter from "./Filter";
-import { PROJECTTYPE, FIELD, REGION, CATEGORY } from "./ItemData";
+import { CATEGORY, FIELD, REGION, PROJECT_TYPE } from "./ItemData";
 
 function FilterGroup(props) {
   const category = "카테고리";
   const region = "지역";
   const field = "구인분야";
-  const projecttype = "프로젝트 종류";
+  const projectType = "프로젝트 종류";
 
   return (
     <FilterWrapper>
@@ -51,9 +51,9 @@ function FilterGroup(props) {
             height={props.height}
             line={props.line}
             level={props.level}
-            title={projecttype}
-            activeMenu="projecttype"
-            data={PROJECTTYPE}
+            title={projectType}
+            activeMenu="projectType"
+            data={PROJECT_TYPE}
             onClick={props.setProjectType}
             value={props.projectType}
           ></Filter>
