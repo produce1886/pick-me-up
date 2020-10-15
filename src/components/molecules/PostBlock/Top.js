@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Col from "../../atoms/Wrapper/Col";
-import Rank from "../Rank";
+import Rank from "./Rank";
 import Profile from "../Profile";
 
 function Top(props) {

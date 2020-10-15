@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Colors from "@colors";
-import Icon from "../atoms/Icon/Rank";
-import Text from "../atoms/Text";
+import Icon from "../../atoms/Icon/Rank";
+import Text from "../../atoms/Text";
 
 export default function Rank(props) {
   return (
