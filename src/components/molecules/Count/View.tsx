@@ -3,7 +3,7 @@ import Colors from "@colors";
 import Icon from "../../atoms/Icon/View";
 import Text from "../../atoms/Text";
 
-function ViewCount(props: { count: string }) {
+function ViewCount(props: { count: number }) {
   return (
     <>
       <Icon

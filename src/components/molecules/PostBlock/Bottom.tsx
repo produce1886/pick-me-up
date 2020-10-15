@@ -4,7 +4,13 @@ import ViewCount from "../Count/View";
 import CommentCount from "../Count/Comment";
 import MoreButton from "../Button/ViewMore";
 
-function Bottom(props) {
+type BottomProps = {
+  viewNum: number;
+  commentsNum: number;
+  id: string;
+};
+
+function Bottom(props: BottomProps) {
   return (
     <Wrapper>
       <Div>

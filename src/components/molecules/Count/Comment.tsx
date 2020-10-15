@@ -3,7 +3,7 @@ import Colors from "@colors";
 import Icon from "../../atoms/Icon/Comment";
 import Text from "../../atoms/Text";
 
-function CommentCount(props: { count: string }) {
+function CommentCount(props: { count: number }) {
   return (
     <>
       <Icon

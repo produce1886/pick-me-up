@@ -7,7 +7,17 @@ import Col from "../../atoms/Wrapper/Col";
 import Rank from "./Rank";
 import Profile from "../Profile";
 
-function Top(props) {
+type TopProps = {
+  type: "most" | "new";
+  rank: number;
+  title: string | string[];
+  name: string;
+  profileImage: string;
+  uid: string;
+  date: string;
+};
+
+function Top(props: TopProps) {
   return (
     <Wrapper>
       <Col>

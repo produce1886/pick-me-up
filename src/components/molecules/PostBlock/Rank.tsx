@@ -3,7 +3,7 @@ import Colors from "@colors";
 import Icon from "../../atoms/Icon/Rank";
 import Text from "../../atoms/Text";
 
-export default function Rank(props) {
+export default function Rank({ number }: { number: number }) {
   return (
     <Wrapper>
       <Icon
@@ -12,7 +12,7 @@ export default function Rank(props) {
       ></Icon>
       <Div>
         <Text level={6} weight="bold" color={Colors.WHITE}>
-          {props.number}
+          {number}
         </Text>
       </Div>
     </Wrapper>
