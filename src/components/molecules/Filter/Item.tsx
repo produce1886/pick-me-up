@@ -3,7 +3,7 @@ import Colors from "@colors";
 import Wrapper from "../../atoms/Filter/Item";
 import Text from "../../atoms/Text";
 
-type itemProps = {
+type ItemProps = {
   width: string | number;
   height: string | number;
   item: any;
@@ -12,7 +12,7 @@ type itemProps = {
   selectedTitle: string;
 };
 
-function FilterItem(props: itemProps) {
+function FilterItem(props: ItemProps) {
   const [isHover, setColor] = useState(false);
 
   return (
