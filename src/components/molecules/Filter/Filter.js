@@ -102,7 +102,7 @@ function Filter(props) {
         {iconAlign}
         {clicked && !item && (
           <DropdownMenu
-            activeMenu={props.activeMenu}
+            isAlign={true}
             data={props.data}
             setSelected={setSelected}
           ></DropdownMenu>
@@ -127,7 +127,6 @@ function Filter(props) {
       {icon}
       {clicked && !item && (
         <DropdownMenu
-          activeMenu={props.activeMenu}
           data={props.data}
           setSelected={setSelected}
         ></DropdownMenu>

@@ -16,6 +16,7 @@ function PortfolioBody(props) {
   const [query, setQuery] = useState("");
   const [writeVisible, setWriteVisible] = useState(false);
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
+  const align = "최신순";
 
   return (
     <>
@@ -28,12 +29,7 @@ function PortfolioBody(props) {
       <Wrapper>
         <InnerWrapper>
           <Div>
-            <Filter
-              title="최신순"
-              activeMenu="align"
-              data={ALIGN}
-              onClick={setSort}
-            ></Filter>
+            <Filter title={align} data={ALIGN} onClick={setSort}></Filter>
           </Div>
           <PortfolioList
             category={category}

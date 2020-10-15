@@ -17,7 +17,6 @@ function FilterGroup(props) {
         line={props.line}
         level={props.level}
         title={category}
-        activeMenu="category"
         data={CATEGORY}
         onClick={props.setCategory}
         value={props.category}
@@ -28,7 +27,6 @@ function FilterGroup(props) {
         line={props.line}
         level={props.level}
         title={field}
-        activeMenu="field"
         data={FIELD}
         onClick={props.setField}
         value={props.field}
@@ -41,7 +39,6 @@ function FilterGroup(props) {
             line={props.line}
             level={props.level}
             title={region}
-            activeMenu="region"
             data={REGION}
             onClick={props.setRegion}
             value={props.region}
@@ -52,7 +49,6 @@ function FilterGroup(props) {
             line={props.line}
             level={props.level}
             title={projectType}
-            activeMenu="projectType"
             data={PROJECT_TYPE}
             onClick={props.setProjectType}
             value={props.projectType}

@@ -7,13 +7,13 @@ import Text from "../../atoms/Text";
 export default function DropdownMenu(props) {
   return (
     <Wrapper
-      zIndex={props.activeMenu === "align" ? "102" : "200"}
+      zIndex={props.isAlign ? "102" : "200"}
       top="1.7rem"
       left="-0.1rem"
       width="5.4rem"
       height="fit-content"
     >
-      {props.activeMenu !== "align" && (
+      {!props.isAlign && (
         <Hover backgroundColor={Colors.WHITE} width="5.2rem" height="1.6rem">
           <Text
             line="1.08rem"
