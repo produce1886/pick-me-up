@@ -52,4 +52,9 @@ const ALIGN = [
   { key: 2, title: "댓글순" },
 ];
 
-export { CATEGORY, FIELD, REGION, PROJECT_TYPE, ALIGN };
+const COMMENT = [
+  { key: 0, title: "댓글 수정" },
+  { key: 1, title: "댓글 삭제" },
+];
+
+export { CATEGORY, FIELD, REGION, PROJECT_TYPE, ALIGN, COMMENT };

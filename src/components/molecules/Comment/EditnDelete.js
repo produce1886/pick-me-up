@@ -1,14 +1,11 @@
 import React, { useCallback } from "react";
 import axios from "axios";
-import ItemWrapper from "../Filter/FilterItem";
+import { COMMENT } from "../Filter/ItemData";
+import ItemWrapper from "../Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
 
 function EditnDelete(props) {
   const pid = parseInt(props.pid, 10);
-  const data = [
-    { key: 0, title: "댓글 수정", type: "more", mode: "edit" },
-    { key: 1, title: "댓글 삭제", type: "more", mode: "delete" },
-  ];
 
   const deleteComment = () => {
     try {
@@ -82,9 +79,9 @@ function EditnDelete(props) {
       width="5.4rem"
       height="3.2rem"
     >
-      {data.map((value, index) => (
+      {COMMENT.map((value) => (
         <ItemWrapper
-          key={index}
+          key={value.key}
           item={value}
           setSelected={setSelected}
           width="4.6rem"

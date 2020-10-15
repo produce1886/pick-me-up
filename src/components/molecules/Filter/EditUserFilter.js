@@ -3,16 +3,16 @@ import styled, { css } from "styled-components";
 import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Icondown from "../../atoms/Icon/Filter/Down";
-import ItemWrapper from "./FilterItem";
+import ItemWrapper from "./Item";
 
 function EditUserFilter(props) {
-  let selectedtitle;
+  let selectedTitle;
   if (props.type === "interest" && props.interest) {
-    selectedtitle = props.interest;
+    selectedTitle = props.interest;
   } else if (props.type === "area" && props.area) {
-    selectedtitle = props.area;
+    selectedTitle = props.area;
   } else {
-    selectedtitle = props.title;
+    selectedTitle = props.title;
   }
   const iconStyle = {
     width: "0.6rem",
@@ -44,7 +44,7 @@ function EditUserFilter(props) {
   return (
     <FilterWrapper onClick={() => openMenu()}>
       <Text line={props.line} level={1} color={Colors.BLACK}>
-        {selectedtitle}
+        {selectedTitle}
       </Text>
       {icon}
       {clicked && (
@@ -53,12 +53,12 @@ function EditUserFilter(props) {
           left="0rem"
           zIndex={props.zIndex}
         >
-          {props.data.map((value, index) => (
+          {props.data.map((value) => (
             <ItemWrapper
-              key={index}
+              key={value.key}
               item={value}
               setSelected={setSelected}
-              selectedtitle={selectedtitle}
+              selectedTitle={selectedTitle}
               width="21rem"
               height="1.2rem"
             ></ItemWrapper>

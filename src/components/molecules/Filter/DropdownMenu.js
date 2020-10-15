@@ -1,5 +1,5 @@
 import Colors from "@colors";
-import ItemWrapper from "./FilterItem";
+import ItemWrapper from "./Item";
 import Hover from "../../atoms/Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
 import Text from "../../atoms/Text";
@@ -25,9 +25,9 @@ export default function DropdownMenu(props) {
           </Text>
         </Hover>
       )}
-      {props.data.map((value, index) => (
+      {props.data.map((value) => (
         <ItemWrapper
-          key={index}
+          key={value.key}
           item={value}
           setSelected={props.setSelected}
           width="5.2rem"

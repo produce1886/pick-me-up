@@ -3,8 +3,17 @@ import Colors from "@colors";
 import Wrapper from "../../atoms/Filter/Item";
 import Text from "../../atoms/Text";
 
-function FilterItem(props) {
-  const [mouseon, setColor] = useState(false);
+type itemProps = {
+  width: string | number;
+  height: string | number;
+  item: any;
+  setSelected: (arg0: any) => void;
+  title: string;
+  selectedTitle: string;
+};
+
+function FilterItem(props: itemProps) {
+  const [isHover, setColor] = useState(false);
 
   return (
     <Wrapper
@@ -15,19 +24,19 @@ function FilterItem(props) {
       onClick={() => {
         props.setSelected(props.item);
       }}
-      backgroundColor={mouseon ? Colors.LIGHT_PURPLE : Colors.WHITE}
+      backgroundColor={isHover ? Colors.LIGHT_PURPLE : Colors.WHITE}
     >
       <Text
         line="1rem"
         level={3}
         color={
-          props.selectedtitle === props.item.title
+          props.selectedTitle === props.title
             ? Colors.DEEP_PURPLE
             : Colors.BLACK
         }
         align="left"
       >
-        {props.item.title}
+        {props.title}
       </Text>
     </Wrapper>
   );
