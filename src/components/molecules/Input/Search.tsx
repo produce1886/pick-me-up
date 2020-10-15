@@ -3,18 +3,22 @@ import styled from "styled-components";
 import Colors from "@colors";
 import Icon from "../../atoms/Icon/Search";
 
-export default function Search(props) {
-  const [keyword, setKeyword] = useState();
+export default function Search(props: { setQuery: (query: string) => void }) {
+  const [keyword, setKeyword] = useState("");
 
-  const inputHandler = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
   };
 
   const doSearch = () => {
+    if (keyword === "") {
+      alert("검색어를 입력해주세요!");
+      return;
+    }
     props.setQuery(keyword);
   };
 
-  const enterHandler = (e) => {
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") doSearch();
   };
 
@@ -32,8 +36,8 @@ export default function Search(props) {
       <Input
         placeholder="검색"
         type="text"
-        onChange={inputHandler}
-        onKeyPress={enterHandler}
+        onChange={handleInputChange}
+        onKeyPress={handleEnterPress}
       ></Input>
     </Wrapper>
   );
