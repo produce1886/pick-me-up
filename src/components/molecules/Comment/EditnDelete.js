@@ -9,21 +9,21 @@ function EditnDelete(props) {
 
   const deleteComment = () => {
     try {
-      if (props.type === "project") {
+      if (props.modalType === "project") {
         if (window.confirm("댓글을 삭제하시겠습니까?")) {
           axios.delete(
             `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
           );
           setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-          props.setClicked(false);
+          props.setIsButtonClicked(false);
         }
-      } else if (props.type === "portfolio") {
+      } else if (props.modalType === "portfolio") {
         if (window.confirm("댓글을 삭제하시겠습니까?")) {
           axios.delete(
             `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
           );
           setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-          props.setClicked(false);
+          props.setIsButtonClicked(false);
         }
       }
     } catch (error) {
@@ -35,14 +35,14 @@ function EditnDelete(props) {
   const getComment = () => {
     const fetchData = async () => {
       try {
-        if (props.type === "project") {
+        if (props.modalType === "project") {
           const result = await axios.get(
             `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
           );
           const comment = Object.assign(result.data);
           props.setCidUpdate(comment.id);
           props.setContentUpdate(comment.content);
-        } else if (props.type === "portfolio") {
+        } else if (props.modalType === "portfolio") {
           const result = await axios.get(
             `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
           );
@@ -59,14 +59,14 @@ function EditnDelete(props) {
 
   const updateComment = () => {
     getComment();
-    props.setEdit(true);
-    props.setClicked(false);
+    props.setIsEdit(true);
+    props.setIsButtonClicked(false);
   };
 
-  const setSelected = useCallback((item) => {
-    if (item.key === 1) {
+  const setSelectedItemTitle = useCallback((itemTitle) => {
+    if (itemTitle === "댓글 삭제") {
       deleteComment();
-    } else if (item.key === 0) {
+    } else if (itemTitle === "댓글 수정") {
       updateComment();
     }
   }, []);
@@ -79,11 +79,11 @@ function EditnDelete(props) {
       width="5.4rem"
       height="3.2rem"
     >
-      {COMMENT.map((value) => (
+      {COMMENT.map((item) => (
         <ItemWrapper
-          key={value.key}
-          item={value}
-          setSelected={setSelected}
+          key={item.key}
+          item={item}
+          setSelectedItemTitle={setSelectedItemTitle}
           width="4.6rem"
           height="1rem"
         ></ItemWrapper>

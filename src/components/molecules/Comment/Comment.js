@@ -51,10 +51,10 @@ function Comment(props) {
           id={props.id}
           pid={props.pid}
           setCidUpdate={props.setCidUpdate}
-          setEdit={props.setEdit}
+          setIsEdit={props.setIsEdit}
           setContentUpdate={props.setContentUpdate}
-          type={props.type}
-          setClicked={setIsButtonClicked}
+          modalType={props.modalType}
+          setIsButtonClicked={setIsButtonClicked}
           modalReload={props.modalReload}
           setModalReload={props.setModalReload}
         ></EditnDelete>

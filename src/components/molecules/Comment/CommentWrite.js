@@ -9,7 +9,7 @@ function CommentWrite(props) {
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
   const onChangeHandler = (e) => {
-    props.edit
+    props.isEdit
       ? props.setContentUpdate(e.target.value)
       : setContent(e.target.value);
   };
@@ -20,7 +20,7 @@ function CommentWrite(props) {
     }
     if (content.length < 1 && props.contentUpdate < 1) {
       alert("댓글을 작성해주세요");
-    } else if (!props.edit) {
+    } else if (!props.isEdit) {
       try {
         if (props.type === "project") {
           axios.post(`${process.env.API_HOST}/projects/${props.pid}/comments`, {
@@ -43,7 +43,7 @@ function CommentWrite(props) {
       } catch (error) {
         console.log(error);
       }
-    } else if (props.edit) {
+    } else if (props.isEdit) {
       try {
         if (props.type === "project") {
           axios.put(
@@ -64,7 +64,7 @@ function CommentWrite(props) {
           setContent("");
           setTimeout(() => props.setModalReload(props.modalReload + 1), 3000);
         }
-        props.setEdit(false);
+        props.setIsEdit(false);
       } catch (error) {
         console.log(error);
       }
@@ -82,7 +82,7 @@ function CommentWrite(props) {
               onChangeHandler(e);
             }}
             maxLength="100"
-            value={props.edit ? props.contentUpdate : content}
+            value={props.isEdit ? props.contentUpdate : content}
           ></Textarea>
         </CommentBox>
         <IconButton onClick={commentSubmitHandler}>

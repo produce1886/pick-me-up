@@ -10,7 +10,7 @@ function ModalBottom(props) {
   const [cidUpdate, setCidUpdate] = useState("");
   // 수정 댓글 본문 받아오는 state
   const [contentUpdate, setContentUpdate] = useState("");
-  const [edit, setEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   return (
     <Bottom>
@@ -26,7 +26,7 @@ function ModalBottom(props) {
       {props.comments &&
         props.comments.map((item, index) => (
           <Comment
-            type={props.type}
+            modalType={props.modalType}
             comment={item.content}
             date={item.createdDate}
             {...item.user}
@@ -35,20 +35,20 @@ function ModalBottom(props) {
             pid={props.pid}
             setCidUpdate={setCidUpdate}
             setContentUpdate={setContentUpdate}
-            setEdit={setEdit}
+            setIsEdit={setIsEdit}
             modalReload={props.modalReload}
             setModalReload={props.setModalReload}
           ></Comment>
         ))}
       <CommentWrite
-        type={props.type}
+        modalType={props.modalType}
         pid={props.pid}
         contentUpdate={contentUpdate}
         setContentUpdate={setContentUpdate}
-        edit={edit}
+        edit={isEdit}
         pid={props.pid}
         cid={cidUpdate}
-        setEdit={setEdit}
+        setIsEdit={setIsEdit}
         modalReload={props.modalReload}
         setModalReload={props.setModalReload}
       ></CommentWrite>
