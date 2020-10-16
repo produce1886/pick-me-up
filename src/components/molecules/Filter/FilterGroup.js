@@ -19,7 +19,6 @@ function FilterGroup(props) {
         title={category}
         data={CATEGORY}
         onClick={props.setCategory}
-        value={props.category}
       ></Filter>
       <Filter
         width={props.width}
@@ -29,7 +28,6 @@ function FilterGroup(props) {
         title={field}
         data={FIELD}
         onClick={props.setField}
-        value={props.field}
       ></Filter>
       {props.type === "project" && (
         <>
@@ -41,7 +39,6 @@ function FilterGroup(props) {
             title={region}
             data={REGION}
             onClick={props.setRegion}
-            value={props.region}
           ></Filter>
           <Filter
             width={props.width}
@@ -51,7 +48,6 @@ function FilterGroup(props) {
             title={projectType}
             data={PROJECT_TYPE}
             onClick={props.setProjectType}
-            value={props.projectType}
           ></Filter>
         </>
       )}
