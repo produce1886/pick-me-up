@@ -6,36 +6,25 @@ import Text from "../../atoms/Text";
 type ItemProps = {
   width: string | number;
   height: string | number;
-  item: any;
-  setSelected: (arg0: any) => void;
   title: string;
-  selectedTitle: string;
+  handleClick: (arg0: string) => void;
 };
 
 function FilterItem(props: ItemProps) {
-  const [isHover, setColor] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   return (
     <Wrapper
       width={props.width}
       height={props.height}
-      onMouseOver={() => setColor(true)}
-      onMouseOut={() => setColor(false)}
+      onMouseOver={() => setIsHover(true)}
+      onMouseOut={() => setIsHover(false)}
       onClick={() => {
-        props.setSelected(props.item);
+        props.handleClick(props.title);
       }}
       backgroundColor={isHover ? Colors.LIGHT_PURPLE : Colors.WHITE}
     >
-      <Text
-        line="1rem"
-        level={3}
-        color={
-          props.selectedTitle === props.title
-            ? Colors.DEEP_PURPLE
-            : Colors.BLACK
-        }
-        align="left"
-      >
+      <Text line="1rem" level={3} color={Colors.BLACK} align="left">
         {props.title}
       </Text>
     </Wrapper>

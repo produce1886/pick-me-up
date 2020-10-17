@@ -33,7 +33,15 @@ function ProjectBody(props) {
       <Wrapper>
         <InnerWrapper>
           <Div>
-            <Filter title={align} data={ALIGN} onClick={setSort}></Filter>
+            <Filter
+              width="6rem"
+              height="1.6rem"
+              line="1.08rem"
+              level={3}
+              defaultText={align}
+              data={ALIGN}
+              onClick={setSort}
+            ></Filter>
           </Div>
           <ProjectList
             category={category}

@@ -6,13 +6,13 @@ import Icondown from "../../atoms/Icon/Filter/Down";
 import ItemWrapper from "./Item";
 
 function EditUserFilter(props) {
-  let selectedTitle;
+  let selectedItemTitle;
   if (props.type === "interest" && props.interest) {
-    selectedTitle = props.interest;
+    selectedItemTitle = props.interest;
   } else if (props.type === "area" && props.area) {
-    selectedTitle = props.area;
+    selectedItemTitle = props.area;
   } else {
-    selectedTitle = props.title;
+    selectedItemTitle = props.title;
   }
   const iconStyle = {
     width: "0.6rem",
@@ -20,15 +20,14 @@ function EditUserFilter(props) {
     margin: "0 0 0 0.3rem",
   };
   const [clicked, setClicked] = useState(false);
-  const [item, setItem] = useState("");
+
   const icon = <Icondown style={iconStyle} fill={Colors.BLACK}></Icondown>;
-  const setSelected = (item) => {
-    if (item) {
-      props.onClick(item.title);
+  const setSelectedItemTitle = (itemTitle) => {
+    if (itemTitle) {
+      props.onClick(itemTitle);
     } else {
       props.onClick("");
     }
-    setItem(item);
   };
 
   const openMenu = () => {
@@ -36,15 +35,15 @@ function EditUserFilter(props) {
   };
 
   useEffect(() => {
-    if (!item && props.value) {
-      setSelected({ title: props.value });
+    if (props.value) {
+      setSelectedItemTitle(props.value);
     }
   }, [props.value]);
 
   return (
     <FilterWrapper onClick={() => openMenu()}>
       <Text line={props.line} level={1} color={Colors.BLACK}>
-        {selectedTitle}
+        {selectedItemTitle}
       </Text>
       {icon}
       {clicked && (
@@ -57,8 +56,8 @@ function EditUserFilter(props) {
             <ItemWrapper
               key={value.key}
               item={value}
-              setSelected={setSelected}
-              selectedTitle={selectedTitle}
+              setSelectedItemTitle={setSelectedItemTitle}
+              selectedItemTitle={selectedItemTitle}
               width="21rem"
               height="1.2rem"
             ></ItemWrapper>

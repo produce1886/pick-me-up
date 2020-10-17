@@ -25,11 +25,11 @@ export default function DropdownMenu(props) {
           </Text>
         </Hover>
       )}
-      {props.data.map((value) => (
+      {props.data.map((item) => (
         <ItemWrapper
-          key={value.key}
-          item={value}
-          setSelected={props.setSelected}
+          key={item.key}
+          {...item}
+          handleClick={props.handleClick}
           width="5.2rem"
           height="1.6rem"
         ></ItemWrapper>
