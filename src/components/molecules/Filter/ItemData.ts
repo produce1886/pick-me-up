@@ -1,3 +1,8 @@
+type FilterItemType = {
+  key: number;
+  title: string;
+};
+
 const CATEGORY = [
   { key: 0, title: "웹" },
   { key: 1, title: "어플리케이션" },
@@ -57,4 +62,5 @@ const COMMENT = [
   { key: 1, title: "댓글 삭제" },
 ];
 
+export type { FilterItemType };
 export { CATEGORY, FIELD, REGION, PROJECT_TYPE, ALIGN, COMMENT };

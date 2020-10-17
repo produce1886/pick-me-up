@@ -3,7 +3,19 @@ import styled from "styled-components";
 import Filter from "./Filter";
 import { CATEGORY, FIELD, REGION, PROJECT_TYPE } from "./ItemData";
 
-function FilterGroup(props) {
+type FilterGroupProps = {
+  type: string;
+  width: string;
+  height: string;
+  line: string;
+  level: number;
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+  setField: React.Dispatch<React.SetStateAction<string>>;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
+  setProjectType: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function FilterGroup(props: FilterGroupProps) {
   const category = "카테고리";
   const region = "지역";
   const field = "구인분야";
