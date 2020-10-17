@@ -27,7 +27,7 @@ function ModalView(props: ModalProps) {
       {!isLoading && data && (
         <>
           <Top
-            type={props.modalType}
+            modalType={props.modalType}
             title={data.title}
             uid={data.user.id}
             name={data.user.username}
@@ -38,7 +38,7 @@ function ModalView(props: ModalProps) {
             projectCategory={data.projectCategory}
           ></Top>
           <Middle
-            type={props.modalType}
+            modalType={props.modalType}
             date={data.createdDate}
             content={data.content}
             image={data.image}
@@ -54,7 +54,7 @@ function ModalView(props: ModalProps) {
             setListReload={props.setReload}
           ></Middle>
           <Bottom
-            type={props.modalType}
+            modalType={props.modalType}
             commentsNum={data.commentsNum}
             comments={data.comments}
             pid={data.id}

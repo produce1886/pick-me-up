@@ -8,7 +8,7 @@ function Profile(props) {
   return (
     <Wrapper>
       {props.profileImage ? (
-        <ImageHolder size={props.size}>
+        <ImageHolder size={props.size} margin={props.margin}>
           <Img src={props.profileImage}></Img>
         </ImageHolder>
       ) : (
@@ -16,14 +16,16 @@ function Profile(props) {
           style={{
             width: `${props.size}`,
             height: `${props.size}`,
-            marginRight: "0.3rem",
+            margin: `${props.margin ? props.margin : "0 0.3rem 0 0"}`,
           }}
           fill={Colors.GREY}
         ></ProfileIcon>
       )}
-      <Text level={props.level} color={Colors.BLACK} weight={props.weight}>
-        {props.name}
-      </Text>
+      {props.name && (
+        <Text level={props.level} color={Colors.BLACK} weight={props.weight}>
+          {props.name}
+        </Text>
+      )}
     </Wrapper>
   );
 }
@@ -39,11 +41,11 @@ const Wrapper = styled.div`
 
 const ImageHolder = styled.div`
   overflow: hidden;
-  margin-right: 0.3rem;
   ${(props) => css`
     width: ${props.size};
     height: ${props.size};
     border-radius: ${props.size};
+    margin: ${props.margin ? props.margin : "0 0.3rem 0 0"};
   `}
 `;
 

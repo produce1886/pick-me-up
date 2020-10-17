@@ -2,63 +2,59 @@ import React, { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import Colors from "@colors";
 import Profile from "../Profile";
 import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon/MoreOption";
-import EditnDelete from "./EditnDelete";
+import EditnDelete from "./EditDelete";
 
 function Comment(props) {
-  const [clicked, setClicked] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
   let { date } = props;
   date = date.replace("T", " ");
-  const user = props.userInfo;
-  const loginUser = useSelector((state) => state.user.userData);
+  const currentUserEmail = useSelector((state) => state.user.userData.email);
 
   return (
     <Wrapper>
       <Link href="/profile/[userid]" as={`/profile/${props.id}`}>
         <A>
-          <ProfileDiv>
-            <Profile size="2rem" profileImage={user.image}></Profile>
-          </ProfileDiv>
+          <Profile
+            size="2rem"
+            profileImage={props.image}
+            margin="0.3rem 0.3rem 0 0"
+          ></Profile>
         </A>
       </Link>
-      <TextDiv>
+      <Column>
         <InfoWrapper>
-          <Div>
-            <Link href="/profile/[userid]" as={`/profile/${props.id}`}>
-              <A>
-                <Text level={2} name="name" weight={800} align="center">
-                  {user.username}
-                </Text>
-              </A>
-            </Link>
-            &nbsp;
-            <Text level={1} color="#d3d4d8">
-              {date}
-            </Text>
-          </Div>
-          {loginUser.email === user.email && (
-            <ButtonWrapper onClick={() => setClicked(!clicked)}>
+          <Text level={2} name="name" weight={800} align="center">
+            {props.username}
+          </Text>
+          &nbsp;
+          <Text level={1} color={Colors.DEEP_GREY}>
+            {date}
+          </Text>
+          {currentUserEmail === props.email && (
+            <ButtonWrapper onClick={() => setIsButtonClicked(!isButtonClicked)}>
               <Icon style={{ width: "1rem", height: "1rem" }}></Icon>
             </ButtonWrapper>
           )}
         </InfoWrapper>
-        <CommentBox>
-          <Text level={1} color="#232735" width="100%" height="100%">
+        <CommentWrapper>
+          <Text level={1} color={Colors.BLACK} width="100%" height="100%">
             {props.comment}
           </Text>
-        </CommentBox>
-      </TextDiv>
-      {clicked && (
+        </CommentWrapper>
+      </Column>
+      {isButtonClicked && (
         <EditnDelete
           id={props.id}
           pid={props.pid}
           setCidUpdate={props.setCidUpdate}
-          setEdit={props.setEdit}
+          setIsEdit={props.setIsEdit}
           setContentUpdate={props.setContentUpdate}
-          type={props.type}
-          setClicked={setClicked}
+          modalType={props.modalType}
+          setIsButtonClicked={setIsButtonClicked}
           modalReload={props.modalReload}
           setModalReload={props.setModalReload}
         ></EditnDelete>
@@ -69,22 +65,18 @@ function Comment(props) {
 
 export default React.memo(Comment);
 
-const ProfileDiv = styled.div`
-  width: fit-content;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Div = styled.div`
-  align-items: center;
+const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 4rem;
+  position: relative;
+  box-sizing: border-box;
+  margin: 0.2rem 0;
 `;
 
-const TextDiv = styled.div`
+const Column = styled.div`
   width: 100%;
   height: 100%;
   justify-content: center;
@@ -96,14 +88,14 @@ const TextDiv = styled.div`
 
 const InfoWrapper = styled.div`
   width: 100%;
-  justify-content: space-between;
   align-items: center;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
+  position: relative;
 `;
 
-const CommentBox = styled.div`
+const CommentWrapper = styled.div`
   width: 100%;
   height: 2rem;
   justify-content: center;
@@ -126,18 +118,9 @@ const ButtonWrapper = styled.button`
   position: relative;
   box-sizing: border-box;
   border-radius: 0.2rem;
-  padding: unset;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  height: 4rem;
-  position: relative;
-  box-sizing: border-box;
-  margin: 0.2rem 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
 `;
 
 const A = styled.a``;

@@ -1,18 +1,29 @@
 import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Col from "../../atoms/Wrapper/Col";
-import Rank from "../Rank";
+import Rank from "./Rank";
 import Profile from "../Profile";
 
-function Top(props) {
+type TopProps = {
+  type: "most" | "new";
+  rank: number;
+  title: string | string[];
+  name: string;
+  profileImage: string;
+  uid: string;
+  date: string;
+};
+
+function Top(props: TopProps) {
   return (
     <Wrapper>
       <Col>
         {props.type === "most" && <Rank number={props.rank}></Rank>}
         <Row>
-          <Text level={6} weight="bold" color="#9c69e2" line={1.17}>
+          <Text level={6} weight="bold" color={Colors.DEEP_PURPLE} line={1.17}>
             {props.title}
           </Text>
         </Row>
@@ -28,7 +39,7 @@ function Top(props) {
                 ></Profile>
               </A>
             </Link>
-            <Text level={1} color="#232735">
+            <Text level={1} color={Colors.BLACK}>
               {props.date}
             </Text>
           </Div>

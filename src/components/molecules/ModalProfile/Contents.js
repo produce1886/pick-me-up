@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Edit from "../../atoms/Icon/Edit";
-import EditUserFilter from "../Filter/EditUserFilter";
+import Filter from "../Filter/Filter";
 import { FIELD, REGION } from "../Filter/ItemData";
 
 export function University(props) {
@@ -47,7 +48,7 @@ export function University(props) {
       )}
       {!editUniv && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
-          <Text level={3} color="#232735" align="left">
+          <Text level={3} color={Colors.BLACK} align="left">
             {props.university} {props.major}
           </Text>
         </Row>
@@ -55,7 +56,7 @@ export function University(props) {
       <ButtonWrapper onClick={() => setEditUniv(!editUniv)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
-          fill="#232735"
+          fill={Colors.BLACK}
         ></Edit>
       </ButtonWrapper>
     </Content>
@@ -74,18 +75,21 @@ export function Area(props) {
         </Toggle>
       </ToggleSwitchWrapper>
       {editArea && (
-        <EditUserFilter
+        <Filter
+          width="21rem"
+          height="1.2rem"
+          level={0}
+          defaultText={props.area ? props.area : "지역을 선택하세요"}
           onClick={props.setArea}
           data={REGION}
           title={title}
-          zIndex={props.zIndex}
-          type="area"
-          area={props.area}
-        ></EditUserFilter>
+          previousItemTitle={props.area}
+          isUserInfoEdit={true}
+        ></Filter>
       )}
       {!editArea && (
         <Row marginRight="3rem" paddingLeft="1rem" width="21.5rem">
-          <Text level={3} color="#232735" align="left">
+          <Text level={3} color={Colors.BLACK} align="left">
             {props.area}
           </Text>
         </Row>
@@ -93,7 +97,7 @@ export function Area(props) {
       <ButtonWrapper onClick={() => setEditArea(!editArea)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
-          fill="#232735"
+          fill={Colors.BLACK}
         ></Edit>
       </ButtonWrapper>
     </Content>
@@ -115,18 +119,23 @@ export function Interest(props) {
         </Toggle>
       </ToggleSwitchWrapper>
       {editInterest && (
-        <EditUserFilter
+        <Filter
+          width="21rem"
+          height="1.2rem"
+          level={0}
+          defaultText={
+            props.interest ? props.interest : "관심분야를 선택하세요"
+          }
           onClick={props.setInterest}
           data={FIELD}
           title={title}
-          zIndex={props.zIndex}
-          type="interest"
-          interest={props.interest}
-        ></EditUserFilter>
+          previousItemTitle={props.interest}
+          isUserInfoEdit={true}
+        ></Filter>
       )}
       {!editInterest && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
-          <Text level={3} color="#232735" align="left">
+          <Text level={3} color={Colors.BLACK} align="left">
             {props.interest}
           </Text>
         </Row>
@@ -134,7 +143,7 @@ export function Interest(props) {
       <ButtonWrapper onClick={() => setEditInterest(!editInterest)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
-          fill="#232735"
+          fill={Colors.BLACK}
         ></Edit>
       </ButtonWrapper>
     </Content>

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
+import Profile from "@src/components/molecules/Profile";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";
 import Edit from "../../atoms/Icon/Edit";
-import ProfileIcon from "../../atoms/Icon/Profile";
 
 function DefaultInfo(props) {
   const [editIntroduce, setEditIntroduce] = useState(false);
@@ -22,12 +23,12 @@ function DefaultInfo(props) {
   return (
     <Wrapper>
       <Title>
-        <Text weight={600} level={8} color="#232735">
+        <Text weight={600} level={8} color={Colors.BLACK}>
           내 정보 수정
         </Text>
       </Title>
       <Div>
-        <Text weight={600} level={3} color="#232735">
+        <Text weight={600} level={3} color={Colors.BLACK}>
           프로필 사진
         </Text>
 
@@ -40,30 +41,11 @@ function DefaultInfo(props) {
           ></ProfileInput>
           <Camera
             style={{ width: "0.88rem", height: "0.72rem" }}
-            fill="#232735"
+            fill={Colors.BLACK}
           ></Camera>
         </label>
       </Div>
-      {props.image ? (
-        <img
-          src={props.image}
-          style={{
-            width: "3.6rem",
-            height: "3.6rem",
-            borderRadius: "50%",
-          }}
-        />
-      ) : (
-        <ProfileIcon
-          style={{
-            width: "3.6rem",
-            height: "3.6rem",
-            marginTop: "0.6rem",
-            marginBottom: "1rem",
-          }}
-          fill="#d3d4d8"
-        ></ProfileIcon>
-      )}
+      <Profile profileImage={props.image} size="3.6rem" margin="0" />
       <Content>
         <Div>
           <DivTitle>
@@ -73,16 +55,16 @@ function DefaultInfo(props) {
                 height: "0.8rem",
                 marginRight: "0.32rem",
               }}
-              fill="#d3d4d8"
+              fill={Colors.GREY}
             ></User>
-            <Text weight={600} level={3} color="#232735">
+            <Text weight={600} level={3} color={Colors.BLACK}>
               닉네임
             </Text>
           </DivTitle>
           <ButtonWrapper onClick={() => setEditUsername(!editUsername)}>
             <Edit
               style={{ width: "0.8rem", height: "0.8rem" }}
-              fill="#232735"
+              fill={Colors.BLACK}
             ></Edit>
           </ButtonWrapper>
         </Div>
@@ -97,20 +79,20 @@ function DefaultInfo(props) {
           ></Input>
         )}
         {!editUsername && (
-          <Text level={3} color="#232735" align="center">
+          <Text level={3} color={Colors.BLACK} align="center">
             {props.username}
           </Text>
         )}
       </Content>
       <Content>
         <Div>
-          <Text weight={600} level={3} color="#232735">
+          <Text weight={600} level={3} color={Colors.BLACK}>
             나를 소개할 한 마디
           </Text>
           <ButtonWrapper onClick={() => setEditIntroduce(!editIntroduce)}>
             <Edit
               style={{ width: "0.8rem", height: "0.8rem" }}
-              fill="#232735"
+              fill={Colors.BLACK}
             ></Edit>
           </ButtonWrapper>
         </Div>
@@ -125,7 +107,7 @@ function DefaultInfo(props) {
           ></Input>
         )}
         {!editIntroduce && (
-          <Text level={3} color="#232735" align="center">
+          <Text level={3} color={Colors.BLACK} align="center">
             {props.introduce}
           </Text>
         )}
