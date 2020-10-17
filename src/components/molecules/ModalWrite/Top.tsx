@@ -41,11 +41,10 @@ function ModalTop({
             onChange={onChangeHandler}
           ></Input>
           <Filters
-            modalType={modalType}
+            type={modalType}
             width="fit-content"
             height="1rem"
-            line="1rem"
-            level={1}
+            level={0}
             setCategory={setCategory}
             setField={setField}
             setRegion={setRegion}

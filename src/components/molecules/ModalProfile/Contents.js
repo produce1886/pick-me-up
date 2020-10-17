@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Edit from "../../atoms/Icon/Edit";
-import EditUserFilter from "../Filter/EditUserFilter";
+import Filter from "../Filter/Filter";
 import { FIELD, REGION } from "../Filter/ItemData";
 
 export function University(props) {
@@ -75,14 +75,17 @@ export function Area(props) {
         </Toggle>
       </ToggleSwitchWrapper>
       {editArea && (
-        <EditUserFilter
+        <Filter
+          width="21rem"
+          height="1.2rem"
+          level={0}
+          defaultText={props.area ? props.area : "지역을 선택하세요"}
           onClick={props.setArea}
           data={REGION}
           title={title}
-          zIndex={props.zIndex}
-          type="area"
-          area={props.area}
-        ></EditUserFilter>
+          previousItemTitle={props.area}
+          isUserInfoEdit={true}
+        ></Filter>
       )}
       {!editArea && (
         <Row marginRight="3rem" paddingLeft="1rem" width="21.5rem">
@@ -116,14 +119,19 @@ export function Interest(props) {
         </Toggle>
       </ToggleSwitchWrapper>
       {editInterest && (
-        <EditUserFilter
+        <Filter
+          width="21rem"
+          height="1.2rem"
+          level={0}
+          defaultText={
+            props.interest ? props.interest : "관심분야를 선택하세요"
+          }
           onClick={props.setInterest}
           data={FIELD}
           title={title}
-          zIndex={props.zIndex}
-          type="interest"
-          interest={props.interest}
-        ></EditUserFilter>
+          previousItemTitle={props.interest}
+          isUserInfoEdit={true}
+        ></Filter>
       )}
       {!editInterest && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">

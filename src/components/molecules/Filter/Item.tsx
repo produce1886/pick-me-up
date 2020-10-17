@@ -7,6 +7,7 @@ type ItemProps = {
   width: string | number;
   height: string | number;
   title: string;
+  previousItemTitle: string;
   handleClick: (arg0: string) => void;
 };
 
@@ -24,7 +25,16 @@ function FilterItem(props: ItemProps) {
       }}
       backgroundColor={isHover ? Colors.LIGHT_PURPLE : Colors.WHITE}
     >
-      <Text line="1rem" level={3} color={Colors.BLACK} align="left">
+      <Text
+        line="1rem"
+        level={3}
+        color={
+          props.title === props.previousItemTitle
+            ? Colors.DEEP_PURPLE
+            : Colors.BLACK
+        }
+        align="left"
+      >
         {props.title}
       </Text>
     </Wrapper>

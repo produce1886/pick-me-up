@@ -8,7 +8,7 @@ import IconUpLine from "../../atoms/Icon/Chevron/Up";
 import IconUp from "../../atoms/Icon/Filter/Up";
 import IconDown from "../../atoms/Icon/Filter/Down";
 import IconX from "../../atoms/Icon/X";
-import DropdownMenu from "./DropdownMenu";
+import DropDownMenu from "./DropDownMenu";
 
 function Filter(props) {
   const [isFilterOpened, setIsFilterOpened] = useState(false);
@@ -16,7 +16,7 @@ function Filter(props) {
   const isAlign = props.defaultText === "최신순";
 
   const handleFilterClick = () => {
-    if (selectedItemTitle === "") {
+    if (selectedItemTitle === "" || props.isUserInfoEdit) {
       setIsFilterOpened(!isFilterOpened);
     }
   };
@@ -46,14 +46,19 @@ function Filter(props) {
     margin: "0 0 0 0.3rem",
   };
 
-  let icon = isAlign ? (
-    <IconDown style={iconStyle} fill={Colors.BLACK}></IconDown>
-  ) : (
-    <IconDownLine style={iconStyle} fill={Colors.DEEP_GREY}></IconDownLine>
-  );
+  let icon =
+    isAlign || props.isUserInfoEdit ? (
+      <IconDown style={iconStyle} fill={Colors.BLACK}></IconDown>
+    ) : (
+      <IconDownLine style={iconStyle} fill={Colors.DEEP_GREY}></IconDownLine>
+    );
   let backgroundColor = Colors.WHITE;
+  let border = "0.04rem";
 
-  if (selectedItemTitle !== "") {
+  if (props.isUserInfoEdit) {
+    backgroundColor = Colors.LIGHT_GREY;
+    border = "none";
+  } else if (selectedItemTitle !== "") {
     icon = (
       <XButton onClick={resetFilter}>
         <IconX style={iconXStyle} fill={Colors.BLACK}></IconX>
@@ -61,8 +66,9 @@ function Filter(props) {
     );
     backgroundColor = Colors.GREY;
   } else if (isFilterOpened) {
-    if (isAlign) {
+    if (isAlign || props.isUserInfoEdit) {
       icon = <IconUp style={iconStyle} fill={Colors.BLACK}></IconUp>;
+      border = "0.08rem";
     } else {
       icon = (
         <IconUpLine style={iconStyle} fill={Colors.DEEP_GREY}></IconUpLine>
@@ -77,7 +83,7 @@ function Filter(props) {
       width={props.width}
       height={props.height}
       max-height="1.6rem"
-      border={isFilterOpened && isAlign ? "0.08rem" : "0.04rem"}
+      border={border}
       borderColor={isFilterOpened && isAlign ? Colors.PURPLE : Colors.GREY}
       backgroundColor={backgroundColor}
     >
@@ -86,11 +92,15 @@ function Filter(props) {
       </Text>
       {icon}
       {isFilterOpened && (
-        <DropdownMenu
+        <DropDownMenu
+          width={props.width}
+          height={props.height}
           isAlign={isAlign}
+          isUserInfoEdit={props.isUserInfoEdit}
           data={props.data}
           handleClick={handleItemClick}
-        ></DropdownMenu>
+          previousItemTitle={props.previousItemTitle}
+        ></DropDownMenu>
       )}
     </Wrapper>
   );

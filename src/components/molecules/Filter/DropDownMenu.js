@@ -8,13 +8,17 @@ export default function DropdownMenu(props) {
   return (
     <Wrapper
       zIndex={props.isAlign ? "102" : "200"}
-      top="1.7rem"
+      top={props.height}
       left="-0.1rem"
       width="5.4rem"
       height="fit-content"
     >
-      {!props.isAlign && (
-        <Hover backgroundColor={Colors.WHITE} width="5.2rem" height="1.6rem">
+      {!props.isAlign && !props.isUserInfoEdit && (
+        <Hover
+          backgroundColor={Colors.WHITE}
+          width={props.width}
+          height={props.height}
+        >
           <Text
             line="1.08rem"
             level={3}
@@ -30,8 +34,9 @@ export default function DropdownMenu(props) {
           key={item.key}
           {...item}
           handleClick={props.handleClick}
-          width="5.2rem"
-          height="1.6rem"
+          width={props.width}
+          height={props.height}
+          previousItemTitle={props.previousItemTitle}
         ></ItemWrapper>
       ))}
     </Wrapper>

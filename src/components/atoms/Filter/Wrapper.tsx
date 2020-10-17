@@ -19,7 +19,7 @@ export default styled.div`
   font-family: inherit;
   border-radius: 0.2rem;
   padding: 0 0.4rem 0 0.4rem;
-  margin: 0 0.8rem 0 0;
+  margin: 0 0.6rem 0 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
