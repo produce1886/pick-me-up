@@ -6,7 +6,7 @@ import Colors from "@colors";
 import Profile from "../Profile";
 import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon/MoreOption";
-import EditnDelete from "./EditnDelete";
+import EditnDelete from "./EditDelete";
 
 function Comment(props) {
   const [isButtonClicked, setIsButtonClicked] = useState(false);

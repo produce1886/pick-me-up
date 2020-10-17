@@ -15,7 +15,6 @@ function EditnDelete(props) {
             `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
           );
           setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-          props.setIsButtonClicked(false);
         }
       } else if (props.modalType === "portfolio") {
         if (window.confirm("댓글을 삭제하시겠습니까?")) {
@@ -23,12 +22,11 @@ function EditnDelete(props) {
             `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
           );
           setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-          props.setIsButtonClicked(false);
         }
       }
     } catch (error) {
       console.log(error);
-      alert("Error!");
+      alert("댓글 삭제에 실패했습니다");
     }
   };
 
@@ -60,15 +58,15 @@ function EditnDelete(props) {
   const updateComment = () => {
     getComment();
     props.setIsEdit(true);
-    props.setIsButtonClicked(false);
   };
 
-  const setSelectedItemTitle = useCallback((itemTitle) => {
+  const handleClick = useCallback((itemTitle) => {
     if (itemTitle === "댓글 삭제") {
       deleteComment();
     } else if (itemTitle === "댓글 수정") {
       updateComment();
     }
+    props.setIsButtonClicked(false);
   }, []);
 
   return (
@@ -82,8 +80,8 @@ function EditnDelete(props) {
       {COMMENT.map((item) => (
         <ItemWrapper
           key={item.key}
-          item={item}
-          setSelectedItemTitle={setSelectedItemTitle}
+          {...item}
+          handleClick={handleClick}
           width="4.6rem"
           height="1rem"
         ></ItemWrapper>
