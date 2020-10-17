@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 
 export default styled.div`
   width: 15.2rem;
@@ -13,6 +14,6 @@ export default styled.div`
   align-items: center;
   justify-content: center;
   ${(props: { isSkeleton: boolean }) => css`
-    background-color: ${props.isSkeleton ? "#ffffff" : "#d3d4d8"};
+    background-color: ${props.isSkeleton ? Colors.WHITE : Colors.GREY};
   `}
 `;

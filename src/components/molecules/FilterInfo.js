@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import Text from "../atoms/Text";
 
 function FilterInfo(props) {
@@ -7,39 +8,39 @@ function FilterInfo(props) {
     <Wrapper>
       <>
         <Textdiv>
-          <Text level={0} color="#8b90a0" name="카테고리">
+          <Text level={0} color={Colors.DEEP_GREY} name="카테고리">
             {props.category}
           </Text>
         </Textdiv>
         <Textdiv>
-          <Text level={0} color="#8b90a0">
+          <Text level={0} color={Colors.DEEP_GREY}>
             |
           </Text>
         </Textdiv>
         <Textdiv>
-          <Text level={0} color="#8b90a0" name="구인분야">
+          <Text level={0} color={Colors.DEEP_GREY} name="구인분야">
             {props.field}
           </Text>
         </Textdiv>
       </>
-      {props.type === "project" && (
+      {props.modalType === "project" && (
         <>
           <Textdiv>
-            <Text level={0} color="#8b90a0">
+            <Text level={0} color={Colors.DEEP_GREY}>
               |
             </Text>
           </Textdiv>
           <Textdiv>
-            <Text level={0} color="#8b90a0" name="지역">
+            <Text level={0} color={Colors.DEEP_GREY} name="지역">
               {props.region}
             </Text>
           </Textdiv>
           <Textdiv>
-            <Text level={0} color="#8b90a0">
+            <Text level={0} color={Colors.DEEP_GREY}>
               |
             </Text>
           </Textdiv>
-          <Text level={0} color="#8b90a0" name="프로젝트 종류">
+          <Text level={0} color={Colors.DEEP_GREY} name="프로젝트 종류">
             {props.projectCategory}
           </Text>
         </>

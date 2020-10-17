@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import axios from "axios";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
 import TagButton from "../Button/Tag";
@@ -31,7 +32,6 @@ function ModalMiddle(props) {
         }
       }
     } catch (error) {
-      alert("Error!");
       console.log(error);
     }
   }, []);
@@ -39,12 +39,12 @@ function ModalMiddle(props) {
   return (
     <Middle height="fit-content">
       <DateWrapper>
-        <Text level={1} color="#232735" weight={500}>
+        <Text level={1} color={Colors.BLACK} weight={500}>
           {date}
         </Text>
       </DateWrapper>
       <ContentBox>
-        <Text level={2} color="#232735">
+        <Text level={2} color={Colors.BLACK}>
           {props.content}
         </Text>
         {props.image && (
@@ -57,7 +57,7 @@ function ModalMiddle(props) {
         <TagWrapper>
           <Icon
             style={{ width: "1.5rem", height: "1.5rem", marginRight: "0.3rem" }}
-            fill="#232735"
+            fill={Colors.BLACK}
           ></Icon>
           {props.tags.map((item, index) => (
             <TagButton text={item.tag} key={index}></TagButton>
@@ -67,12 +67,12 @@ function ModalMiddle(props) {
       {props.userEmail === user.userData.email && (
         <ButtonWrapper>
           <Button onClick={() => props.setUpdate(true)}>
-            <Text level={1} weight={500} color="#232735">
+            <Text level={1} weight={500} color={Colors.BLACK}>
               게시글 수정
             </Text>
           </Button>
           <Button onClick={deletePost}>
-            <Text level={1} weight={500} color="#232735">
+            <Text level={1} weight={500} color={Colors.BLACK}>
               게시글 삭제
             </Text>
           </Button>

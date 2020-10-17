@@ -1,8 +1,9 @@
+import styled, { css } from "styled-components";
+import Colors from "@colors";
 import SkeletonTop from "../../atoms/Modal/Top";
 import SkeletonMiddle from "../../atoms/Modal/Middle";
 import SkeletonBottom from "../../atoms/Modal/Bottom";
 import TagIcon from "../../atoms/Icon/Tag";
-import styled, { css } from "styled-components";
 
 export default function Skeleton() {
   return (
@@ -24,7 +25,7 @@ export default function Skeleton() {
         <Row justifyContent="flex-start">
           <TagIcon
             style={{ width: "1.1rem", height: "1.1rem" }}
-            fill="#232735"
+            fill={Colors.BLACK}
           ></TagIcon>
         </Row>
       </SkeletonBottom>

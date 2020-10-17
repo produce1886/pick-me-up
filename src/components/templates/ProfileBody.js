@@ -25,7 +25,7 @@ function ProfileBody() {
       ></Top>
       {editvisible && (
         <EditModal
-          visible={editvisible}
+          isVisible={editvisible}
           onClose={() => setEditVisible(false)}
         ></EditModal>
       )}

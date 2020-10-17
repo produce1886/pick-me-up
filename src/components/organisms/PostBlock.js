@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Colors from "@colors";
 import Wrapper from "../atoms/Wrapper/PostBlock";
 import Top from "../molecules/PostBlock/Top";
 import Bottom from "../molecules/PostBlock/Bottom";
@@ -20,14 +21,14 @@ export default function PostBlock(props) {
       ></Top>
       {props.type === "most" && (
         <BodyHot>
-          <Text level={2} color="#232735">
+          <Text level={2} color={Colors.BLACK}>
             {props.item.content}
           </Text>
         </BodyHot>
       )}
       {props.type === "new" && (
         <BodyNew>
-          <Text level={2} color="#232735">
+          <Text level={2} color={Colors.BLACK}>
             {props.item.content}
           </Text>
         </BodyNew>

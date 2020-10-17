@@ -1,4 +1,6 @@
+import Colors from "@colors";
+
 export default interface IconProps {
   style: React.CSSProperties;
-  fill?: string;
+  fill?: Colors;
 }

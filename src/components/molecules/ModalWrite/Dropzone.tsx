@@ -110,7 +110,7 @@ export default function Dropzone({
             <XButton onClick={() => removeFile(file)}>
               <Close
                 style={{ width: "1rem", height: "1rem" }}
-                fill="#232735"
+                fill={Colors.BLACK}
               ></Close>
             </XButton>
             <Img

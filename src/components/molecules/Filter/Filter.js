@@ -1,130 +1,105 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Wrapper from "../../atoms/Filter/Wrapper";
-import Icondownline from "../../atoms/Icon/Chevron/Down";
-import Iconupline from "../../atoms/Icon/Chevron/Up";
-import Iconup from "../../atoms/Icon/Filter/Up";
-import Icondown from "../../atoms/Icon/Filter/Down";
+import IconDownLine from "../../atoms/Icon/Chevron/Down";
+import IconUpLine from "../../atoms/Icon/Chevron/Up";
+import IconUp from "../../atoms/Icon/Filter/Up";
+import IconDown from "../../atoms/Icon/Filter/Down";
 import IconX from "../../atoms/Icon/X";
-import DropdownMenu from "./DropdownMenu";
+import DropdownMenu from "./DropDownMenu";
 
 function Filter(props) {
+  const [isFilterOpened, setIsFilterOpened] = useState(false);
+  const [selectedItemTitle, setSelectedItemTitle] = useState("");
+  const isAlign = props.defaultText === "최신순";
+
+  const handleFilterClick = () => {
+    if (selectedItemTitle === "" || props.isUserInfoEdit) {
+      setIsFilterOpened(!isFilterOpened);
+    }
+  };
+
+  const handleItemClick = (itemTitle) => {
+    props.onClick(itemTitle);
+    setSelectedItemTitle(itemTitle);
+  };
+
+  const resetFilter = () => {
+    if (isAlign) {
+      props.onClick("최신순");
+    } else {
+      props.onClick("");
+    }
+    setSelectedItemTitle("");
+  };
+
   const iconStyle = {
     width: "0.6rem",
     height: "0.4rem",
     margin: "0 0 0 0.3rem",
   };
   const iconXStyle = {
-    width: "0.6rem",
-    height: "0.6rem",
+    width: "0.8rem",
+    height: "0.8rem",
     margin: "0 0 0 0.3rem",
   };
 
-  const [clicked, setClicked] = useState(false);
-  const [item, setItem] = useState("");
+  let icon =
+    isAlign || props.isUserInfoEdit ? (
+      <IconDown style={iconStyle} fill={Colors.BLACK}></IconDown>
+    ) : (
+      <IconDownLine style={iconStyle} fill={Colors.DEEP_GREY}></IconDownLine>
+    );
+  let backgroundColor = Colors.WHITE;
+  let border = "0.04rem";
 
-  const setSelected = (item) => {
-    if (item) {
-      props.onClick(item.title);
-    } else {
-      props.onClick("");
-    }
-    setItem(item);
-  };
-
-  const resetFilter = () => {
-    if (props.title === "최신순") {
-      props.onClick("최신순");
-    } else {
-      props.onClick("");
-    }
-    setItem("");
-    setClicked(false);
-  };
-
-  const openMenu = () => {
-    if (item) return;
-    setClicked(!clicked);
-  };
-
-  let background = "#ffffff";
-  let icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
-  let iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
-  let backgroundAlign = "#ffffff";
-
-  useEffect(() => {
-    if (!item && props.value) {
-      setSelected({ title: props.value });
-    }
-  }, [props.value]);
-
-  if (item) {
+  if (props.isUserInfoEdit) {
+    backgroundColor = Colors.LIGHT_GREY;
+    border = "none";
+  } else if (selectedItemTitle !== "") {
     icon = (
-      <Button onClick={resetFilter}>
-        <IconX style={iconXStyle} fill="#232735"></IconX>
-      </Button>
+      <XButton onClick={resetFilter}>
+        <IconX style={iconXStyle} fill={Colors.BLACK}></IconX>
+      </XButton>
     );
-    iconAlign = (
-      <Button onClick={resetFilter}>
-        <IconX style={iconXStyle} fill="#232735"></IconX>
-      </Button>
-    );
-    background = "#d3d4d8";
-    backgroundAlign = "#d3d4d8";
-  } else if (clicked) {
-    icon = <Iconupline style={iconStyle} fill="#8b90a0"></Iconupline>;
-    background = "#f0f1f3";
-    iconAlign = <Iconup style={iconStyle} fill="#232735"></Iconup>;
-  } else {
-    background = "#ffffff";
-    icon = <Icondownline style={iconStyle} fill="#8b90a0"></Icondownline>;
-    iconAlign = <Icondown style={iconStyle} fill="#232735"></Icondown>;
-  }
-  if (props.title === "최신순") {
-    return (
-      <Wrapper
-        onClick={() => openMenu()}
-        width="6rem"
-        height="1.6rem"
-        border={clicked ? "0.08rem" : "0.04rem"}
-        borderColor={clicked ? "#c8acee" : "#d3d4d8"}
-        backgroundColor={backgroundAlign}
-      >
-        <Text line="1.08rem" level={3} color="#232735">
-          {item ? item.title : props.title}
-        </Text>
-        {iconAlign}
-        {clicked && !item && (
-          <DropdownMenu
-            activeMenu={props.activeMenu}
-            data={props.data}
-            setSelected={setSelected}
-          ></DropdownMenu>
-        )}
-      </Wrapper>
-    );
+    backgroundColor = Colors.GREY;
+  } else if (isFilterOpened) {
+    if (isAlign || props.isUserInfoEdit) {
+      icon = <IconUp style={iconStyle} fill={Colors.BLACK}></IconUp>;
+      border = "0.08rem";
+    } else {
+      icon = (
+        <IconUpLine style={iconStyle} fill={Colors.DEEP_GREY}></IconUpLine>
+      );
+      backgroundColor = Colors.LIGHT_GREY;
+    }
   }
 
   return (
     <Wrapper
-      onClick={() => openMenu()}
+      onClick={handleFilterClick}
       width={props.width}
       height={props.height}
       max-height="1.6rem"
-      border="0.04rem"
-      borderColor="#d3d4d8"
-      backgroundColor={background}
+      border={border}
+      borderColor={isFilterOpened && isAlign ? Colors.PURPLE : Colors.GREY}
+      backgroundColor={backgroundColor}
     >
-      <Text line={props.line} level={props.level} color="#232735">
-        {item ? item.title : props.title}
+      <Text line={props.line} level={props.level} color={Colors.BLACK}>
+        {selectedItemTitle || props.defaultText}
       </Text>
       {icon}
-      {clicked && !item && (
+      {isFilterOpened && (
         <DropdownMenu
-          activeMenu={props.activeMenu}
+          width={props.width}
+          height={props.height}
+          isAlign={isAlign}
+          isUserInfoEdit={props.isUserInfoEdit}
           data={props.data}
-          setSelected={setSelected}
+          handleClick={handleItemClick}
+          previousItemTitle={props.previousItemTitle}
         ></DropdownMenu>
       )}
     </Wrapper>
@@ -133,8 +108,13 @@ function Filter(props) {
 
 export default React.memo(Filter);
 
-const Button = styled.div`
+const XButton = styled.button`
+  width: fit-content;
+  height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 `;
