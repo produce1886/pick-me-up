@@ -8,7 +8,7 @@ import IconUpLine from "../../atoms/Icon/Chevron/Up";
 import IconUp from "../../atoms/Icon/Filter/Up";
 import IconDown from "../../atoms/Icon/Filter/Down";
 import IconX from "../../atoms/Icon/X";
-import DropDownMenu from "./DropDownMenu";
+import DropdownMenu from "./DropDownMenu";
 
 function Filter(props) {
   const [isFilterOpened, setIsFilterOpened] = useState(false);
@@ -92,7 +92,7 @@ function Filter(props) {
       </Text>
       {icon}
       {isFilterOpened && (
-        <DropDownMenu
+        <DropdownMenu
           width={props.width}
           height={props.height}
           isAlign={isAlign}
@@ -100,7 +100,7 @@ function Filter(props) {
           data={props.data}
           handleClick={handleItemClick}
           previousItemTitle={props.previousItemTitle}
-        ></DropDownMenu>
+        ></DropdownMenu>
       )}
     </Wrapper>
   );
