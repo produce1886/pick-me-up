@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Filter from "./Filter";
-import { CATEGORY, FIELD, REGION, PROJECT_TYPE } from "./ItemData";
+import { CATEGORY, FIELD, REGION, PROJECT_CATEGORY } from "./ItemData";
 
 type FilterGroupProps = {
   type: string;
@@ -58,7 +58,7 @@ function FilterGroup(props: FilterGroupProps) {
             line={props.line}
             level={props.level}
             defaultText={projectType}
-            data={PROJECT_TYPE}
+            data={PROJECT_CATEGORY}
             onClick={props.setProjectType}
           ></Filter>
         </>
