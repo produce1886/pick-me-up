@@ -12,7 +12,7 @@ type DetailProps = {
   title: string;
   uid: string;
   name: string;
-  profileImage: string;
+  profileImage?: string;
   viewNum: number;
   commentsNum: number;
 };
