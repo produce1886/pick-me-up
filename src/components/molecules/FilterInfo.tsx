@@ -30,7 +30,6 @@ export default React.memo(FilterInfo);
 
 const Wrapper = styled.div`
   width: fit-content;
-  height: 0.72rem;
   display: flex;
   box-sizing: border-box;
   justify-content: space-between;
