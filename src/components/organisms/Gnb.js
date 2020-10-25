@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Logo from "../molecules/Button/Logo";
-import MainMenu from "../molecules/menu/Main";
+import MainMenu from "../molecules/Gnb/Middle";
 import LogInButton from "../molecules/Button/LogIn";
 import LogOutButton from "../molecules/Button/LogOut";
 import Profile from "../molecules/Profile";
