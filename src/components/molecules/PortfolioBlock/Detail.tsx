@@ -7,7 +7,17 @@ import ViewCount from "../Count/View";
 import CommentCount from "../Count/Comment";
 import Profile from "../Profile";
 
-function Detail(props) {
+type DetailProps = {
+  y: number | string;
+  title: string;
+  uid: string;
+  name: string;
+  profileImage: string;
+  viewNum: number;
+  commentsNum: number;
+};
+
+function Detail(props: DetailProps) {
   return (
     <DetailWrapper y={props.y}>
       <Row>
@@ -51,7 +61,7 @@ const DetailWrapper = styled.div`
   flex-direction:column;
   box-sizing: border-box;
 }
-  ${(props) => css`
+  ${(props: { y: number | string }) => css`
     -webkit-transform: translateY(${props.y});
     transform: translateY(${props.y});
   `}
