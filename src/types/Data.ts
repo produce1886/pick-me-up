@@ -15,13 +15,15 @@ type DataProps = {
   viewNum: number;
   projectTag: Tag[];
   portfolioTag: Tag[];
-  user: {
-    id: number;
-    username: string;
-    email: string;
-    image: string;
-  };
+  user: User;
   comments: Comment[];
+};
+
+export type User = {
+  id: number;
+  username: string;
+  email: string;
+  image: string;
 };
 
 export type Tag = {
@@ -42,4 +44,5 @@ export type Comment = {
     image: string;
   };
 };
+
 export default DataProps;
