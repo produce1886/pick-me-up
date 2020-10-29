@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import Colors from "@colors";
+import { ModalType } from "@src/components/atoms/Modal/ModalType";
+import { Comment } from "@src/types/Data";
 import Text from "../../atoms/Text";
-import Comment from "../Comment/Comment";
+import CommentComponent from "../Comment/Comment";
 import CommentWrite from "../Comment/CommentWrite";
 
-function ModalBottom(props) {
+type ModalBottomProps = {
+  modalType: ModalType;
+  commentsNum: number;
+  comments: Comment[];
+  pid: string | string[] | number;
+  modalReload: number;
+  setModalReload: Dispatch<SetStateAction<number>>;
+};
+
+function ModalBottom(props: ModalBottomProps) {
   // 수정 댓글 아이디 받아오는 state
   const [cidUpdate, setCidUpdate] = useState("");
   // 수정 댓글 본문 받아오는 state
@@ -24,8 +35,8 @@ function ModalBottom(props) {
         </Text>
       </Div>
       {props.comments &&
-        props.comments.map((item, index) => (
-          <Comment
+        props.comments.map((item: Comment, index: number) => (
+          <CommentComponent
             modalType={props.modalType}
             comment={item.content}
             date={item.createdDate}
@@ -38,7 +49,7 @@ function ModalBottom(props) {
             setIsEdit={setIsEdit}
             modalReload={props.modalReload}
             setModalReload={props.setModalReload}
-          ></Comment>
+          ></CommentComponent>
         ))}
       <CommentWrite
         modalType={props.modalType}
@@ -46,7 +57,6 @@ function ModalBottom(props) {
         contentUpdate={contentUpdate}
         setContentUpdate={setContentUpdate}
         edit={isEdit}
-        pid={props.pid}
         cid={cidUpdate}
         setIsEdit={setIsEdit}
         modalReload={props.modalReload}
