@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Birth from "../../atoms/Icon/Birth";
 import Univ from "../../atoms/Icon/University";
@@ -17,7 +18,7 @@ function OptionInfo(props) {
   return (
     <Wrapper>
       <Title>
-        <Text weight={600} level={3} color="#232735">
+        <Text weight={600} level={3} color={Colors.BLACK}>
           추가 정보
         </Text>
       </Title>
@@ -29,9 +30,9 @@ function OptionInfo(props) {
               height: "0.88rem",
               marginRight: "0.32rem",
             }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></Birth>
-          <Text weight={600} level={3} color="#232735">
+          <Text weight={600} level={3} color={Colors.BLACK}>
             생일
           </Text>
         </DivTitle>
@@ -57,7 +58,7 @@ function OptionInfo(props) {
           )}
           {!editBirth && (
             <Row marginRight="2.4rem" paddingLeft="1rem" width="18.5rem">
-              <Text level={3} color="#232735" align="left">
+              <Text level={3} color={Colors.BLACK} align="left">
                 {props.birth}
               </Text>
             </Row>
@@ -65,7 +66,7 @@ function OptionInfo(props) {
           <ButtonWrapper onClick={() => setEditBirth(!editBirth)}>
             <Edit
               style={{ width: "0.8rem", height: "0.8rem" }}
-              fill="#232735"
+              fill={Colors.BLACK}
             ></Edit>
           </ButtonWrapper>
         </Content>
@@ -78,9 +79,9 @@ function OptionInfo(props) {
               height: "0.8rem",
               marginRight: "0.32rem",
             }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></Univ>
-          <Text weight={600} level={3} color="#232735">
+          <Text weight={600} level={3} color={Colors.BLACK}>
             학력
           </Text>
         </DivTitle>
@@ -101,9 +102,9 @@ function OptionInfo(props) {
               height: "0.8rem",
               marginRight: "0.32rem",
             }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></AreaIcon>
-          <Text weight={600} level={3} color="#232735">
+          <Text weight={600} level={3} color={Colors.BLACK}>
             활동지역
           </Text>
         </DivTitle>
@@ -123,9 +124,9 @@ function OptionInfo(props) {
               height: "0.8rem",
               marginRight: "0.32rem",
             }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></Heart>
-          <Text weight={600} level={3} color="#232735">
+          <Text weight={600} level={3} color={Colors.BLACK}>
             관심분야
           </Text>
         </DivTitle>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Link from "next/link";
+import Colors from "@colors";
 import Postblock from "../organisms/PostBlock";
 import Text from "../atoms/Text";
 import Icon from "../atoms/Icon/Chevron/Right";
@@ -16,7 +17,7 @@ export default function Preview(props) {
         <LinkWrapper>
           <Link href="project">
             <A>
-              <Text level={8} color="#232735" weight="bold">
+              <Text level={8} color={Colors.BLACK} weight="bold">
                 {props.type === "new" && "신규 프로젝트"}
                 {props.type === "most" && "가장 많이 본 프로젝트"}
               </Text>
@@ -24,7 +25,7 @@ export default function Preview(props) {
           </Link>
           <Icon
             style={{ width: "0.4rem", height: "0.8rem" }}
-            fill="#232735"
+            fill={Colors.BLACK}
           ></Icon>
         </LinkWrapper>
         <InnerWrapper>

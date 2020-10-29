@@ -1,51 +1,46 @@
 import React, { useCallback } from "react";
 import axios from "axios";
-import ItemWrapper from "../Filter/FilterItem";
+import { COMMENT } from "../Filter/ItemData";
+import ItemWrapper from "../Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
 
 function EditnDelete(props) {
   const pid = parseInt(props.pid, 10);
-  const data = [
-    { key: 0, title: "댓글 수정", type: "more", mode: "edit" },
-    { key: 1, title: "댓글 삭제", type: "more", mode: "delete" },
-  ];
 
   const deleteComment = () => {
     try {
-      if (props.type === "project") {
+      if (props.modalType === "project") {
         if (window.confirm("댓글을 삭제하시겠습니까?")) {
           axios.delete(
             `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
           );
           setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-          props.setClicked(false);
         }
-      } else if (props.type === "portfolio") {
+      } else if (props.modalType === "portfolio") {
         if (window.confirm("댓글을 삭제하시겠습니까?")) {
           axios.delete(
             `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
           );
           setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-          props.setClicked(false);
         }
       }
     } catch (error) {
       console.log(error);
-      alert("Error!");
+      alert("댓글 삭제에 실패했습니다");
     }
   };
 
   const getComment = () => {
     const fetchData = async () => {
       try {
-        if (props.type === "project") {
+        if (props.modalType === "project") {
           const result = await axios.get(
             `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
           );
           const comment = Object.assign(result.data);
           props.setCidUpdate(comment.id);
           props.setContentUpdate(comment.content);
-        } else if (props.type === "portfolio") {
+        } else if (props.modalType === "portfolio") {
           const result = await axios.get(
             `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
           );
@@ -62,20 +57,17 @@ function EditnDelete(props) {
 
   const updateComment = () => {
     getComment();
-    props.setEdit(true);
-    props.setClicked(false);
+    props.setIsEdit(true);
   };
 
-  const setSelected = useCallback(
-    (item) => {
-      if (item.key === 1) {
-        deleteComment();
-      } else if (item.key === 0) {
-        updateComment();
-      }
-    },
-    [item]
-  );
+  const handleClick = useCallback((itemTitle) => {
+    if (itemTitle === "댓글 삭제") {
+      deleteComment();
+    } else if (itemTitle === "댓글 수정") {
+      updateComment();
+    }
+    props.setIsButtonClicked(false);
+  }, []);
 
   return (
     <Wrapper
@@ -85,11 +77,11 @@ function EditnDelete(props) {
       width="5.4rem"
       height="3.2rem"
     >
-      {data.map((value, index) => (
+      {COMMENT.map((item) => (
         <ItemWrapper
-          key={index}
-          item={value}
-          setSelected={setSelected}
+          key={item.key}
+          {...item}
+          handleClick={handleClick}
           width="4.6rem"
           height="1rem"
         ></ItemWrapper>

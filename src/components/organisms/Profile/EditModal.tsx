@@ -169,7 +169,7 @@ function EditModal(props: EditModalProps) {
               top: "2.3rem",
               position: "absolute",
             }}
-            fill="#232735"
+            fill={Colors.BLACK}
           ></X>
         </ButtonWrapper>
         <Inner>

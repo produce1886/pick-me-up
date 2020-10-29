@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Birth from "../../atoms/Icon/Birth";
@@ -28,9 +29,9 @@ function Info(props) {
         <Div>
           <User
             style={{ width: "0.64rem", height: "0.72rem" }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></User>
-          <Text level={3} color="#232735">
+          <Text level={3} color={Colors.BLACK}>
             {username}
           </Text>
         </Div>
@@ -39,9 +40,9 @@ function Info(props) {
         <Div>
           <Birth
             style={{ width: "0.8rem", height: "0.8rem" }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></Birth>
-          <Text level={3} color="#232735">
+          <Text level={3} color={Colors.BLACK}>
             {birth}
           </Text>
         </Div>
@@ -50,21 +51,21 @@ function Info(props) {
         <Div>
           <Univ
             style={{ width: "0.8rem", height: "0.72rem" }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></Univ>
           <Row>
-            <Text level={3} color="#232735" weight="bold">
+            <Text level={3} color={Colors.BLACK} weight="bold">
               {university}
             </Text>
             {major && (
               <>
-                <Text level={3} color="#232735">
+                <Text level={3} color={Colors.BLACK}>
                   에서&nbsp;
                 </Text>
-                <Text level={3} color="#232735" weight="bold">
+                <Text level={3} color={Colors.BLACK} weight="bold">
                   {major}
                 </Text>
-                <Text level={3} color="#232735">
+                <Text level={3} color={Colors.BLACK}>
                   &nbsp;전공
                 </Text>
               </>
@@ -76,9 +77,9 @@ function Info(props) {
         <Div>
           <Area
             style={{ width: "0.6rem", height: "0.72rem" }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></Area>
-          <Text level={3} color="#232735">
+          <Text level={3} color={Colors.BLACK}>
             {area}
           </Text>
         </Div>
@@ -87,9 +88,9 @@ function Info(props) {
         <Div>
           <Heart
             style={{ width: "0.83rem", height: "0.72rem" }}
-            fill="#d3d4d8"
+            fill={Colors.GREY}
           ></Heart>
-          <Text level={3} color="#232735">
+          <Text level={3} color={Colors.BLACK}>
             {interests}
           </Text>
         </Div>
