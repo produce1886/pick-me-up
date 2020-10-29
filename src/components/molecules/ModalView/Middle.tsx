@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import axios from "axios";
 import Colors from "@colors";
 import { State } from "@src/types/User";
@@ -15,7 +15,7 @@ type ModalMiddleProps = {
   modalType: ModalType;
   date: string;
   content: string;
-  image: string | string[];
+  image: string;
   userEmail: string;
   pid: number | string | string[];
   tags: { id: number; tag: string }[];
