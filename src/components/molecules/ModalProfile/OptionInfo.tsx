@@ -9,9 +9,30 @@ import Heart from "../../atoms/Icon/Heart";
 import Edit from "../../atoms/Icon/Edit";
 import { University, Area, Interest } from "./Contents";
 
-function OptionInfo(props) {
+type OptionInfoProps = {
+  birthSecurity: boolean;
+  areaSecurity: boolean;
+  interestSecurity: boolean;
+  universitySecurity: boolean;
+  birth: Date;
+  university: string;
+  major: string;
+  area: string;
+  interest: string;
+  setBirthSecurity: () => void;
+  setAreaSecurity: () => void;
+  setInterestSecurity: () => void;
+  setUniversitySecurity: () => void;
+  setBirth: React.Dispatch<React.SetStateAction<string>>;
+  setMajor: React.Dispatch<React.SetStateAction<string>>;
+  setUniversity: React.Dispatch<React.SetStateAction<string>>;
+  setArea: React.Dispatch<React.SetStateAction<string>>;
+  setInterest: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function OptionInfo(props: OptionInfoProps) {
   const [editBirth, setEditBirth] = useState(false);
-  const onChangeBirthHandler = (e) => {
+  const onChangeBirthHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setBirth(e.target.value);
   };
 
@@ -38,12 +59,9 @@ function OptionInfo(props) {
         </DivTitle>
         <Content>
           <ToggleSwitchWrapper>
-            <Toggle
-              toggled={props.birthSecurity}
-              onClick={props.setBirthSecurity}
-            >
-              <ToggleBall toggled={props.birthSecurity}></ToggleBall>
-              <RippleBg visible={props.birthSecurity}></RippleBg>
+            <Toggle onClick={props.setBirthSecurity}>
+              <ToggleBall isToggled={props.birthSecurity}></ToggleBall>
+              <RippleBg isVisible={props.birthSecurity}></RippleBg>
             </Toggle>
           </ToggleSwitchWrapper>
           {editBirth && (
@@ -86,7 +104,7 @@ function OptionInfo(props) {
           </Text>
         </DivTitle>
         <University
-          UniversitySecurity={props.UniversitySecurity}
+          universitySecurity={props.universitySecurity}
           setUniversitySecurity={props.setUniversitySecurity}
           setUniversity={props.setUniversity}
           university={props.university}
@@ -113,7 +131,7 @@ function OptionInfo(props) {
           setAreaSecurity={props.setAreaSecurity}
           setArea={props.setArea}
           area={props.area}
-          zIndex={2000}
+          // zIndex={2000}
         ></Area>
       </Div>
       <Div>
@@ -135,7 +153,7 @@ function OptionInfo(props) {
           setInterestSecurity={props.setInterestSecurity}
           setInterest={props.setInterest}
           interest={props.interest}
-          zIndex={1999}
+          // zIndex={1999}
         ></Interest>
       </Div>
     </Wrapper>
@@ -154,7 +172,7 @@ const Wrapper = styled.div`
 `;
 
 const Row = styled.div`
-  ${(props) => css`
+  ${(props: { width: string; marginRight: string; paddingLeft: string }) => css`
     width: ${props.width};
     text-align: center;
     padding-bottom: 0.2rem;
@@ -208,7 +226,7 @@ const Content = styled.div`
   box-sizing: border-box;
 `;
 const Input = styled.input`
-  ${(props) => css`
+  ${(props: { width: string; marginRight: string }) => css`
     background-color: #f0f1f3;
     border-radius: 0.32rem;
     border: none;
@@ -219,7 +237,6 @@ const Input = styled.input`
     font-size: 0.64rem;
     align-items: center;
     height: 1.2rem;
-    maxlength: ${props.maxLength};
     padding-left: 1rem;
     margin-right: ${props.marginRight};
   `}
@@ -258,26 +275,28 @@ const ToggleBall = styled.div`
   border: 1px solid #f0f1f3;
   height: 1rem;
   width: 1rem;
-  transform: ${(props) =>
-    props.toggled ? `translateX(0.9rem)` : "translateX(0rem)"};
+  transform: ${(props: { isToggled: boolean }) =>
+    props.isToggled ? `translateX(0.9rem)` : "translateX(0rem)"};
   &:active {
     background-color: #f0f1f3;
   }
 `;
 const RippleBg = styled.div`
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-image: radial-gradient(circle, #c8acee 10%, transparent 10.01%);
-  background-repeat: no-repeat;
-  background-position: 50%;
-  pointer-events: none;
-  transition: transform 0.5s, opacity 0.3s ease;
-  transform: ${(props) => (props.visible ? "scale(10, 10)" : "scale(0, 0)")};
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  position: absolute;
-  z-index: 1;
+  ${(props: { isVisible: boolean }) => css`
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: radial-gradient(circle, #c8acee 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    pointer-events: none;
+    transition: transform 0.5s, opacity 0.3s ease;
+    transform: ${props.isVisible ? "scale(10, 10)" : "scale(0, 0)"};
+    opacity: ${props.isVisible ? 1 : 0};
+    position: absolute;
+    z-index: 1;
+  `}
 `;
 
 const ToggleSwitchWrapper = styled.div`
