@@ -6,6 +6,7 @@ import axios from "axios";
 import Colors from "@colors";
 import { State } from "@src/types/User";
 import { ModalType } from "@src/components/atoms/Modal/ModalType";
+import { Tag } from "@src/types/Data";
 import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
 import TagButton from "../Button/Tag";
@@ -18,7 +19,7 @@ type ModalMiddleProps = {
   image: string;
   userEmail: string;
   pid: number | string | string[];
-  tags: { id: number; tag: string }[];
+  tags: Tag[];
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   listReload: number;
   setListReload: React.Dispatch<React.SetStateAction<number>>;
@@ -31,6 +32,7 @@ function ModalMiddle(props: ModalMiddleProps) {
   let { date } = props;
   date = date.replace("T", " ");
 
+  // api로 빼야하나?
   const deletePost = useCallback(() => {
     try {
       if (props.modalType === "project") {
@@ -74,6 +76,7 @@ function ModalMiddle(props: ModalMiddleProps) {
             style={{ width: "1.5rem", height: "1.5rem", marginRight: "0.3rem" }}
             fill={Colors.BLACK}
           ></Icon>
+          /* key에 index 넣음 수정 필요 */
           {props.tags.map((item: { tag: string }, index: number) => (
             <TagButton text={item.tag} key={index}></TagButton>
           ))}

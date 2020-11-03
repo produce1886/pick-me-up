@@ -39,9 +39,10 @@ function ModalBottom(props: ModalBottomProps) {
           <CommentComponent
             modalType={props.modalType}
             comment={item.content}
-            date={item.createdDate}
+            createdDate={item.createdDate}
             {...item.user}
             id={item.id}
+            // key에 index 넣은거 수정 필요. Q.어떤 방식으로?
             key={index}
             pid={props.pid}
             setCidUpdate={setCidUpdate}
@@ -56,7 +57,7 @@ function ModalBottom(props: ModalBottomProps) {
         pid={props.pid}
         contentUpdate={contentUpdate}
         setContentUpdate={setContentUpdate}
-        edit={isEdit}
+        isEdit={isEdit}
         cid={cidUpdate}
         setIsEdit={setIsEdit}
         modalReload={props.modalReload}

@@ -10,8 +10,8 @@ import EditnDelete from "./EditDelete";
 
 function Comment(props) {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  let { date } = props;
-  date = date.replace("T", " ");
+  let { createdDate } = props;
+  createdDate = createdDate.replace("T", " ");
   const currentUserEmail = useSelector((state) => state.user.userData.email);
 
   return (
@@ -32,7 +32,7 @@ function Comment(props) {
           </Text>
           &nbsp;
           <Text level={1} color={Colors.DEEP_GREY}>
-            {date}
+            {createdDate}
           </Text>
           {currentUserEmail === props.email && (
             <ButtonWrapper onClick={() => setIsButtonClicked(!isButtonClicked)}>
