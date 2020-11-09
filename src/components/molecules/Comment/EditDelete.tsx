@@ -1,10 +1,11 @@
 import React, { useCallback } from "react";
 import CommentService from "@src/lib/api/Comment";
 import { COMMENT } from "../Filter/ItemData";
+import CommentProps from "./CommentProps";
 import ItemWrapper from "../Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
 
-function EditDelete(props) {
+function EditDelete(props: CommentProps) {
   const url = `${props.modalType}s/${props.pid}/comments/${props.cid}`;
 
   const handleClick = useCallback((itemTitle) => {

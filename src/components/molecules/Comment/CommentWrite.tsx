@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CommentService from "@src/lib/api/Comment";
 import CommentHooks from "@src/lib/hooks/Comment";
+import UserState from "@src/types/User";
+import CommentProps from "./CommentProps";
 import Profile from "../Profile";
 import Icon from "../../atoms/Icon/Write";
 
-function CommentWrite(props) {
-  const user = useSelector((state) => state.user);
+function CommentWrite(props: CommentProps) {
+  const userState = useSelector((state: { user: UserState }) => state.user);
   const [content, setContent] = useState("");
 
   CommentHooks.useCommentLoadApi(
@@ -16,12 +18,12 @@ function CommentWrite(props) {
     props.updatingCid
   );
 
-  const handleInputChange = (e) => {
-    setContent(e.target.value);
+  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.target.value);
   };
 
   const handleWriteButtonClick = () => {
-    if (!user.isSignedIn) {
+    if (!userState.isSignedIn) {
       // eslint-disable-next-line no-undef
       alert("로그인하신 다음에 댓글을 사용하실 수 있습니다.");
       return;
@@ -31,14 +33,13 @@ function CommentWrite(props) {
       alert("댓글을 작성해주세요");
       return;
     }
-
     if (props.updatingCid) {
       const url = `${props.modalType}s/${props.pid}/comments/${props.updatingCid}`;
       CommentService.updateComment(url, content);
       props.setUpdatingCid(null);
     } else {
       const url = `${props.modalType}s/${props.pid}/comments`;
-      const body = { email: user.userData.email, content };
+      const body = { email: userState.userData.email, content };
       CommentService.writeComment(url, body);
     }
     setContent("");
@@ -47,15 +48,14 @@ function CommentWrite(props) {
 
   return (
     <Wrapper>
-      <Profile size="2rem" profileImage={user.userData.image}></Profile>
+      <Profile size="2rem" profileImage={userState.userData.image}></Profile>
       <CommentBox>
         <Textarea
           placeholder="내용을 입력하세요"
-          type="text"
           onChange={(e) => {
             handleInputChange(e);
           }}
-          maxLength="100"
+          maxLength={100}
           value={content}
         ></Textarea>
       </CommentBox>
