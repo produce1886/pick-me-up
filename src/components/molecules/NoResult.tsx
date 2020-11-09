@@ -5,7 +5,7 @@ import Text from "../atoms/Text";
 
 function NoResult() {
   return (
-    <Div>
+    <Wrapper>
       <Icon
         style={{ width: "4.8rem", height: "4.8rem", marginBottom: "1.5rem" }}
         fill={Colors.GREY}
@@ -16,11 +16,11 @@ function NoResult() {
       <Text color={Colors.GREY} level={12} weight="bold">
         발견된 게시글이 없습니다.
       </Text>
-    </Div>
+    </Wrapper>
   );
 }
 
-const Div = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

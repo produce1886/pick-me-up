@@ -11,7 +11,7 @@ import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import DataProps from "../../types/Data";
-import { State } from "../../types/User";
+import UserState from "../../types/User";
 import { ModalType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
 import checkIsNotEmpty from "../../lib/utils/CheckIsNotEmpty";
@@ -33,7 +33,7 @@ function ModalUpdate({
   modalReload,
   setModalReload,
 }: ModalUpdateProps) {
-  const userState = useSelector((state: { user: State }) => state.user);
+  const userState = useSelector((state: { user: UserState }) => state.user);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");

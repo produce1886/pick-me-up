@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import axios from "axios";
 import { LOGIN_USER, LOGOUT_USER } from "./types";
-import { State as UserState } from "../types/User";
+import UserState from "../types/User";
 
 type DataType = UserState["userData"];
 

@@ -7,7 +7,7 @@ type ItemProps = {
   width: string | number;
   height: string | number;
   title: string;
-  previousItemTitle: string;
+  previousItemTitle?: string;
   handleClick: (arg0: string) => void;
 };
 

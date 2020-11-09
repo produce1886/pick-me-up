@@ -3,14 +3,25 @@ import ItemWrapper from "./Item";
 import Hover from "../../atoms/Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
 import Text from "../../atoms/Text";
+import { FilterItemType } from "./ItemData";
 
-export default function DropdownMenu(props) {
+type DropDownMenuProps = {
+  isAlign?: boolean;
+  isUserInfoEdit?: boolean;
+  width: string | number;
+  height: string | number;
+  handleClick: (arg0: string) => void;
+  previousItemTitle?: string;
+  data: Array<FilterItemType>;
+};
+
+export default function DropDownMenu(props: DropDownMenuProps) {
   return (
     <Wrapper
       zIndex={props.isAlign ? "102" : "200"}
       top={props.height}
       left="-0.1rem"
-      width="5.4rem"
+      width={props.width}
       height="fit-content"
     >
       {!props.isAlign && !props.isUserInfoEdit && (
@@ -29,7 +40,7 @@ export default function DropdownMenu(props) {
           </Text>
         </Hover>
       )}
-      {props.data.map((item) => (
+      {props.data.map((item: FilterItemType) => (
         <ItemWrapper
           key={item.key}
           {...item}

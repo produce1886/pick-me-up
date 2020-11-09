@@ -9,7 +9,7 @@ import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import X from "../../atoms/Icon/X";
 import PillButton from "../../molecules/Button/Pill";
-import { State } from "../../../types/User";
+import UserState from "../../../types/User";
 
 type ButtonWrapperProps = {
   bottom?: string;
@@ -30,7 +30,7 @@ function EditModal(props: EditModalProps) {
   const [areaSecurity, setAreaSecurity] = useState(false);
   const [interestSecurity, setInterestSecurity] = useState(false);
   const [UniversitySecurity, setUniversitySecurity] = useState(false);
-  const userState = useSelector((state: { user: State }) => state.user);
+  const userState = useSelector((state: { user: UserState }) => state.user);
   const { email } = userState.userData;
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");

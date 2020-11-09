@@ -16,6 +16,7 @@ export default styled.div`
     left: ${props.left};
     z-index: ${props.zIndex};
   `}
+  min-width: 5.4rem;
   border: none;
   background-color: #ffffff;
   flex-direction: column;

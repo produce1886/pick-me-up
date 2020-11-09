@@ -1,4 +1,4 @@
-export type State = {
+type UserState = {
   isSignedIn: boolean;
   userData: {
     username?: string;
@@ -6,3 +6,5 @@ export type State = {
     image?: string;
   };
 };
+
+export default UserState;

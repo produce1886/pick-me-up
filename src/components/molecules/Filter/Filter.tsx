@@ -9,8 +9,22 @@ import IconUp from "../../atoms/Icon/Filter/Up";
 import IconDown from "../../atoms/Icon/Filter/Down";
 import IconX from "../../atoms/Icon/X";
 import DropdownMenu from "./DropDownMenu";
+import { FilterItemType } from "./ItemData";
 
-function Filter(props) {
+type FilterProps = {
+  defaultText: string;
+  isAlign?: boolean;
+  isUserInfoEdit?: boolean;
+  width: string | number;
+  height: string | number;
+  line?: string;
+  level: number;
+  onClick: (arg0: string) => void;
+  previousItemTitle?: string;
+  data: Array<FilterItemType>;
+};
+
+function Filter(props: FilterProps) {
   const [isFilterOpened, setIsFilterOpened] = useState(false);
   const [selectedItemTitle, setSelectedItemTitle] = useState("");
   const isAlign = props.defaultText === "최신순";
@@ -21,7 +35,7 @@ function Filter(props) {
     }
   };
 
-  const handleItemClick = (itemTitle) => {
+  const handleItemClick = (itemTitle: string) => {
     props.onClick(itemTitle);
     setSelectedItemTitle(itemTitle);
   };

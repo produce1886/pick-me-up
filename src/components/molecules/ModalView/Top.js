@@ -16,7 +16,7 @@ function ModalTop(props) {
           </Text>
         </TitleWrapper>
         <FilterInfo
-          modalType={props.type}
+          type={props.modalType}
           category={props.category}
           field={props.field}
           region={props.region}
