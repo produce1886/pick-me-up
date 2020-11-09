@@ -13,6 +13,7 @@ export default styled.div`
     height: ${props.height};
     background-color: ${props.backgroundColor};
   `}
+  min-width: 5.4rem;
   border: none;
   display: flex;
   flex-direction: row;

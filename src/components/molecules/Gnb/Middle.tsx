@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Colors from "@colors";
 import Link from "next/link";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 
 export default function Main() {
