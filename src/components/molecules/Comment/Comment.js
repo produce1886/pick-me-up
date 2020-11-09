@@ -6,7 +6,7 @@ import Colors from "@colors";
 import Profile from "../Profile";
 import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon/MoreOption";
-import EditnDelete from "./EditDelete";
+import EditDelete from "./EditDelete";
 
 function Comment(props) {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -47,17 +47,15 @@ function Comment(props) {
         </CommentWrapper>
       </Column>
       {isButtonClicked && (
-        <EditnDelete
-          id={props.id}
+        <EditDelete
+          cid={props.cid}
           pid={props.pid}
-          setCidUpdate={props.setCidUpdate}
-          setIsEdit={props.setIsEdit}
-          setContentUpdate={props.setContentUpdate}
           modalType={props.modalType}
           setIsButtonClicked={setIsButtonClicked}
           modalReload={props.modalReload}
           setModalReload={props.setModalReload}
-        ></EditnDelete>
+          setUpdatingCid={props.setUpdatingCid}
+        ></EditDelete>
       )}
     </Wrapper>
   );

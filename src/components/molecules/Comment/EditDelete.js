@@ -1,72 +1,22 @@
 import React, { useCallback } from "react";
-import axios from "axios";
+import CommentService from "@src/lib/api/Comment";
 import { COMMENT } from "../Filter/ItemData";
 import ItemWrapper from "../Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
 
-function EditnDelete(props) {
-  const pid = parseInt(props.pid, 10);
-
-  const deleteComment = () => {
-    try {
-      if (props.modalType === "project") {
-        if (window.confirm("댓글을 삭제하시겠습니까?")) {
-          axios.delete(
-            `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
-          );
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-        }
-      } else if (props.modalType === "portfolio") {
-        if (window.confirm("댓글을 삭제하시겠습니까?")) {
-          axios.delete(
-            `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
-          );
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      alert("댓글 삭제에 실패했습니다");
-    }
-  };
-
-  const getComment = () => {
-    const fetchData = async () => {
-      try {
-        if (props.modalType === "project") {
-          const result = await axios.get(
-            `${process.env.API_HOST}/projects/${pid}/comments/${props.id}`
-          );
-          const comment = Object.assign(result.data);
-          props.setCidUpdate(comment.id);
-          props.setContentUpdate(comment.content);
-        } else if (props.modalType === "portfolio") {
-          const result = await axios.get(
-            `${process.env.API_HOST}/portfolios/${pid}/comments/${props.id}`
-          );
-          const comment = Object.assign(result.data);
-          props.setCidUpdate(comment.id);
-          props.setContentUpdate(comment.content);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  };
-
-  const updateComment = () => {
-    getComment();
-    props.setIsEdit(true);
-  };
+function EditDelete(props) {
+  const url = `${props.modalType}s/${props.pid}/comments/${props.cid}`;
 
   const handleClick = useCallback((itemTitle) => {
     if (itemTitle === "댓글 삭제") {
-      deleteComment();
+      if (window.confirm("댓글을 삭제하시겠습니까?")) {
+        CommentService.deleteComment(url);
+      }
     } else if (itemTitle === "댓글 수정") {
-      updateComment();
+      props.setUpdatingCid(props.cid);
     }
     props.setIsButtonClicked(false);
+    setTimeout(() => props.setModalReload(props.modalReload + 1), 500);
   }, []);
 
   return (
@@ -90,4 +40,4 @@ function EditnDelete(props) {
   );
 }
 
-export default React.memo(EditnDelete);
+export default React.memo(EditDelete);

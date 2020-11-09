@@ -1,109 +1,65 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
 import styled from "styled-components";
+import CommentService from "@src/lib/api/Comment";
 import Profile from "../Profile";
 import Icon from "../../atoms/Icon/Write";
 
 function CommentWrite(props) {
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
-  const onChangeHandler = (e) => {
-    props.isEdit
-      ? props.setContentUpdate(e.target.value)
-      : setContent(e.target.value);
+
+  const handleInputChange = (e) => {
+    setContent(e.target.value);
   };
-  const commentSubmitHandler = () => {
+
+  const handleWriteButtonClick = () => {
     if (!user.isSignedIn) {
       alert("로그인하신 다음에 댓글을 사용하실 수 있습니다.");
       return;
     }
-    if (content.length < 1 && props.contentUpdate < 1) {
+    if (content.length < 1) {
       alert("댓글을 작성해주세요");
-    } else if (!props.isEdit) {
-      try {
-        if (props.type === "project") {
-          axios.post(`${process.env.API_HOST}/projects/${props.pid}/comments`, {
-            email: user.userData.email,
-            content,
-          });
-          setContent("");
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-        } else if (props.type === "portfolio") {
-          axios.post(
-            `${process.env.API_HOST}/portfolios/${props.pid}/comments`,
-            {
-              email: user.userData.email,
-              content,
-            }
-          );
-          setContent("");
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else if (props.isEdit) {
-      try {
-        if (props.type === "project") {
-          axios.put(
-            `${process.env.API_HOST}/projects/${props.pid}/comments/${props.cid}`,
-            {
-              content: props.contentUpdate,
-            }
-          );
-          setContent("");
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 3000);
-        } else if (props.type === "portfolio") {
-          axios.put(
-            `${process.env.API_HOST}/portfolios/${props.pid}/comments/${props.cid}`,
-            {
-              content: props.contentUpdate,
-            }
-          );
-          setContent("");
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 3000);
-        }
-        props.setIsEdit(false);
-      } catch (error) {
-        console.log(error);
-      }
+      return;
     }
+
+    if (props.updatingCid) {
+      const url = `${props.modalType}s/${props.pid}/comments/${props.updatingCid}`;
+      CommentService.updateComment(url, content);
+      props.setUpdatingCid(null);
+    } else {
+      const url = `${props.modalType}s/${props.pid}/comments`;
+      const body = { email: user.userData.email, content };
+      CommentService.writeComment(url, body);
+    }
+    setContent("");
+    setTimeout(() => props.setModalReload(props.modalReload + 1), 300);
   };
+
   return (
     <Wrapper>
-      <Div>
-        <Profile size="2rem" profileImage={user.userData.image}></Profile>
-        <CommentBox>
-          <Textarea
-            placeholder="내용을 입력하세요"
-            type="text"
-            onChange={(e) => {
-              onChangeHandler(e);
-            }}
-            maxLength="100"
-            value={props.isEdit ? props.contentUpdate : content}
-          ></Textarea>
-        </CommentBox>
-        <IconButton onClick={commentSubmitHandler}>
-          <Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
-        </IconButton>
-      </Div>
+      <Profile size="2rem" profileImage={user.userData.image}></Profile>
+      <CommentBox>
+        <Textarea
+          placeholder="내용을 입력하세요"
+          type="text"
+          onChange={(e) => {
+            handleInputChange(e);
+          }}
+          maxLength="100"
+          value={content}
+        ></Textarea>
+      </CommentBox>
+      <WriteButton onClick={handleWriteButtonClick}>
+        <Icon style={{ width: "2.4rem", height: "2.4rem" }}></Icon>
+      </WriteButton>
     </Wrapper>
   );
 }
 
 export default React.memo(CommentWrite);
 
-const Div = styled.div`
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-`;
-
-const IconButton = styled.button`
+const WriteButton = styled.button`
   width: fit-content;
   align-items: center;
   display: flex;
@@ -130,7 +86,7 @@ const CommentBox = styled.div`
 const Textarea = styled.textarea`
   background-color: transparent;
   border: none;
-  padding: unset;
+  padding: 0;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -152,7 +108,8 @@ const Textarea = styled.textarea`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 3.3rem;
   position: relative;
