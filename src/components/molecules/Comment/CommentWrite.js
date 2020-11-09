@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CommentService from "@src/lib/api/Comment";
+import CommentHooks from "@src/lib/hooks/Comment";
 import Profile from "../Profile";
 import Icon from "../../atoms/Icon/Write";
 
@@ -9,16 +10,24 @@ function CommentWrite(props) {
   const user = useSelector((state) => state.user);
   const [content, setContent] = useState("");
 
+  CommentHooks.useCommentLoadApi(
+    setContent,
+    `${props.modalType}s/${props.pid}/comments`,
+    props.updatingCid
+  );
+
   const handleInputChange = (e) => {
     setContent(e.target.value);
   };
 
   const handleWriteButtonClick = () => {
     if (!user.isSignedIn) {
+      // eslint-disable-next-line no-undef
       alert("로그인하신 다음에 댓글을 사용하실 수 있습니다.");
       return;
     }
     if (content.length < 1) {
+      // eslint-disable-next-line no-undef
       alert("댓글을 작성해주세요");
       return;
     }

@@ -9,14 +9,15 @@ function EditDelete(props) {
 
   const handleClick = useCallback((itemTitle) => {
     if (itemTitle === "댓글 삭제") {
+      // eslint-disable-next-line no-undef
       if (window.confirm("댓글을 삭제하시겠습니까?")) {
         CommentService.deleteComment(url);
+        setTimeout(() => props.setModalReload(props.modalReload + 1), 500);
       }
     } else if (itemTitle === "댓글 수정") {
       props.setUpdatingCid(props.cid);
     }
     props.setIsButtonClicked(false);
-    setTimeout(() => props.setModalReload(props.modalReload + 1), 500);
   }, []);
 
   return (
