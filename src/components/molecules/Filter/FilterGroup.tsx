@@ -7,7 +7,7 @@ type FilterGroupProps = {
   type: string;
   width: string;
   height: string;
-  line: string;
+  line?: string;
   level: number;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   setField: React.Dispatch<React.SetStateAction<string>>;
