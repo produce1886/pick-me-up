@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import UserState from "@src/types/User";
 import Logo from "../molecules/Button/Logo";
 import MainMenu from "../molecules/Gnb/Middle";
 import LogInButton from "../molecules/Button/LogIn";
@@ -7,7 +8,7 @@ import LogOutButton from "../molecules/Button/LogOut";
 import Profile from "../molecules/Profile";
 
 export default function GlobalNavigationBar() {
-  const userState = useSelector((state) => state.user);
+  const userState = useSelector((state: { user: UserState }) => state.user);
 
   return (
     <Wrapper>
