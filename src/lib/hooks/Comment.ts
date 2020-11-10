@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 
-const useCommentLoadApi = (
+const useCommentLoadingApi = (
   setContent: React.Dispatch<React.SetStateAction<string>>,
   url: string,
   cid?: string
@@ -21,6 +21,6 @@ const useCommentLoadApi = (
   }, [cid]);
 };
 
-const CommentHooks = { useCommentLoadApi };
+const CommentHooks = { useCommentLoadingApi };
 
 export default CommentHooks;
