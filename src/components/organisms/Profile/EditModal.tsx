@@ -56,7 +56,6 @@ function EditModal(props: EditModalProps) {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(props.data);
   const put = useCallback(() => {
     try {
       const body = {
@@ -99,14 +98,13 @@ function EditModal(props: EditModalProps) {
     interestSecurity,
   ]);
 
-  /*
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
         const result = await axios.get(`${process.env.API_HOST}/users/${uid}`);
         setImage(result.data.image);
-        setUsername(result.data.username);
+        setUsername(props.username);
         setIntroduce(result.data.introduce);
         setBirth(result.data.birth);
         setUniversity(result.data.university);
@@ -126,9 +124,8 @@ function EditModal(props: EditModalProps) {
     if (!data) {
       fetchData();
     }
-  }, []);
-*/
-
+  }, [data]);
+  /*
   useEffect(() => {
     setImage(props.image);
     setUsername(props.username);
@@ -156,7 +153,7 @@ function EditModal(props: EditModalProps) {
     interestSecurity,
     universitySecurity,
   ]);
-
+  */
   return (
     <>
       <Modal isVisible={props.isVisible} onClose={props.onClose}>
@@ -192,7 +189,7 @@ function EditModal(props: EditModalProps) {
                 setInterestSecurity={() =>
                   setInterestSecurity(!interestSecurity)
                 }
-                UniversitySecurity={universitySecurity}
+                universitySecurity={universitySecurity}
                 setUniversitySecurity={() =>
                   setUniversitySecurity(!universitySecurity)
                 }
