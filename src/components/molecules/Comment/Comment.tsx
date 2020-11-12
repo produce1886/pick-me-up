@@ -3,12 +3,14 @@ import Link from "next/link";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Colors from "@colors";
+import UserState from "@src/types/User";
+import CommentProps from "./CommentProps";
 import Profile from "../Profile";
 import Text from "../../atoms/Text";
 import Icon from "../../atoms/Icon/MoreOption";
-import EditnDelete from "./EditDelete";
+import EditDelete from "./EditDelete";
 
-function Comment(props) {
+function Comment(props: CommentProps) {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   let { createdDate } = props;
   createdDate = createdDate.replace("T", " ");
@@ -27,7 +29,7 @@ function Comment(props) {
       </Link>
       <Column>
         <InfoWrapper>
-          <Text level={2} name="name" weight={800} align="center">
+          <Text level={2} weight={800} align="center">
             {props.username}
           </Text>
           &nbsp;
@@ -47,17 +49,15 @@ function Comment(props) {
         </CommentWrapper>
       </Column>
       {isButtonClicked && (
-        <EditnDelete
-          id={props.id}
+        <EditDelete
+          cid={props.cid}
           pid={props.pid}
-          setCidUpdate={props.setCidUpdate}
-          setIsEdit={props.setIsEdit}
-          setContentUpdate={props.setContentUpdate}
           modalType={props.modalType}
           setIsButtonClicked={setIsButtonClicked}
           modalReload={props.modalReload}
           setModalReload={props.setModalReload}
-        ></EditnDelete>
+          setUpdatingCid={props.setUpdatingCid}
+        ></EditDelete>
       )}
     </Wrapper>
   );

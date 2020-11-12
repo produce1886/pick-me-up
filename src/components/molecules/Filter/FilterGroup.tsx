@@ -1,16 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { ModalType } from "@src/components/atoms/Modal/ModalType";
 import Filter from "./Filter";
-import { CATEGORY, FIELD, REGION, PROJECT_TYPE, FilterItem } from "./ItemData";
-import { ModalType } from "../../atoms/Modal/ModalType";
+import { CATEGORY, FIELD, REGION, PROJECT_CATEGORY } from "./ItemData";
 
 type FilterGroupProps = {
+  type: string;
   width: string;
   height: string;
-  line: string;
+  line?: string;
   level: number;
-  defaultText: string;
-  data: FilterItem[];
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   setField: React.Dispatch<React.SetStateAction<string>>;
   setRegion: React.Dispatch<React.SetStateAction<string>>;
@@ -61,7 +60,7 @@ function FilterGroup(props: FilterGroupProps) {
             line={props.line}
             level={props.level}
             defaultText={projectType}
-            data={PROJECT_TYPE}
+            data={PROJECT_CATEGORY}
             onClick={props.setProjectType}
           ></Filter>
         </>

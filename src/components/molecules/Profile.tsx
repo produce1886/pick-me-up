@@ -4,12 +4,21 @@ import Colors from "@colors";
 import ProfileIcon from "../atoms/Icon/Profile";
 import Text from "../atoms/Text";
 
-function Profile(props) {
+type ProfileProps = {
+  profileImage?: string;
+  size: string;
+  margin?: string;
+  name?: string;
+  level?: number;
+  weight?: string | number;
+};
+
+function Profile(props: ProfileProps) {
   return (
     <Wrapper>
       {props.profileImage ? (
         <ImageHolder size={props.size} margin={props.margin}>
-          <Img src={props.profileImage}></Img>
+          <Img src={props.profileImage} alt="프로필 사진(Profile Image)"></Img>
         </ImageHolder>
       ) : (
         <ProfileIcon
@@ -41,7 +50,7 @@ const Wrapper = styled.div`
 
 const ImageHolder = styled.div`
   overflow: hidden;
-  ${(props) => css`
+  ${(props: ProfileProps) => css`
     width: ${props.size};
     height: ${props.size};
     border-radius: ${props.size};

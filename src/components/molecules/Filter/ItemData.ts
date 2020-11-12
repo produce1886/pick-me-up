@@ -1,3 +1,8 @@
+type FilterItemType = {
+  key: number;
+  title: string;
+};
+
 const CATEGORY = [
   { key: 0, title: "웹" },
   { key: 1, title: "어플리케이션" },
@@ -39,7 +44,7 @@ const REGION = [
   { key: 16, title: "충북" },
 ];
 
-const PROJECT_TYPE = [
+const PROJECT_CATEGORY = [
   { key: 0, title: "공모전" },
   { key: 1, title: "창업" },
   { key: 2, title: "프로젝트" },
@@ -57,9 +62,5 @@ const COMMENT = [
   { key: 1, title: "댓글 삭제" },
 ];
 
-export type FilterItem = {
-  key: number;
-  title: string;
-};
-
-export { CATEGORY, FIELD, REGION, PROJECT_TYPE, ALIGN, COMMENT };
+export type { FilterItemType };
+export { CATEGORY, FIELD, REGION, PROJECT_CATEGORY, ALIGN, COMMENT };

@@ -14,7 +14,7 @@ type OptionInfoProps = {
   areaSecurity: boolean;
   interestSecurity: boolean;
   universitySecurity: boolean;
-  birth: Date;
+  birth: string;
   university: string;
   major: string;
   area: string;

@@ -11,21 +11,21 @@ type ModalBottomProps = {
   modalType: ModalType;
   commentsNum: number;
   comments: Comment[];
-  pid: string | string[] | number;
+  pid: string;
   modalReload: number;
   setModalReload: Dispatch<SetStateAction<number>>;
 };
 
 function ModalBottom(props: ModalBottomProps) {
   // 수정 댓글 아이디 받아오는 state
-  const [cidUpdate, setCidUpdate] = useState("");
+  const [updatingCid, setUpdatingCid] = useState("");
   // 수정 댓글 본문 받아오는 state
   const [contentUpdate, setContentUpdate] = useState("");
   const [isEdit, setIsEdit] = useState(false);
 
   return (
-    <Bottom>
-      <Div>
+    <Wrapper>
+      <CommentNumWrapper>
         <Text level={4} weight={500} color={Colors.DEEP_PURPLE}>
           {props.commentsNum}
         </Text>
@@ -33,21 +33,17 @@ function ModalBottom(props: ModalBottomProps) {
         <Text level={4} weight={500} color={Colors.BLACK}>
           {props.commentsNum < 2 ? "Comment" : "Comments"}
         </Text>
-      </Div>
+      </CommentNumWrapper>
       {props.comments &&
         props.comments.map((item: Comment, index: number) => (
           <CommentComponent
+            key={item.id}
             modalType={props.modalType}
             comment={item.content}
             createdDate={item.createdDate}
             {...item.user}
-            id={item.id}
-            // key에 index 넣은거 수정 필요. Q.어떤 방식으로?
-            key={index}
+            cid={item.id}
             pid={props.pid}
-            setCidUpdate={setCidUpdate}
-            setContentUpdate={setContentUpdate}
-            setIsEdit={setIsEdit}
             modalReload={props.modalReload}
             setModalReload={props.setModalReload}
           ></CommentComponent>
@@ -55,27 +51,25 @@ function ModalBottom(props: ModalBottomProps) {
       <CommentWrite
         modalType={props.modalType}
         pid={props.pid}
-        contentUpdate={contentUpdate}
-        setContentUpdate={setContentUpdate}
-        isEdit={isEdit}
-        cid={cidUpdate}
-        setIsEdit={setIsEdit}
+        cid={cid}
         modalReload={props.modalReload}
         setModalReload={props.setModalReload}
+        updatingCid={updatingCid}
+        setUpdatingCid={setUpdatingCid}
       ></CommentWrite>
-    </Bottom>
+    </Wrapper>
   );
 }
 
 export default React.memo(ModalBottom);
 
-const Div = styled.div`
+const CommentNumWrapper = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
 `;
 
-const Bottom = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: fit-content;
   background-color: #ffffff;
