@@ -12,10 +12,11 @@ import EditDelete from "./EditDelete";
 
 function Comment(props: CommentProps) {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  let { createdDate } = props;
-  createdDate = createdDate.replace("T", " ");
-  const currentUserEmail = useSelector((state) => state.user.userData.email);
-
+  const currentUserEmail = useSelector(
+    (state: { user: UserState }) => state.user.userData.email
+  );
+  let { date } = props;
+  date = date.replace("T", " ");
   return (
     <Wrapper>
       <Link href="/profile/[userid]" as={`/profile/${props.id}`}>
@@ -34,7 +35,7 @@ function Comment(props: CommentProps) {
           </Text>
           &nbsp;
           <Text level={1} color={Colors.DEEP_GREY}>
-            {createdDate}
+            {date}
           </Text>
           {currentUserEmail === props.email && (
             <ButtonWrapper onClick={() => setIsButtonClicked(!isButtonClicked)}>
