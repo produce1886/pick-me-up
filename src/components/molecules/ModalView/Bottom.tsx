@@ -35,12 +35,12 @@ function ModalBottom(props: ModalBottomProps) {
         </Text>
       </CommentNumWrapper>
       {props.comments &&
-        props.comments.map((item: Comment, index: number) => (
+        props.comments.map((item: Comment) => (
           <CommentComponent
             key={item.id}
             modalType={props.modalType}
             comment={item.content}
-            createdDate={item.createdDate}
+            date={item.createdDate}
             {...item.user}
             cid={item.id}
             pid={props.pid}
@@ -51,7 +51,6 @@ function ModalBottom(props: ModalBottomProps) {
       <CommentWrite
         modalType={props.modalType}
         pid={props.pid}
-        cid={cid}
         modalReload={props.modalReload}
         setModalReload={props.setModalReload}
         updatingCid={updatingCid}
