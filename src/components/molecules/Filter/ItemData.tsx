@@ -57,4 +57,9 @@ const COMMENT = [
   { key: 1, title: "댓글 삭제" },
 ];
 
+export type FilterItem = {
+  key: number;
+  title: string;
+};
+
 export { CATEGORY, FIELD, REGION, PROJECT_TYPE, ALIGN, COMMENT };

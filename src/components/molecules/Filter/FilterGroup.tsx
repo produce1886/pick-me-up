@@ -1,9 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import Filter from "./Filter";
-import { CATEGORY, FIELD, REGION, PROJECT_TYPE } from "./ItemData";
+import { CATEGORY, FIELD, REGION, PROJECT_TYPE, FilterItem } from "./ItemData";
+import { ModalType } from "../../atoms/Modal/ModalType";
 
-function FilterGroup(props) {
+type FilterGroupProps = {
+  width: string;
+  height: string;
+  line: string;
+  level: number;
+  defaultText: string;
+  data: FilterItem[];
+  setCategory: React.Dispatch<React.SetStateAction<string>>;
+  setField: React.Dispatch<React.SetStateAction<string>>;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
+  setProjectType: React.Dispatch<React.SetStateAction<string>>;
+  modalType: ModalType;
+};
+
+function FilterGroup(props: FilterGroupProps) {
   const category = "카테고리";
   const region = "지역";
   const field = "구인분야";
@@ -29,7 +44,7 @@ function FilterGroup(props) {
         data={FIELD}
         onClick={props.setField}
       ></Filter>
-      {props.type === "project" && (
+      {props.modalType === "project" && (
         <>
           <Filter
             width={props.width}
