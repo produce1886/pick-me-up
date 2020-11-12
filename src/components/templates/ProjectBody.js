@@ -18,11 +18,12 @@ function ProjectBody(props) {
   const [query, setQuery] = useState("");
   const [writeVisible, setWriteVisible] = useState(false);
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
+  const align = "최신순";
 
   return (
     <>
       <FilterSearch
-        modalType="project"
+        type="project"
         setCategory={setCategory}
         setField={setField}
         setRegion={setRegion}
@@ -33,8 +34,11 @@ function ProjectBody(props) {
         <InnerWrapper>
           <Div>
             <Filter
-              title="최신순"
-              activeMenu="align"
+              width="6rem"
+              height="1.6rem"
+              line="1.08rem"
+              level={3}
+              defaultText={align}
               data={ALIGN}
               onClick={setSort}
             ></Filter>

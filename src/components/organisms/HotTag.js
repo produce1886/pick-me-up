@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Row from "../atoms/Row";
-import Col from "../atoms/Col";
+import Colors from "@colors";
+import Row from "../atoms/Wrapper/Row";
+import Col from "../atoms/Wrapper/Col";
 import Icon from "../atoms/Icon/Tag";
 import Text from "../atoms/Text";
 import Tag from "../molecules/Button/Tag";
@@ -18,12 +19,12 @@ export default function HotTag() {
           <Div>
             <Icon
               style={{ width: "2rem", height: "2rem" }}
-              fill="#9c69e2"
+              fill={Colors.DEEP_PURPLE}
             ></Icon>
-            <Text color="#232735" level={12} weight="bold">
+            <Text color={Colors.BLACK} level={12} weight="bold">
               HOT TAG
             </Text>
-            <Text color="#8b90a0" level={1}>
+            <Text color={Colors.DEEP_GREY} level={1}>
               지금 이시간 가장 인기 있는 태그를 확인하세요
             </Text>
           </Div>

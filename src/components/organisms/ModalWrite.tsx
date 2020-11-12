@@ -4,7 +4,7 @@ import axios from "axios";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
-import { State } from "../../types/User";
+import UserState from "../../types/User";
 import { ModalType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
 import checkIsNotEmpty from "../../lib/utils/CheckIsNotEmpty";
@@ -24,7 +24,7 @@ function ModalWrite({
   setReload,
   reload,
 }: ModalWriteProps) {
-  const userState = useSelector((state: { user: State }) => state.user);
+  const userState = useSelector((state: { user: UserState }) => state.user);
   const { email } = userState.userData;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");

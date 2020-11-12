@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import Text from "../../atoms/Text";
 import EditButton from "../../molecules/Button/Edit";
 
@@ -18,11 +19,11 @@ function Top(props) {
         >
           <EditButton></EditButton>
         </ButtonWrapper>
-        <Text level={6} weight="bold" color="#232735">
+        <Text level={6} weight="bold" color={Colors.BLACK}>
           {props.username}
         </Text>
         {props.introduce_security && (
-          <Text level={3} color="#8b90a0">
+          <Text level={3} color={Colors.DEEP_GREY}>
             {props.introduce}
           </Text>
         )}

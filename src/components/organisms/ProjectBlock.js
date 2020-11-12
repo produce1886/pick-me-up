@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import Text from "../atoms/Text";
 import Top from "../molecules/ProjectBlock/Top";
 import Bottom from "../molecules/ProjectBlock/Bottom";
@@ -22,7 +23,7 @@ function ProjectBlock(props) {
         projectCategory={props.item.projectCategory}
       ></Top>
       <Body>
-        <Text level={2} color="#232735">
+        <Text level={2} color={Colors.BLACK}>
           {props.item.content}
         </Text>
       </Body>

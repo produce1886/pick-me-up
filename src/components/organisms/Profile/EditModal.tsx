@@ -9,7 +9,7 @@ import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import X from "../../atoms/Icon/X";
 import PillButton from "../../molecules/Button/Pill";
-import { State } from "../../../types/User";
+import UserState from "../../../types/User";
 
 type ButtonWrapperProps = {
   bottom?: string;
@@ -20,6 +20,19 @@ type ButtonWrapperProps = {
 type EditModalProps = {
   isVisible: boolean;
   onClose: () => void;
+  data: JSON;
+  image: string;
+  username: string;
+  introduce: string;
+  birth: string;
+  university: string;
+  major: string;
+  area: string;
+  interest: string;
+  birthSecurity: boolean;
+  areaSecurity: boolean;
+  interestSecurity: boolean;
+  universitySecurity: boolean;
 };
 
 function EditModal(props: EditModalProps) {
@@ -29,8 +42,13 @@ function EditModal(props: EditModalProps) {
   const [birthSecurity, setBirthSecurity] = useState(false);
   const [areaSecurity, setAreaSecurity] = useState(false);
   const [interestSecurity, setInterestSecurity] = useState(false);
-  const [UniversitySecurity, setUniversitySecurity] = useState(false);
+<<<<<<< HEAD
+  const [universitySecurity, setUniversitySecurity] = useState(false);
   const userState = useSelector((state: { user: State }) => state.user);
+=======
+  const [UniversitySecurity, setUniversitySecurity] = useState(false);
+  const userState = useSelector((state: { user: UserState }) => state.user);
+>>>>>>> f86ebf24d3cd94fc150d5c071a7b75098ab6d806
   const { email } = userState.userData;
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");
@@ -58,8 +76,8 @@ function EditModal(props: EditModalProps) {
         interests: interest,
         sex_security: sexSecurity,
         birth_security: birthSecurity,
-        university_security: UniversitySecurity,
-        major_security: UniversitySecurity,
+        university_security: universitySecurity,
+        major_security: universitySecurity,
         area_security: areaSecurity,
         introduce_security: true,
         interests_security: interestSecurity,
@@ -80,7 +98,7 @@ function EditModal(props: EditModalProps) {
     image,
     interest,
     birthSecurity,
-    UniversitySecurity,
+    universitySecurity,
     areaSecurity,
     interestSecurity,
   ]);
@@ -91,7 +109,7 @@ function EditModal(props: EditModalProps) {
       try {
         const result = await axios.get(`${process.env.API_HOST}/users/${uid}`);
         setImage(result.data.image);
-        setUsername(result.data.username);
+        setUsername(props.username);
         setIntroduce(result.data.introduce);
         setBirth(result.data.birth);
         setUniversity(result.data.university);
@@ -111,8 +129,36 @@ function EditModal(props: EditModalProps) {
     if (!data) {
       fetchData();
     }
-  }, []);
-
+  }, [data]);
+  /*
+  useEffect(() => {
+    setImage(props.image);
+    setUsername(props.username);
+    setIntroduce(props.introduce);
+    setBirth(props.birth);
+    setUniversity(props.university);
+    setMajor(props.major);
+    setArea(props.area);
+    setInterest(props.interest);
+    setBirthSecurity(props.birthSecurity);
+    setAreaSecurity(props.areaSecurity);
+    setInterestSecurity(props.interestSecurity);
+    setUniversitySecurity(props.universitySecurity);
+  }, [
+    image,
+    username,
+    introduce,
+    birth,
+    university,
+    major,
+    area,
+    interest,
+    birthSecurity,
+    areaSecurity,
+    interestSecurity,
+    universitySecurity,
+  ]);
+  */
   return (
     <>
       <Modal isVisible={props.isVisible} onClose={props.onClose}>
@@ -125,11 +171,11 @@ function EditModal(props: EditModalProps) {
               top: "2.3rem",
               position: "absolute",
             }}
-            fill="#232735"
+            fill={Colors.BLACK}
           ></X>
         </ButtonWrapper>
         <Inner>
-          {!isLoading && data && (
+          {!isLoading && (
             <>
               <DefaultInfo
                 image={image}
@@ -148,9 +194,9 @@ function EditModal(props: EditModalProps) {
                 setInterestSecurity={() =>
                   setInterestSecurity(!interestSecurity)
                 }
-                UniversitySecurity={UniversitySecurity}
+                universitySecurity={universitySecurity}
                 setUniversitySecurity={() =>
-                  setUniversitySecurity(!UniversitySecurity)
+                  setUniversitySecurity(!universitySecurity)
                 }
                 birth={birth}
                 setBirth={setBirth}
