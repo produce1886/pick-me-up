@@ -1,26 +1,10 @@
-import { useEffect } from "react";
-import axios from "axios";
+import CommentService from "@src/lib/api/Comment";
+import useAxiosQuery from "./Api";
 
-const useCommentLoadingApi = (
-  setContent: React.Dispatch<React.SetStateAction<string>>,
-  url: string,
-  cid?: string
-) => {
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios.get(`${process.env.API_HOST}/${url}/${cid}`);
-        setContent(result.data.content);
-      } catch (err) {
-        alert("댓글 수정에 실패했습니다.");
-      }
-    };
-    if (cid) {
-      fetchData();
-    }
-  }, [cid]);
-};
+export const useCommentGetApi = useAxiosQuery<string>(
+  CommentService.getComment
+);
 
-const CommentHooks = { useCommentLoadingApi };
+const CommentHooks = { useCommentGetApi };
 
 export default CommentHooks;

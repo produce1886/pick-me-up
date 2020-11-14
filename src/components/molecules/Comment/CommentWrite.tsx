@@ -12,11 +12,11 @@ function CommentWrite(props: CommentProps) {
   const userState = useSelector((state: { user: UserState }) => state.user);
   const [content, setContent] = useState("");
 
-  CommentHooks.useCommentLoadApi(
+  const { isLoading, isError, data } = CommentHooks.useCommentGetApi([
     setContent,
     `${props.modalType}s/${props.pid}/comments`,
-    props.updatingCid
-  );
+    props.updatingCid,
+  ]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
