@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Filter from "./Filter";
 import { CATEGORY, FIELD, REGION, PROJECT_CATEGORY } from "./ItemData";
 
-type FilterGroupProps = {
+export type FilterGroupProps = {
   type: string;
   width: string;
   height: string;
