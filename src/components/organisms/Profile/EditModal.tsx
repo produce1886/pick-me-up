@@ -41,14 +41,9 @@ function EditModal(props: EditModalProps) {
   const sexSecurity = false;
   const [birthSecurity, setBirthSecurity] = useState(false);
   const [areaSecurity, setAreaSecurity] = useState(false);
-  const [interestSecurity, setInterestSecurity] = useState(false);
-<<<<<<< HEAD
+  const [interestsSecurity, setInterestSecurity] = useState(false);
   const [universitySecurity, setUniversitySecurity] = useState(false);
-  const userState = useSelector((state: { user: State }) => state.user);
-=======
-  const [UniversitySecurity, setUniversitySecurity] = useState(false);
   const userState = useSelector((state: { user: UserState }) => state.user);
->>>>>>> f86ebf24d3cd94fc150d5c071a7b75098ab6d806
   const { email } = userState.userData;
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");
@@ -80,7 +75,7 @@ function EditModal(props: EditModalProps) {
         major_security: universitySecurity,
         area_security: areaSecurity,
         introduce_security: true,
-        interests_security: interestSecurity,
+        interests_security: interestsSecurity,
       };
       axios.put(`${process.env.API_HOST}/users/${uid}`, body);
       props.onClose();
@@ -100,7 +95,7 @@ function EditModal(props: EditModalProps) {
     birthSecurity,
     universitySecurity,
     areaSecurity,
-    interestSecurity,
+    interestsSecurity,
   ]);
 
   useEffect(() => {
@@ -109,7 +104,7 @@ function EditModal(props: EditModalProps) {
       try {
         const result = await axios.get(`${process.env.API_HOST}/users/${uid}`);
         setImage(result.data.image);
-        setUsername(props.username);
+        setUsername(result.data.username);
         setIntroduce(result.data.introduce);
         setBirth(result.data.birth);
         setUniversity(result.data.university);
@@ -190,9 +185,9 @@ function EditModal(props: EditModalProps) {
                 setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
                 areaSecurity={areaSecurity}
                 setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
-                interestSecurity={interestSecurity}
+                interestsSecurity={interestsSecurity}
                 setInterestSecurity={() =>
-                  setInterestSecurity(!interestSecurity)
+                  setInterestSecurity(!interestsSecurity)
                 }
                 universitySecurity={universitySecurity}
                 setUniversitySecurity={() =>
