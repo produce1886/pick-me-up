@@ -12,7 +12,7 @@ import { University, Area, Interest } from "./Contents";
 type OptionInfoProps = {
   birthSecurity: boolean;
   areaSecurity: boolean;
-  interestSecurity: boolean;
+  interestsSecurity: boolean;
   universitySecurity: boolean;
   birth: string;
   university: string;
@@ -61,7 +61,9 @@ function OptionInfo(props: OptionInfoProps) {
           <ToggleSwitchWrapper>
             <Toggle onClick={props.setBirthSecurity}>
               <ToggleBall isToggled={props.birthSecurity}></ToggleBall>
-              <RippleBg isVisible={props.birthSecurity}></RippleBg>
+              <RippleBackground
+                isVisible={props.birthSecurity}
+              ></RippleBackground>
             </Toggle>
           </ToggleSwitchWrapper>
           {editBirth && (
@@ -148,7 +150,7 @@ function OptionInfo(props: OptionInfoProps) {
           </Text>
         </DivTitle>
         <Interest
-          interestSecurity={props.interestSecurity}
+          interestsSecurity={props.interestsSecurity}
           setInterestSecurity={props.setInterestSecurity}
           setInterest={props.setInterest}
           interest={props.interest}
@@ -279,7 +281,7 @@ const ToggleBall = styled.div`
     background-color: #f0f1f3;
   }
 `;
-const RippleBg = styled.div`
+const RippleBackground = styled.div`
   ${(props: { isVisible: boolean }) => css`
     width: 100%;
     height: 100%;

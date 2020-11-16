@@ -41,7 +41,7 @@ function EditModal(props: EditModalProps) {
   const sexSecurity = false;
   const [birthSecurity, setBirthSecurity] = useState(false);
   const [areaSecurity, setAreaSecurity] = useState(false);
-  const [interestSecurity, setInterestSecurity] = useState(false);
+  const [interestsSecurity, setInterestSecurity] = useState(false);
   const [universitySecurity, setUniversitySecurity] = useState(false);
   const userState = useSelector((state: { user: UserState }) => state.user);
   const { email } = userState.userData;
@@ -75,7 +75,7 @@ function EditModal(props: EditModalProps) {
         major_security: universitySecurity,
         area_security: areaSecurity,
         introduce_security: true,
-        interests_security: interestSecurity,
+        interests_security: interestsSecurity,
       };
       axios.put(`${process.env.API_HOST}/users/${uid}`, body);
       props.onClose();
@@ -95,7 +95,7 @@ function EditModal(props: EditModalProps) {
     birthSecurity,
     universitySecurity,
     areaSecurity,
-    interestSecurity,
+    interestsSecurity,
   ]);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ function EditModal(props: EditModalProps) {
       try {
         const result = await axios.get(`${process.env.API_HOST}/users/${uid}`);
         setImage(result.data.image);
-        setUsername(props.username);
+        setUsername(result.data.username);
         setIntroduce(result.data.introduce);
         setBirth(result.data.birth);
         setUniversity(result.data.university);
@@ -185,9 +185,9 @@ function EditModal(props: EditModalProps) {
                 setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
                 areaSecurity={areaSecurity}
                 setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
-                interestSecurity={interestSecurity}
+                interestsSecurity={interestsSecurity}
                 setInterestSecurity={() =>
-                  setInterestSecurity(!interestSecurity)
+                  setInterestSecurity(!interestsSecurity)
                 }
                 universitySecurity={universitySecurity}
                 setUniversitySecurity={() =>

@@ -23,7 +23,7 @@ type AreaProps = {
 };
 
 type InterestProps = {
-  interestSecurity: boolean;
+  interestsSecurity: boolean;
   interest: string;
   setInterest: React.Dispatch<React.SetStateAction<string>>;
   setInterestSecurity: () => void;
@@ -43,7 +43,9 @@ export function University(props: UniversityProps) {
       <ToggleSwitchWrapper>
         <Toggle onClick={props.setUniversitySecurity}>
           <ToggleBall isToggled={props.universitySecurity}></ToggleBall>
-          <RippleBg isVisible={props.universitySecurity}></RippleBg>
+          <RippleBackground
+            isVisible={props.universitySecurity}
+          ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
       {editUniv && (
@@ -84,14 +86,13 @@ export function University(props: UniversityProps) {
 }
 
 export function Area(props: AreaProps) {
-  const title = "지역";
   const [editArea, setEditArea] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
         <Toggle onClick={props.setAreaSecurity}>
           <ToggleBall isToggled={props.areaSecurity}></ToggleBall>
-          <RippleBg isVisible={props.areaSecurity}></RippleBg>
+          <RippleBackground isVisible={props.areaSecurity}></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
       {editArea && (
@@ -102,7 +103,6 @@ export function Area(props: AreaProps) {
           defaultText={props.area ? props.area : "지역을 선택하세요"}
           onClick={props.setArea}
           data={REGION}
-          title={title}
           previousItemTitle={props.area}
           isUserInfoEdit={true}
         ></Filter>
@@ -125,14 +125,15 @@ export function Area(props: AreaProps) {
 }
 
 export function Interest(props: InterestProps) {
-  const title = "관심 분야";
   const [editInterest, setEditInterest] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
         <Toggle onClick={props.setInterestSecurity}>
-          <ToggleBall isToggled={props.interestSecurity}></ToggleBall>
-          <RippleBg isVisible={props.interestSecurity}></RippleBg>
+          <ToggleBall isToggled={props.interestsSecurity}></ToggleBall>
+          <RippleBackground
+            isVisible={props.interestsSecurity}
+          ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
       {editInterest && (
@@ -145,7 +146,6 @@ export function Interest(props: InterestProps) {
           }
           onClick={props.setInterest}
           data={FIELD}
-          title={title}
           previousItemTitle={props.interest}
           isUserInfoEdit={true}
         ></Filter>
@@ -248,7 +248,7 @@ const ToggleBall = styled.div`
     background-color: #f0f1f3;
   }
 `;
-const RippleBg = styled.div`
+const RippleBackground = styled.div`
   ${(props: { isVisible: boolean }) => css`
     width: 100%;
     height: 100%;
