@@ -42,13 +42,8 @@ function EditModal(props: EditModalProps) {
   const [birthSecurity, setBirthSecurity] = useState(false);
   const [areaSecurity, setAreaSecurity] = useState(false);
   const [interestSecurity, setInterestSecurity] = useState(false);
-<<<<<<< HEAD
   const [universitySecurity, setUniversitySecurity] = useState(false);
-  const userState = useSelector((state: { user: State }) => state.user);
-=======
-  const [UniversitySecurity, setUniversitySecurity] = useState(false);
   const userState = useSelector((state: { user: UserState }) => state.user);
->>>>>>> f86ebf24d3cd94fc150d5c071a7b75098ab6d806
   const { email } = userState.userData;
   const [image, setImage] = useState("");
   const [username, setUsername] = useState("");
