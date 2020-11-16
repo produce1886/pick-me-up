@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { ModalType } from "../../atoms/Modal/ModalType";
+import { PageType } from "../../atoms/Modal/ModalType";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";
 
 type ModalMiddleProps = {
   setContent: React.Dispatch<React.SetStateAction<string>>;
   content: string;
-  modalType: ModalType;
+  page: PageType;
   images: string[];
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -15,7 +15,7 @@ type ModalMiddleProps = {
 function ModalMiddle({
   setContent,
   content,
-  modalType,
+  page,
   images,
   setImages,
 }: ModalMiddleProps) {
@@ -33,7 +33,7 @@ function ModalMiddle({
         value={content}
       ></Textarea>
       <Dropzone
-        modalType={modalType}
+        page={page}
         setImages={setImages}
         images={images}
       ></Dropzone>

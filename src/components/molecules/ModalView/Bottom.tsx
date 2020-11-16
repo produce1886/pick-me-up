@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import Colors from "@colors";
+import { PageType } from "@src/components/atoms/Modal/ModalType";
+import { Comment } from "@src/types/Data";
 import Text from "../../atoms/Text";
-import Comment from "../Comment/Comment";
+import CommentComponent from "../Comment/Comment";
 import CommentWrite from "../Comment/CommentWrite";
 
-function ModalBottom(props) {
+type ModalBottomProps = {
+  page: PageType;
+  commentsNum: number;
+  comments: Comment[];
+  pid: string;
+  modalReload: number;
+  setModalReload: Dispatch<SetStateAction<number>>;
+};
+
+function ModalBottom(props: ModalBottomProps) {
   const [updatingCid, setUpdatingCid] = useState(null);
 
   return (
@@ -20,22 +31,23 @@ function ModalBottom(props) {
         </Text>
       </CommentNumWrapper>
       {props.comments &&
-        props.comments.map((item) => (
-          <Comment
+        props.comments.map((item: Comment) => (
+          <CommentComponent
             key={item.id}
-            modalType={props.modalType}
+            page={props.page}
             comment={item.content}
             date={item.createdDate}
             {...item.user}
+            // number, string type error 수정 필요
             cid={item.id}
             pid={props.pid}
             modalReload={props.modalReload}
             setModalReload={props.setModalReload}
             setUpdatingCid={setUpdatingCid}
-          ></Comment>
+          ></CommentComponent>
         ))}
       <CommentWrite
-        modalType={props.modalType}
+        page={props.page}
         pid={props.pid}
         modalReload={props.modalReload}
         setModalReload={props.setModalReload}

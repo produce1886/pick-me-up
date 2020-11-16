@@ -1,4 +1,4 @@
-import { ModalType } from "@src/components/atoms/Modal/ModalType";
+import { PageType } from "@src/components/atoms/Modal/ModalType";
 
 export default function checkIsNotEmpty(
   title: string,
@@ -7,7 +7,7 @@ export default function checkIsNotEmpty(
   field: string,
   region: string,
   projectType: string,
-  modalType: ModalType
+  page: PageType
 ): boolean {
   const flag = false;
   if (!title) {
@@ -26,11 +26,11 @@ export default function checkIsNotEmpty(
     alert("구인분야를 선택해주세요");
     return flag;
   }
-  if (!region && modalType === "project") {
+  if (!region && page === "project") {
     alert("지역을 선택해주세요");
     return flag;
   }
-  if (!projectType && modalType === "project") {
+  if (!projectType && page === "project") {
     alert("프로젝트 종류를 선택해주세요");
     return flag;
   }

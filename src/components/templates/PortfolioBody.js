@@ -21,7 +21,7 @@ function PortfolioBody(props) {
   return (
     <>
       <FilterSearch
-        type="portfolio"
+        page="portfolio"
         setCategory={setCategory}
         setField={setField}
         setQuery={setQuery}
@@ -53,7 +53,7 @@ function PortfolioBody(props) {
         )}
         {writeVisible && (
           <ModalWrite
-            modalType="portfolio"
+            page="portfolio"
             isVisible={writeVisible}
             onClose={() => setWriteVisible(false)}
             reload={props.reload}

@@ -17,7 +17,6 @@ function Comment(props: CommentProps) {
   );
   let { date } = props;
   date = date.replace("T", " ");
-
   return (
     <Wrapper>
       <Link href="/profile/[userid]" as={`/profile/${props.id}`}>
@@ -54,7 +53,7 @@ function Comment(props: CommentProps) {
         <EditDelete
           cid={props.cid}
           pid={props.pid}
-          modalType={props.modalType}
+          page={props.page}
           setIsButtonClicked={setIsButtonClicked}
           modalReload={props.modalReload}
           setModalReload={props.setModalReload}

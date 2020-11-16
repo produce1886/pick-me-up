@@ -5,29 +5,25 @@ import Middle from "../molecules/ModalView/Middle";
 import Bottom from "../molecules/ModalView/Bottom";
 import ProjectSkeleton from "../_skeletons/project/ProjectView";
 import PortfolioSkeleton from "../_skeletons/portfolio/PortfolioView";
-import { ModalProps, ModalType } from "../atoms/Modal/ModalType";
+import { ModalProps, PageType } from "../atoms/Modal/ModalType";
 import DataProps from "../../types/Data";
 import Modal from "../atoms/Modal/index";
 
 function ModalView(props: ModalProps) {
-  const { data, isLoading } = getData(
-    props.pid,
-    props.modalType,
-    props.modalReload
-  );
+  const { data, isLoading } = getData(props.pid, props.page, props.modalReload);
 
   return (
     <Modal isVisible={props.isVisible} onClose={props.onClose}>
-      {isLoading && !data && props.modalType === "project" && (
+      {isLoading && !data && props.page === "project" && (
         <ProjectSkeleton></ProjectSkeleton>
       )}
-      {isLoading && !data && props.modalType === "portfolio" && (
+      {isLoading && !data && props.page === "portfolio" && (
         <PortfolioSkeleton></PortfolioSkeleton>
       )}
       {!isLoading && data && (
         <>
           <Top
-            modalType={props.modalType}
+            page={props.page}
             title={data.title}
             uid={data.user.id}
             name={data.user.username}
@@ -38,23 +34,21 @@ function ModalView(props: ModalProps) {
             projectCategory={data.projectCategory}
           ></Top>
           <Middle
-            modalType={props.modalType}
+            page={props.page}
             date={data.createdDate}
             content={data.content}
             image={data.image}
             userEmail={data.user.email}
             pid={data.id}
             tags={
-              props.modalType === "project"
-                ? data.projectTag
-                : data.portfolioTag
+              props.page === "project" ? data.projectTag : data.portfolioTag
             }
             setUpdate={props.setIsUpdate}
             listReload={props.reload}
             setListReload={props.setReload}
           ></Middle>
           <Bottom
-            modalType={props.modalType}
+            page={props.page}
             commentsNum={data.commentsNum}
             comments={data.comments}
             pid={data.id}
@@ -71,7 +65,7 @@ export default React.memo(ModalView);
 
 const getData = (
   pid: string | string[],
-  modalType: ModalType,
+  page: PageType,
   modalReload: number
 ) => {
   const [data, setData] = useState<DataProps>();
@@ -81,13 +75,13 @@ const getData = (
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        if (modalType === "project") {
+        if (page === "project") {
           const result = await axios.get(
             `${process.env.API_HOST}/projects/${pid}`
           );
           setData(result.data);
           setIsLoading(false);
-        } else if (modalType === "portfolio") {
+        } else if (page === "portfolio") {
           const result = await axios.get(
             `${process.env.API_HOST}/portfolios/${pid}`
           );

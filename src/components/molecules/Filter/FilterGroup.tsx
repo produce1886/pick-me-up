@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { PageType } from "@src/components/atoms/Modal/ModalType";
 import Filter from "./Filter";
 import { CATEGORY, FIELD, REGION, PROJECT_CATEGORY } from "./ItemData";
 
 export type FilterGroupProps = {
-  type: string;
   width: string;
   height: string;
   line?: string;
@@ -13,6 +13,7 @@ export type FilterGroupProps = {
   setField: React.Dispatch<React.SetStateAction<string>>;
   setRegion: React.Dispatch<React.SetStateAction<string>>;
   setProjectType: React.Dispatch<React.SetStateAction<string>>;
+  page: PageType;
 };
 
 function FilterGroup(props: FilterGroupProps) {
@@ -41,7 +42,7 @@ function FilterGroup(props: FilterGroupProps) {
         data={FIELD}
         onClick={props.setField}
       ></Filter>
-      {props.type === "project" && (
+      {props.page === "project" && (
         <>
           <Filter
             width={props.width}

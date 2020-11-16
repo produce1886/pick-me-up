@@ -14,7 +14,7 @@ function CommentWrite(props: CommentProps) {
 
   const { isLoading, isError, data } = CommentHooks.useCommentGetApi([
     setContent,
-    `${props.modalType}s/${props.pid}/comments`,
+    `${props.page}s/${props.pid}/comments`,
     props.updatingCid,
   ]);
 
@@ -34,11 +34,11 @@ function CommentWrite(props: CommentProps) {
       return;
     }
     if (props.updatingCid) {
-      const url = `${props.modalType}s/${props.pid}/comments/${props.updatingCid}`;
+      const url = `${props.page}s/${props.pid}/comments/${props.updatingCid}`;
       CommentService.updateComment(url, content);
       props.setUpdatingCid(null);
     } else {
-      const url = `${props.modalType}s/${props.pid}/comments`;
+      const url = `${props.page}s/${props.pid}/comments`;
       const body = { email: userState.userData.email, content };
       CommentService.writeComment(url, body);
     }

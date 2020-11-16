@@ -16,7 +16,7 @@ export default function Project() {
     <>
       {router.query.pid && !isUpdate && (
         <Modal
-          modalType="project"
+          page="project"
           isVisible={!!router.query.pid}
           pid={router.query.pid}
           onClose={() => router.push(`/project`)}
@@ -29,7 +29,7 @@ export default function Project() {
       )}
       {router.query.pid && isUpdate && (
         <UpdateModal
-          modalType="project"
+          page="project"
           pid={router.query.pid}
           onClose={() => {
             setIsUpdate(false);
