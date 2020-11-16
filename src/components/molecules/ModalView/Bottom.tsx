@@ -17,11 +17,7 @@ type ModalBottomProps = {
 };
 
 function ModalBottom(props: ModalBottomProps) {
-  // 수정 댓글 아이디 받아오는 state
-  const [updatingCid, setUpdatingCid] = useState("");
-  // 수정 댓글 본문 받아오는 state
-  const [contentUpdate, setContentUpdate] = useState("");
-  const [isEdit, setIsEdit] = useState(false);
+  const [updatingCid, setUpdatingCid] = useState(null);
 
   return (
     <Wrapper>
@@ -42,10 +38,12 @@ function ModalBottom(props: ModalBottomProps) {
             comment={item.content}
             date={item.createdDate}
             {...item.user}
+            // number, string type error 수정 필요
             cid={item.id}
             pid={props.pid}
             modalReload={props.modalReload}
             setModalReload={props.setModalReload}
+            setUpdatingCid={setUpdatingCid}
           ></CommentComponent>
         ))}
       <CommentWrite
