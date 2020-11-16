@@ -45,4 +45,11 @@ export type Comment = {
   };
 };
 
+export type HotTag = {
+  id: string;
+  name: string;
+  score: number;
+  count: number;
+};
+
 export default DataProps;
