@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import { PageType } from "../../atoms/Modal/ModalType";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CommentService from "@src/lib/api/Comment";
 import CommentHooks from "@src/lib/hooks/Comment";
 import UserState from "@src/types/User";
+import Colors from "@colors";
 import CommentProps from "./CommentProps";
 import Profile from "../Profile";
 import Icon from "../../atoms/Icon/Write";

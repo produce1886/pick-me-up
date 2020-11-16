@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import UserState from "@src/types/User";
+import Colors from "@colors";
 import Logo from "../molecules/Button/Logo";
 import MainMenu from "../molecules/Gnb/Middle";
 import LogInButton from "../molecules/Button/LogIn";
