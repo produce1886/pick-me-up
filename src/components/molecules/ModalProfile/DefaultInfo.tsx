@@ -7,17 +7,26 @@ import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";
 import Edit from "../../atoms/Icon/Edit";
 
-function DefaultInfo(props) {
+type DefaultInfoProps = {
+  image: string;
+  username: string;
+  introduce: string;
+  setImage: React.Dispatch<React.SetStateAction<string>>;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setIntroduce: React.Dispatch<React.SetStateAction<string>>;
+};
+
+function DefaultInfo(props: DefaultInfoProps) {
   const [editIntroduce, setEditIntroduce] = useState(false);
   const [editUsername, setEditUsername] = useState(false);
 
-  const onChangeUsernameHandler = (e) => {
+  const onChangeUsernameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setUsername(e.target.value);
   };
-  const onChangeIntroduceHandler = (e) => {
+  const onChangeIntroduceHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setIntroduce(e.target.value);
   };
-  const onChangeImageHandler = (e) => {
+  const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setImage(URL.createObjectURL(e.target.files[0]));
   };
   return (
@@ -32,7 +41,7 @@ function DefaultInfo(props) {
           프로필 사진
         </Text>
 
-        <label for="upload">
+        <label htmlFor="upload">
           <ProfileInput
             type="file"
             accept="image/png, image/jpeg, image/jpg"
@@ -75,7 +84,7 @@ function DefaultInfo(props) {
             value={props.username}
             onChange={onChangeUsernameHandler}
             width="6rem"
-            maxLength="8"
+            maxLength={8}
           ></Input>
         )}
         {!editUsername && (
@@ -103,7 +112,7 @@ function DefaultInfo(props) {
             value={props.introduce}
             onChange={onChangeIntroduceHandler}
             width="25rem"
-            maxLength="35"
+            maxLength={35}
           ></Input>
         )}
         {!editIntroduce && (
@@ -156,7 +165,7 @@ const DivTitle = styled.div`
 `;
 
 const Input = styled.input`
-  ${(props) => css`
+  ${(props: { width: string }) => css`
     background-color: #f0f1f3;
     border-radius: 0.6rem;
     border: 0.04rem solid #d3d4d8;
@@ -170,7 +179,6 @@ const Input = styled.input`
     text-align: center;
     align-items: center;
     height: 1.2rem;
-    maxlength: ${props.maxLength};
   `}
 `;
 

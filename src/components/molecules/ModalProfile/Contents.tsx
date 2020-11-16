@@ -6,24 +6,46 @@ import Edit from "../../atoms/Icon/Edit";
 import Filter from "../Filter/Filter";
 import { FIELD, REGION } from "../Filter/ItemData";
 
-export function University(props) {
+type UniversityProps = {
+  universitySecurity: boolean;
+  university: string;
+  major: string;
+  setUniversitySecurity: () => void;
+  setMajor: React.Dispatch<React.SetStateAction<string>>;
+  setUniversity: React.Dispatch<React.SetStateAction<string>>;
+};
+
+type AreaProps = {
+  areaSecurity: boolean;
+  area: string;
+  setAreaSecurity: () => void;
+  setArea: React.Dispatch<React.SetStateAction<string>>;
+};
+
+type InterestProps = {
+  interestsSecurity: boolean;
+  interest: string;
+  setInterest: React.Dispatch<React.SetStateAction<string>>;
+  setInterestSecurity: () => void;
+};
+
+export function University(props: UniversityProps) {
   const [editUniv, setEditUniv] = useState(false);
 
-  const onChangeUnivHandler = (e) => {
+  const onChangeUnivHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setUniversity(e.target.value);
   };
-  const onChangeMajorHandler = (e) => {
+  const onChangeMajorHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setMajor(e.target.value);
   };
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle
-          toggled={props.UniversitySecurity}
-          onClick={props.setUniversitySecurity}
-        >
-          <ToggleBall toggled={props.UniversitySecurity}></ToggleBall>
-          <RippleBg visible={props.UniversitySecurity}></RippleBg>
+        <Toggle onClick={props.setUniversitySecurity}>
+          <ToggleBall isToggled={props.universitySecurity}></ToggleBall>
+          <RippleBackground
+            isVisible={props.universitySecurity}
+          ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
       {editUniv && (
@@ -63,15 +85,14 @@ export function University(props) {
   );
 }
 
-export function Area(props) {
-  const title = "지역";
+export function Area(props: AreaProps) {
   const [editArea, setEditArea] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle toggled={props.areaSecurity} onClick={props.setAreaSecurity}>
-          <ToggleBall toggled={props.areaSecurity}></ToggleBall>
-          <RippleBg visible={props.areaSecurity}></RippleBg>
+        <Toggle onClick={props.setAreaSecurity}>
+          <ToggleBall isToggled={props.areaSecurity}></ToggleBall>
+          <RippleBackground isVisible={props.areaSecurity}></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
       {editArea && (
@@ -82,7 +103,6 @@ export function Area(props) {
           defaultText={props.area ? props.area : "지역을 선택하세요"}
           onClick={props.setArea}
           data={REGION}
-          title={title}
           previousItemTitle={props.area}
           isUserInfoEdit={true}
         ></Filter>
@@ -104,18 +124,16 @@ export function Area(props) {
   );
 }
 
-export function Interest(props) {
-  const title = "관심 분야";
+export function Interest(props: InterestProps) {
   const [editInterest, setEditInterest] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle
-          toggled={props.interestSecurity}
-          onClick={props.setInterestSecurity}
-        >
-          <ToggleBall toggled={props.interestSecurity}></ToggleBall>
-          <RippleBg visible={props.interestSecurity}></RippleBg>
+        <Toggle onClick={props.setInterestSecurity}>
+          <ToggleBall isToggled={props.interestsSecurity}></ToggleBall>
+          <RippleBackground
+            isVisible={props.interestsSecurity}
+          ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
       {editInterest && (
@@ -128,7 +146,6 @@ export function Interest(props) {
           }
           onClick={props.setInterest}
           data={FIELD}
-          title={title}
           previousItemTitle={props.interest}
           isUserInfoEdit={true}
         ></Filter>
@@ -174,18 +191,17 @@ const ButtonWrapper = styled.button`
 `;
 
 const Row = styled.div`
-  ${(props) => css`
+  ${(props: { width: string; marginRight: string; paddingLeft: string }) => css`
     width: ${props.width};
     text-align: center;
     padding-bottom: 0.2rem;
     margin-right: ${props.marginRight};
     padding-left: ${props.paddingLeft};
-    box-sizing: border-box;
   `}
 `;
 
 const Input = styled.input`
-  ${(props) => css`
+  ${(props: { width: string; marginRight: string }) => css`
     background-color: #f0f1f3;
     border-radius: 0.32rem;
     border: none;
@@ -196,7 +212,6 @@ const Input = styled.input`
     font-size: 0.64rem;
     align-items: center;
     height: 1.2rem;
-    maxlength: ${props.maxLength};
     padding-left: 1rem;
     margin-right: ${props.marginRight};
   `}
@@ -227,26 +242,28 @@ const ToggleBall = styled.div`
   border: 1px solid #f0f1f3;
   height: 1rem;
   width: 1rem;
-  transform: ${(props) =>
-    props.toggled ? `translateX(0.9rem)` : "translateX(0rem)"};
+  transform: ${(props: { isToggled: boolean }) =>
+    props.isToggled ? `translateX(0.9rem)` : "translateX(0rem)"};
   &:active {
     background-color: #f0f1f3;
   }
 `;
-const RippleBg = styled.div`
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-image: radial-gradient(circle, #c8acee 10%, transparent 10.01%);
-  background-repeat: no-repeat;
-  background-position: 50%;
-  pointer-events: none;
-  transition: transform 0.5s, opacity 0.3s ease;
-  transform: ${(props) => (props.visible ? "scale(10, 10)" : "scale(0, 0)")};
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  position: absolute;
-  z-index: 1;
+const RippleBackground = styled.div`
+  ${(props: { isVisible: boolean }) => css`
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-image: radial-gradient(circle, #c8acee 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    pointer-events: none;
+    transition: transform 0.5s, opacity 0.3s ease;
+    transform: ${props.isVisible ? "scale(10, 10)" : "scale(0, 0)"};
+    opacity: ${props.isVisible ? 1 : 0};
+    position: absolute;
+    z-index: 1;
+  `}
 `;
 
 const ToggleSwitchWrapper = styled.div`

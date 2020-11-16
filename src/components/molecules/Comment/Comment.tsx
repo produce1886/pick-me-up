@@ -17,7 +17,6 @@ function Comment(props: CommentProps) {
   );
   let { date } = props;
   date = date.replace("T", " ");
-
   return (
     <Wrapper>
       <Link href="/profile/[userid]" as={`/profile/${props.id}`}>

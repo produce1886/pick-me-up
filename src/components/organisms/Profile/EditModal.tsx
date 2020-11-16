@@ -20,6 +20,19 @@ type ButtonWrapperProps = {
 type EditModalProps = {
   isVisible: boolean;
   onClose: () => void;
+  data: JSON;
+  image: string;
+  username: string;
+  introduce: string;
+  birth: string;
+  university: string;
+  major: string;
+  area: string;
+  interest: string;
+  birthSecurity: boolean;
+  areaSecurity: boolean;
+  interestSecurity: boolean;
+  universitySecurity: boolean;
 };
 
 function EditModal(props: EditModalProps) {
@@ -28,8 +41,8 @@ function EditModal(props: EditModalProps) {
   const sexSecurity = false;
   const [birthSecurity, setBirthSecurity] = useState(false);
   const [areaSecurity, setAreaSecurity] = useState(false);
-  const [interestSecurity, setInterestSecurity] = useState(false);
-  const [UniversitySecurity, setUniversitySecurity] = useState(false);
+  const [interestsSecurity, setInterestSecurity] = useState(false);
+  const [universitySecurity, setUniversitySecurity] = useState(false);
   const userState = useSelector((state: { user: UserState }) => state.user);
   const { email } = userState.userData;
   const [image, setImage] = useState("");
@@ -58,11 +71,11 @@ function EditModal(props: EditModalProps) {
         interests: interest,
         sex_security: sexSecurity,
         birth_security: birthSecurity,
-        university_security: UniversitySecurity,
-        major_security: UniversitySecurity,
+        university_security: universitySecurity,
+        major_security: universitySecurity,
         area_security: areaSecurity,
         introduce_security: true,
-        interests_security: interestSecurity,
+        interests_security: interestsSecurity,
       };
       axios.put(`${process.env.API_HOST}/users/${uid}`, body);
       props.onClose();
@@ -80,9 +93,9 @@ function EditModal(props: EditModalProps) {
     image,
     interest,
     birthSecurity,
-    UniversitySecurity,
+    universitySecurity,
     areaSecurity,
-    interestSecurity,
+    interestsSecurity,
   ]);
 
   useEffect(() => {
@@ -111,8 +124,36 @@ function EditModal(props: EditModalProps) {
     if (!data) {
       fetchData();
     }
-  }, []);
-
+  }, [data]);
+  /*
+  useEffect(() => {
+    setImage(props.image);
+    setUsername(props.username);
+    setIntroduce(props.introduce);
+    setBirth(props.birth);
+    setUniversity(props.university);
+    setMajor(props.major);
+    setArea(props.area);
+    setInterest(props.interest);
+    setBirthSecurity(props.birthSecurity);
+    setAreaSecurity(props.areaSecurity);
+    setInterestSecurity(props.interestSecurity);
+    setUniversitySecurity(props.universitySecurity);
+  }, [
+    image,
+    username,
+    introduce,
+    birth,
+    university,
+    major,
+    area,
+    interest,
+    birthSecurity,
+    areaSecurity,
+    interestSecurity,
+    universitySecurity,
+  ]);
+  */
   return (
     <>
       <Modal isVisible={props.isVisible} onClose={props.onClose}>
@@ -129,7 +170,7 @@ function EditModal(props: EditModalProps) {
           ></X>
         </ButtonWrapper>
         <Inner>
-          {!isLoading && data && (
+          {!isLoading && (
             <>
               <DefaultInfo
                 image={image}
@@ -144,13 +185,13 @@ function EditModal(props: EditModalProps) {
                 setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
                 areaSecurity={areaSecurity}
                 setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
-                interestSecurity={interestSecurity}
+                interestsSecurity={interestsSecurity}
                 setInterestSecurity={() =>
-                  setInterestSecurity(!interestSecurity)
+                  setInterestSecurity(!interestsSecurity)
                 }
-                UniversitySecurity={UniversitySecurity}
+                universitySecurity={universitySecurity}
                 setUniversitySecurity={() =>
-                  setUniversitySecurity(!UniversitySecurity)
+                  setUniversitySecurity(!universitySecurity)
                 }
                 birth={birth}
                 setBirth={setBirth}
