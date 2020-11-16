@@ -131,7 +131,6 @@ function OptionInfo(props: OptionInfoProps) {
           setAreaSecurity={props.setAreaSecurity}
           setArea={props.setArea}
           area={props.area}
-          // zIndex={2000}
         ></Area>
       </Div>
       <Div>
@@ -153,7 +152,6 @@ function OptionInfo(props: OptionInfoProps) {
           setInterestSecurity={props.setInterestSecurity}
           setInterest={props.setInterest}
           interest={props.interest}
-          // zIndex={1999}
         ></Interest>
       </Div>
     </Wrapper>
