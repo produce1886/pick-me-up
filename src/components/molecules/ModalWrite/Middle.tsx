@@ -32,11 +32,7 @@ function ModalMiddle({
         }}
         value={content}
       ></Textarea>
-      <Dropzone
-        page={page}
-        setImages={setImages}
-        images={images}
-      ></Dropzone>
+      <Dropzone page={page} setImages={setImages} images={images}></Dropzone>
     </Middle>
   );
 }
@@ -55,13 +51,13 @@ const Textarea = styled.textarea`
   font-size: 0.72rem;
   resize: none;
   input::placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   input::-webkit-input-placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   input:-ms-input-placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   overflow-y: scroll;
 `;

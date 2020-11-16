@@ -224,7 +224,7 @@ export default EditModal;
 const Inner = styled.div`
   width: 100%;
   height: fit-content;
-  background-color: #ffffff;
+  background-color: ${Colors.WHITE};
   box-sizing: border-box;
   box-shadow: 0 0.24rem 0.48rem 0 rgba(0, 0, 0, 0.1);
   border-radius: 1rem;

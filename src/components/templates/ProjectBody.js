@@ -93,7 +93,7 @@ const InnerWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: #f0f8fd;
+  background-color: ${Colors.LIGTH_BLUE};
   width: 100%;
   min-height: 30rem;
   align-items: center;

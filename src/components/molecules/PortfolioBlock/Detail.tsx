@@ -53,7 +53,7 @@ const DetailWrapper = styled.div`
   height: 3rem;
   position: absolute;
   bottom: -3rem;
-  background-color: #fff;
+  background-color: ${Colors.WHITE};
   -webkit-transition: -webkit-transform 0.6s;
   transition: transform 0.6s;
   padding: 0.4rem 0.6rem;

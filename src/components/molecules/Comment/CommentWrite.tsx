@@ -82,7 +82,7 @@ const CommentBox = styled.div`
   width: 100%;
   height: fit-content;
   border-radius: 0.2rem;
-  background-color: #d3d4d8;
+  background-color: ${Colors.GREY};
   justify-content: center;
   align-items: center;
   display: flex;
@@ -104,13 +104,13 @@ const Textarea = styled.textarea`
   font-size: 0.56rem;
   resize: none;
   input::placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   input::-webkit-input-placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   input:-ms-input-placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
 `;
 

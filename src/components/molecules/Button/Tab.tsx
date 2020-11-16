@@ -28,6 +28,6 @@ const Wrapper = styled.div`
   align-items: center;
   box-sizing: border-box;
   ${(props: { isSelected: boolean }) => css`
-    border-bottom: ${props.isSelected && "3px solid #232735"};
+    border-bottom: ${props.isSelected && `3px solid ${Colors.BLACK}`};
   `}
 `;

@@ -53,7 +53,7 @@ export default React.memo(Top);
 
 const Wrapper = styled.div`
   width: 100%;
-  border-bottom: 0.07rem solid #d3d4d8;
+  border-bottom: 0.07rem solid ${Colors.GREY};
   padding: 0.8rem 1rem 0rem 1rem;
   box-sizing: border-box;
   height: fit-content;

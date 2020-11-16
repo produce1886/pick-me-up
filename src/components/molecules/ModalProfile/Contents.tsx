@@ -202,7 +202,7 @@ const Row = styled.div`
 
 const Input = styled.input`
   ${(props: { width: string; marginRight: string }) => css`
-    background-color: #f0f1f3;
+    background-color: ${Colors.LIGHT_GREY};
     border-radius: 0.32rem;
     border: none;
     box-sizing: border-box;
@@ -223,7 +223,7 @@ const Toggle = styled.div`
   overflow: hidden;
   position: relative;
   transform: translate3d(0, 0, 0);
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
   height: 1.1rem;
   width: 2rem;
   border-radius: 2rem;
@@ -238,14 +238,14 @@ const ToggleBall = styled.div`
   transition: transform 0.3s cubic-bezier(1, 0.19, 0.15, 0.7);
   transition-delay: 0.1s;
   will-change: transform;
-  background-color: #ffffff;
-  border: 1px solid #f0f1f3;
+  background-color: ${Colors.WHITE};
+  border: 1px solid ${Colors.LIGHT_GREY};
   height: 1rem;
   width: 1rem;
   transform: ${(props: { isToggled: boolean }) =>
     props.isToggled ? `translateX(0.9rem)` : "translateX(0rem)"};
   &:active {
-    background-color: #f0f1f3;
+    background-color: ${Colors.LIGHT_GREY};
   }
 `;
 const RippleBackground = styled.div`
@@ -254,7 +254,11 @@ const RippleBackground = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    background-image: radial-gradient(circle, #c8acee 10%, transparent 10.01%);
+    background-image: radial-gradient(
+      circle,
+      ${Colors.PURPLE} 10%,
+      transparent 10.01%
+    );
     background-repeat: no-repeat;
     background-position: 50%;
     pointer-events: none;
