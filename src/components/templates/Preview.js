@@ -9,7 +9,7 @@ import Icon from "../atoms/Icon/Chevron/Right";
 import Skeleton from "../_skeletons/main/PostBlock";
 
 export default function Preview(props) {
-  const { projects, isLoading } = getProjects(props.type);
+  const { projects, isLoading } = getProjects(props.sort);
 
   return (
     <Wrapper>
@@ -18,8 +18,8 @@ export default function Preview(props) {
           <Link href="project">
             <A>
               <Text level={8} color={Colors.BLACK} weight="bold">
-                {props.type === "new" && "신규 프로젝트"}
-                {props.type === "most" && "가장 많이 본 프로젝트"}
+                {props.sort === "new" && "신규 프로젝트"}
+                {props.sort === "most" && "가장 많이 본 프로젝트"}
               </Text>
             </A>
           </Link>
@@ -37,13 +37,13 @@ export default function Preview(props) {
               <Skeleton />
             </>
           )}
-          {props.type === "new" &&
+          {props.sort === "new" &&
             projects.length > 0 &&
             !isLoading &&
             projects.map((item, index) => (
-              <Postblock key={index} item={item} type={props.type}></Postblock>
+              <Postblock key={index} item={item} sort={props.sort}></Postblock>
             ))}
-          {props.type === "most" &&
+          {props.sort === "most" &&
             projects.length > 0 &&
             !isLoading &&
             projects.map((item, index) => (
@@ -51,7 +51,7 @@ export default function Preview(props) {
                 key={index}
                 rank={index + 1}
                 item={item}
-                type={props.type}
+                sort={props.sort}
               ></Postblock>
             ))}
         </InnerWrapper>
@@ -60,21 +60,21 @@ export default function Preview(props) {
   );
 }
 
-const getProjects = (type) => {
+const getProjects = (sort) => {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  let sort;
-  if (type === "new") {
-    sort = "createdDate";
-  } else if (type === "most") {
-    sort = "viewNum";
+  let sortColumn;
+  if (sort === "new") {
+    sortColumn = "createdDate";
+  } else if (sort === "most") {
+    sortColumn = "viewNum";
   }
 
   const body = {
     page: 0,
     size: 4,
-    sortColumn: `${sort}`,
+    sortColumn,
     category: "",
     huntingField: "",
     region: "",

@@ -9,8 +9,8 @@ export default function Home() {
     <>
       <Gnb></Gnb>
       <Banner></Banner>
-      <Preview type="new"></Preview>
-      <Preview type="most"></Preview>
+      <Preview sort="new"></Preview>
+      <Preview sort="most"></Preview>
       <HotTag></HotTag>
       <Footer></Footer>
     </>

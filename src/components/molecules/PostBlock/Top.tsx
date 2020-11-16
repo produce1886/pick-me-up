@@ -8,7 +8,7 @@ import Rank from "./Rank";
 import Profile from "../Profile";
 
 type TopProps = {
-  type: "most" | "new";
+  sort: "most" | "new";
   rank: number;
   title: string | string[];
   name: string;
@@ -21,7 +21,7 @@ function Top(props: TopProps) {
   return (
     <Wrapper>
       <Col>
-        {props.type === "most" && <Rank number={props.rank}></Rank>}
+        {props.sort === "most" && <Rank number={props.rank}></Rank>}
         <Row>
           <Text level={6} weight="bold" color={Colors.DEEP_PURPLE} line={1.17}>
             {props.title}

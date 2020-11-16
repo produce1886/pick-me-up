@@ -11,7 +11,7 @@ export default function PostBlock(props) {
   return (
     <Wrapper>
       <Top
-        type={props.type}
+        sort={props.sort}
         rank={props.rank}
         title={props.item.title}
         date={date}
@@ -19,14 +19,14 @@ export default function PostBlock(props) {
         name={props.item.user.username}
         profileImage={props.item.user.image}
       ></Top>
-      {props.type === "most" && (
+      {props.sort === "most" && (
         <BodyHot>
           <Text level={2} color={Colors.BLACK}>
             {props.item.content}
           </Text>
         </BodyHot>
       )}
-      {props.type === "new" && (
+      {props.sort === "new" && (
         <BodyNew>
           <Text level={2} color={Colors.BLACK}>
             {props.item.content}
