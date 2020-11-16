@@ -10,7 +10,7 @@ type DataProps = {
   createdDate: string;
   content: string;
   image: string;
-  id: number;
+  id: string;
   commentsNum: number;
   viewNum: number;
   projectTag: Tag[];
@@ -20,29 +20,24 @@ type DataProps = {
 };
 
 export type User = {
-  id: number;
+  id: string;
   username: string;
   email: string;
   image: string;
 };
 
 export type Tag = {
-  id: number;
+  id: string;
   tag: string;
 };
 
 export type Comment = {
   createdDate: string;
   modifiedDate: string;
-  id: number;
+  id: string;
   content: string;
   email: string;
-  user: {
-    id: number;
-    username: string;
-    email: string;
-    image: string;
-  };
+  user: User;
 };
 
 export type HotTag = {
@@ -50,6 +45,16 @@ export type HotTag = {
   name: string;
   score: number;
   count: number;
+};
+
+export type Preview = {
+  createdDate: string;
+  id: string;
+  title: string;
+  content: string;
+  viewNum: number;
+  user: User;
+  commentsNum: number;
 };
 
 export default DataProps;

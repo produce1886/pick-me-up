@@ -5,12 +5,12 @@ import Colors from "@colors";
 import Text from "../../atoms/Text";
 
 type ButtonProps = {
-  id: string;
+  pid: string;
 };
 
-function ViewMoreButton({ id }: ButtonProps) {
+function ViewMoreButton({ pid }: ButtonProps) {
   return (
-    <Link href={`/project?pid=${id}`}>
+    <Link href={`/project?pid=${pid}`}>
       <A>
         <Text level={1} weight={500} color={Colors.DEEP_GREY}>
           더보기

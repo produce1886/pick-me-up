@@ -7,7 +7,7 @@ import Col from "../../atoms/Wrapper/Col";
 import Rank from "./Rank";
 import Profile from "../Profile";
 
-type TopProps = {
+export type TopProps = {
   sort: "most" | "new";
   rank: number;
   title: string | string[];
