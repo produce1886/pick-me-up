@@ -41,7 +41,7 @@ function ModalTop({
             onChange={onChangeHandler}
           ></Input>
           <Filters
-            type={page}
+            page={page}
             width="fit-content"
             height="1rem"
             level={0}

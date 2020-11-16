@@ -12,11 +12,7 @@ type DropzoneProps = {
   images: string[];
 };
 
-export default function Dropzone({
-  page,
-  setImages,
-  images,
-}: DropzoneProps) {
+export default function Dropzone({ page, setImages, images }: DropzoneProps) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [preview, setPreview] = useState([]);
 
@@ -161,7 +157,7 @@ const DropContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.1rem dashed #c8acee;
+  border: 0.1rem dashed ${Colors.PURPLE};
   width: 100%;
   height: 10rem;
   box-sizing: border-box;

@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 
 type DropDownMenuProps = {
   width: string | number;
@@ -18,7 +19,7 @@ export default styled.div`
   `}
   min-width: 5.4rem;
   border: none;
-  background-color: #ffffff;
+  background-color: ${Colors.WHITE};
   flex-direction: column;
   justify-content: center;
   display: flex;

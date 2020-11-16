@@ -26,7 +26,7 @@ function Bottom(props: BottomProps) {
           &nbsp;
           <CommentCount count={props.commentsNum}></CommentCount>
         </CountWrapper>
-        <MoreButton id={props.id}></MoreButton>
+        <MoreButton pid={props.id}></MoreButton>
       </BottomWrapper>
     </Wrapper>
   );

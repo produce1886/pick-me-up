@@ -36,7 +36,7 @@ const Title = styled.div`
   width: 21.2rem;
   height: 1.4rem;
   border-radius: 0.12rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
 `;
 
 const Row = styled.div`
@@ -54,14 +54,14 @@ const Profile = styled.div`
   width: 2.56rem;
   height: 2.56rem;
   border-radius: 2.56rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
 `;
 
 const Date = styled.div`
   width: 5rem;
   height: 0.48rem;
   border-radius: 0.12rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
   margin-bottom: 1rem;
 `;
 
@@ -69,6 +69,6 @@ const Block = styled.div`
   width: 36.24;
   height: 36.24rem;
   border-radius: 0.4rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
   margin-bottom: 0.5rem;
 `;

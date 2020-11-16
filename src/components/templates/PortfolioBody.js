@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Colors from "@colors";
 import FilterSearch from "../organisms/FilterSearch";
 import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
@@ -68,7 +69,7 @@ function PortfolioBody(props) {
 export default React.memo(PortfolioBody);
 
 const Wrapper = styled.div`
-  background-color: #f5edff;
+  background-color: ${Colors.LIGHT_PURPLE};
   width: 100%;
   justify-content: flex-start;
   align-items: center;

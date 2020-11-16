@@ -69,12 +69,12 @@ const CommentNumWrapper = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   height: fit-content;
-  background-color: #ffffff;
+  background-color: ${Colors.WHITE};
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
   position: relative;
   flex-direction: column;
   padding: 0.5rem 1.5rem 1rem 1.5rem;
-  border-top: 0.07rem solid #d3d4d8;
+  border-top: 0.07rem solid ${Colors.GREY};
 `;

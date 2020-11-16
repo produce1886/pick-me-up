@@ -6,36 +6,36 @@ import Text from "../../atoms/Text";
 
 type BannerItemProps = {
   color: Colors;
-  type: "프로젝트" | "포트폴리오";
+  page: "프로젝트" | "포트폴리오";
 };
 
 type RowProps = {
   width?: string;
 };
 
-export default function Item({ color, type }: BannerItemProps) {
+export default function Item({ color, page }: BannerItemProps) {
   return (
     <Wrapper color={color}>
       <InnerWrapper>
         <Col>
           <Row>
             <Text level={18} weight="bold" color={Colors.BLACK}>
-              {type}
+              {page}
             </Text>
             <Text level={8} weight="bold" color={Colors.DEEP_GREY}>
               &nbsp;&nbsp;
-              {type === "프로젝트" && "Project"}
-              {type === "포트폴리오" && "Portfolio"}
+              {page === "프로젝트" && "Project"}
+              {page === "포트폴리오" && "Portfolio"}
             </Text>
           </Row>
-          {type === "프로젝트" && (
+          {page === "프로젝트" && (
             <Row width="12rem">
               <Text level={3} color={Colors.BLACK}>
                 척하면 척, 당신이 꿈꿨던 이상적인 팀을 픽미업에서 만들어보세요.
               </Text>
             </Row>
           )}
-          {type === "포트폴리오" && (
+          {page === "포트폴리오" && (
             <Row width="9.5rem">
               <Text level={3} color={Colors.BLACK}>
                 당신만의 특별한 포트폴리오를 픽미업에서 공유해보세요.
@@ -43,16 +43,16 @@ export default function Item({ color, type }: BannerItemProps) {
             </Row>
           )}
           <Row>
-            {type === "프로젝트" && (
+            {page === "프로젝트" && (
               <Pill link="/project" text="바로가기"></Pill>
             )}
-            {type === "포트폴리오" && (
+            {page === "포트폴리오" && (
               <Pill link="/portfolio" text="바로가기"></Pill>
             )}
           </Row>
         </Col>
-        {type === "프로젝트" && <Img src="Image/Project.png"></Img>}
-        {type === "포트폴리오" && <Img src="Image/Portfolio.png"></Img>}
+        {page === "프로젝트" && <Img src="Image/Project.png"></Img>}
+        {page === "포트폴리오" && <Img src="Image/Portfolio.png"></Img>}
       </InnerWrapper>
     </Wrapper>
   );

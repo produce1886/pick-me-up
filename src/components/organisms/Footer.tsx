@@ -45,7 +45,7 @@ const InnerWrapper = styled.div`
 const Wrapper = styled.footer`
   width: 100%;
   height: 8rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
