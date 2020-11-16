@@ -4,27 +4,44 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import axios from "axios";
 import Colors from "@colors";
+import { State } from "@src/types/User";
+import { ModalType } from "@src/components/atoms/Modal/ModalType";
+import { Tag } from "@src/types/Data";
 import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
 import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 
-function ModalMiddle(props) {
+type ModalMiddleProps = {
+  modalType: ModalType;
+  date: string;
+  content: string;
+  image: string;
+  userEmail: string;
+  pid: number | string | string[];
+  tags: Tag[];
+  setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  listReload: number;
+  setListReload: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function ModalMiddle(props: ModalMiddleProps) {
   const router = useRouter();
-  const user = useSelector((state) => state.user);
+  const userState = useSelector((state: { user: State }) => state.user);
   const { pid } = props;
   let { date } = props;
   date = date.replace("T", " ");
 
+  // api로 빼야하나?
   const deletePost = useCallback(() => {
     try {
-      if (props.type === "project") {
+      if (props.modalType === "project") {
         if (window.confirm("게시글을 삭제하시겠습니까?")) {
           axios.delete(`${process.env.API_HOST}/projects/${pid}`);
           setTimeout(() => props.setListReload(props.listReload + 1), 300);
           router.push("/project");
         }
-      } else if (props.type === "portfolio") {
+      } else if (props.modalType === "portfolio") {
         if (window.confirm("게시글을 삭제하시겠습니까?")) {
           axios.delete(`${process.env.API_HOST}/portfolios/${pid}`);
           setTimeout(() => props.setListReload(props.listReload + 1), 300);
@@ -59,12 +76,13 @@ function ModalMiddle(props) {
             style={{ width: "1.5rem", height: "1.5rem", marginRight: "0.3rem" }}
             fill={Colors.BLACK}
           ></Icon>
-          {props.tags.map((item, index) => (
+          /* key에 index 넣음 수정 필요 */
+          {props.tags.map((item: { tag: string }, index: number) => (
             <TagButton text={item.tag} key={index}></TagButton>
           ))}
         </TagWrapper>
       )}
-      {props.userEmail === user.userData.email && (
+      {props.userEmail === userState.userData.email && (
         <ButtonWrapper>
           <Button onClick={() => props.setUpdate(true)}>
             <Text level={1} weight={500} color={Colors.BLACK}>

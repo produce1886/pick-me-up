@@ -2,11 +2,32 @@ import React from "react";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 import Colors from "@colors";
+import { ModalType } from "@src/components/atoms/Modal/ModalType";
 import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
 import FilterInfo from "../FilterInfo";
 
-function ModalTop(props) {
+type ModalTopProps = {
+  modalType: ModalType;
+  title: string;
+  uid: number;
+  name: string;
+  profileImage: string;
+  category: string;
+  field: string;
+  region: string;
+  projectCategory: string;
+};
+
+type ProfileHolderProps = {
+  size: string;
+  noMargin: boolean;
+};
+
+type ImageProps = {
+  src?: string;
+};
+function ModalTop(props: ModalTopProps) {
   return (
     <Top>
       <TitleFilterWrapper>
@@ -16,7 +37,7 @@ function ModalTop(props) {
           </Text>
         </TitleWrapper>
         <FilterInfo
-          type={props.modalType}
+          modalType={props.modalType}
           category={props.category}
           field={props.field}
           region={props.region}
@@ -64,7 +85,7 @@ const ProfileBox = styled.div`
 
 const ProfileHolder = styled.div`
   overflow: hidden;
-  ${(props) => css`
+  ${(props: ProfileHolderProps) => css`
     width: ${props.size};
     height: ${props.size};
     border-radius: ${props.size};
@@ -72,8 +93,11 @@ const ProfileHolder = styled.div`
 `;
 
 const Img = styled.img`
-  width: 100%;
-  height: 100%;
+  ${(props: ImageProps) => css`
+    width: 100%;
+    height: 100%;
+    src: ${props.src};
+  `}
 `;
 
 const A = styled.a``;

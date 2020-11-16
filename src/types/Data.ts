@@ -13,32 +13,35 @@ type DataProps = {
   id: number;
   commentsNum: number;
   viewNum: number;
-  projectTag: {
-    id: number;
-    tag: string;
-  };
-  portfolioTag: {
-    id: number;
-    tag: string;
-  };
+  projectTag: Tag[];
+  portfolioTag: Tag[];
+  user: User;
+  comments: Comment[];
+};
+
+export type User = {
+  id: number;
+  username: string;
+  email: string;
+  image: string;
+};
+
+export type Tag = {
+  id: number;
+  tag: string;
+};
+
+export type Comment = {
+  createdDate: string;
+  modifiedDate: string;
+  id: number;
+  content: string;
+  email: string;
   user: {
     id: number;
     username: string;
     email: string;
     image: string;
-  };
-  comments: {
-    createdDate: string;
-    modifiedDate: string;
-    id: number;
-    content: string;
-    email: string;
-    user: {
-      id: number;
-      username: string;
-      email: string;
-      image: string;
-    };
   };
 };
 
