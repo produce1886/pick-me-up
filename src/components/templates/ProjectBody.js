@@ -23,7 +23,7 @@ function ProjectBody(props) {
   return (
     <>
       <FilterSearch
-        type="project"
+        page="project"
         setCategory={setCategory}
         setField={setField}
         setRegion={setRegion}
@@ -60,7 +60,7 @@ function ProjectBody(props) {
       )}
       {writeVisible && (
         <ModalWrite
-          modalType="project"
+          page="project"
           isVisible={writeVisible}
           onClose={() => setWriteVisible(false)}
           reload={props.reload}

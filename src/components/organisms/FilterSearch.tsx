@@ -16,7 +16,7 @@ function FilterSearch(
           width="fit-content"
           line="1.08rem"
           level={3}
-          type={props.type}
+          page={props.page}
           setCategory={props.setCategory}
           setField={props.setField}
           setRegion={props.setRegion}

@@ -1,14 +1,14 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import Colors from "@colors";
-import { ModalType } from "@src/components/atoms/Modal/ModalType";
+import { PageType } from "@src/components/atoms/Modal/ModalType";
 import { Comment } from "@src/types/Data";
 import Text from "../../atoms/Text";
 import CommentComponent from "../Comment/Comment";
 import CommentWrite from "../Comment/CommentWrite";
 
 type ModalBottomProps = {
-  modalType: ModalType;
+  page: PageType;
   commentsNum: number;
   comments: Comment[];
   pid: string;
@@ -34,7 +34,7 @@ function ModalBottom(props: ModalBottomProps) {
         props.comments.map((item: Comment) => (
           <CommentComponent
             key={item.id}
-            modalType={props.modalType}
+            page={props.page}
             comment={item.content}
             date={item.createdDate}
             {...item.user}
@@ -47,7 +47,7 @@ function ModalBottom(props: ModalBottomProps) {
           ></CommentComponent>
         ))}
       <CommentWrite
-        modalType={props.modalType}
+        page={props.page}
         pid={props.pid}
         modalReload={props.modalReload}
         setModalReload={props.setModalReload}

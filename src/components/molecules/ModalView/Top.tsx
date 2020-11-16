@@ -2,13 +2,13 @@ import React from "react";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 import Colors from "@colors";
-import { ModalType } from "@src/components/atoms/Modal/ModalType";
+import { PageType } from "@src/components/atoms/Modal/ModalType";
 import Text from "../../atoms/Text";
 import Top from "../../atoms/Modal/Top";
 import FilterInfo from "../FilterInfo";
 
 type ModalTopProps = {
-  modalType: ModalType;
+  page: PageType;
   title: string;
   uid: number;
   name: string;
@@ -37,7 +37,7 @@ function ModalTop(props: ModalTopProps) {
           </Text>
         </TitleWrapper>
         <FilterInfo
-          modalType={props.modalType}
+          page={props.page}
           category={props.category}
           field={props.field}
           region={props.region}

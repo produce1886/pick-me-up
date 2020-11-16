@@ -7,13 +7,13 @@ import Close from "../../atoms/Icon/Close";
 import { ImageFile } from "../../atoms/Modal/ModalType";
 
 type DropzoneProps = {
-  modalType: string;
+  page: string;
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
   images: string[];
 };
 
 export default function Dropzone({
-  modalType,
+  page,
   setImages,
   images,
 }: DropzoneProps) {
@@ -40,7 +40,7 @@ export default function Dropzone({
   const fileDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const { files } = event.dataTransfer;
-    if (files.length > 0 && modalType === "project") {
+    if (files.length > 0 && page === "project") {
       if (selectedFiles.length === 1) {
         alert("이미지는 1개까지 가능합니다.");
       } else {

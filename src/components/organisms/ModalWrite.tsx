@@ -5,12 +5,12 @@ import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import UserState from "../../types/User";
-import { ModalType } from "../atoms/Modal/ModalType";
+import { PageType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
 import checkIsNotEmpty from "../../lib/utils/CheckIsNotEmpty";
 
 type ModalWriteProps = {
-  modalType: ModalType;
+  page: PageType;
   isVisible: boolean;
   onClose: () => void;
   setReload: Dispatch<SetStateAction<number>>;
@@ -18,7 +18,7 @@ type ModalWriteProps = {
 };
 
 function ModalWrite({
-  modalType,
+  page,
   isVisible,
   onClose,
   setReload,
@@ -43,11 +43,11 @@ function ModalWrite({
       field,
       region,
       projectType,
-      modalType
+      page
     );
     if (flag) {
       try {
-        if (modalType === "project") {
+        if (page === "project") {
           const image = images.length > 0 ? images[0] : "";
           const body = {
             title,
@@ -63,7 +63,7 @@ function ModalWrite({
           axios.post(`${process.env.API_HOST}/projects`, body);
           setTimeout(() => setReload(reload + 1), 300);
           onClose();
-        } else if (modalType === "portfolio") {
+        } else if (page === "portfolio") {
           const image = images.length > 0 ? images[0] : "";
           const body = {
             title,
@@ -79,7 +79,7 @@ function ModalWrite({
           onClose();
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
-        else if (props.type === "portfolio") {
+        else if (props.page === "portfolio") {
           let imageDataArray = [];
           images.map((value) => imageDataArray.push(value.data));
           let body = {
@@ -106,7 +106,7 @@ function ModalWrite({
   return (
     <Modal isVisible={isVisible} onClose={onClose}>
       <Top
-        modalType={modalType}
+        page={page}
         setCategory={setCategory}
         setField={setField}
         setRegion={setRegion}
@@ -116,7 +116,7 @@ function ModalWrite({
         profileImage={userState.userData.image}
       ></Top>
       <Middle
-        modalType={modalType}
+        page={page}
         setContent={setContent}
         setImages={setImages}
         images={images}

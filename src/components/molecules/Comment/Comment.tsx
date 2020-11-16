@@ -53,7 +53,7 @@ function Comment(props: CommentProps) {
         <EditDelete
           cid={props.cid}
           pid={props.pid}
-          modalType={props.modalType}
+          page={props.page}
           setIsButtonClicked={setIsButtonClicked}
           modalReload={props.modalReload}
           setModalReload={props.setModalReload}
