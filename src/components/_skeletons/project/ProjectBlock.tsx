@@ -45,7 +45,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${(props) =>
+  ${(props: { justifyContent?: string }) =>
     css`
       justify-content: ${props.justifyContent};
     `};
@@ -80,7 +80,7 @@ const Bottom = styled.div`
 `;
 
 const Block = styled.div`
-  ${(props) =>
+  ${(props: { width: string }) =>
     css`
       width: ${props.width};
     `};
