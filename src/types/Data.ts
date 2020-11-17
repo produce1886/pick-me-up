@@ -1,5 +1,5 @@
 type DataProps = {
-  type: "project" | "portfolio";
+  page: "project" | "portfolio";
   title: string;
   name: string;
   profileImage: string;
