@@ -68,7 +68,7 @@ const Bottom = styled.div`
 `;
 
 const Block = styled.div`
-  ${(props) =>
+  ${(props: { width: string }) =>
     css`
       width: ${props.width};
     `};
