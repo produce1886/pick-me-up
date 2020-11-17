@@ -37,7 +37,7 @@ const Title = styled.div`
   width: 21.2rem;
   height: 1.4rem;
   border-radius: 0.12rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
 `;
 
 const Row = styled.div`
@@ -45,7 +45,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${(props) =>
+  ${(props: { justifyContent: string }) =>
     css`
       justify-content: ${props.justifyContent};
     `};
@@ -55,23 +55,23 @@ const Profile = styled.div`
   width: 2.56rem;
   height: 2.56rem;
   border-radius: 2.56rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
 `;
 
 const Date = styled.div`
   width: 5rem;
   height: 0.48rem;
   border-radius: 0.12rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
 `;
 
 const Block = styled.div`
-  ${(props) =>
+  ${(props: { width: string }) =>
     css`
       width: ${props.width};
     `};
   height: 0.6rem;
   border-radius: 0.12rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
   margin-bottom: 0.5rem;
 `;

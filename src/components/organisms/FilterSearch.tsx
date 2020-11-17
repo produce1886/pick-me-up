@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Search from "../molecules/Input/Search";
-import Filters from "../molecules/Filter/FilterGroup";
+import Filters, { FilterGroupProps } from "../molecules/Filter/FilterGroup";
 
-function FilterSearch(props) {
+function FilterSearch(
+  props: FilterGroupProps & {
+    setQuery: React.Dispatch<React.SetStateAction<string>>;
+  }
+) {
   return (
     <Wrapper>
       <InnerWrapper>
@@ -12,7 +16,7 @@ function FilterSearch(props) {
           width="fit-content"
           line="1.08rem"
           level={3}
-          type={props.type}
+          page={props.page}
           setCategory={props.setCategory}
           setField={props.setField}
           setRegion={props.setRegion}

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Colors from "@colors";
 import { State } from "@src/types/User";
-import { ModalType } from "@src/components/atoms/Modal/ModalType";
+import { PageType } from "@src/components/atoms/Modal/ModalType";
 import { Tag } from "@src/types/Data";
 import Text from "../../atoms/Text";
 import Middle from "../../atoms/Modal/Middle";
@@ -13,7 +13,7 @@ import TagButton from "../Button/Tag";
 import Icon from "../../atoms/Icon/Tag";
 
 type ModalMiddleProps = {
-  modalType: ModalType;
+  page: PageType;
   date: string;
   content: string;
   image: string;
@@ -35,13 +35,13 @@ function ModalMiddle(props: ModalMiddleProps) {
   // api로 빼야하나?
   const deletePost = useCallback(() => {
     try {
-      if (props.modalType === "project") {
+      if (props.page === "project") {
         if (window.confirm("게시글을 삭제하시겠습니까?")) {
           axios.delete(`${process.env.API_HOST}/projects/${pid}`);
           setTimeout(() => props.setListReload(props.listReload + 1), 300);
           router.push("/project");
         }
-      } else if (props.modalType === "portfolio") {
+      } else if (props.page === "portfolio") {
         if (window.confirm("게시글을 삭제하시겠습니까?")) {
           axios.delete(`${process.env.API_HOST}/portfolios/${pid}`);
           setTimeout(() => props.setListReload(props.listReload + 1), 300);

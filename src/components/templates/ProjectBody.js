@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import Colors from "@colors";
 import FilterSearch from "../organisms/FilterSearch";
 import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
@@ -23,7 +24,7 @@ function ProjectBody(props) {
   return (
     <>
       <FilterSearch
-        type="project"
+        page="project"
         setCategory={setCategory}
         setField={setField}
         setRegion={setRegion}
@@ -60,7 +61,7 @@ function ProjectBody(props) {
       )}
       {writeVisible && (
         <ModalWrite
-          modalType="project"
+          page="project"
           isVisible={writeVisible}
           onClose={() => setWriteVisible(false)}
           reload={props.reload}
@@ -93,7 +94,7 @@ const InnerWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: #f0f8fd;
+  background-color: ${Colors.LIGHT_BLUE};
   width: 100%;
   min-height: 30rem;
   align-items: center;

@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import styled, { createGlobalStyle } from "styled-components";
 import dotenv from "dotenv";
+import Colors from "@colors";
 import { wrapper } from "../src/_store";
 
 dotenv.config();
@@ -38,7 +39,7 @@ body {
   padding: 0;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 1rem;
-  background-color:#fff;
+  background-color:${Colors.WHITE};
   min-width: 768px;
 }
 ::-webkit-scrollbar {
@@ -77,7 +78,7 @@ function PickMeUp({ Component, pageProps }: AppProps) {
 const Wrapper = styled.div`
   width: 100%;
   min-height: 100%;
-  background-color: #fff;
+  background-color: ${Colors.WHITE};
 `;
 
 export default wrapper.withRedux(PickMeUp);

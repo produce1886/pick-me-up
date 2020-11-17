@@ -6,7 +6,7 @@ import ItemWrapper from "../Filter/Item";
 import Wrapper from "../../atoms/Filter/DropDownMenu";
 
 function EditDelete(props: CommentProps) {
-  const url = `${props.modalType}s/${props.pid}/comments/${props.cid}`;
+  const url = `${props.page}s/${props.pid}/comments/${props.cid}`;
 
   const handleClick = useCallback((itemTitle) => {
     if (itemTitle === "댓글 삭제") {

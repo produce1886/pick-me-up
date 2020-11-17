@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 
 export type WrapperProps = {
   isVisible: boolean;
@@ -60,7 +61,7 @@ const Overlay = styled.div`
 const Inner = styled.div`
   width: 100%;
   height: fit-content;
-  background-color: #ffffff;
+  background-color: ${Colors.WHITE};
   box-sizing: border-box;
   box-shadow: 0 0 0.4rem 0 rgba(0, 0, 0, 0.5);
   border-radius: 0.8rem;

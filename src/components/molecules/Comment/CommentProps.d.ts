@@ -1,7 +1,7 @@
 type CommentProps = {
   pid: string;
   cid: string;
-  modalType: "project" | "portfolio";
+  page: "project" | "portfolio";
   modalReload: number;
   setModalReload: Dispatch<SetStateAction<number>>;
   updatingCid?: string;

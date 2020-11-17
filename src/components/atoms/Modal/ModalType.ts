@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 export type ModalProps = {
-  modalType: ModalType;
+  page: PageType;
   isVisible: boolean;
   pid: string | string[];
   onClose: () => void;
@@ -12,7 +12,7 @@ export type ModalProps = {
   setModalReload: Dispatch<SetStateAction<number>>;
 };
 
-export type ModalType = "project" | "portfolio";
+export type PageType = "project" | "portfolio";
 
 export type ImageFile = Blob & {
   invalid?: boolean;

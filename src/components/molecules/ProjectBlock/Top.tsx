@@ -36,7 +36,7 @@ function Top(props: TopProps) {
       </Link>
       <BottomWrapper>
         <FilterInfo
-          type="project"
+          page="project"
           category={props.category}
           field={props.field}
           region={props.region}
