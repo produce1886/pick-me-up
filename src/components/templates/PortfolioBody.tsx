@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Colors from "@colors";
+import UserState from "@src/types/User";
 import FilterSearch from "../organisms/FilterSearch";
 import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
@@ -10,13 +11,19 @@ import WriteButton from "../molecules/Button/Write";
 import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
 
-function PortfolioBody(props) {
+type BodyProps = {
+  isModalVisible: boolean;
+  reload: number;
+  setReload: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function PortfolioBody(props: BodyProps) {
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
   const [isWriteVisible, setIsWriteVisible] = useState(false);
-  const isSignedIn = useSelector((state) => state.user.isSignedIn);
+  const isSignedIn = useSelector((state: UserState) => state.isSignedIn);
   const align = "최신순";
 
   return (

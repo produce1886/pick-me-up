@@ -11,8 +11,8 @@ export type FilterGroupProps = {
   level?: number;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   setField: React.Dispatch<React.SetStateAction<string>>;
-  setRegion: React.Dispatch<React.SetStateAction<string>>;
-  setProjectType: React.Dispatch<React.SetStateAction<string>>;
+  setRegion?: React.Dispatch<React.SetStateAction<string>>;
+  setProjectType?: React.Dispatch<React.SetStateAction<string>>;
   page: PageType;
 };
 
