@@ -45,7 +45,7 @@ const Wrapper = styled.div`
 const Background = styled.div`
   width: 100%;
   height: 7.2rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
 `;
 
 const InfoWrapper = styled.div`
@@ -72,7 +72,7 @@ const ProfileHolder = styled.div`
   height: 5rem;
   border-radius: 2.5rem;
   overflow: hidden;
-  background-color: #d3d4d8;
+  background-color: ${Colors.GREY};
   position: absolute;
   top: 4.6rem;
 `;

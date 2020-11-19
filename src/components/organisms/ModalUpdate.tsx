@@ -13,12 +13,12 @@ import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import DataProps from "../../types/Data";
 import UserState from "../../types/User";
-import { ModalType } from "../atoms/Modal/ModalType";
+import { PageType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
 
 type ModalUpdateProps = {
-  modalType: ModalType;
-  pid: string;
+  page: PageType;
+  pid: string | string[];
   onClose: () => void;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
   modalReload: number;
@@ -27,7 +27,7 @@ type ModalUpdateProps = {
 
 function ModalUpdate({
   pid,
-  modalType,
+  page,
   onClose,
   setIsUpdate,
   modalReload,
@@ -44,7 +44,7 @@ function ModalUpdate({
   const [tags, setTags] = useState<string[]>([]);
   const { isLoading } = getData(
     pid,
-    modalType,
+    page,
     setTitle,
     setContent,
     setCategory,
@@ -68,11 +68,11 @@ function ModalUpdate({
       field,
       region,
       projectType,
-      modalType
+      page
     );
     if (flag) {
       try {
-        if (modalType === "project") {
+        if (page === "project") {
           const image = images.length > 0 ? images[0] : "";
           const body = {
             title,
@@ -87,7 +87,7 @@ function ModalUpdate({
           axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setIsUpdate(false);
-        } else if (modalType === "portfolio") {
+        } else if (page === "portfolio") {
           const image = images.length > 0 ? images[0] : "";
           const body = {
             title,
@@ -102,7 +102,7 @@ function ModalUpdate({
           setIsUpdate(false);
         }
         /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
-        else if (props.type === "portfolio") {
+        else if (props.page === "portfolio") {
           let imageDataArray = [];
           images.map((value) => imageDataArray.push(value.data));
           let body = {
@@ -127,7 +127,7 @@ function ModalUpdate({
   return (
     <Modal isVisible={!isLoading} onClose={onClose}>
       <Top
-        modalType={modalType}
+        page={page}
         title={title}
         setCategory={setCategory}
         setField={setField}
@@ -137,7 +137,7 @@ function ModalUpdate({
         profileImage={userState.userData.image}
       ></Top>
       <Middle
-        modalType={modalType}
+        page={page}
         setContent={setContent}
         setImages={setImages}
         images={images}

@@ -1,5 +1,6 @@
-import Wrapper from "src/components/atoms/Wrapper/PostBlock";
+import Wrapper from "@src/components/atoms/Wrapper/PostBlock";
 import styled, { css } from "styled-components";
+import Colors from "@colors";
 
 export default function Skeleton() {
   return (
@@ -22,7 +23,7 @@ export default function Skeleton() {
 const Top = styled.div`
   width: 100%;
   height: 3.6rem;
-  border-bottom: 0.04rem solid #f0f1f3;
+  border-bottom: 0.04rem solid ${Colors.LIGHT_GREY};
   padding: 0.6rem 1rem 0.6rem 1rem;
   box-sizing: border-box;
   display: flex;
@@ -34,7 +35,7 @@ const Title = styled.div`
   width: 100%;
   height: 0.9rem;
   border-radius: 0.12rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
 `;
 
 const Row = styled.div`
@@ -47,14 +48,14 @@ const Profile = styled.div`
   width: 0.8rem;
   height: 0.8rem;
   border-radius: 0.4rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
 `;
 
 const Name = styled.div`
   width: 2rem;
   height: 0.5rem;
   border-radius: 0.12rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
   margin-left: 0.24rem;
 `;
 
@@ -67,12 +68,12 @@ const Bottom = styled.div`
 `;
 
 const Block = styled.div`
-  ${(props) =>
+  ${(props: { width: string }) =>
     css`
       width: ${props.width};
     `};
   height: 0.5rem;
   border-radius: 0.12rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
   margin-bottom: 0.5rem;
 `;

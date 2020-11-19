@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 2rem;
   align-items: center;
-  border-bottom: 1px solid #f0f1f3;
+  border-bottom: 1px solid ${Colors.LIGHT_GREY};
   display: flex;
   justify-content: center;
 `;

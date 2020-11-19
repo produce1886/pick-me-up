@@ -7,8 +7,8 @@ import Col from "../../atoms/Wrapper/Col";
 import Rank from "./Rank";
 import Profile from "../Profile";
 
-type TopProps = {
-  type: "most" | "new";
+export type TopProps = {
+  sort: "most" | "new";
   rank: number;
   title: string | string[];
   name: string;
@@ -21,7 +21,7 @@ function Top(props: TopProps) {
   return (
     <Wrapper>
       <Col>
-        {props.type === "most" && <Rank number={props.rank}></Rank>}
+        {props.sort === "most" && <Rank number={props.rank}></Rank>}
         <Row>
           <Text level={6} weight="bold" color={Colors.DEEP_PURPLE} line={1.17}>
             {props.title}
@@ -53,7 +53,7 @@ export default React.memo(Top);
 
 const Wrapper = styled.div`
   width: 100%;
-  border-bottom: 0.07rem solid #d3d4d8;
+  border-bottom: 0.07rem solid ${Colors.GREY};
   padding: 0.8rem 1rem 0rem 1rem;
   box-sizing: border-box;
   height: fit-content;

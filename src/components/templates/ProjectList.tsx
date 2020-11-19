@@ -1,34 +1,44 @@
-import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
+import ProjectHooks from "@src/lib/hooks/Project";
 import ProjectBlock from "../organisms/ProjectBlock";
 import NoResult from "../molecules/NoResult";
 import MoreListButton from "../molecules/Button/LoadMore";
 import Skeleton from "../_skeletons/project/ProjectBlock";
 
-function ProjectList(props) {
+type ProjectListProps = {
+  category: string;
+  field: string;
+  region: string;
+  projectType: string;
+  query: string;
+  sort: string;
+  reload: number;
+};
+
+function ProjectList(props: ProjectListProps) {
   const { category, field, region, projectType, query, sort, reload } = props;
-  const [project, setProject] = useState([]);
   const [limit, setLimit] = useState(10);
-  const { isLoading, dataNum } = getProjectList(
+  const { isLoading, isError, data } = ProjectHooks.useProjectListGetApi([
     category,
     field,
     region,
     projectType,
     query,
     sort,
-    setProject,
     limit,
-    reload
-  );
-
-  const renderBlocks = project.map((item, index) => (
-    <ProjectBlock key={index} item={item}></ProjectBlock>
-  ));
+    reload,
+  ]);
 
   const loadMoreHandler = useCallback(() => {
     setLimit(limit + 10);
   }, [limit]);
+
+  const renderBlocks =
+    data &&
+    data.pagelist.map((item) => (
+      <ProjectBlock key={item.id} {...item}></ProjectBlock>
+    ));
 
   if (isLoading) {
     return (
@@ -47,7 +57,7 @@ function ProjectList(props) {
     );
   }
 
-  if (!isLoading && project.length === 0) {
+  if ((data && data.pagelist.length === 0) || isError) {
     return (
       <Wrapper>
         <NoResult></NoResult>
@@ -57,8 +67,8 @@ function ProjectList(props) {
 
   return (
     <>
-      <Wrapper>{!isLoading && project.length > 0 && renderBlocks}</Wrapper>
-      {project.length < dataNum && (
+      <Wrapper>{renderBlocks}</Wrapper>
+      {data && data.pagelist.length < data.nrOfElements && (
         <MoreWrapper>
           <MoreListButton onClick={loadMoreHandler}></MoreListButton>
         </MoreWrapper>
@@ -68,56 +78,6 @@ function ProjectList(props) {
 }
 
 export default React.memo(ProjectList);
-
-const getProjectList = (
-  category,
-  field,
-  region,
-  projectType,
-  query,
-  sort,
-  setProject,
-  limit,
-  reload
-) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [dataNum, setDataNum] = useState(0);
-  const sortColumn = {
-    최신순: "createdDate",
-    댓글순: "commentsNum",
-    조회순: "viewNum",
-  };
-
-  const body = {
-    page: 0,
-    size: limit,
-    sortColumn: sortColumn[sort],
-    category,
-    huntingField: field,
-    region,
-    projectCategory: projectType,
-    keyword: query,
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const result = await axios.post(
-          `${process.env.API_HOST}/projects/list`,
-          body
-        );
-        setProject(result.data.pagelist);
-        setDataNum(result.data.nrOfElements);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [category, field, region, projectType, query, sort, limit, reload]);
-  return { isLoading, dataNum };
-};
 
 const Wrapper = styled.div`
   width: 100%;

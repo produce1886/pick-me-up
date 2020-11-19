@@ -8,7 +8,7 @@ export default function Footer() {
     <Wrapper>
       <InnerWrapper>
         <Logo style={{ width: "5rem", height: "1.5rem" }}></Logo>
-        <Div>
+        <TextWrapper>
           <Text level={1} weight={500} color={Colors.BLACK}>
             기획자와 개발자, 디자이너들의
           </Text>
@@ -18,13 +18,13 @@ export default function Footer() {
           <Text level={0} color={Colors.BLACK}>
             © 2020 pickmeup. All rights reserved.
           </Text>
-        </Div>
+        </TextWrapper>
       </InnerWrapper>
     </Wrapper>
   );
 }
 
-const Div = styled.div`
+const TextWrapper = styled.div`
   margin-left: 0.4rem;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ const InnerWrapper = styled.div`
 const Wrapper = styled.footer`
   width: 100%;
   height: 8rem;
-  background-color: #f0f1f3;
+  background-color: ${Colors.LIGHT_GREY};
   box-sizing: border-box;
   align-items: center;
   justify-content: center;

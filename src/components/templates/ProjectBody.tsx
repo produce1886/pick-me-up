@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import Colors from "@colors";
+import UserState from "@src/types/User";
 import FilterSearch from "../organisms/FilterSearch";
 import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
@@ -9,21 +11,27 @@ import WriteButton from "../molecules/Button/Write";
 import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
 
-function ProjectBody(props) {
+type BodyProps = {
+  isModalVisible: boolean;
+  reload: number;
+  setReload: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function ProjectBody(props: BodyProps) {
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [region, setRegion] = useState("");
   const [projectType, setProjectType] = useState("");
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
-  const [writeVisible, setWriteVisible] = useState(false);
-  const isSignedIn = useSelector((state) => state.user.isSignedIn);
+  const [isWriteVisible, setIsWriteVisible] = useState(false);
+  const isSignedIn = useSelector((state: UserState) => state.isSignedIn);
   const align = "최신순";
 
   return (
     <>
       <FilterSearch
-        type="project"
+        page="project"
         setCategory={setCategory}
         setField={setField}
         setRegion={setRegion}
@@ -32,7 +40,7 @@ function ProjectBody(props) {
       ></FilterSearch>
       <Wrapper>
         <InnerWrapper>
-          <Div>
+          <AlignFilterWrapper>
             <Filter
               width="6rem"
               height="1.6rem"
@@ -42,7 +50,7 @@ function ProjectBody(props) {
               data={ALIGN}
               onClick={setSort}
             ></Filter>
-          </Div>
+          </AlignFilterWrapper>
           <ProjectList
             category={category}
             field={field}
@@ -55,14 +63,14 @@ function ProjectBody(props) {
         </InnerWrapper>
       </Wrapper>
       <TopButton></TopButton>
-      {isSignedIn && !writeVisible && !props.viewVisible && (
-        <WriteButton onClick={() => setWriteVisible(true)}></WriteButton>
+      {isSignedIn && !isWriteVisible && !props.isModalVisible && (
+        <WriteButton onClick={() => setIsWriteVisible(true)}></WriteButton>
       )}
-      {writeVisible && (
+      {isWriteVisible && (
         <ModalWrite
-          modalType="project"
-          isVisible={writeVisible}
-          onClose={() => setWriteVisible(false)}
+          page="project"
+          isVisible={isWriteVisible}
+          onClose={() => setIsWriteVisible(false)}
           reload={props.reload}
           setReload={props.setReload}
         ></ModalWrite>
@@ -73,7 +81,7 @@ function ProjectBody(props) {
 
 export default React.memo(ProjectBody);
 
-const Div = styled.div`
+const AlignFilterWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -93,7 +101,7 @@ const InnerWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: #f0f8fd;
+  background-color: ${Colors.LIGHT_BLUE};
   width: 100%;
   min-height: 30rem;
   align-items: center;

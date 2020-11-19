@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CommentService from "@src/lib/api/Comment";
 import CommentHooks from "@src/lib/hooks/Comment";
 import UserState from "@src/types/User";
+import Colors from "@colors";
 import CommentProps from "./CommentProps";
 import Profile from "../Profile";
 import Icon from "../../atoms/Icon/Write";
@@ -12,11 +13,11 @@ function CommentWrite(props: CommentProps) {
   const userState = useSelector((state: { user: UserState }) => state.user);
   const [content, setContent] = useState("");
 
-  CommentHooks.useCommentLoadApi(
+  const { isLoading, isError, data } = CommentHooks.useCommentGetApi([
     setContent,
-    `${props.modalType}s/${props.pid}/comments`,
-    props.updatingCid
-  );
+    `${props.page}s/${props.pid}/comments`,
+    props.updatingCid,
+  ]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
@@ -34,11 +35,11 @@ function CommentWrite(props: CommentProps) {
       return;
     }
     if (props.updatingCid) {
-      const url = `${props.modalType}s/${props.pid}/comments/${props.updatingCid}`;
+      const url = `${props.page}s/${props.pid}/comments/${props.updatingCid}`;
       CommentService.updateComment(url, content);
       props.setUpdatingCid(null);
     } else {
-      const url = `${props.modalType}s/${props.pid}/comments`;
+      const url = `${props.page}s/${props.pid}/comments`;
       const body = { email: userState.userData.email, content };
       CommentService.writeComment(url, body);
     }
@@ -82,7 +83,7 @@ const CommentBox = styled.div`
   width: 100%;
   height: fit-content;
   border-radius: 0.2rem;
-  background-color: #d3d4d8;
+  background-color: ${Colors.GREY};
   justify-content: center;
   align-items: center;
   display: flex;
@@ -104,13 +105,13 @@ const Textarea = styled.textarea`
   font-size: 0.56rem;
   resize: none;
   input::placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   input::-webkit-input-placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   input:-ms-input-placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
 `;
 

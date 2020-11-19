@@ -145,7 +145,7 @@ const Title = styled.div`
   margin-top: 1rem;
   margin-bottom: 0.3rem;
   padding-bottom: 0.32rem;
-  border-bottom: 0.08rem solid #f0f1f3;
+  border-bottom: 0.08rem solid ${Colors.LIGHT_GREY};
 `;
 const Div = styled.div`
   display: flex;
@@ -166,9 +166,9 @@ const DivTitle = styled.div`
 
 const Input = styled.input`
   ${(props: { width: string }) => css`
-    background-color: #f0f1f3;
+    background-color: ${Colors.LIGHT_GREY};
     border-radius: 0.6rem;
-    border: 0.04rem solid #d3d4d8;
+    border: 0.04rem solid ${Colors.GREY};
     padding: unset;
     box-sizing: border-box;
     width: ${props.width};
