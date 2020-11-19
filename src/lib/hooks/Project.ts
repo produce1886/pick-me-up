@@ -1,8 +1,8 @@
 import ProjectService from "@src/lib/api/Project";
-import { ProjectList } from "@src/types/Data";
+import { PostList } from "@src/types/Data";
 import useAxiosQuery from "./Api";
 
-export const useProjectListGetApi = useAxiosQuery<ProjectList>(
+export const useProjectListGetApi = useAxiosQuery<PostList>(
   ProjectService.getProjectList
 );
 

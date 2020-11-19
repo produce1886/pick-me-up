@@ -56,7 +56,7 @@ export type Preview = {
   commentsNum: number;
 };
 
-export type ProjectList = {
+export type PostList = {
   nrOfElements: number;
   pagelist: DataProps[];
 };

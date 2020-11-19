@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback } from "react";
-import axios from "axios";
+import React, { useState, useCallback } from "react";
 import styled from "styled-components";
+import PortfolioHooks from "@src/lib/hooks/Portfolio";
 import PortfolioBlock from "../organisms/PortfolioBlock";
 import MoreListButton from "../molecules/Button/LoadMore";
 import NoResult from "../molecules/NoResult";
@@ -8,25 +8,25 @@ import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
 function PortfolioList(props) {
   const { category, field, query, sort, reload } = props;
-  const [portfolio, setPortfolio] = useState([]);
   const [limit, setLimit] = useState(15);
-  const { isLoading, dataNum } = getPortfolioList(
+  const { isLoading, isError, data } = PortfolioHooks.usePortfolioListGetApi([
     category,
     field,
     query,
     sort,
-    setPortfolio,
     limit,
-    reload
-  );
-
-  const renderBlocks = portfolio.map((item, index) => (
-    <PortfolioBlock key={index} item={item}></PortfolioBlock>
-  ));
+    reload,
+  ]);
 
   const loadMoreHandler = useCallback(() => {
     setLimit(limit + 15);
   }, [limit]);
+
+  const renderBlocks =
+    data &&
+    data.pagelist.map((item) => (
+      <PortfolioBlock key={item.id} {...item}></PortfolioBlock>
+    ));
 
   if (isLoading) {
     return (
@@ -50,7 +50,7 @@ function PortfolioList(props) {
     );
   }
 
-  if (!isLoading && portfolio.length === 0) {
+  if ((data && data.pagelist.length === 0) || isError) {
     return (
       <Wrapper>
         <NoResult></NoResult>
@@ -60,65 +60,17 @@ function PortfolioList(props) {
 
   return (
     <>
-      <Wrapper>{!isLoading && portfolio.length > 0 && renderBlocks}</Wrapper>
+      <Wrapper>{renderBlocks}</Wrapper>
       <MoreWrapper>
-        <MoreInnerWrapper>
-          {portfolio.length < dataNum && (
-            <MoreListButton onClick={loadMoreHandler}></MoreListButton>
-          )}
-        </MoreInnerWrapper>
+        {data && data.pagelist.length < data.nrOfElements && (
+          <MoreListButton onClick={loadMoreHandler}></MoreListButton>
+        )}
       </MoreWrapper>
     </>
   );
 }
 
 export default React.memo(PortfolioList);
-
-const getPortfolioList = (
-  category,
-  field,
-  query,
-  sort,
-  setPortfolio,
-  limit,
-  reload
-) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [dataNum, setDataNum] = useState(0);
-  const sortColumn = {
-    최신순: "createdDate",
-    댓글순: "commentsNum",
-    조회순: "viewNum",
-  };
-
-  const body = {
-    page: 0,
-    size: limit,
-    sortColumn: sortColumn[sort],
-    category,
-    huntingField: field,
-    keyword: query,
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const result = await axios.post(
-          `${process.env.API_HOST}/portfolios/list`,
-          body
-        );
-        setPortfolio(result.data.pagelist);
-        setDataNum(result.data.nrOfElements);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [category, field, query, sort, limit, reload]);
-  return { isLoading, dataNum };
-};
 
 const Wrapper = styled.div`
   width: 100%;
@@ -130,17 +82,6 @@ const Wrapper = styled.div`
   margin: 2rem 0 2rem 0;
 `;
 
-const MoreInnerWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  max-width: 92%;
-  width: 48rem;
-  height: 2rem;
-  position: relative;
-  justify-content: center;
-  align-itmes: center;
-`;
 const MoreWrapper = styled.div`
   background-color: transparent;
   flex-direction: row;
@@ -151,4 +92,5 @@ const MoreWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   padding: 0 1.8rem 0 0;
+  margin-bottom: 1.6rem;
 `;
