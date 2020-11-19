@@ -12,7 +12,7 @@ type ProjectListProps = {
   region: string;
   projectType: string;
   query: string;
-  sort: "최신순" | "댓글순" | "조회순";
+  sort: string;
   reload: number;
 };
 
