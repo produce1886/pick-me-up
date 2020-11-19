@@ -57,4 +57,9 @@ export type Preview = {
   commentsNum: number;
 };
 
+export type ProjectList = {
+  nrOfElements: number;
+  pagelist: DataProps[];
+};
+
 export default DataProps;
