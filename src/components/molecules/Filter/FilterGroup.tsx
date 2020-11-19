@@ -5,14 +5,14 @@ import Filter from "./Filter";
 import { CATEGORY, FIELD, REGION, PROJECT_CATEGORY } from "./ItemData";
 
 export type FilterGroupProps = {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   line?: string;
-  level: number;
+  level?: number;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   setField: React.Dispatch<React.SetStateAction<string>>;
-  setRegion: React.Dispatch<React.SetStateAction<string>>;
-  setProjectType: React.Dispatch<React.SetStateAction<string>>;
+  setRegion?: React.Dispatch<React.SetStateAction<string>>;
+  setProjectType?: React.Dispatch<React.SetStateAction<string>>;
   page: PageType;
 };
 

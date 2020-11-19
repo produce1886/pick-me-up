@@ -9,7 +9,7 @@ type BottomProps = {
   tags?: { tag: string; id: string }[];
   viewNum: number;
   commentsNum: number;
-  id: string;
+  pid: string;
 };
 
 function Bottom(props: BottomProps) {
@@ -26,7 +26,7 @@ function Bottom(props: BottomProps) {
           &nbsp;
           <CommentCount count={props.commentsNum}></CommentCount>
         </CountWrapper>
-        <MoreButton pid={props.id}></MoreButton>
+        <MoreButton pid={props.pid}></MoreButton>
       </BottomWrapper>
     </Wrapper>
   );

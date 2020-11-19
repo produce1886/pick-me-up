@@ -42,7 +42,7 @@ export default function Project() {
       )}
       <Gnb></Gnb>
       <ProjectBody
-        viewVisible={!!router.query.pid}
+        isModalVisible={!!router.query.pid}
         reload={reload}
         setReload={setReload}
       ></ProjectBody>

@@ -1,37 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 import Colors from "@colors";
+import DataProps from "@src/types/Data";
 import Text from "../atoms/Text";
 import Top from "../molecules/ProjectBlock/Top";
 import Bottom from "../molecules/ProjectBlock/Bottom";
 import Wrapper from "../atoms/Wrapper/ProjectBlock";
 
-function ProjectBlock(props) {
-  const date = props.item.createdDate.split("T")[0];
+function ProjectBlock(props: DataProps) {
+  const date = props.createdDate.split("T")[0];
 
   return (
     <Wrapper>
       <Top
-        title={props.item.title}
-        name={props.item.user.username}
+        title={props.title}
+        name={props.user.username}
         date={date}
-        uid={props.item.user.id}
-        profileImage={props.item.user.image}
-        category={props.item.category}
-        field={props.item.huntingField}
-        region={props.item.region}
-        projectCategory={props.item.projectCategory}
+        uid={props.user.id}
+        profileImage={props.user.image}
+        category={props.category}
+        field={props.huntingField}
+        region={props.region}
+        projectCategory={props.projectCategory}
       ></Top>
       <Body>
         <Text level={2} color={Colors.BLACK}>
-          {props.item.content}
+          {props.content}
         </Text>
       </Body>
       <Bottom
-        tags={props.item.projectTag}
-        viewNum={props.item.viewNum}
-        commentsNum={props.item.commentsNum}
-        id={props.item.id}
+        tags={props.projectTag}
+        viewNum={props.viewNum}
+        commentsNum={props.commentsNum}
+        pid={props.id}
       ></Bottom>
     </Wrapper>
   );

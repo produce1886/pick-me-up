@@ -1,36 +1,37 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import DataProps from "@src/types/Data";
 import Text from "../atoms/Text";
 import Detail from "../molecules/PortfolioBlock/Detail";
 import Wrapper from "../atoms/Wrapper/PortfolioBlock";
 
-function PortfolioBlock(props) {
+function PortfolioBlock(props: DataProps) {
   const [show, setShow] = useState(false);
 
   return (
-    <Link href={`/portfolio?pid=${props.item.id}`}>
+    <Link href={`/portfolio?pid=${props.id}`}>
       <A>
         <Wrapper
-          skeleton={false}
+          isSkeleton={false}
           onMouseOver={() => setShow(true)}
           onMouseOut={() => setShow(false)}
         >
-          {props.item.image ? (
-            <Img src={props.item.image}></Img>
+          {props.image ? (
+            <Img src={props.image}></Img>
           ) : (
             <Text level={5} weight={500}>
-              {props.item.content.substr(0, 15)}
+              {props.content.substr(0, 15)}
             </Text>
           )}
           <Detail
             y={show ? "-3rem" : "3rem"}
-            title={props.item.title}
-            uid={props.item.user.id}
-            profileImage={props.item.user.image}
-            name={props.item.user.username}
-            viewNum={props.item.viewNum}
-            commentsNum={props.item.commentsNum}
+            title={props.title}
+            uid={props.user.id}
+            profileImage={props.user.image}
+            name={props.user.username}
+            viewNum={props.viewNum}
+            commentsNum={props.commentsNum}
           ></Detail>
         </Wrapper>
       </A>
