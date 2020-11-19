@@ -1,7 +1,13 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import UpdateModalHooks from "@src/lib/api/Modal";
+import checkIsNotEmpty from "@src/lib/utils/CheckIsNotEmpty";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
@@ -12,7 +18,7 @@ import Modal from "../atoms/Modal/index";
 
 type ModalUpdateProps = {
   modalType: ModalType;
-  pid: string | string[];
+  pid: string;
   onClose: () => void;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
   modalReload: number;
@@ -54,7 +60,70 @@ function ModalUpdate({
     tags.map((value: string) => tagArray.push(value));
     setTags(tagArray);
   }
-
+  const update = useCallback(() => {
+    const flag = checkIsNotEmpty(
+      title,
+      content,
+      category,
+      field,
+      region,
+      projectType,
+      modalType
+    );
+    if (flag) {
+      try {
+        if (modalType === "project") {
+          const image = images.length > 0 ? images[0] : "";
+          const body = {
+            title,
+            content,
+            category,
+            huntingField: field,
+            region,
+            projectCategory: projectType,
+            tags,
+            image,
+          };
+          axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
+          setTimeout(() => setModalReload(modalReload + 1), 400);
+          setIsUpdate(false);
+        } else if (modalType === "portfolio") {
+          const image = images.length > 0 ? images[0] : "";
+          const body = {
+            title,
+            content,
+            category,
+            huntingField: field,
+            tags,
+            image,
+          };
+          axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
+          setTimeout(() => setModalReload(modalReload + 1), 400);
+          setIsUpdate(false);
+        }
+        /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
+        else if (props.type === "portfolio") {
+          let imageDataArray = [];
+          images.map((value) => imageDataArray.push(value.data));
+          let body = {
+            title: title,
+            content: content,
+            category: category,
+            huntingField: field,
+            tags: tags,
+            image: imageDataArray,
+          };
+          axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
+          setTimeout(() => props.setModalReload(props.modalReload + 1), 400);
+          props.setUpdate(false);
+        }
+        */
+      } catch (error) {
+        console.log(error);
+        alert("에러가 발생했습니다.");
+      }
+    }
+  }, [title, content, category, field, region, projectType, tags, images]);
   return (
     <Modal isVisible={!isLoading} onClose={onClose}>
       <Top
@@ -77,23 +146,7 @@ function ModalUpdate({
       <Bottom
         tags={tags}
         setTags={setTags}
-        onClick={() =>
-          UpdateModalHooks.updateModal(
-            title,
-            content,
-            category,
-            field,
-            region,
-            projectType,
-            modalType,
-            tags,
-            pid,
-            images,
-            setIsUpdate,
-            modalReload,
-            setModalReload
-          )
-        }
+        onClick={update}
         isUpdate={true}
       ></Bottom>
     </Modal>
