@@ -27,7 +27,7 @@ function ProjectList(props) {
   const renderBlocks =
     data &&
     data.pagelist.map((item) => (
-      <ProjectBlock key={item.id} item={item}></ProjectBlock>
+      <ProjectBlock key={item.id} {...item}></ProjectBlock>
     ));
 
   if (isLoading) {
