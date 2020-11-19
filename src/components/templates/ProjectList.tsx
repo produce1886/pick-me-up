@@ -6,7 +6,17 @@ import NoResult from "../molecules/NoResult";
 import MoreListButton from "../molecules/Button/LoadMore";
 import Skeleton from "../_skeletons/project/ProjectBlock";
 
-function ProjectList(props) {
+type ProjectListProps = {
+  category: string;
+  field: string;
+  region: string;
+  projectType: string;
+  query: string;
+  sort: "최신순" | "댓글순" | "조회순";
+  reload: number;
+};
+
+function ProjectList(props: ProjectListProps) {
   const { category, field, region, projectType, query, sort, reload } = props;
   const [limit, setLimit] = useState(10);
   const { isLoading, isError, data } = ProjectHooks.useProjectListGetApi([
