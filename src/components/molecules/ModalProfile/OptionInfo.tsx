@@ -287,7 +287,11 @@ const RippleBackground = styled.div`
     height: 100%;
     top: 0;
     left: 0;
-    background-image: radial-gradient(circle, ${Colors.PURPLE} 10%, transparent 10.01%);
+    background-image: radial-gradient(
+      circle,
+      ${Colors.PURPLE} 10%,
+      transparent 10.01%
+    );
     background-repeat: no-repeat;
     background-position: 50%;
     pointer-events: none;

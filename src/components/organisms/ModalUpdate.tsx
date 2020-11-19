@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import checkIsNotEmpty from "@src/lib/utils/CheckIsNotEmpty";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
@@ -14,7 +15,6 @@ import DataProps from "../../types/Data";
 import UserState from "../../types/User";
 import { PageType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
-import checkIsNotEmpty from "../../lib/utils/CheckIsNotEmpty";
 
 type ModalUpdateProps = {
   page: PageType;
@@ -60,7 +60,6 @@ function ModalUpdate({
     tags.map((value: string) => tagArray.push(value));
     setTags(tagArray);
   }
-
   const update = useCallback(() => {
     const flag = checkIsNotEmpty(
       title,
@@ -125,7 +124,6 @@ function ModalUpdate({
       }
     }
   }, [title, content, category, field, region, projectType, tags, images]);
-
   return (
     <Modal isVisible={!isLoading} onClose={onClose}>
       <Top
