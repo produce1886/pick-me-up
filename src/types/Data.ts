@@ -36,7 +36,6 @@ export type Comment = {
   modifiedDate: string;
   id: string;
   content: string;
-  email: string;
   user: User;
 };
 
