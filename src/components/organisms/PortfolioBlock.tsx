@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import DataProps from "@src/types/Data";
 import Text from "../atoms/Text";
 import Detail from "../molecules/PortfolioBlock/Detail";
 import Wrapper from "../atoms/Wrapper/PortfolioBlock";
 
-function PortfolioBlock(props) {
+function PortfolioBlock(props: DataProps) {
   const [show, setShow] = useState(false);
 
   return (
     <Link href={`/portfolio?pid=${props.id}`}>
       <A>
         <Wrapper
-          skeleton={false}
+          isSkeleton={false}
           onMouseOver={() => setShow(true)}
           onMouseOut={() => setShow(false)}
         >
