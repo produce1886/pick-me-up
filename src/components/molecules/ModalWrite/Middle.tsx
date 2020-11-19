@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { ModalType } from "../../atoms/Modal/ModalType";
+import Colors from "@colors";
+import { PageType } from "../../atoms/Modal/ModalType";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";
 
 type ModalMiddleProps = {
   setContent: React.Dispatch<React.SetStateAction<string>>;
   content: string;
-  modalType: ModalType;
+  page: PageType;
   images: string[];
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -15,7 +16,7 @@ type ModalMiddleProps = {
 function ModalMiddle({
   setContent,
   content,
-  modalType,
+  page,
   images,
   setImages,
 }: ModalMiddleProps) {
@@ -32,11 +33,7 @@ function ModalMiddle({
         }}
         value={content}
       ></Textarea>
-      <Dropzone
-        modalType={modalType}
-        setImages={setImages}
-        images={images}
-      ></Dropzone>
+      <Dropzone page={page} setImages={setImages} images={images}></Dropzone>
     </Middle>
   );
 }
@@ -55,13 +52,13 @@ const Textarea = styled.textarea`
   font-size: 0.72rem;
   resize: none;
   input::placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   input::-webkit-input-placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   input:-ms-input-placeholder {
-    color: #d3d4d8;
+    color: ${Colors.GREY};
   }
   overflow-y: scroll;
 `;

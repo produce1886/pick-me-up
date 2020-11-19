@@ -13,7 +13,7 @@ export default styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${(props: { isSkeleton: boolean }) => css`
+  ${(props: { isSkeleton?: boolean }) => css`
     background-color: ${props.isSkeleton ? Colors.WHITE : Colors.GREY};
   `}
 `;

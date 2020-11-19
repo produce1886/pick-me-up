@@ -4,10 +4,10 @@ import ViewCount from "../Count/View";
 import CommentCount from "../Count/Comment";
 import MoreButton from "../Button/ViewMore";
 
-type BottomProps = {
+export type BottomProps = {
   viewNum: number;
   commentsNum: number;
-  id: string;
+  pid: string;
 };
 
 function Bottom(props: BottomProps) {
@@ -18,7 +18,7 @@ function Bottom(props: BottomProps) {
         &nbsp;
         <CommentCount count={props.commentsNum}></CommentCount>
       </Div>
-      <MoreButton id={props.id}></MoreButton>
+      <MoreButton pid={props.pid}></MoreButton>
     </Wrapper>
   );
 }

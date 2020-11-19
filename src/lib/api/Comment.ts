@@ -1,36 +1,39 @@
-import axios from "axios";
+import base from "./Api";
 
-const writeComment = (
+const getComment = (
+  setContent: React.Dispatch<React.SetStateAction<string>>,
   url: string,
-  body: { email: string; content: string }
+  cid?: string
 ) => {
-  try {
-    axios.post(`${process.env.API_HOST}/${url}`, body);
-  } catch (error) {
-    console.log(error);
+  if (cid) {
+    base()
+      .get(`/${url}/${cid}`)
+      .then((res) => res.data)
+      .then((data) => {
+        setContent(data.content);
+      });
   }
 };
 
-const updateComment = (url: string, content: string) => {
-  try {
-    axios.put(`${process.env.API_HOST}/${url}`, {
+const writeComment = (url: string, body: { email: string; content: string }) =>
+  base()
+    .post(`/${url}`, body)
+    .catch((err) => alert("댓글 등록에 실패했습니다"));
+
+const updateComment = (url: string, content: string) =>
+  base()
+    .put(`/${url}`, {
       content,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+    })
+    .catch((err) => alert("댓글 수정에 실패했습니다"));
 
-const deleteComment = (url: string) => {
-  try {
-    axios.delete(`${process.env.API_HOST}/${url}`);
-  } catch (error) {
-    console.log(error);
-    alert("댓글 삭제에 실패했습니다");
-  }
-};
+const deleteComment = (url: string) =>
+  base()
+    .delete(`/${url}`)
+    .catch((err) => alert("댓글 삭제에 실패했습니다"));
 
 const CommentService = {
+  getComment,
   writeComment,
   updateComment,
   deleteComment,

@@ -3,10 +3,10 @@ import styled from "styled-components";
 import Top from "../../atoms/Modal/Top";
 import Profile from "../Profile";
 import Filters from "../Filter/FilterGroup";
-import { ModalType } from "../../atoms/Modal/ModalType";
+import { PageType } from "../../atoms/Modal/ModalType";
 
 type ModalTopProps = {
-  modalType: ModalType;
+  page: PageType;
   setCategory: Dispatch<SetStateAction<string>>;
   setField: React.Dispatch<React.SetStateAction<string>>;
   setRegion: React.Dispatch<React.SetStateAction<string>>;
@@ -17,7 +17,7 @@ type ModalTopProps = {
 };
 
 function ModalTop({
-  modalType,
+  page,
   setCategory,
   setField,
   setRegion,
@@ -41,7 +41,7 @@ function ModalTop({
             onChange={onChangeHandler}
           ></Input>
           <Filters
-            type={modalType}
+            page={page}
             width="fit-content"
             height="1rem"
             level={0}

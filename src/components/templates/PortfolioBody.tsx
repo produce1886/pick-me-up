@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Colors from "@colors";
+import UserState from "@src/types/User";
 import FilterSearch from "../organisms/FilterSearch";
 import Filter from "../molecules/Filter/Filter";
 import { ALIGN } from "../molecules/Filter/ItemData";
@@ -9,19 +11,25 @@ import WriteButton from "../molecules/Button/Write";
 import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
 
-function PortfolioBody(props) {
+type BodyProps = {
+  isModalVisible: boolean;
+  reload: number;
+  setReload: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function PortfolioBody(props: BodyProps) {
   const [category, setCategory] = useState("");
   const [field, setField] = useState("");
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
-  const [writeVisible, setWriteVisible] = useState(false);
-  const isSignedIn = useSelector((state) => state.user.isSignedIn);
+  const [isWriteVisible, setIsWriteVisible] = useState(false);
+  const isSignedIn = useSelector((state: UserState) => state.isSignedIn);
   const align = "최신순";
 
   return (
     <>
       <FilterSearch
-        type="portfolio"
+        page="portfolio"
         setCategory={setCategory}
         setField={setField}
         setQuery={setQuery}
@@ -48,14 +56,14 @@ function PortfolioBody(props) {
           ></PortfolioList>
         </InnerWrapper>
         <TopButton></TopButton>
-        {isSignedIn && !writeVisible && !props.viewVisible && (
-          <WriteButton onClick={() => setWriteVisible(true)}></WriteButton>
+        {isSignedIn && !isWriteVisible && !props.isModalVisible && (
+          <WriteButton onClick={() => setIsWriteVisible(true)}></WriteButton>
         )}
-        {writeVisible && (
+        {isWriteVisible && (
           <ModalWrite
-            modalType="portfolio"
-            isVisible={writeVisible}
-            onClose={() => setWriteVisible(false)}
+            page="portfolio"
+            isVisible={isWriteVisible}
+            onClose={() => setIsWriteVisible(false)}
             reload={props.reload}
             setReload={props.setReload}
           ></ModalWrite>
@@ -68,7 +76,7 @@ function PortfolioBody(props) {
 export default React.memo(PortfolioBody);
 
 const Wrapper = styled.div`
-  background-color: #f5edff;
+  background-color: ${Colors.LIGHT_PURPLE};
   width: 100%;
   justify-content: flex-start;
   align-items: center;

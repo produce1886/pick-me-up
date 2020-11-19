@@ -14,7 +14,7 @@ export default styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: ${Colors.WHITE};
   border: none;
   padding: 0 0.75rem 0 0.75rem;
   outline: none;
