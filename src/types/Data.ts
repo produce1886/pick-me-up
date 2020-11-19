@@ -36,7 +36,6 @@ export type Comment = {
   modifiedDate: string;
   id: string;
   content: string;
-  email: string;
   user: User;
 };
 
@@ -55,6 +54,11 @@ export type Preview = {
   viewNum: number;
   user: User;
   commentsNum: number;
+};
+
+export type PostList = {
+  nrOfElements: number;
+  pagelist: DataProps[];
 };
 
 export default DataProps;
