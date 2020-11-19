@@ -15,7 +15,7 @@ function PortfolioBody(props) {
   const [field, setField] = useState("");
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
-  const [writeVisible, setWriteVisible] = useState(false);
+  const [isWriteVisible, setIsWriteVisible] = useState(false);
   const isSignedIn = useSelector((state) => state.user.isSignedIn);
   const align = "최신순";
 
@@ -49,14 +49,14 @@ function PortfolioBody(props) {
           ></PortfolioList>
         </InnerWrapper>
         <TopButton></TopButton>
-        {isSignedIn && !writeVisible && !props.viewVisible && (
-          <WriteButton onClick={() => setWriteVisible(true)}></WriteButton>
+        {isSignedIn && !isWriteVisible && !props.isModalVisible && (
+          <WriteButton onClick={() => setIsWriteVisible(true)}></WriteButton>
         )}
-        {writeVisible && (
+        {isWriteVisible && (
           <ModalWrite
             page="portfolio"
-            isVisible={writeVisible}
-            onClose={() => setWriteVisible(false)}
+            isVisible={isWriteVisible}
+            onClose={() => setIsWriteVisible(false)}
             reload={props.reload}
             setReload={props.setReload}
           ></ModalWrite>

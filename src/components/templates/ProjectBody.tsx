@@ -12,7 +12,7 @@ import TopButton from "../molecules/Button/Top";
 import ModalWrite from "../organisms/ModalWrite";
 
 type BodyProps = {
-  viewVisible: boolean;
+  isModalVisible: boolean;
   reload: number;
   setReload: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -24,7 +24,7 @@ function ProjectBody(props: BodyProps) {
   const [projectType, setProjectType] = useState("");
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
-  const [writeVisible, setWriteVisible] = useState(false);
+  const [isWriteVisible, setIsWriteVisible] = useState(false);
   const isSignedIn = useSelector((state: UserState) => state.isSignedIn);
   const align = "최신순";
 
@@ -63,14 +63,14 @@ function ProjectBody(props: BodyProps) {
         </InnerWrapper>
       </Wrapper>
       <TopButton></TopButton>
-      {isSignedIn && !writeVisible && !props.viewVisible && (
-        <WriteButton onClick={() => setWriteVisible(true)}></WriteButton>
+      {isSignedIn && !isWriteVisible && !props.isModalVisible && (
+        <WriteButton onClick={() => setIsWriteVisible(true)}></WriteButton>
       )}
-      {writeVisible && (
+      {isWriteVisible && (
         <ModalWrite
           page="project"
-          isVisible={writeVisible}
-          onClose={() => setWriteVisible(false)}
+          isVisible={isWriteVisible}
+          onClose={() => setIsWriteVisible(false)}
           reload={props.reload}
           setReload={props.setReload}
         ></ModalWrite>

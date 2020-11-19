@@ -42,7 +42,7 @@ export default function Portfolio() {
       )}
       <Gnb></Gnb>
       <PortfolioBody
-        viewVisible={!!router.query.pid}
+        isModalVisible={!!router.query.pid}
         reload={reload}
         setReload={setReload}
       ></PortfolioBody>
