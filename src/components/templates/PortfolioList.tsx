@@ -6,7 +6,15 @@ import MoreListButton from "../molecules/Button/LoadMore";
 import NoResult from "../molecules/NoResult";
 import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
-function PortfolioList(props) {
+type PortfolioListProps = {
+  category: string;
+  field: string;
+  query: string;
+  sort: string;
+  reload: number;
+};
+
+function PortfolioList(props: PortfolioListProps) {
   const { category, field, query, sort, reload } = props;
   const [limit, setLimit] = useState(15);
   const { isLoading, isError, data } = PortfolioHooks.usePortfolioListGetApi([
