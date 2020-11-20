@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import Colors from "@colors";
 import TabButton from "../../molecules/Button/Tab";
 
-function Tab(props) {
+type TabProps = {
+  selected: number;
+  setSelected: React.Dispatch<React.SetStateAction<number>>;
+};
+
+function Tab(props: TabProps) {
   return (
     <Wrapper>
       <TabButton

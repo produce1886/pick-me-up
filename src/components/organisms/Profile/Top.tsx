@@ -2,27 +2,43 @@ import React from "react";
 import styled from "styled-components";
 import Colors from "@colors";
 import Text from "../../atoms/Text";
+import ProfileIcon from "../../atoms/Icon/Profile";
 import EditButton from "../../molecules/Button/Edit";
 
-function Top(props) {
+type TopProps = {
+  setIsEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  profileImage?: string;
+  name: string;
+  introduceSecurity: boolean;
+  introduce: string;
+};
+
+function Top(props: TopProps) {
   return (
     <Wrapper>
       <Background></Background>
       <ProfileHolder>
-        <Img src={props.image}></Img>
+        {props.profileImage ? (
+          <Img src={props.profileImage}></Img>
+        ) : (
+          <ProfileIcon
+            style={{ width: "5rem", height: "5rem" }}
+            fill={Colors.GREY}
+          ></ProfileIcon>
+        )}
       </ProfileHolder>
       <InfoWrapper>
         <ButtonWrapper
           onClick={() => {
-            props.setEditVisible(true);
+            props.setIsEditVisible(true);
           }}
         >
           <EditButton></EditButton>
         </ButtonWrapper>
         <Text level={6} weight="bold" color={Colors.BLACK}>
-          {props.username}
+          {props.name}
         </Text>
-        {props.introduce_security && (
+        {props.introduceSecurity && (
           <Text level={3} color={Colors.DEEP_GREY}>
             {props.introduce}
           </Text>
