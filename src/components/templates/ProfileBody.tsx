@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import styled from "styled-components";
+import ProfileHooks from "@src/lib/hooks/Profile";
 import Top from "../organisms/Profile/Top";
 import Tab from "../organisms/Profile/Tab";
 import Info from "../organisms/Profile/Info";
@@ -11,8 +11,8 @@ import EditModal from "../organisms/Profile/EditModal";
 
 function ProfileBody() {
   const router = useRouter();
-  const { userid } = router.query;
-  const { isLoading, data } = useGetPersonalInfoAPI(userid);
+  const { userID } = router.query;
+  const { isLoading, isError, data } = ProfileHooks.useProfileGetApi([userID]);
   const [selected, setSelected] = useState(0);
   const [isEditVisible, setIsEditVisible] = useState(false);
 
@@ -29,14 +29,14 @@ function ProfileBody() {
       )}
       <Tab selected={selected} setSelected={setSelected}></Tab>
       <BodyWrapper>
-        {selected === 0 && <Info {...data}></Info>}
+        {selected === 0 && data && <Info {...data}></Info>}
         {selected === 1 && <Project></Project>}
         {selected === 2 && <Portfolio></Portfolio>}
       </BodyWrapper>
       {isEditVisible && (
         <EditModal
-          isVisible={isEditVisible}
           onClose={() => setIsEditVisible(false)}
+          {...data}
         ></EditModal>
       )}
     </Wrapper>
@@ -44,28 +44,6 @@ function ProfileBody() {
 }
 
 export default ProfileBody;
-
-const useGetPersonalInfoAPI = (userid) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const result = await axios.get(
-          `${process.env.API_HOST}/users/${userid}`
-        );
-        setData(result.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  });
-  return { isLoading, data };
-};
 
 const Wrapper = styled.div`
   width: 100%;
