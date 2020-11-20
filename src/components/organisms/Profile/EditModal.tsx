@@ -37,7 +37,7 @@ type EditModalProps = {
 
 function EditModal(props: EditModalProps) {
   const router = useRouter();
-  const uid = router.query.userid;
+  const uid = router.query.userID;
   const sexSecurity = false;
   const [birthSecurity, setBirthSecurity] = useState(false);
   const [areaSecurity, setAreaSecurity] = useState(false);
