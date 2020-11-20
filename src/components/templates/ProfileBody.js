@@ -14,27 +14,31 @@ function ProfileBody() {
   const { userid } = router.query;
   const { isLoading, data } = useGetPersonalInfoAPI(userid);
   const [selected, setSelected] = useState(0);
-  const [editvisible, setEditVisible] = useState(false);
+  const [isEditVisible, setIsEditVisible] = useState(false);
 
   return (
     <Wrapper>
-      <Top
-        setEditVisible={setEditVisible}
-        isLoading={isLoading}
-        {...data}
-      ></Top>
-      {editvisible && (
-        <EditModal
-          isVisible={editvisible}
-          onClose={() => setEditVisible(false)}
-        ></EditModal>
+      {data && ( // needs skeleton
+        <Top
+          setIsEditVisible={setIsEditVisible}
+          profileImage={data.image}
+          name={data.username}
+          introduceSecurity={data.introduce_security}
+          introduce={data.introduce}
+        ></Top>
       )}
       <Tab selected={selected} setSelected={setSelected}></Tab>
       <BodyWrapper>
-        {selected === 0 && <Info isLoading={isLoading} {...data}></Info>}
+        {selected === 0 && <Info {...data}></Info>}
         {selected === 1 && <Project></Project>}
         {selected === 2 && <Portfolio></Portfolio>}
       </BodyWrapper>
+      {isEditVisible && (
+        <EditModal
+          isVisible={isEditVisible}
+          onClose={() => setIsEditVisible(false)}
+        ></EditModal>
+      )}
     </Wrapper>
   );
 }

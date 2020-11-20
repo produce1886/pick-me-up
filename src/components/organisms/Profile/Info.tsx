@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Colors from "@colors";
+import { Profile } from "@src/types/Data";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Birth from "../../atoms/Icon/Birth";
@@ -9,7 +10,7 @@ import Area from "../../atoms/Icon/Area";
 import Heart from "../../atoms/Icon/Heart";
 import Row from "../../atoms/Wrapper/Row";
 
-function Info(props) {
+function Info(props: Profile) {
   const {
     username,
     birth,
@@ -25,19 +26,17 @@ function Info(props) {
 
   return (
     <Wrapper>
-      {username && (
-        <Div>
-          <User
-            style={{ width: "0.64rem", height: "0.72rem" }}
-            fill={Colors.GREY}
-          ></User>
-          <Text level={3} color={Colors.BLACK}>
-            {username}
-          </Text>
-        </Div>
-      )}
+      <InfoUnitWrapper>
+        <User
+          style={{ width: "0.64rem", height: "0.72rem" }}
+          fill={Colors.GREY}
+        ></User>
+        <Text level={3} color={Colors.BLACK}>
+          {username}
+        </Text>
+      </InfoUnitWrapper>
       {birth && birthSecurity && (
-        <Div>
+        <InfoUnitWrapper>
           <Birth
             style={{ width: "0.8rem", height: "0.8rem" }}
             fill={Colors.GREY}
@@ -45,10 +44,10 @@ function Info(props) {
           <Text level={3} color={Colors.BLACK}>
             {birth}
           </Text>
-        </Div>
+        </InfoUnitWrapper>
       )}
       {university && universitySecurity && (
-        <Div>
+        <InfoUnitWrapper>
           <Univ
             style={{ width: "0.8rem", height: "0.72rem" }}
             fill={Colors.GREY}
@@ -71,10 +70,10 @@ function Info(props) {
               </>
             )}
           </Row>
-        </Div>
+        </InfoUnitWrapper>
       )}
       {area && areaSecurity && (
-        <Div>
+        <InfoUnitWrapper>
           <Area
             style={{ width: "0.6rem", height: "0.72rem" }}
             fill={Colors.GREY}
@@ -82,10 +81,10 @@ function Info(props) {
           <Text level={3} color={Colors.BLACK}>
             {area}
           </Text>
-        </Div>
+        </InfoUnitWrapper>
       )}
       {interests && interestsSecurity && (
-        <Div>
+        <InfoUnitWrapper>
           <Heart
             style={{ width: "0.83rem", height: "0.72rem" }}
             fill={Colors.GREY}
@@ -93,7 +92,7 @@ function Info(props) {
           <Text level={3} color={Colors.BLACK}>
             {interests}
           </Text>
-        </Div>
+        </InfoUnitWrapper>
       )}
     </Wrapper>
   );
@@ -111,7 +110,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
-const Div = styled.div`
+const InfoUnitWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
