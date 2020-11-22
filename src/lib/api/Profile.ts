@@ -1,7 +1,7 @@
 import { Profile } from "@src/types/Data";
 import base from "./Api";
 
-const getProfile = (uid: string) => {
+const getProfile = (uid: string, reload: number) => {
   if (uid) {
     return base()
       .get(`/users/${uid}`)

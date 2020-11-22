@@ -10,9 +10,13 @@ import Project from "../organisms/Profile/Project";
 import EditModal from "../organisms/Profile/EditModal";
 
 function ProfileBody() {
+  const [reload, setReload] = useState<number>(0);
   const router = useRouter();
   const { userID } = router.query;
-  const { isLoading, isError, data } = ProfileHooks.useProfileGetApi([userID]);
+  const { isLoading, isError, data } = ProfileHooks.useProfileGetApi([
+    userID,
+    reload,
+  ]);
   const [selected, setSelected] = useState(0);
   const [isEditVisible, setIsEditVisible] = useState(false);
 
@@ -36,6 +40,8 @@ function ProfileBody() {
       {isEditVisible && (
         <EditModal
           onClose={() => setIsEditVisible(false)}
+          reload={reload}
+          setReload={setReload}
           {...data}
         ></EditModal>
       )}
