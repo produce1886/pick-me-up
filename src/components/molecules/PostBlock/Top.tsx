@@ -29,7 +29,7 @@ function Top(props: TopProps) {
         </Row>
         <Row>
           <Div>
-            <Link href="/profile/[userid]" as={`/profile/${props.uid}`}>
+            <Link href="/profile/[userID]" as={`/profile/${props.uid}`}>
               <A>
                 <Profile
                   size="0.9rem"

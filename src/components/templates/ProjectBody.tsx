@@ -25,7 +25,9 @@ function ProjectBody(props: BodyProps) {
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
   const [isWriteVisible, setIsWriteVisible] = useState(false);
-  const isSignedIn = useSelector((state: UserState) => state.isSignedIn);
+  const isSignedIn = useSelector(
+    (state: { user: UserState }) => state.user.isSignedIn
+  );
   const align = "최신순";
 
   return (

@@ -24,7 +24,7 @@ function Top(props: TopProps) {
       <Text level={6} weight="bold" color={Colors.DEEP_PURPLE} line={1.17}>
         {props.title}
       </Text>
-      <Link href="/profile/[userid]" as={`/profile/${props.uid}`}>
+      <Link href="/profile/[userID]" as={`/profile/${props.uid}`}>
         <A>
           <Profile
             size="1rem"
