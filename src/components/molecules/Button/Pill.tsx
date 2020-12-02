@@ -19,8 +19,9 @@ function PillButton(props: ButtonProps) {
       </Link>
     );
   }
+
   return (
-    <Wrapper>
+    <Wrapper onClick={props.onClick}>
       <Text level={1} weight={props.weight} color={props.color}>
         {props.text}
       </Text>

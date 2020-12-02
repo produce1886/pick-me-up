@@ -45,7 +45,7 @@ function ModalTop(props: ModalTopProps) {
         ></FilterInfo>
       </TitleFilterWrapper>
       <ProfileBox>
-        <Link href="/profile/[userid]" as={`/profile/${props.uid}`}>
+        <Link href="/profile/[userID]" as={`/profile/${props.uid}`}>
           <A>
             <ProfileHolder size="3rem" noMargin={true}>
               <Img src={props.profileImage}></Img>

@@ -18,7 +18,7 @@ type OptionInfoProps = {
   university: string;
   major: string;
   area: string;
-  interest: string;
+  interests: string;
   setBirthSecurity: () => void;
   setAreaSecurity: () => void;
   setInterestSecurity: () => void;
@@ -27,7 +27,7 @@ type OptionInfoProps = {
   setMajor: React.Dispatch<React.SetStateAction<string>>;
   setUniversity: React.Dispatch<React.SetStateAction<string>>;
   setArea: React.Dispatch<React.SetStateAction<string>>;
-  setInterest: React.Dispatch<React.SetStateAction<string>>;
+  setInterests: React.Dispatch<React.SetStateAction<string>>;
 };
 
 function OptionInfo(props: OptionInfoProps) {
@@ -152,8 +152,8 @@ function OptionInfo(props: OptionInfoProps) {
         <Interest
           interestsSecurity={props.interestsSecurity}
           setInterestSecurity={props.setInterestSecurity}
-          setInterest={props.setInterest}
-          interest={props.interest}
+          setInterest={props.setInterests}
+          interest={props.interests}
         ></Interest>
       </Div>
     </Wrapper>
