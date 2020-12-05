@@ -18,15 +18,20 @@ function ModalView(props: ModalProps) {
   }
   const { isLoading, isError, data } = getData([props.pid, props.modalReload]);
 
+  if (isLoading) {
+    return (
+      <>
+        {props.page === "project" && <ProjectSkeleton></ProjectSkeleton>}
+        {props.page === "portfolio" && <PortfolioSkeleton></PortfolioSkeleton>}
+      </>
+    );
+  }
+
+  if (isError) alert("에러가 발생했습니다");
+
   return (
     <Modal isVisible={props.isVisible} onClose={props.onClose}>
-      {isLoading && props.page === "project" && (
-        <ProjectSkeleton></ProjectSkeleton>
-      )}
-      {isLoading && props.page === "portfolio" && (
-        <PortfolioSkeleton></PortfolioSkeleton>
-      )}
-      {!isLoading && data && (
+      {data && (
         <>
           <Top
             page={props.page}
