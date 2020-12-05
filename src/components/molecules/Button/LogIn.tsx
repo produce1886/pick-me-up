@@ -22,7 +22,7 @@ export default function LogInButton() {
       clientId={process.env.GOOGLE_CLIENT_ID}
       buttonText="Log In"
       onSuccess={loginHandler}
-      onFailure={(response) => console.log(response)}
+      onFailure={() => alert("로그인에 실패했습니다")}
       cookiePolicy={"single_host_origin"}
     />
   );
