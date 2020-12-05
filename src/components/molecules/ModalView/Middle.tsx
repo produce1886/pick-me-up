@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import axios from "axios";
 import Colors from "@colors";
-import { State } from "@src/types/User";
+import UserState from "@src/types/User";
 import { PageType } from "@src/components/atoms/Modal/ModalType";
 import { Tag } from "@src/types/Data";
 import Text from "../../atoms/Text";
@@ -27,7 +27,7 @@ type ModalMiddleProps = {
 
 function ModalMiddle(props: ModalMiddleProps) {
   const router = useRouter();
-  const userState = useSelector((state: { user: State }) => state.user);
+  const userState = useSelector((state: { user: UserState }) => state.user);
   const { pid } = props;
   let { date } = props;
   date = date.replace("T", " ");
