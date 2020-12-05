@@ -32,8 +32,14 @@ const getProjectList = (
     .then((res) => res.data);
 };
 
+const getProject = (pid: string, modalReload: number) =>
+  base()
+    .get(`projects/${pid}`)
+    .then((res) => res.data);
+
 const ProjectService = {
   getProjectList,
+  getProject,
 };
 
 export default ProjectService;

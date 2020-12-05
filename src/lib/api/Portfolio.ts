@@ -28,8 +28,14 @@ const getPortfolioList = (
     .then((res) => res.data);
 };
 
+const getPortfolio = (pid: string, modalReload: number) =>
+  base()
+    .get(`projects/${pid}`)
+    .then((res) => res.data);
+
 const PortfolioService = {
   getPortfolioList,
+  getPortfolio,
 };
 
 export default PortfolioService;
