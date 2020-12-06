@@ -37,9 +37,15 @@ const getProject = (pid: string, modalReload: number) =>
     .get(`projects/${pid}`)
     .then((res) => res.data);
 
+const deleteProject = (pid: string) =>
+  base()
+    .delete(`/projects/${pid}`)
+    .catch((err) => alert("게시글 삭제에 실패했습니다"));
+
 const ProjectService = {
   getProjectList,
   getProject,
+  deleteProject,
 };
 
 export default ProjectService;

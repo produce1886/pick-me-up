@@ -33,9 +33,15 @@ const getPortfolio = (pid: string, modalReload: number) =>
     .get(`projects/${pid}`)
     .then((res) => res.data);
 
+const deletePortfolio = (pid: string) =>
+  base()
+    .delete(`/projects/${pid}`)
+    .catch((err) => alert("게시글 삭제에 실패했습니다"));
+
 const PortfolioService = {
   getPortfolioList,
   getPortfolio,
+  deletePortfolio,
 };
 
 export default PortfolioService;
