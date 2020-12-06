@@ -37,7 +37,6 @@ function ModalView(props: ModalProps) {
             page={props.page}
             title={data.title}
             uid={data.user.id}
-            name={data.user.username}
             profileImage={data.user.image}
             category={data.category}
             field={data.huntingField}
