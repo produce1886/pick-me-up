@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Colors from "@colors";
 import Bottom from "../../atoms/Modal/Bottom";
-import TagButton from "../Button/Tag";
+import TagButton from "../Tag";
 import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
 

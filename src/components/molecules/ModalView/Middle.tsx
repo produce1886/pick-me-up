@@ -10,7 +10,7 @@ import ProjectService from "@src/lib/api/Project";
 import PortfolioService from "@src/lib/api/Portfolio";
 import Text from "../../atoms/Text";
 import Wrapper from "../../atoms/Modal/Middle";
-import TagButton from "../Button/Tag";
+import TagButton from "../Tag";
 import Icon from "../../atoms/Icon/Tag";
 
 type ModalMiddleProps = {

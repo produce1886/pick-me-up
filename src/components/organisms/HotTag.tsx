@@ -4,7 +4,7 @@ import Colors from "@colors";
 import HotTagHooks from "@src/lib/hooks/HotTag";
 import Icon from "../atoms/Icon/Tag";
 import Text from "../atoms/Text";
-import Tag from "../molecules/Button/Tag";
+import Tag from "../molecules/Tag";
 import Skeleton from "../_skeletons/main/Tag";
 
 export default function HotTag() {
