@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ViewCount from "../Count/View";
 import CommentCount from "../Count/Comment";
 import MoreButton from "../Button/ViewMore";
-import TagButton from "../Button/Tag";
+import TagButton from "../Tag";
 
 type BottomProps = {
   tags?: { tag: string; id: string }[];
