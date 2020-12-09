@@ -2,14 +2,15 @@ import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import axios from "axios";
 import Colors from "@colors";
-import { State } from "@src/types/User";
+import UserState from "@src/types/User";
 import { PageType } from "@src/components/atoms/Modal/ModalType";
 import { Tag } from "@src/types/Data";
+import ProjectService from "@src/lib/api/Project";
+import PortfolioService from "@src/lib/api/Portfolio";
 import Text from "../../atoms/Text";
-import Middle from "../../atoms/Modal/Middle";
-import TagButton from "../Button/Tag";
+import Wrapper from "../../atoms/Modal/Middle";
+import TagButton from "../Tag";
 import Icon from "../../atoms/Icon/Tag";
 
 type ModalMiddleProps = {
@@ -18,7 +19,7 @@ type ModalMiddleProps = {
   content: string;
   image: string;
   userEmail: string;
-  pid: number | string | string[];
+  pid: string;
   tags: Tag[];
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   listReload: number;
@@ -27,61 +28,55 @@ type ModalMiddleProps = {
 
 function ModalMiddle(props: ModalMiddleProps) {
   const router = useRouter();
-  const userState = useSelector((state: { user: State }) => state.user);
+  const userState = useSelector((state: { user: UserState }) => state.user);
   const { pid } = props;
   let { date } = props;
   date = date.replace("T", " ");
 
-  // api로 빼야하나?
   const deletePost = useCallback(() => {
-    try {
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
       if (props.page === "project") {
-        if (window.confirm("게시글을 삭제하시겠습니까?")) {
-          axios.delete(`${process.env.API_HOST}/projects/${pid}`);
-          setTimeout(() => props.setListReload(props.listReload + 1), 300);
-          router.push("/project");
-        }
+        ProjectService.deleteProject(pid);
       } else if (props.page === "portfolio") {
-        if (window.confirm("게시글을 삭제하시겠습니까?")) {
-          axios.delete(`${process.env.API_HOST}/portfolios/${pid}`);
-          setTimeout(() => props.setListReload(props.listReload + 1), 300);
-          router.push("/portfolio");
-        }
+        PortfolioService.deletePortfolio(pid);
       }
-    } catch (error) {
-      console.log(error);
+      setTimeout(() => props.setListReload(props.listReload + 1), 400);
+      router.push(`/${props.page}`);
     }
   }, []);
 
+  const renderTags = props.tags && props.tags.length > 0 && (
+    <TagWrapper>
+      <Icon
+        style={{
+          width: "1.5rem",
+          height: "1.5rem",
+          marginRight: "0.3rem",
+        }}
+        fill={Colors.BLACK}
+      ></Icon>
+      {props.tags.map((item: Tag) => (
+        <TagButton key={item.id} text={item.tag}></TagButton>
+      ))}
+    </TagWrapper>
+  );
+
   return (
-    <Middle height="fit-content">
+    <Wrapper height="fit-content">
       <DateWrapper>
         <Text level={1} color={Colors.BLACK} weight={500}>
           {date}
         </Text>
       </DateWrapper>
       <ContentBox>
-        <Text level={2} color={Colors.BLACK}>
-          {props.content}
-        </Text>
+        <TextWrapper>{props.content}</TextWrapper>
         {props.image && (
           <ImageHolder>
             <Img src={props.image}></Img>
           </ImageHolder>
         )}
       </ContentBox>
-      {props.tags && props.tags.length > 0 && (
-        <TagWrapper>
-          <Icon
-            style={{ width: "1.5rem", height: "1.5rem", marginRight: "0.3rem" }}
-            fill={Colors.BLACK}
-          ></Icon>
-          /* key에 index 넣음 수정 필요 */
-          {props.tags.map((item: { tag: string }, index: number) => (
-            <TagButton text={item.tag} key={index}></TagButton>
-          ))}
-        </TagWrapper>
-      )}
+      {renderTags}
       {props.userEmail === userState.userData.email && (
         <ButtonWrapper>
           <Button onClick={() => props.setUpdate(true)}>
@@ -96,7 +91,7 @@ function ModalMiddle(props: ModalMiddleProps) {
           </Button>
         </ButtonWrapper>
       )}
-    </Middle>
+    </Wrapper>
   );
 }
 
@@ -121,6 +116,12 @@ const ContentBox = styled.div`
   justify-content: flex-start;
   box-sizing: border-box;
   overflow-y: scroll;
+`;
+
+const TextWrapper = styled.pre`
+  font-size: 0.64rem;
+  color: ${Colors.BLACK};
+  font-family: "Noto Sans KR", sans-serif;
 `;
 
 const TagWrapper = styled.div`

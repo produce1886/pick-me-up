@@ -19,6 +19,23 @@ type ModalBottomProps = {
 function ModalBottom(props: ModalBottomProps) {
   const [updatingCid, setUpdatingCid] = useState(null);
 
+  const renderComments =
+    props.comments &&
+    props.comments.map((item: Comment) => (
+      <CommentComponent
+        key={item.id}
+        page={props.page}
+        comment={item.content}
+        date={item.createdDate}
+        {...item.user}
+        cid={item.id}
+        pid={props.pid}
+        modalReload={props.modalReload}
+        setModalReload={props.setModalReload}
+        setUpdatingCid={setUpdatingCid}
+      ></CommentComponent>
+    ));
+
   return (
     <Wrapper>
       <CommentNumWrapper>
@@ -30,22 +47,7 @@ function ModalBottom(props: ModalBottomProps) {
           {props.commentsNum < 2 ? "Comment" : "Comments"}
         </Text>
       </CommentNumWrapper>
-      {props.comments &&
-        props.comments.map((item: Comment) => (
-          <CommentComponent
-            key={item.id}
-            page={props.page}
-            comment={item.content}
-            date={item.createdDate}
-            {...item.user}
-            // number, string type error 수정 필요
-            cid={item.id}
-            pid={props.pid}
-            modalReload={props.modalReload}
-            setModalReload={props.setModalReload}
-            setUpdatingCid={setUpdatingCid}
-          ></CommentComponent>
-        ))}
+      {renderComments}
       <CommentWrite
         page={props.page}
         pid={props.pid}
