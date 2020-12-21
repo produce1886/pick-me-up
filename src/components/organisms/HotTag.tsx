@@ -25,7 +25,7 @@ export default function HotTag() {
           지금 이시간 가장 인기 있는 태그를 확인하세요
         </Text>
         <Row>
-          {isLoading && duplicate(<Skeleton />, 10)}
+          {isLoading && duplicate(Skeleton, 10)}
           {!isLoading &&
             !isError &&
             data &&
