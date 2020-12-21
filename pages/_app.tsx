@@ -67,6 +67,10 @@ function PickMeUp({ Component, pageProps }: AppProps) {
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap"
           rel="stylesheet"
         ></link>
+        <meta
+          name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"
+        />
       </Head>
       <Wrapper>
         <Component {...pageProps} />
