@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Colors from "@colors";
 import PreviewHooks from "@src/lib/hooks/Preview";
+import duplicate from "@src/lib/utils/duplicate";
 import PreviewBlock from "../organisms/PreviewBlock";
 import Text from "../atoms/Text";
 import Icon from "../atoms/Icon/Chevron/Right";
@@ -28,14 +29,7 @@ export default function Preview({ sort }: { sort: "new" | "most" }) {
           ></Icon>
         </LinkWrapper>
         <BlockWrapper>
-          {isLoading && (
-            <>
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-              <Skeleton />
-            </>
-          )}
+          {isLoading && duplicate(Skeleton, 4)}
           {!isLoading &&
             !isError &&
             data &&
