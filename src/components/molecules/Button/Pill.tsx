@@ -8,7 +8,7 @@ import Wrapper from "../../atoms/Button/Pill";
 function PillButton(props: ButtonProps) {
   if (props.link) {
     return (
-      <Link href={props.link}>
+      <Link href={props.link} passHref>
         <A>
           <Wrapper>
             <Text level={1} weight={props.weight} color={props.color}>
@@ -31,4 +31,4 @@ function PillButton(props: ButtonProps) {
 
 export default React.memo(PillButton);
 
-const A = styled.a``;
+const A = styled.a`text-decoration: none;`;

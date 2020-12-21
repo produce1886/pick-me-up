@@ -5,7 +5,7 @@ import Logo from "../../atoms/Image/Logo";
 
 export default function LogoButton() {
   return (
-    <Link href="/index">
+    <Link href="/" passHref>
       <A>
         <Logo style={{ width: "5rem", height: "1.5rem" }}></Logo>
       </A>
@@ -13,4 +13,6 @@ export default function LogoButton() {
   );
 }
 
-const A = styled.a``;
+const A = styled.a`
+  text-decoration: none;
+`;

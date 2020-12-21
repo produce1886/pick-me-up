@@ -10,11 +10,11 @@ export default function Rank({ number }: { number: number }) {
         fill={Colors.PINK}
         style={{ width: "1.8rem", height: "2.4rem" }}
       ></Icon>
-      <Div>
+      <NumberWrapper>
         <Text level={6} weight="bold" color={Colors.WHITE}>
           {number}
         </Text>
-      </Div>
+      </NumberWrapper>
     </Wrapper>
   );
 }
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
-const Div = styled.div`
+const NumberWrapper = styled.span`
   position: absolute;
   top: 0.1rem;
 `;
