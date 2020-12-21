@@ -27,7 +27,7 @@ function Top(props: TopProps) {
       </Row>
       <Row>
         <BottomWrapper>
-          <Link href="/profile/[userID]" as={`/profile/${props.uid}`}>
+          <Link href={`/profile/${props.uid}`} passHref>
             <A>
               <Profile
                 size="0.9rem"
@@ -75,4 +75,4 @@ const Row = styled.div`
   margin-top: 0.2rem;
 `;
 
-const A = styled.a``;
+const A = styled.a`text-decoration: none;`;

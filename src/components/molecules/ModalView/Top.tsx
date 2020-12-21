@@ -42,7 +42,7 @@ function ModalTop(props: ModalTopProps) {
           projectCategory={props.projectCategory}
         ></FilterInfo>
       </TitleFilterWrapper>
-      <Link href="/profile/[userID]" as={`/profile/${props.uid}`}>
+      <Link href={`/profile/${props.uid}`} passHref>
         <A>
           <ProfileHolder size="3rem" noMargin={true}>
             <Img src={props.profileImage}></Img>
@@ -82,4 +82,4 @@ const Img = styled.img`
   `}
 `;
 
-const A = styled.a``;
+const A = styled.a`text-decoration: none;`;

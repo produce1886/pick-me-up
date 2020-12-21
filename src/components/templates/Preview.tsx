@@ -15,7 +15,7 @@ export default function Preview({ sort }: { sort: "new" | "most" }) {
     <Wrapper>
       <InnerWrapper>
         <LinkWrapper>
-          <Link href="project">
+          <Link href="project" passHref>
             <A>
               <Text level={8} color={Colors.BLACK} weight="bold">
                 {sort === "new" && "신규 프로젝트"}

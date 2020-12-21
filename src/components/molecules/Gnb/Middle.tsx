@@ -8,7 +8,7 @@ export default function Main() {
     <Wrapper>
       <InnerWrapper>
         <LinkButton>
-          <Link href="/project">
+          <Link href="/project" passHref>
             <A>
               <Text level={3} weight={500} color={Colors.BLACK}>
                 프로젝트
@@ -17,7 +17,7 @@ export default function Main() {
           </Link>
         </LinkButton>
         <LinkButton>
-          <Link href="/portfolio">
+          <Link href="/portfolio" passHref>
             <A>
               <Text level={3} weight={500} color={Colors.BLACK}>
                 포트폴리오

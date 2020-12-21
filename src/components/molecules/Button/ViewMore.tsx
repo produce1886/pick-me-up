@@ -10,7 +10,7 @@ type ButtonProps = {
 
 function ViewMoreButton({ pid }: ButtonProps) {
   return (
-    <Link href={`/project?pid=${pid}`}>
+    <Link href={`/project?pid=${pid}`} passHref>
       <A>
         <Text level={1} weight={500} color={Colors.DEEP_GREY}>
           더보기
@@ -22,4 +22,4 @@ function ViewMoreButton({ pid }: ButtonProps) {
 
 export default React.memo(ViewMoreButton);
 
-const A = styled.a``;
+const A = styled.a`text-decoration: none;`;
