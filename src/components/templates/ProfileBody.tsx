@@ -8,6 +8,7 @@ import Info from "../organisms/Profile/Info";
 import Portfolio from "../organisms/Profile/Portfolio";
 import Project from "../organisms/Profile/Project";
 import EditModal from "../organisms/Profile/EditModal";
+import SkeletonBody from "../_skeletons/profile/ProfileInfo";
 
 function ProfileBody() {
   const [reload, setReload] = useState<number>(0);
@@ -20,15 +21,25 @@ function ProfileBody() {
   const [selected, setSelected] = useState(0);
   const [isEditVisible, setIsEditVisible] = useState(false);
 
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <Top skeleton={true} setIsEditVisible={setIsEditVisible}></Top>
+        <Tab selected={selected} setSelected={setSelected}></Tab>
+        <SkeletonBody></SkeletonBody>
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
-      {data && ( // needs skeleton
+      {data && !isLoading && (
         <Top
           setIsEditVisible={setIsEditVisible}
           profileImage={data.image}
           name={data.username}
           introduceSecurity={data.introduce_security}
           introduce={data.introduce}
+          skeleton={false}
         ></Top>
       )}
       <Tab selected={selected} setSelected={setSelected}></Tab>
