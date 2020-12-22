@@ -1,17 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import Colors from "@colors";
-import ButtonProps from "../../atoms/Button/button";
-import Text from "../../atoms/Text";
-import Wrapper from "../../atoms/Button/Tag";
-import IconX from "../../atoms/Icon/X";
+import Text from "../atoms/Text";
+import Wrapper from "../atoms/Wrapper/Tag";
+import IconX from "../atoms/Icon/X";
 
-type TagButtonProps = ButtonProps & {
+type TagProps = {
+  text: string;
+  onClick?: () => void;
   tagType?: "MODAL_WRITE" | "MODAL_VIEW";
   isModal?: boolean;
 };
 
-function TagButton(props: TagButtonProps) {
+function Tag(props: TagProps) {
   let background = Colors.PURPLE;
   let borderColor = Colors.PURPLE;
   let textColor = Colors.WHITE;
@@ -36,7 +37,6 @@ function TagButton(props: TagButtonProps) {
             style={{
               width: "0.6rem",
               height: "0.6rem",
-              marginLeft: "0.2rem",
             }}
             fill={Colors.BLACK}
           ></IconX>
@@ -46,13 +46,16 @@ function TagButton(props: TagButtonProps) {
   );
 }
 
-export default React.memo(TagButton);
+export default React.memo(Tag);
 
-const IconButton = styled.div`
+const IconButton = styled.button`
   width: fit-content;
   height: fit-content;
   flex-direction: row;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  margin: 0 0 0 0.2rem;
+  border: none;
 `;

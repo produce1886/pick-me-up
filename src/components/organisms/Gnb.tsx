@@ -64,7 +64,7 @@ const ProfileWrapper = styled.div`
   flex-direction: row;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
   width: 100%;
   height: 4rem;
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.1);

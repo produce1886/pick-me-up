@@ -19,7 +19,7 @@ function Comment(props: CommentProps) {
   date = date.replace("T", " ");
   return (
     <Wrapper>
-      <Link href="/profile/[userid]" as={`/profile/${props.id}`}>
+      <Link href={`/profile/${props.id}`} passHref>
         <A>
           <Profile
             size="2rem"
@@ -124,4 +124,4 @@ const ButtonWrapper = styled.button`
   right: 0;
 `;
 
-const A = styled.a``;
+const A = styled.a`text-decoration: none;`;

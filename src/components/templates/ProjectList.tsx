@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import ProjectHooks from "@src/lib/hooks/Project";
+import duplicate from "@src/lib/utils/duplicate";
 import ProjectBlock from "../organisms/ProjectBlock";
 import NoResult from "../molecules/NoResult";
 import MoreListButton from "../molecules/Button/LoadMore";
@@ -41,20 +42,7 @@ function ProjectList(props: ProjectListProps) {
     ));
 
   if (isLoading) {
-    return (
-      <Wrapper>
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-      </Wrapper>
-    );
+    return <Wrapper>{duplicate(Skeleton, 10)}</Wrapper>;
   }
 
   if ((data && data.pagelist.length === 0) || isError) {

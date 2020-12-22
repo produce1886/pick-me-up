@@ -1,227 +1,130 @@
-import React, { useState, useCallback, useEffect } from "react";
-import styled, { css } from "styled-components";
-import { useSelector } from "react-redux";
+/* eslint-disable camelcase */
+import React, { useState } from "react";
+import styled from "styled-components";
 import { useRouter } from "next/router";
-import axios from "axios";
 import Colors from "@colors";
+import { Profile } from "@src/types/Data";
+import ProfileService from "@src/lib/api/Profile";
 import Modal from "../../atoms/Modal/index";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
 import X from "../../atoms/Icon/X";
 import PillButton from "../../molecules/Button/Pill";
-import UserState from "../../../types/User";
 
-type ButtonWrapperProps = {
-  bottom?: string;
-  top?: string;
-  right?: string;
-};
-
-type EditModalProps = {
-  isVisible: boolean;
+type EditModalProps = Profile & {
   onClose: () => void;
-  data: JSON;
-  image: string;
-  username: string;
-  introduce: string;
-  birth: string;
-  university: string;
-  major: string;
-  area: string;
-  interest: string;
-  birthSecurity: boolean;
-  areaSecurity: boolean;
-  interestSecurity: boolean;
-  universitySecurity: boolean;
+  reload: number;
+  setReload: React.Dispatch<React.SetStateAction<number>>;
 };
 
 function EditModal(props: EditModalProps) {
+  const [image, setImage] = useState(props.image);
+  const [username, setUsername] = useState(props.username);
+  const [introduce, setIntroduce] = useState(props.introduce);
+  const [birth, setBirth] = useState(props.birth);
+  const [university, setUniversity] = useState(props.university);
+  const [major, setMajor] = useState(props.major);
+  const [area, setArea] = useState(props.area || "지역");
+  const [interests, setInterests] = useState(props.interests || "관심 분야");
+  const [birthSecurity, setBirthSecurity] = useState(props.birth_security);
+  const [areaSecurity, setAreaSecurity] = useState(props.area_security);
+  const [interestsSecurity, setInterestsSecurity] = useState(
+    props.interests_security
+  );
+  const [universitySecurity, setUniversitySecurity] = useState(
+    props.university_security
+  );
+
   const router = useRouter();
-  const uid = router.query.userid;
-  const sexSecurity = false;
-  const [birthSecurity, setBirthSecurity] = useState(false);
-  const [areaSecurity, setAreaSecurity] = useState(false);
-  const [interestsSecurity, setInterestSecurity] = useState(false);
-  const [universitySecurity, setUniversitySecurity] = useState(false);
-  const userState = useSelector((state: { user: UserState }) => state.user);
-  const { email } = userState.userData;
-  const [image, setImage] = useState("");
-  const [username, setUsername] = useState("");
-  const [introduce, setIntroduce] = useState("");
-  const [birth, setBirth] = useState("");
-  const [university, setUniversity] = useState("");
-  const [major, setMajor] = useState("");
-  const [area, setArea] = useState("지역");
-  const [interest, setInterest] = useState("관심 분야");
-  const [data, setData] = useState();
-  const [isLoading, setIsLoading] = useState(false);
+  const userID = router.query.userID.toString();
 
-  const put = useCallback(() => {
-    try {
-      const body = {
-        email,
-        username,
-        sex: "",
-        birth,
-        university,
-        major,
-        area,
-        introduce,
-        image,
-        interests: interest,
-        sex_security: sexSecurity,
-        birth_security: birthSecurity,
-        university_security: universitySecurity,
-        major_security: universitySecurity,
-        area_security: areaSecurity,
-        introduce_security: true,
-        interests_security: interestsSecurity,
-      };
-      axios.put(`${process.env.API_HOST}/users/${uid}`, body);
-      props.onClose();
-    } catch (error) {
-      console.log(error);
-    }
-  }, [
-    email,
+  const body = {
+    email: props.email,
     username,
+    sex: "",
     birth,
     university,
     major,
     area,
     introduce,
     image,
-    interest,
-    birthSecurity,
-    universitySecurity,
-    areaSecurity,
-    interestsSecurity,
-  ]);
+    interests,
+    sex_security: false,
+    introduce_security: true,
+    birth_security: birthSecurity,
+    university_security: universitySecurity,
+    major_security: universitySecurity,
+    area_security: areaSecurity,
+    interests_security: interestsSecurity,
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const result = await axios.get(`${process.env.API_HOST}/users/${uid}`);
-        setImage(result.data.image);
-        setUsername(result.data.username);
-        setIntroduce(result.data.introduce);
-        setBirth(result.data.birth);
-        setUniversity(result.data.university);
-        setMajor(result.data.major);
-        setArea(result.data.area);
-        setInterest(result.data.interests);
-        setBirthSecurity(result.data.birth_security);
-        setAreaSecurity(result.data.area_security);
-        setInterestSecurity(result.data.interests_security);
-        setUniversitySecurity(result.data.university_security);
-        setData(result.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (!data) {
-      fetchData();
-    }
-  }, [data]);
-  /*
-  useEffect(() => {
-    setImage(props.image);
-    setUsername(props.username);
-    setIntroduce(props.introduce);
-    setBirth(props.birth);
-    setUniversity(props.university);
-    setMajor(props.major);
-    setArea(props.area);
-    setInterest(props.interest);
-    setBirthSecurity(props.birthSecurity);
-    setAreaSecurity(props.areaSecurity);
-    setInterestSecurity(props.interestSecurity);
-    setUniversitySecurity(props.universitySecurity);
-  }, [
-    image,
-    username,
-    introduce,
-    birth,
-    university,
-    major,
-    area,
-    interest,
-    birthSecurity,
-    areaSecurity,
-    interestSecurity,
-    universitySecurity,
-  ]);
-  */
+  const updateProfile = () => {
+    ProfileService.updateProfile(userID, body)
+      .then(() => props.onClose())
+      .then(() => props.setReload(props.reload + 1));
+  };
+
   return (
-    <>
-      <Modal isVisible={props.isVisible} onClose={props.onClose}>
-        <ButtonWrapper onClick={() => props.onClose()} right="2.4rem">
-          <X
-            style={{
-              width: "1.2rem",
-              height: "1.2rem",
-              zIndex: 200,
-              top: "2.3rem",
-              position: "absolute",
-            }}
-            fill={Colors.BLACK}
-          ></X>
-        </ButtonWrapper>
-        <Inner>
-          {!isLoading && (
-            <>
-              <DefaultInfo
-                image={image}
-                setImage={setImage}
-                username={username}
-                setUsername={setUsername}
-                introduce={introduce}
-                setIntroduce={setIntroduce}
-              ></DefaultInfo>
-              <OptionInfo
-                birthSecurity={birthSecurity}
-                setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
-                areaSecurity={areaSecurity}
-                setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
-                interestsSecurity={interestsSecurity}
-                setInterestSecurity={() =>
-                  setInterestSecurity(!interestsSecurity)
-                }
-                universitySecurity={universitySecurity}
-                setUniversitySecurity={() =>
-                  setUniversitySecurity(!universitySecurity)
-                }
-                birth={birth}
-                setBirth={setBirth}
-                setMajor={setMajor}
-                setUniversity={setUniversity}
-                university={university}
-                major={major}
-                area={area}
-                setArea={setArea}
-                interest={interest}
-                setInterest={setInterest}
-              ></OptionInfo>
-              <ButtonWrapper bottom="1.5rem" onClick={put} right="1.4rem">
-                <PillButton
-                  weight={500}
-                  color={Colors.WHITE}
-                  text="수정하기"
-                ></PillButton>
-              </ButtonWrapper>
-            </>
-          )}
-        </Inner>
-      </Modal>
-    </>
+    <Modal isVisible={true} onClose={props.onClose}>
+      <XButton onClick={props.onClose}>
+        <X
+          style={{
+            width: "1.2rem",
+            height: "1.2rem",
+            zIndex: 200,
+            top: "2.3rem",
+            position: "absolute",
+          }}
+          fill={Colors.BLACK}
+        ></X>
+      </XButton>
+      <InnerWrapper>
+        <DefaultInfo
+          image={image}
+          setImage={setImage}
+          username={username}
+          setUsername={setUsername}
+          introduce={introduce}
+          setIntroduce={setIntroduce}
+        ></DefaultInfo>
+        <OptionInfo
+          birth={birth}
+          setBirth={setBirth}
+          setMajor={setMajor}
+          setUniversity={setUniversity}
+          university={university}
+          major={major}
+          area={area}
+          setArea={setArea}
+          interests={interests}
+          setInterests={setInterests}
+          birthSecurity={birthSecurity}
+          setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
+          areaSecurity={areaSecurity}
+          setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
+          interestsSecurity={interestsSecurity}
+          setInterestSecurity={() => setInterestsSecurity(!interestsSecurity)}
+          universitySecurity={universitySecurity}
+          setUniversitySecurity={() =>
+            setUniversitySecurity(!universitySecurity)
+          }
+        ></OptionInfo>
+        <UpdateButtonWrapper>
+          <PillButton
+            onClick={updateProfile}
+            weight={500}
+            color={Colors.WHITE}
+            text="수정하기"
+          ></PillButton>
+        </UpdateButtonWrapper>
+      </InnerWrapper>
+    </Modal>
   );
 }
 
 export default EditModal;
 
-const Inner = styled.div`
+const InnerWrapper = styled.div`
   width: 100%;
   height: fit-content;
   background-color: ${Colors.WHITE};
@@ -234,18 +137,22 @@ const Inner = styled.div`
   margin-bottom: 5rem;
 `;
 
-const ButtonWrapper = styled.button`
-  ${(props: ButtonWrapperProps) => css`
-    width: fit-content;
-    height: fit-content;
-    background-color: transparent;
-    border: none;
-    margin: unset;
-    padding: unset;
-    outline: none;
-    position: absolute;
-    bottom: ${props.bottom};
-    top: ${props.top};
-    right: ${props.right};
-  `}
+const XButton = styled.button`
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  position: absolute;
+  right: 2.4rem;
+`;
+
+const UpdateButtonWrapper = styled.div`
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.4rem;
 `;

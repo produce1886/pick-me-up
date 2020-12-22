@@ -23,7 +23,9 @@ function PortfolioBody(props: BodyProps) {
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
   const [isWriteVisible, setIsWriteVisible] = useState(false);
-  const isSignedIn = useSelector((state: UserState) => state.isSignedIn);
+  const isSignedIn = useSelector(
+    (state: { user: UserState }) => state.user.isSignedIn
+  );
   const align = "최신순";
 
   return (
@@ -36,7 +38,7 @@ function PortfolioBody(props: BodyProps) {
       ></FilterSearch>
       <Wrapper>
         <InnerWrapper>
-          <Div>
+          <AlignFilterWrapper>
             <Filter
               width="6rem"
               height="1.6rem"
@@ -46,7 +48,7 @@ function PortfolioBody(props: BodyProps) {
               data={ALIGN}
               onClick={setSort}
             ></Filter>
-          </Div>
+          </AlignFilterWrapper>
           <PortfolioList
             category={category}
             field={field}
@@ -94,7 +96,7 @@ const InnerWrapper = styled.div`
   box-sizing: border-box;
 `;
 
-const Div = styled.div`
+const AlignFilterWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;

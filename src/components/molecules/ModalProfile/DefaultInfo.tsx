@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import Colors from "@colors";
-import Profile from "@src/components/molecules/Profile";
+import Profile from "../Profile";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";

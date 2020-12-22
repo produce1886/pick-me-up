@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 type DataProps = {
   page: "project" | "portfolio";
   title: string;
@@ -59,6 +60,23 @@ export type Preview = {
 export type PostList = {
   nrOfElements: number;
   pagelist: DataProps[];
+};
+
+export type Profile = {
+  username: string;
+  email: string;
+  image?: string;
+  introduce?: string;
+  introduce_security?: boolean;
+  birth?: string;
+  university?: string;
+  major?: string;
+  area?: string;
+  interests?: string;
+  birth_security?: boolean;
+  university_security?: boolean;
+  area_security?: boolean;
+  interests_security?: boolean;
 };
 
 export default DataProps;
