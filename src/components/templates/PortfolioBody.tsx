@@ -38,7 +38,7 @@ function PortfolioBody(props: BodyProps) {
       ></FilterSearch>
       <Wrapper>
         <InnerWrapper>
-          <Div>
+          <AlignFilterWrapper>
             <Filter
               width="6rem"
               height="1.6rem"
@@ -48,7 +48,7 @@ function PortfolioBody(props: BodyProps) {
               data={ALIGN}
               onClick={setSort}
             ></Filter>
-          </Div>
+          </AlignFilterWrapper>
           <PortfolioList
             category={category}
             field={field}
@@ -96,7 +96,7 @@ const InnerWrapper = styled.div`
   box-sizing: border-box;
 `;
 
-const Div = styled.div`
+const AlignFilterWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;

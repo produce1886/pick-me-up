@@ -3,7 +3,6 @@ import Link from "next/link";
 import styled from "styled-components";
 import Colors from "@colors";
 import Text from "../../atoms/Text";
-import Col from "../../atoms/Wrapper/Col";
 import Rank from "./Rank";
 import Profile from "../Profile";
 
@@ -20,31 +19,29 @@ export type TopProps = {
 function Top(props: TopProps) {
   return (
     <Wrapper>
-      <Col>
-        {props.sort === "most" && <Rank number={props.rank}></Rank>}
-        <Row>
-          <Text level={6} weight="bold" color={Colors.DEEP_PURPLE} line={1.17}>
-            {props.title}
+      {props.sort === "most" && <Rank number={props.rank}></Rank>}
+      <Row>
+        <Text level={6} weight="bold" color={Colors.DEEP_PURPLE} line={1.17}>
+          {props.title}
+        </Text>
+      </Row>
+      <Row>
+        <BottomWrapper>
+          <Link href={`/profile/${props.uid}`} passHref>
+            <A>
+              <Profile
+                size="0.9rem"
+                level={1}
+                name={props.name}
+                profileImage={props.profileImage}
+              ></Profile>
+            </A>
+          </Link>
+          <Text level={1} color={Colors.BLACK}>
+            {props.date}
           </Text>
-        </Row>
-        <Row>
-          <Div>
-            <Link href="/profile/[userID]" as={`/profile/${props.uid}`}>
-              <A>
-                <Profile
-                  size="0.9rem"
-                  level={1}
-                  name={props.name}
-                  profileImage={props.profileImage}
-                ></Profile>
-              </A>
-            </Link>
-            <Text level={1} color={Colors.BLACK}>
-              {props.date}
-            </Text>
-          </Div>
-        </Row>
-      </Col>
+        </BottomWrapper>
+      </Row>
     </Wrapper>
   );
 }
@@ -57,9 +54,11 @@ const Wrapper = styled.div`
   padding: 0.8rem 1rem 0rem 1rem;
   box-sizing: border-box;
   height: fit-content;
+  display: flex;
+  flex-direction: column;
 `;
 
-const Div = styled.div`
+const BottomWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -76,4 +75,4 @@ const Row = styled.div`
   margin-top: 0.2rem;
 `;
 
-const A = styled.a``;
+const A = styled.a`text-decoration: none;`;

@@ -10,7 +10,7 @@ function PortfolioBlock(props: DataProps) {
   const [show, setShow] = useState(false);
 
   return (
-    <Link href={`/portfolio?pid=${props.id}`}>
+    <Link href={`/portfolio?pid=${props.id}`} passHref>
       <A>
         <Wrapper
           isSkeleton={false}
@@ -46,4 +46,4 @@ const Img = styled.img`
   height: 100%;
 `;
 
-const A = styled.a``;
+const A = styled.a`text-decoration: none;`;

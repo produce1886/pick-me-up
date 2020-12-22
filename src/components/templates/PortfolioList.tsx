@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import PortfolioHooks from "@src/lib/hooks/Portfolio";
+import duplicate from "@src/lib/utils/duplicate";
 import PortfolioBlock from "../organisms/PortfolioBlock";
 import MoreListButton from "../molecules/Button/LoadMore";
 import NoResult from "../molecules/NoResult";
@@ -37,25 +38,7 @@ function PortfolioList(props: PortfolioListProps) {
     ));
 
   if (isLoading) {
-    return (
-      <Wrapper>
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-      </Wrapper>
-    );
+    return <Wrapper>{duplicate(Skeleton, 15)}</Wrapper>;
   }
 
   if ((data && data.pagelist.length === 0) || isError) {

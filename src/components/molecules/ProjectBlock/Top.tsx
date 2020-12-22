@@ -24,7 +24,7 @@ function Top(props: TopProps) {
       <Text level={6} weight="bold" color={Colors.DEEP_PURPLE} line={1.17}>
         {props.title}
       </Text>
-      <Link href="/profile/[userID]" as={`/profile/${props.uid}`}>
+      <Link href={`/profile/${props.uid}`} passHref>
         <A>
           <Profile
             size="1rem"
@@ -70,4 +70,4 @@ const BottomWrapper = styled.div`
   align-items: center;
 `;
 
-const A = styled.a``;
+const A = styled.a`text-decoration: none;`;

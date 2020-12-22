@@ -1,9 +1,11 @@
 import Document, {
+  Html,
   Head,
   Main,
   NextScript,
   DocumentContext,
 } from "next/document";
+import React from "react";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -32,20 +34,16 @@ export default class MyDocument extends Document {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   render() {
     return (
-      <html lang="ko">
-        <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"
-          />
-        </Head>
+      <Html>
+        <Head />
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
