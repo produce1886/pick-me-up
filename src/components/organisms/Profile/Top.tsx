@@ -8,10 +8,9 @@ import EditButton from "../../molecules/Button/Edit";
 type TopProps = {
   setIsEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
   profileImage?: string;
-  name?: string;
-  introduceSecurity?: boolean;
-  introduce?: string;
-  skeleton: boolean;
+  name: string;
+  introduceSecurity: boolean;
+  introduce: string;
 };
 
 function Top(props: TopProps) {
@@ -36,22 +35,13 @@ function Top(props: TopProps) {
         >
           <EditButton></EditButton>
         </ButtonWrapper>
-        {props.skeleton ? (
-          <>
-            <Block width="5.76rem"></Block>
-            <Block width="14.08rem"></Block>
-          </>
-        ) : (
-          <>
-            <Text level={6} weight="bold" color={Colors.BLACK}>
-              {props.name}
-            </Text>
-            {props.introduceSecurity && (
-              <Text level={3} color={Colors.DEEP_GREY}>
-                {props.introduce}
-              </Text>
-            )}
-          </>
+        <Text level={6} weight="bold" color={Colors.BLACK}>
+          {props.name}
+        </Text>
+        {props.introduceSecurity && (
+          <Text level={3} color={Colors.DEEP_GREY}>
+            {props.introduce}
+          </Text>
         )}
       </InfoWrapper>
     </Wrapper>
@@ -106,15 +96,4 @@ const ProfileHolder = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-`;
-
-const Block = styled.div`
-  ${(props: { width: string }) =>
-    css`
-      width: ${props.width};
-    `};
-  height: 0.6rem;
-  border-radius: 0.12rem;
-  background-color: ${Colors.LIGHT_GREY};
-  margin-bottom: 0.5rem;
 `;
