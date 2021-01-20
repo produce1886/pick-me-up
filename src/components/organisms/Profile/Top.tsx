@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Colors from "@colors";
 import Text from "../../atoms/Text";
 import ProfileIcon from "../../atoms/Icon/Profile";
