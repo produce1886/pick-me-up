@@ -1,13 +1,19 @@
 import styled, { css } from "styled-components";
 import Colors from "@colors";
+import SkeletonModal from "../../atoms/Modal/index";
 import SkeletonTop from "../../atoms/Modal/Top";
 import SkeletonMiddle from "../../atoms/Modal/Middle";
 import SkeletonBottom from "../../atoms/Modal/Bottom";
 import TagIcon from "../../atoms/Icon/Tag";
 
-export default function Skeleton() {
+type ModalProps = {
+  onClose: () => void;
+  isVisible: boolean;
+};
+
+export default function Skeleton(props: ModalProps) {
   return (
-    <>
+    <SkeletonModal isVisible={props.isVisible} onClose={props.onClose}>
       <SkeletonTop>
         <Row justifyContent="space-between">
           <Title></Title>
@@ -28,7 +34,7 @@ export default function Skeleton() {
           ></TagIcon>
         </Row>
       </SkeletonBottom>
-    </>
+    </SkeletonModal>
   );
 }
 

@@ -21,8 +21,18 @@ function ModalView(props: ModalProps) {
   if (isLoading) {
     return (
       <>
-        {props.page === "project" && <ProjectSkeleton></ProjectSkeleton>}
-        {props.page === "portfolio" && <PortfolioSkeleton></PortfolioSkeleton>}
+        {props.page === "project" && (
+          <ProjectSkeleton
+            isVisible={props.isVisible}
+            onClose={props.onClose}
+          ></ProjectSkeleton>
+        )}
+        {props.page === "portfolio" && (
+          <PortfolioSkeleton
+            isVisible={props.isVisible}
+            onClose={props.onClose}
+          ></PortfolioSkeleton>
+        )}
       </>
     );
   }
