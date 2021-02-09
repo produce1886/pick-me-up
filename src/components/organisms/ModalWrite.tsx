@@ -33,7 +33,8 @@ function ModalWrite({
   const [region, setRegion] = useState("");
   const [projectSection, setProjectSection] = useState("");
   const [images, setImages] = useState<string[]>([]);
-  const [tags, setTags] = useState<string[]>([]);
+  const [projectTags, setProjectTags] = useState<string[]>([]);
+  const [portfolioTags, setPortfolioTags] = useState<string[]>([]);
 
   const post = useCallback(() => {
     const flag = checkIsNotEmpty(
@@ -49,7 +50,6 @@ function ModalWrite({
       try {
         if (page === "project") {
           const image = images.length > 0 ? images[0] : "";
-          const projectTags = [...tags];
           const body = {
             authorEmail,
             title,
@@ -66,7 +66,6 @@ function ModalWrite({
           onClose();
         } else if (page === "portfolio") {
           const image = images.length > 0 ? images[0] : "";
-          const portfolioTags = [...tags];
           const body = {
             title,
             content,
@@ -110,8 +109,9 @@ function ModalWrite({
     recruitmentField,
     region,
     projectSection,
-    tags,
+    projectTags,
     images,
+    portfolioTags,
   ]);
 
   return (
@@ -134,9 +134,12 @@ function ModalWrite({
         content={content}
       ></Middle>
       <Bottom
+        page={page}
         onClick={post}
-        tags={tags}
-        setTags={setTags}
+        projectTags={projectTags}
+        portfolioTags={portfolioTags}
+        setProjectTags={setProjectTags}
+        setPortfolioTags={setPortfolioTags}
         isUpdate={false}
       ></Bottom>
     </Modal>

@@ -19,7 +19,7 @@ type ModalMiddleProps = {
   content: string;
   image: string;
   userEmail: string;
-  pid: string;
+  pid: number;
   tags: Tag[];
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   listReload: number;
@@ -56,7 +56,7 @@ function ModalMiddle(props: ModalMiddleProps) {
         fill={Colors.BLACK}
       ></Icon>
       {props.tags.map((item: Tag) => (
-        <TagButton key={item.id} text={item.tag}></TagButton>
+        <TagButton key={item.id} text={item.tagName}></TagButton>
       ))}
     </TagWrapper>
   );
