@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Colors from "@colors";
-import DataProps from "@src/types/Data";
+import { ProjectProps } from "@src/types/Data";
 import Text from "../atoms/Text";
 import Top from "../molecules/ProjectBlock/Top";
 import Bottom from "../molecules/ProjectBlock/Bottom";
 import Wrapper from "../atoms/Wrapper/ProjectBlock";
 
-function ProjectBlock(props: DataProps) {
+function ProjectBlock(props: ProjectProps) {
   const date = props.createdDate.split("T")[0];
 
   return (
@@ -19,9 +19,9 @@ function ProjectBlock(props: DataProps) {
         uid={props.user.id}
         profileImage={props.user.image}
         category={props.category}
-        field={props.huntingField}
+        recruitmentField={props.recruitmentField}
         region={props.region}
-        projectCategory={props.projectCategory}
+        projectSection={props.projectSection}
       ></Top>
       <Body>
         <Text level={2} color={Colors.BLACK}>
@@ -29,7 +29,7 @@ function ProjectBlock(props: DataProps) {
         </Text>
       </Body>
       <Bottom
-        tags={props.projectTag}
+        tags={props.projectTags}
         viewNum={props.viewNum}
         commentsNum={props.commentsNum}
         pid={props.id}

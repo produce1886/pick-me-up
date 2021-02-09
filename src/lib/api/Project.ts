@@ -2,13 +2,12 @@ import base from "./Api";
 
 const getProjectList = (
   category: string,
-  field: string,
+  recruitmentField: string,
   region: string,
-  projectType: string,
+  projectSection: string,
   query: string,
   sort: "최신순" | "댓글순" | "조회순",
-  limit: number,
-  reload: number
+  limit: number
 ) => {
   const sortColumn = {
     최신순: "createdDate",
@@ -16,25 +15,18 @@ const getProjectList = (
     조회순: "viewNum",
   };
 
-  const body = {
-    page: 0,
-    size: limit,
-    sortColumn: sortColumn[sort],
-    category,
-    huntingField: field,
-    region,
-    projectCategory: projectType,
-    keyword: query,
-  };
+  const url = `page=${0}&size=${limit}&sort=${
+    sortColumn[sort]
+  }&category=${category}&recruitmentField=${recruitmentField}&region=${region}&projectSection=${projectSection}&keyword=${query}`;
 
   return base()
-    .post(`/projects/list`, body)
+    .get(`/projects/list?${url}`)
     .then((res) => res.data);
 };
 
 const getProject = (pid: string, modalReload: number) =>
   base()
-    .get(`projects/${pid}`)
+    .get(`/projects/${pid}`)
     .then((res) => res.data);
 
 const deleteProject = (pid: string) =>

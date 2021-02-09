@@ -7,9 +7,9 @@ function Project() {
     <Wrapper>
       <List
         category=""
-        field=""
+        recruitmentField=""
         region=""
-        projectType=""
+        projectSection=""
         query=""
         sort="최신순"
       ></List>
