@@ -25,7 +25,7 @@ function ModalWrite({
   reload,
 }: ModalWriteProps) {
   const userState = useSelector((state: { user: UserState }) => state.user);
-  const { email } = userState.userData;
+  const authorEmail = userState.userData.email;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -49,15 +49,16 @@ function ModalWrite({
       try {
         if (page === "project") {
           const image = images.length > 0 ? images[0] : "";
+          const projectTags = [...tags];
           const body = {
+            authorEmail,
             title,
             content,
-            email,
             category,
             recruitmentField,
             region,
             projectSection,
-            tags,
+            projectTags,
             image,
           };
           axios.post(`${process.env.API_HOST}/projects`, body);
@@ -65,13 +66,14 @@ function ModalWrite({
           onClose();
         } else if (page === "portfolio") {
           const image = images.length > 0 ? images[0] : "";
+          const portfolioTags = [...tags];
           const body = {
             title,
             content,
-            email,
+            authorEmail,
             category,
             recruitmentField,
-            tags,
+            portfolioTags,
             image,
           };
           axios.post(`${process.env.API_HOST}/portfolios`, body);
