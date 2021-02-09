@@ -9,11 +9,13 @@ export type ProjectProps = {
   region: string;
   projectSection: string;
   projectTags: Tag[];
+  image: string;
   createdDate: string;
   modifiedDate: string;
   viewNum: number;
   commentsNum: number;
   user: User;
+  comments: Comment;
 };
 
 export type PortfolioProps = {
@@ -28,6 +30,7 @@ export type PortfolioProps = {
   viewNum: number;
   commentsNum: number;
   user: User;
+  comments: Comment;
 };
 
 export type User = {
@@ -45,7 +48,7 @@ export type Tag = {
 export type Comment = {
   createdDate: string;
   modifiedDate: string;
-  id: string;
+  id: number;
   content: string;
   user: User;
 };

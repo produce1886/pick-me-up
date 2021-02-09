@@ -11,7 +11,7 @@ type ModalBottomProps = {
   page: PageType;
   commentsNum: number;
   comments: Comment[];
-  pid: string;
+  pid: number;
   modalReload: number;
   setModalReload: Dispatch<SetStateAction<number>>;
 };

@@ -24,12 +24,12 @@ const getProjectList = (
     .then((res) => res.data);
 };
 
-const getProject = (pid: string, modalReload: number) =>
+const getProject = (pid: number, modalReload: number) =>
   base()
     .get(`/projects/${pid}`)
     .then((res) => res.data);
 
-const deleteProject = (pid: string) =>
+const deleteProject = (pid: number) =>
   base()
     .delete(`/projects/${pid}`)
     .catch((err) => alert("게시글 삭제에 실패했습니다"));
