@@ -1,36 +1,28 @@
 /* eslint-disable camelcase */
 
-export type ProjectProps = {
+type DataProps = {
   id: number;
   title: string;
   content: string;
   category: string;
   recruitmentField: string;
+  createdDate: string;
+  modifiedDate: string;
+  viewNum: number;
+  commentsNum: number;
+  user: User;
+  comments: Comment[];
+};
+
+export type ProjectProps = DataProps & {
   region: string;
   projectSection: string;
   projectTags: Tag[];
   image: string;
-  createdDate: string;
-  modifiedDate: string;
-  viewNum: number;
-  commentsNum: number;
-  user: User;
-  comments: Comment;
 };
 
-export type PortfolioProps = {
-  id: number;
-  title: string;
-  content: string;
-  category: string;
-  recruitmentField: string;
+export type PortfolioProps = DataProps & {
   portfolioTags: Tag[];
-  createdDate: string;
-  modifiedDate: string;
-  viewNum: number;
-  commentsNum: number;
-  user: User;
-  comments: Comment;
 };
 
 export type User = {

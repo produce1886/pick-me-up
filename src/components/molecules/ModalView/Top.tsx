@@ -14,8 +14,8 @@ type ModalTopProps = {
   profileImage: string;
   category: string;
   recruitmentField: string;
-  region: string;
-  projectSection: string;
+  region?: string;
+  projectSection?: string;
 };
 
 type ProfileHolderProps = {

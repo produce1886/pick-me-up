@@ -198,7 +198,7 @@ const getData = (
             setImages([result.data.image]);
           }
           let jsonProjectTagArray: string[] = [];
-          jsonProjectTagArray = Object.entries(result.data.projectTag).map(
+          jsonProjectTagArray = Object.entries(result.data.projectTags).map(
             ([value]) => value
           );
           setTags(jsonProjectTagArray);
@@ -216,7 +216,7 @@ const getData = (
             setImages([result.data.image]);
           }
           let jsonPortfolioTagArray: string[] = [];
-          jsonPortfolioTagArray = Object.entries(result.data.portfolioTag).map(
+          jsonPortfolioTagArray = Object.entries(result.data.portfolioTags).map(
             ([value]) => value
           );
           setTags(jsonPortfolioTagArray);

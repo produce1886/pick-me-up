@@ -13,6 +13,8 @@ type ModalBottomProps = {
   projectTags?: string[];
   setProjectTags?: React.Dispatch<React.SetStateAction<string[]>>;
   setPortfolioTags?: React.Dispatch<React.SetStateAction<string[]>>;
+  tags: string[];
+  setTags: React.Dispatch<React.SetStateAction<string[]>>;
   onClick: () => void;
   isUpdate: boolean;
 };
@@ -57,52 +59,23 @@ function ModalBottom(props: ModalBottomProps) {
             style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }}
             fill={Colors.BLACK}
           ></Icon>
-          {props.page === "project" && (
-            <Input
-              onChange={handleChange}
-              onKeyPress={(e) =>
-                handleKeyPress(e, props.projectTags, props.setProjectTags)
-              }
-              value={tagInput}
-              placeholder="태그를 입력하세요"
-            ></Input>
-          )}
-          {props.page === "portfolio" && (
-            <Input
-              onChange={handleChange}
-              onKeyPress={(e) =>
-                handleKeyPress(e, props.portfolioTags, props.setPortfolioTags)
-              }
-              value={tagInput}
-              placeholder="태그를 입력하세요"
-            ></Input>
-          )}
+          <Input
+            onChange={handleChange}
+            onKeyPress={(e) => handleKeyPress(e, props.tags, props.setTags)}
+            value={tagInput}
+            placeholder="태그를 입력하세요"
+          ></Input>
         </IconTextWrapper>
         <TagWrapper>
-          {props.projectTags &&
-            props.projectTags.map((value, index) => (
-              <TagButton
-                key={index}
-                isModal={true}
-                text={value}
-                onClick={() =>
-                  removeTag(value, props.projectTags, props.setProjectTags)
-                }
-                tagType="MODAL_WRITE"
-              ></TagButton>
-            ))}
-          {props.portfolioTags &&
-            props.portfolioTags.map((value, index) => (
-              <TagButton
-                key={index}
-                isModal={true}
-                text={value}
-                onClick={() =>
-                  removeTag(value, props.portfolioTags, props.setPortfolioTags)
-                }
-                tagType="MODAL_WRITE"
-              ></TagButton>
-            ))}
+          {props.tags.map((value, index) => (
+            <TagButton
+              key={index}
+              isModal={true}
+              text={value}
+              onClick={() => removeTag(value, props.tags, props.setTags)}
+              tagType="MODAL_WRITE"
+            ></TagButton>
+          ))}
         </TagWrapper>
         <ButtonWrapper onClick={props.onClick}>
           <PillButton
