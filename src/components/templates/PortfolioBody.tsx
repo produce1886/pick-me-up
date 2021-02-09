@@ -19,7 +19,7 @@ type BodyProps = {
 
 function PortfolioBody(props: BodyProps) {
   const [category, setCategory] = useState("");
-  const [field, setField] = useState("");
+  const [recruitmentField, setRecruitmentField] = useState("");
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
   const [isWriteVisible, setIsWriteVisible] = useState(false);
@@ -33,7 +33,7 @@ function PortfolioBody(props: BodyProps) {
       <FilterSearch
         page="portfolio"
         setCategory={setCategory}
-        setField={setField}
+        setRecruitmentField={setRecruitmentField}
         setQuery={setQuery}
       ></FilterSearch>
       <Wrapper>
@@ -51,7 +51,7 @@ function PortfolioBody(props: BodyProps) {
           </AlignFilterWrapper>
           <PortfolioList
             category={category}
-            field={field}
+            recruitmentField={recruitmentField}
             query={query}
             sort={sort}
             reload={props.reload}

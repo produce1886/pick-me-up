@@ -29,9 +29,9 @@ function ModalWrite({
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
-  const [field, setField] = useState("");
+  const [recruitmentField, setRecruitmentField] = useState("");
   const [region, setRegion] = useState("");
-  const [projectType, setProjectType] = useState("");
+  const [projectSection, setProjectSection] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
 
@@ -40,9 +40,9 @@ function ModalWrite({
       title,
       content,
       category,
-      field,
+      recruitmentField,
       region,
-      projectType,
+      projectSection,
       page
     );
     if (flag) {
@@ -54,9 +54,9 @@ function ModalWrite({
             content,
             email,
             category,
-            huntingField: field,
+            recruitmentField,
             region,
-            projectCategory: projectType,
+            projectSection,
             tags,
             image,
           };
@@ -70,7 +70,7 @@ function ModalWrite({
             content,
             email,
             category,
-            huntingField: field,
+            recruitmentField,
             tags,
             image,
           };
@@ -101,16 +101,25 @@ function ModalWrite({
         alert("에러가 발생했습니다.");
       }
     }
-  }, [title, content, category, field, region, projectType, tags, images]);
+  }, [
+    title,
+    content,
+    category,
+    recruitmentField,
+    region,
+    projectSection,
+    tags,
+    images,
+  ]);
 
   return (
     <Modal isVisible={isVisible} onClose={onClose}>
       <Top
         page={page}
         setCategory={setCategory}
-        setField={setField}
+        setRecruitmentField={setRecruitmentField}
         setRegion={setRegion}
-        setProjectType={setProjectType}
+        setProjectSection={setProjectSection}
         setTitle={setTitle}
         title={title}
         profileImage={userState.userData.image}

@@ -49,9 +49,9 @@ function ModalView(props: ModalProps) {
             uid={data.user.id}
             profileImage={data.user.image}
             category={data.category}
-            field={data.huntingField}
+            recruitmentField={data.recruitmentField}
             region={data.region}
-            projectCategory={data.projectCategory}
+            projectSection={data.projectSection}
           ></Top>
           <Middle
             page={props.page}

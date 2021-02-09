@@ -18,9 +18,9 @@ function FilterSearch(
           level={3}
           page={props.page}
           setCategory={props.setCategory}
-          setField={props.setField}
+          setRecruitmentField={props.setRecruitmentField}
           setRegion={props.setRegion}
-          setProjectType={props.setProjectType}
+          setProjectSection={props.setProjectSection}
         ></Filters>
         <Search setQuery={props.setQuery}></Search>
       </InnerWrapper>

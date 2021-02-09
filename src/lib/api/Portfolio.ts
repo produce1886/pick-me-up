@@ -2,7 +2,7 @@ import base from "./Api";
 
 const getPortfolioList = (
   category: string,
-  field: string,
+  recruitmentField: string,
   query: string,
   sort: "최신순" | "댓글순" | "조회순",
   limit: number,
@@ -19,12 +19,12 @@ const getPortfolioList = (
     size: limit,
     sortColumn: sortColumn[sort],
     category,
-    huntingField: field,
+    recruitmentField,
     keyword: query,
   };
 
   return base()
-    .post(`/portfolios/list`, body)
+    .get(`/portfolios/list`)
     .then((res) => res.data);
 };
 
