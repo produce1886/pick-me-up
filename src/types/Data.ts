@@ -15,7 +15,7 @@ export type ProjectProps = {
   viewNum: number;
   commentsNum: number;
   user: User;
-  comments: Comment;
+  comments: Comment[];
 };
 
 export type PortfolioProps = {
@@ -30,7 +30,7 @@ export type PortfolioProps = {
   viewNum: number;
   commentsNum: number;
   user: User;
-  comments: Comment;
+  comments: Comment[];
 };
 
 export type User = {

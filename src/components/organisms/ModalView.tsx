@@ -55,13 +55,13 @@ function ModalView(props: ModalProps) {
           ></Top>
           <Middle
             page={props.page}
-            date={data.createdDate}
+            date={data.createdDate.split("T")[0]}
             content={data.content}
             image={data.image}
             userEmail={data.user.email}
             pid={data.id}
             tags={
-              props.page === "project" ? data.projectTag : data.portfolioTag
+              props.page === "project" ? data.projectTags : data.portfolioTags
             }
             setUpdate={props.setIsUpdate}
             listReload={props.reload}
