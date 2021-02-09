@@ -18,7 +18,7 @@ const CATEGORY = [
   { key: 11, title: "기타" },
 ];
 
-const FIELD = [
+const RECRUITMENT_FIELD = [
   { key: 0, title: "기획" },
   { key: 1, title: "개발" },
   { key: 2, title: "디자인" },
@@ -44,7 +44,7 @@ const REGION = [
   { key: 16, title: "충북" },
 ];
 
-const PROJECT_CATEGORY = [
+const PROJECT_SECTION = [
   { key: 0, title: "공모전" },
   { key: 1, title: "창업" },
   { key: 2, title: "프로젝트" },
@@ -63,4 +63,4 @@ const COMMENT = [
 ];
 
 export type { FilterItemType };
-export { CATEGORY, FIELD, REGION, PROJECT_CATEGORY, ALIGN, COMMENT };
+export { CATEGORY, RECRUITMENT_FIELD, REGION, PROJECT_SECTION, ALIGN, COMMENT };

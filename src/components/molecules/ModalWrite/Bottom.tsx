@@ -5,22 +5,30 @@ import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Tag";
 import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
+import { PageType } from "../../atoms/Modal/ModalType";
 
 type ModalBottomProps = {
-  tags: string[];
-  setTags: React.Dispatch<React.SetStateAction<string[]>>;
+  page: PageType;
+  portfolioTags?: string[];
+  projectTags?: string[];
+  setProjectTags?: React.Dispatch<React.SetStateAction<string[]>>;
+  setPortfolioTags?: React.Dispatch<React.SetStateAction<string[]>>;
   onClick: () => void;
   isUpdate: boolean;
 };
 
-function ModalBottom({ tags, setTags, onClick, isUpdate }: ModalBottomProps) {
+function ModalBottom(props: ModalBottomProps) {
   const [tagInput, setTagInput] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTagInput(e.target.value);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyPress = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+    tags: string[],
+    setTags: React.Dispatch<React.SetStateAction<string[]>>
+  ) => {
     if (e.key !== "Enter") return;
     if (tags.length < 5 && tagInput.length > 0) {
       setTags([...tags, tagInput]);
@@ -30,7 +38,11 @@ function ModalBottom({ tags, setTags, onClick, isUpdate }: ModalBottomProps) {
     }
   };
 
-  const removeTag = (value: string) => {
+  const removeTag = (
+    value: string,
+    tags: string[],
+    setTags: React.Dispatch<React.SetStateAction<string[]>>
+  ) => {
     const tagIndex = tags.indexOf(value);
     const newArray = [...tags];
     newArray.splice(tagIndex, 1);
@@ -45,29 +57,58 @@ function ModalBottom({ tags, setTags, onClick, isUpdate }: ModalBottomProps) {
             style={{ width: "1rem", height: "1rem", marginRight: "0.5rem" }}
             fill={Colors.BLACK}
           ></Icon>
-          <Input
-            onChange={handleChange}
-            onKeyPress={handleKeyPress}
-            value={tagInput}
-            placeholder="태그를 입력하세요"
-          ></Input>
+          {props.page === "project" && (
+            <Input
+              onChange={handleChange}
+              onKeyPress={(e) =>
+                handleKeyPress(e, props.projectTags, props.setProjectTags)
+              }
+              value={tagInput}
+              placeholder="태그를 입력하세요"
+            ></Input>
+          )}
+          {props.page === "portfolio" && (
+            <Input
+              onChange={handleChange}
+              onKeyPress={(e) =>
+                handleKeyPress(e, props.portfolioTags, props.setPortfolioTags)
+              }
+              value={tagInput}
+              placeholder="태그를 입력하세요"
+            ></Input>
+          )}
         </IconTextWrapper>
         <TagWrapper>
-          {tags.map((value, index) => (
-            <TagButton
-              key={index}
-              isModal={true}
-              text={value}
-              onClick={() => removeTag(value)}
-              tagType="MODAL_WRITE"
-            ></TagButton>
-          ))}
+          {props.projectTags &&
+            props.projectTags.map((value, index) => (
+              <TagButton
+                key={index}
+                isModal={true}
+                text={value}
+                onClick={() =>
+                  removeTag(value, props.projectTags, props.setProjectTags)
+                }
+                tagType="MODAL_WRITE"
+              ></TagButton>
+            ))}
+          {props.portfolioTags &&
+            props.portfolioTags.map((value, index) => (
+              <TagButton
+                key={index}
+                isModal={true}
+                text={value}
+                onClick={() =>
+                  removeTag(value, props.portfolioTags, props.setPortfolioTags)
+                }
+                tagType="MODAL_WRITE"
+              ></TagButton>
+            ))}
         </TagWrapper>
-        <ButtonWrapper onClick={onClick}>
+        <ButtonWrapper onClick={props.onClick}>
           <PillButton
             weight={500}
             color={Colors.WHITE}
-            text={isUpdate ? "글 수정하기" : "글 작성하기"}
+            text={props.isUpdate ? "글 수정하기" : "글 작성하기"}
           ></PillButton>
         </ButtonWrapper>
       </Div>

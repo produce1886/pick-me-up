@@ -6,15 +6,15 @@ import MoreButton from "../Button/ViewMore";
 import TagButton from "../Tag";
 
 type BottomProps = {
-  tags?: { tag: string; id: string }[];
+  tags?: { tagName: string; id: string }[];
   viewNum: number;
   commentsNum: number;
-  pid: string;
+  pid: number;
 };
 
 function Bottom(props: BottomProps) {
   const renderTags = props.tags.map((tag) => {
-    return <TagButton text={tag.tag} key={tag.id}></TagButton>;
+    return <TagButton text={tag.tagName} key={tag.id}></TagButton>;
   });
 
   return (

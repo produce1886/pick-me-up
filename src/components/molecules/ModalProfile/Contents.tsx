@@ -4,7 +4,7 @@ import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Edit from "../../atoms/Icon/Edit";
 import Filter from "../Filter/Filter";
-import { FIELD, REGION } from "../Filter/ItemData";
+import { RECRUITMENT_FIELD, REGION } from "../Filter/ItemData";
 
 type UniversityProps = {
   universitySecurity: boolean;
@@ -145,7 +145,7 @@ export function Interest(props: InterestProps) {
             props.interest ? props.interest : "관심분야를 선택하세요"
           }
           onClick={props.setInterest}
-          data={FIELD}
+          data={RECRUITMENT_FIELD}
           previousItemTitle={props.interest}
           isUserInfoEdit={true}
         ></Filter>

@@ -11,7 +11,7 @@ import checkIsNotEmpty from "@src/lib/utils/CheckIsNotEmpty";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
-import DataProps from "../../types/Data";
+import { PortfolioProps, ProjectProps } from "../../types/Data";
 import UserState from "../../types/User";
 import { PageType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
@@ -37,9 +37,9 @@ function ModalUpdate({
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
-  const [field, setField] = useState("");
+  const [recruitmentField, setRecruitmentField] = useState("");
   const [region, setRegion] = useState("");
-  const [projectType, setProjectType] = useState("");
+  const [projectSection, setProjectSection] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const { isLoading } = getData(
@@ -48,9 +48,9 @@ function ModalUpdate({
     setTitle,
     setContent,
     setCategory,
-    setField,
+    setRecruitmentField,
     setRegion,
-    setProjectType,
+    setProjectSection,
     setImages,
     setTags
   );
@@ -65,9 +65,9 @@ function ModalUpdate({
       title,
       content,
       category,
-      field,
+      recruitmentField,
       region,
-      projectType,
+      projectSection,
       page
     );
     if (flag) {
@@ -78,9 +78,9 @@ function ModalUpdate({
             title,
             content,
             category,
-            huntingField: field,
+            recruitmentField,
             region,
-            projectCategory: projectType,
+            projectSection,
             tags,
             image,
           };
@@ -93,7 +93,7 @@ function ModalUpdate({
             title,
             content,
             category,
-            huntingField: field,
+            recruitmentField,
             tags,
             image,
           };
@@ -123,16 +123,25 @@ function ModalUpdate({
         alert("에러가 발생했습니다.");
       }
     }
-  }, [title, content, category, field, region, projectType, tags, images]);
+  }, [
+    title,
+    content,
+    category,
+    recruitmentField,
+    region,
+    projectSection,
+    tags,
+    images,
+  ]);
   return (
     <Modal isVisible={!isLoading} onClose={onClose}>
       <Top
         page={page}
         title={title}
         setCategory={setCategory}
-        setField={setField}
+        setRecruitmentField={setRecruitmentField}
         setRegion={setRegion}
-        setProjectType={setProjectType}
+        setProjectSection={setProjectSection}
         setTitle={setTitle}
         profileImage={userState.userData.image}
       ></Top>
@@ -161,13 +170,13 @@ const getData = (
   setTitle: React.Dispatch<React.SetStateAction<string>>,
   setContent: React.Dispatch<React.SetStateAction<string>>,
   setCategory: React.Dispatch<React.SetStateAction<string>>,
-  setField: React.Dispatch<React.SetStateAction<string>>,
+  setRecruitmentField: React.Dispatch<React.SetStateAction<string>>,
   setRegion: React.Dispatch<React.SetStateAction<string>>,
-  setProjectType: React.Dispatch<React.SetStateAction<string>>,
+  setProjectSection: React.Dispatch<React.SetStateAction<string>>,
   setImages: React.Dispatch<React.SetStateAction<string[]>>,
   setTags: React.Dispatch<React.SetStateAction<string[]>>
 ) => {
-  const [data, setData] = useState<DataProps>();
+  const [data, setData] = useState<ProjectProps>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -175,16 +184,16 @@ const getData = (
       setIsLoading(true);
       try {
         if (type === "project") {
-          const result = await axios.get<DataProps>(
+          const result = await axios.get<ProjectProps>(
             `${process.env.API_HOST}/projects/${pid}`
           );
           setData(result.data);
           setTitle(result.data.title);
           setContent(result.data.content);
           setCategory(result.data.category);
-          setField(result.data.huntingField);
+          setRecruitmentField(result.data.recruitmentField);
           setRegion(result.data.region);
-          setProjectType(result.data.projectCategory);
+          setProjectSection(result.data.projectSection);
           if (!result.data.image) {
             setImages([result.data.image]);
           }
@@ -195,14 +204,14 @@ const getData = (
           setTags(jsonProjectTagArray);
           setIsLoading(false);
         } else if (type === "portfolio") {
-          const result = await axios.get<DataProps>(
+          const result = await axios.get<PortfolioProps>(
             `${process.env.API_HOST}/portfolios/${pid}`
           );
           setData(result.data);
           setTitle(result.data.title);
           setContent(result.data.content);
           setCategory(result.data.category);
-          setField(result.data.huntingField);
+          setRecruitmentField(result.data.recruitmentField);
           if (result.data.image !== "") {
             setImages([result.data.image]);
           }
