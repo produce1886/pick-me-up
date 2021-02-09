@@ -17,7 +17,7 @@ const getProjectList = (
 
   const url = `page=${0}&size=${limit}&sort=${
     sortColumn[sort]
-  }&category=${category}&recruitmentField=${recruitmentField}&region=${region}&projectSection=${projectSection}&keyword=${query}`;
+  },desc&category=${category}&recruitmentField=${recruitmentField}&region=${region}&projectSection=${projectSection}&keyword=${query}`;
 
   return base()
     .get(`/projects/list?${url}`)
