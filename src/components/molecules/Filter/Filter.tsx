@@ -19,6 +19,14 @@ type FilterProps = {
   height: string | number;
   line?: string;
   level: number;
+  isUpdateCategory?: boolean;
+  setIsUpdateCategory?: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateRecruitmentField?: boolean;
+  setIsUpdateRecruitmentField?: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateProjectSection?: boolean;
+  setIsUpdateProjectSection?: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateRegion?: boolean;
+  setIsUpdateRegion?: React.Dispatch<React.SetStateAction<boolean>>;
   onClick: (arg0: string) => void;
   previousItemTitle?: string;
   data: Array<FilterItemType>;
@@ -32,6 +40,18 @@ function Filter(props: FilterProps) {
   const handleFilterClick = () => {
     if (selectedItemTitle === "" || props.isUserInfoEdit) {
       setIsFilterOpened(!isFilterOpened);
+    }
+    if (props.isUpdateCategory) {
+      props.setIsUpdateCategory(false);
+    }
+    if (props.isUpdateRecruitmentField) {
+      props.setIsUpdateRecruitmentField(false);
+    }
+    if (props.isUpdateRegion) {
+      props.setIsUpdateRegion(false);
+    }
+    if (props.isUpdateProjectSection) {
+      props.setIsUpdateProjectSection(false);
     }
   };
 
@@ -73,6 +93,18 @@ function Filter(props: FilterProps) {
     backgroundColor = Colors.LIGHT_GREY;
     border = "none";
   } else if (selectedItemTitle !== "") {
+    icon = (
+      <XButton onClick={resetFilter}>
+        <IconX style={iconXStyle} fill={Colors.BLACK}></IconX>
+      </XButton>
+    );
+    backgroundColor = Colors.GREY;
+  } else if (
+    props.isUpdateCategory ||
+    props.isUpdateRecruitmentField ||
+    props.isUpdateRegion ||
+    props.isUpdateProjectSection
+  ) {
     icon = (
       <XButton onClick={resetFilter}>
         <IconX style={iconXStyle} fill={Colors.BLACK}></IconX>

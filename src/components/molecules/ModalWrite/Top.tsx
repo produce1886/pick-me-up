@@ -7,6 +7,18 @@ import { PageType } from "../../atoms/Modal/ModalType";
 
 type ModalTopProps = {
   page: PageType;
+  category: string;
+  recruitmentField: string;
+  region?: string;
+  projectSection?: string;
+  isUpdateCategory: boolean;
+  setIsUpdateCategory: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateRecruitmentField: boolean;
+  setIsUpdateRecruitmentField: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateProjectSection: boolean;
+  setIsUpdateProjectSection: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateRegion: boolean;
+  setIsUpdateRegion: React.Dispatch<React.SetStateAction<boolean>>;
   setCategory: Dispatch<SetStateAction<string>>;
   setRecruitmentField: React.Dispatch<React.SetStateAction<string>>;
   setRegion: React.Dispatch<React.SetStateAction<string>>;
@@ -18,6 +30,18 @@ type ModalTopProps = {
 
 function ModalTop({
   page,
+  category,
+  recruitmentField,
+  region,
+  projectSection,
+  isUpdateCategory,
+  setIsUpdateCategory,
+  isUpdateRecruitmentField,
+  setIsUpdateRecruitmentField,
+  isUpdateProjectSection,
+  setIsUpdateProjectSection,
+  isUpdateRegion,
+  setIsUpdateRegion,
   setCategory,
   setRecruitmentField,
   setRegion,
@@ -45,6 +69,18 @@ function ModalTop({
             width="fit-content"
             height="1rem"
             level={0}
+            category={category}
+            recruitmentField={recruitmentField}
+            region={region}
+            projectSection={projectSection}
+            isUpdateCategory={isUpdateCategory}
+            setIsUpdateCategory={setIsUpdateCategory}
+            isUpdateRecruitmentField={isUpdateRecruitmentField}
+            setIsUpdateRecruitmentField={setIsUpdateRecruitmentField}
+            isUpdateProjectSection={isUpdateProjectSection}
+            setIsUpdateProjectSection={setIsUpdateProjectSection}
+            isUpdateRegion={isUpdateRegion}
+            setIsUpdateRegion={setIsUpdateRegion}
             setCategory={setCategory}
             setRecruitmentField={setRecruitmentField}
             setRegion={setRegion}

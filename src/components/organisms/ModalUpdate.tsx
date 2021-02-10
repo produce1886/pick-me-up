@@ -8,10 +8,11 @@ import React, {
 import { useSelector } from "react-redux";
 import axios from "axios";
 import checkIsNotEmpty from "@src/lib/utils/CheckIsNotEmpty";
+import ProjectHooks from "@src/lib/hooks/Project";
+import PortfolioHooks from "@src/lib/hooks/Portfolio";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
-import { PortfolioProps, ProjectProps } from "../../types/Data";
 import UserState from "../../types/User";
 import { PageType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
@@ -34,6 +35,7 @@ function ModalUpdate({
   setModalReload,
 }: ModalUpdateProps) {
   const userState = useSelector((state: { user: UserState }) => state.user);
+  const authorEmail = userState.userData.email;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
@@ -42,24 +44,55 @@ function ModalUpdate({
   const [projectSection, setProjectSection] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
-  const { isLoading } = getData(
-    pid,
-    page,
-    setTitle,
-    setContent,
-    setCategory,
-    setRecruitmentField,
-    setRegion,
-    setProjectSection,
-    setImages,
-    setTags
+  const [isUpdateCategory, setIsUpdateCategory] = useState(true);
+  const [isUpdateRecruitmentField, setIsUpdateRecruitmentField] = useState(
+    true
   );
+  const [isUpdateRegion, setIsUpdateRegion] = useState(true);
+  const [isUpdateProjectSection, setIsUpdateProjectSection] = useState(true);
+
+  let getData;
+  if (page === "project") {
+    getData = ProjectHooks.useProjectGetApi;
+  } else if (page === "portfolio") {
+    getData = PortfolioHooks.usePortfolioGetApi;
+  }
+  const { isLoading, isError, data } = getData([pid, modalReload]);
+
+  useEffect(() => {
+    if (data) {
+      if ("projectTags" in data) {
+        setTitle(data.title);
+        setContent(data.content);
+        setCategory(data.category);
+        setRecruitmentField(data.recruitmentField);
+        setRegion(data.region);
+        setProjectSection(data.projectSection);
+        let jsonProjectTagArray: string[] = [];
+        jsonProjectTagArray = Object.values(data.projectTags).map(
+          (value) => value.tagName
+        );
+        setTags(jsonProjectTagArray);
+      } else {
+        setTitle(data.title);
+        setContent(data.content);
+        setCategory(data.category);
+        setRecruitmentField(data.recruitmentField);
+        let jsonPortfolioTagArray: string[] = [];
+        jsonPortfolioTagArray = Object.values(data.portfolioTags).map(
+          (value) => value.tagName
+        );
+        setTags(jsonPortfolioTagArray);
+      }
+    }
+  }, [data]);
 
   if (tags.length > 0 && typeof tags[0] === "object") {
     const tagArray: string[] = [];
     tags.map((value: string) => tagArray.push(value));
     setTags(tagArray);
   }
+
   const update = useCallback(() => {
     const flag = checkIsNotEmpty(
       title,
@@ -73,16 +106,16 @@ function ModalUpdate({
     if (flag) {
       try {
         if (page === "project") {
-          const image = images.length > 0 ? images[0] : "";
+          const projectTags = [...tags];
           const body = {
             title,
             content,
+            authorEmail,
             category,
             recruitmentField,
             region,
             projectSection,
-            tags,
-            image,
+            projectTags,
           };
           axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
           setTimeout(() => setModalReload(modalReload + 1), 400);
@@ -138,6 +171,18 @@ function ModalUpdate({
       <Top
         page={page}
         title={title}
+        category={category}
+        recruitmentField={recruitmentField}
+        region={region}
+        projectSection={projectSection}
+        isUpdateCategory={isUpdateCategory}
+        setIsUpdateCategory={setIsUpdateCategory}
+        isUpdateRecruitmentField={isUpdateRecruitmentField}
+        setIsUpdateRecruitmentField={setIsUpdateRecruitmentField}
+        isUpdateProjectSection={isUpdateProjectSection}
+        setIsUpdateProjectSection={setIsUpdateProjectSection}
+        isUpdateRegion={isUpdateRegion}
+        setIsUpdateRegion={setIsUpdateRegion}
         setCategory={setCategory}
         setRecruitmentField={setRecruitmentField}
         setRegion={setRegion}
@@ -153,6 +198,7 @@ function ModalUpdate({
         content={content}
       ></Middle>
       <Bottom
+        page={page}
         tags={tags}
         setTags={setTags}
         onClick={update}
@@ -163,72 +209,3 @@ function ModalUpdate({
 }
 
 export default React.memo(ModalUpdate);
-
-const getData = (
-  pid: string | string[],
-  type: "project" | "portfolio",
-  setTitle: React.Dispatch<React.SetStateAction<string>>,
-  setContent: React.Dispatch<React.SetStateAction<string>>,
-  setCategory: React.Dispatch<React.SetStateAction<string>>,
-  setRecruitmentField: React.Dispatch<React.SetStateAction<string>>,
-  setRegion: React.Dispatch<React.SetStateAction<string>>,
-  setProjectSection: React.Dispatch<React.SetStateAction<string>>,
-  setImages: React.Dispatch<React.SetStateAction<string[]>>,
-  setTags: React.Dispatch<React.SetStateAction<string[]>>
-) => {
-  const [data, setData] = useState<ProjectProps>();
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        if (type === "project") {
-          const result = await axios.get<ProjectProps>(
-            `${process.env.API_HOST}/projects/${pid}`
-          );
-          setData(result.data);
-          setTitle(result.data.title);
-          setContent(result.data.content);
-          setCategory(result.data.category);
-          setRecruitmentField(result.data.recruitmentField);
-          setRegion(result.data.region);
-          setProjectSection(result.data.projectSection);
-          if (!result.data.image) {
-            setImages([result.data.image]);
-          }
-          let jsonProjectTagArray: string[] = [];
-          jsonProjectTagArray = Object.entries(result.data.projectTags).map(
-            ([value]) => value
-          );
-          setTags(jsonProjectTagArray);
-          setIsLoading(false);
-        } else if (type === "portfolio") {
-          const result = await axios.get<PortfolioProps>(
-            `${process.env.API_HOST}/portfolios/${pid}`
-          );
-          setData(result.data);
-          setTitle(result.data.title);
-          setContent(result.data.content);
-          setCategory(result.data.category);
-          setRecruitmentField(result.data.recruitmentField);
-          if (result.data.image !== "") {
-            setImages([result.data.image]);
-          }
-          let jsonPortfolioTagArray: string[] = [];
-          jsonPortfolioTagArray = Object.entries(result.data.portfolioTags).map(
-            ([value]) => value
-          );
-          setTags(jsonPortfolioTagArray);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (!data) {
-      fetchData();
-    }
-  }, []);
-  return { isLoading };
-};

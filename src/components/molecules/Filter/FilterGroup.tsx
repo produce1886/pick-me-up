@@ -14,6 +14,18 @@ export type FilterGroupProps = {
   height?: string;
   line?: string;
   level?: number;
+  category?: string;
+  recruitmentField?: string;
+  region?: string;
+  projectSection?: string;
+  isUpdateCategory?: boolean;
+  setIsUpdateCategory?: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateRecruitmentField?: boolean;
+  setIsUpdateRecruitmentField?: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateProjectSection?: boolean;
+  setIsUpdateProjectSection?: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpdateRegion?: boolean;
+  setIsUpdateRegion?: React.Dispatch<React.SetStateAction<boolean>>;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   setRecruitmentField: React.Dispatch<React.SetStateAction<string>>;
   setRegion?: React.Dispatch<React.SetStateAction<string>>;
@@ -34,7 +46,9 @@ function FilterGroup(props: FilterGroupProps) {
         height={props.height}
         line={props.line}
         level={props.level}
-        defaultText={category}
+        isUpdateCategory={props.isUpdateCategory}
+        setIsUpdateCategory={props.setIsUpdateCategory}
+        defaultText={props.category ? props.category : category}
         data={CATEGORY}
         onClick={props.setCategory}
       ></Filter>
@@ -43,7 +57,11 @@ function FilterGroup(props: FilterGroupProps) {
         height={props.height}
         line={props.line}
         level={props.level}
-        defaultText={recruitmentField}
+        isUpdateRecruitmentField={props.isUpdateRecruitmentField}
+        setIsUpdateRecruitmentField={props.setIsUpdateRecruitmentField}
+        defaultText={
+          props.recruitmentField ? props.recruitmentField : recruitmentField
+        }
         data={RECRUITMENT_FIELD}
         onClick={props.setRecruitmentField}
       ></Filter>
@@ -54,7 +72,9 @@ function FilterGroup(props: FilterGroupProps) {
             height={props.height}
             line={props.line}
             level={props.level}
-            defaultText={region}
+            isUpdateRegion={props.isUpdateRegion}
+            setIsUpdateRegion={props.setIsUpdateRegion}
+            defaultText={props.region ? props.region : region}
             data={REGION}
             onClick={props.setRegion}
           ></Filter>
@@ -63,7 +83,11 @@ function FilterGroup(props: FilterGroupProps) {
             height={props.height}
             line={props.line}
             level={props.level}
-            defaultText={projectSection}
+            isUpdateProjectSection={props.isUpdateProjectSection}
+            setIsUpdateProjectSection={props.setIsUpdateProjectSection}
+            defaultText={
+              props.projectSection ? props.projectSection : projectSection
+            }
             data={PROJECT_SECTION}
             onClick={props.setProjectSection}
           ></Filter>
