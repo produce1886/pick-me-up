@@ -116,7 +116,7 @@ const TagWrapper = styled.div`
   display: flex;
   align-items: left;
   flex-direction: row;
-  margin: 0 0 0 2.5rem;
+  margin: 1rem 0 0 2.5rem;
   box-sizing: border-box;
 `;
 
