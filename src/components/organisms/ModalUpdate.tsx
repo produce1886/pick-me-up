@@ -44,12 +44,6 @@ function ModalUpdate({
   const [projectSection, setProjectSection] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
-  const [isUpdateCategory, setIsUpdateCategory] = useState(true);
-  const [isUpdateRecruitmentField, setIsUpdateRecruitmentField] = useState(
-    true
-  );
-  const [isUpdateRegion, setIsUpdateRegion] = useState(true);
-  const [isUpdateProjectSection, setIsUpdateProjectSection] = useState(true);
 
   let getData;
   if (page === "project") {
@@ -175,14 +169,6 @@ function ModalUpdate({
         recruitmentField={recruitmentField}
         region={region}
         projectSection={projectSection}
-        isUpdateCategory={isUpdateCategory}
-        setIsUpdateCategory={setIsUpdateCategory}
-        isUpdateRecruitmentField={isUpdateRecruitmentField}
-        setIsUpdateRecruitmentField={setIsUpdateRecruitmentField}
-        isUpdateProjectSection={isUpdateProjectSection}
-        setIsUpdateProjectSection={setIsUpdateProjectSection}
-        isUpdateRegion={isUpdateRegion}
-        setIsUpdateRegion={setIsUpdateRegion}
         setCategory={setCategory}
         setRecruitmentField={setRecruitmentField}
         setRegion={setRegion}
