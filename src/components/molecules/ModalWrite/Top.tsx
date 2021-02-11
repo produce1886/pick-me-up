@@ -7,8 +7,8 @@ import { PageType } from "../../atoms/Modal/ModalType";
 
 type ModalTopProps = {
   page: PageType;
-  category: string;
-  recruitmentField: string;
+  category?: string;
+  recruitmentField?: string;
   region?: string;
   projectSection?: string;
   setCategory: Dispatch<SetStateAction<string>>;

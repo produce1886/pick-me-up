@@ -31,7 +31,9 @@ function Filter(props: FilterProps) {
   const isAlign = props.defaultText === "최신순";
 
   useEffect(() => {
-    setSelectedItemTitle(props.updateTitle);
+    if (props.updateTitle) {
+      setSelectedItemTitle(props.updateTitle);
+    }
   }, [props.updateTitle]);
 
   const handleFilterClick = () => {
