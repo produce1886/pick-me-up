@@ -14,28 +14,23 @@ const getPortfolioList = (
     조회순: "viewNum",
   };
 
-  const body = {
-    page: 0,
-    size: limit,
-    sortColumn: sortColumn[sort],
-    category,
-    recruitmentField,
-    keyword: query,
-  };
+  const url = `page=${0}&size=${limit}&sort=${
+    sortColumn[sort]
+  },desc&category=${category}&recruitmentField=${recruitmentField}&keyword=${query}`;
 
   return base()
-    .get(`/portfolios/list`)
+    .get(`/portfolios/list?${url}`)
     .then((res) => res.data);
 };
 
-const getPortfolio = (pid: string, modalReload: number) =>
+const getPortfolio = (pid: number, modalReload: number) =>
   base()
-    .get(`projects/${pid}`)
+    .get(`portfolios/${pid}`)
     .then((res) => res.data);
 
-const deletePortfolio = (pid: string) =>
+const deletePortfolio = (pid: number) =>
   base()
-    .delete(`/projects/${pid}`)
+    .delete(`/portfolios/${pid}`)
     .catch((err) => alert("게시글 삭제에 실패했습니다"));
 
 const PortfolioService = {

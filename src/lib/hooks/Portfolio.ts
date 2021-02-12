@@ -1,12 +1,12 @@
 import PortfolioService from "@src/lib/api/Portfolio";
-import DataProps, { PostList } from "@src/types/Data";
+import { PortfolioList, PortfolioProps } from "@src/types/Data";
 import useAxiosQuery from "./Api";
 
-export const usePortfolioListGetApi = useAxiosQuery<PostList>(
+export const usePortfolioListGetApi = useAxiosQuery<PortfolioList>(
   PortfolioService.getPortfolioList
 );
 
-export const usePortfolioGetApi = useAxiosQuery<DataProps>(
+export const usePortfolioGetApi = useAxiosQuery<PortfolioProps>(
   PortfolioService.getPortfolio
 );
 
