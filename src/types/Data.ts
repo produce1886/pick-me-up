@@ -23,8 +23,13 @@ export type ProjectProps = DataProps & {
 
 export type PortfolioProps = DataProps & {
   portfolioTags: Tag[];
+  images: Images[];
 };
 
+export type Images = {
+  id: number;
+  image: string;
+};
 export type User = {
   id: string;
   username: string;
