@@ -10,11 +10,12 @@ import axios from "axios";
 import checkIsNotEmpty from "@src/lib/utils/CheckIsNotEmpty";
 import ProjectHooks from "@src/lib/hooks/Project";
 import PortfolioHooks from "@src/lib/hooks/Portfolio";
+import { Images } from "@src/types/Data";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import UserState from "../../types/User";
-import { PageType } from "../atoms/Modal/ModalType";
+import { ImageFile, PageType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
 
 type ModalUpdateProps = {
@@ -41,8 +42,10 @@ function ModalUpdate({
   const [category, setCategory] = useState("");
   const [recruitmentField, setRecruitmentField] = useState("");
   const [region, setRegion] = useState("");
-  const [projectSection, setProjectSection] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [remoteFiles, setRemoteFiles] = useState<Images[]>([]);
+  const [remoteRemoveId, setRemoteRemoveId] = useState<number[]>([]);
+  const [localFiles, setLocalFiles] = useState<ImageFile[]>([]);
+  const [projectSection, setProjectSection] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
 
   let getData;
@@ -52,10 +55,17 @@ function ModalUpdate({
     getData = PortfolioHooks.usePortfolioGetApi;
   }
   const { isLoading, isError, data } = getData([pid, modalReload]);
-
+  console.log(localFiles);
   useEffect(() => {
     if (data) {
       if ("projectTags" in data) {
+        if (data.image !== null) {
+          const projectImage = {
+            id: data.id,
+            image: data.image,
+          };
+          setRemoteFiles([projectImage]);
+        }
         setTitle(data.title);
         setContent(data.content);
         setCategory(data.category);
@@ -72,6 +82,7 @@ function ModalUpdate({
         setContent(data.content);
         setCategory(data.category);
         setRecruitmentField(data.recruitmentField);
+        setRemoteFiles(data.images);
         let jsonPortfolioTagArray: string[] = [];
         jsonPortfolioTagArray = Object.values(data.portfolioTags).map(
           (value) => value.tagName
@@ -101,6 +112,11 @@ function ModalUpdate({
       try {
         if (page === "project") {
           const projectTags = [...tags];
+          const formData = new FormData();
+          formData.append(
+            "image",
+            localFiles.length && (localFiles[0] as Blob)
+          );
           const body = {
             title,
             content,
@@ -111,40 +127,54 @@ function ModalUpdate({
             projectSection,
             projectTags,
           };
+          const patchBody = {
+            formData,
+          };
           axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
+          axios.patch(
+            `${process.env.API_HOST}/projects/${pid}/image`,
+            patchBody
+          );
+
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setIsUpdate(false);
         } else if (page === "portfolio") {
-          const image = images.length > 0 ? images[0] : "";
+          const portfolioTags = [...tags];
           const body = {
             title,
             content,
+            authorEmail,
             category,
             recruitmentField,
-            tags,
-            image,
+            portfolioTags,
           };
           axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
+          // remote를 수정시에도 지우고 local이 반영되는거니까...
+          // => remoteRemoveId에 있는만큼 patch
+          // 이후 local 각각 post
+          if (remoteRemoveId.length > 0) {
+            for (let i = 0; i < remoteRemoveId.length; i += 1) {
+              const formData = new FormData();
+              formData.append("image", null);
+              axios.patch(
+                `${process.env.API_HOST}/portfolios/image/${remoteRemoveId[i]}`,
+                formData
+              );
+            }
+          }
+          if (localFiles.length > 0) {
+            for (let i = 0; i < localFiles.length; i += 1) {
+              const formData = new FormData();
+              formData.append("image", localFiles[i] as Blob);
+              axios.post(
+                `${process.env.API_HOST}/portfolios/${pid}/image`,
+                formData
+              );
+            } // map 사용불가
+          }
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setIsUpdate(false);
         }
-        /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
-        else if (props.page === "portfolio") {
-          let imageDataArray = [];
-          images.map((value) => imageDataArray.push(value.data));
-          let body = {
-            title: title,
-            content: content,
-            category: category,
-            huntingField: field,
-            tags: tags,
-            image: imageDataArray,
-          };
-          axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 400);
-          props.setUpdate(false);
-        }
-        */
       } catch (error) {
         console.log(error);
         alert("에러가 발생했습니다.");
@@ -158,7 +188,8 @@ function ModalUpdate({
     region,
     projectSection,
     tags,
-    images,
+    remoteFiles,
+    localFiles,
   ]);
   return (
     <Modal isVisible={!isLoading} onClose={onClose}>
@@ -179,8 +210,12 @@ function ModalUpdate({
       <Middle
         page={page}
         setContent={setContent}
-        setImages={setImages}
-        images={images}
+        setRemoteFiles={setRemoteFiles}
+        setLocalFiles={setLocalFiles}
+        localFiles={localFiles}
+        remoteFiles={remoteFiles}
+        setRemoteRemoveId={setRemoteRemoveId}
+        remoteRemoveId={remoteRemoveId}
         content={content}
       ></Middle>
       <Bottom
