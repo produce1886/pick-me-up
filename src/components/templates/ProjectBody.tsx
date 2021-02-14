@@ -19,9 +19,9 @@ type BodyProps = {
 
 function ProjectBody(props: BodyProps) {
   const [category, setCategory] = useState("");
-  const [field, setField] = useState("");
+  const [recruitmentField, setRecruitmentField] = useState("");
   const [region, setRegion] = useState("");
-  const [projectType, setProjectType] = useState("");
+  const [projectSection, setProjectSection] = useState("");
   const [sort, setSort] = useState("최신순");
   const [query, setQuery] = useState("");
   const [isWriteVisible, setIsWriteVisible] = useState(false);
@@ -35,9 +35,9 @@ function ProjectBody(props: BodyProps) {
       <FilterSearch
         page="project"
         setCategory={setCategory}
-        setField={setField}
+        setRecruitmentField={setRecruitmentField}
         setRegion={setRegion}
-        setProjectType={setProjectType}
+        setProjectSection={setProjectSection}
         setQuery={setQuery}
       ></FilterSearch>
       <Wrapper>
@@ -55,9 +55,9 @@ function ProjectBody(props: BodyProps) {
           </AlignFilterWrapper>
           <ProjectList
             category={category}
-            field={field}
+            recruitmentField={recruitmentField}
             region={region}
-            projectType={projectType}
+            projectSection={projectSection}
             query={query}
             sort={sort}
             reload={props.reload}

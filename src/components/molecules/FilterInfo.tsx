@@ -7,20 +7,20 @@ import { PageType } from "../atoms/Modal/ModalType";
 type FilterInfoProps = {
   page: PageType;
   category: string;
-  field: string;
+  recruitmentField: string;
   region?: string;
-  projectCategory?: string;
+  projectSection?: string;
 };
 
 function FilterInfo(props: FilterInfoProps) {
   return (
     <Wrapper>
       <Text level={0} color={Colors.DEEP_GREY}>
-        {props.category} | {props.field}
+        {props.category} | {props.recruitmentField}
       </Text>
       {props.page === "project" && (
         <Text level={0} color={Colors.DEEP_GREY}>
-          &nbsp;| {props.region} | {props.projectCategory}
+          &nbsp;| {props.region} | {props.projectSection}
         </Text>
       )}
     </Wrapper>

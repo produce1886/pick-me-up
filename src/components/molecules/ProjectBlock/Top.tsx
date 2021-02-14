@@ -12,9 +12,9 @@ type TopProps = {
   name: string;
   profileImage?: string;
   category: string;
-  field: string;
+  recruitmentField: string;
   region: string;
-  projectCategory: string;
+  projectSection: string;
   date: string;
 };
 
@@ -38,9 +38,9 @@ function Top(props: TopProps) {
         <FilterInfo
           page="project"
           category={props.category}
-          field={props.field}
+          recruitmentField={props.recruitmentField}
           region={props.region}
-          projectCategory={props.projectCategory}
+          projectSection={props.projectSection}
         ></FilterInfo>
         <Text level={1} color={Colors.BLACK}>
           {props.date}
@@ -70,4 +70,6 @@ const BottomWrapper = styled.div`
   align-items: center;
 `;
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;

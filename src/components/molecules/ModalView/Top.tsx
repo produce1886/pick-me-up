@@ -13,9 +13,9 @@ type ModalTopProps = {
   uid: string;
   profileImage: string;
   category: string;
-  field: string;
-  region: string;
-  projectCategory: string;
+  recruitmentField: string;
+  region?: string;
+  projectSection?: string;
 };
 
 type ProfileHolderProps = {
@@ -37,9 +37,9 @@ function ModalTop(props: ModalTopProps) {
         <FilterInfo
           page={props.page}
           category={props.category}
-          field={props.field}
+          recruitmentField={props.recruitmentField}
           region={props.region}
-          projectCategory={props.projectCategory}
+          projectSection={props.projectSection}
         ></FilterInfo>
       </TitleFilterWrapper>
       <Link href={`/profile/${props.uid}`} passHref>
@@ -82,4 +82,6 @@ const Img = styled.img`
   `}
 `;
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;

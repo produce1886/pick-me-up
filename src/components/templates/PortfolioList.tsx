@@ -9,18 +9,18 @@ import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
 type PortfolioListProps = {
   category: string;
-  field: string;
+  recruitmentField: string;
   query: string;
   sort: string;
   reload: number;
 };
 
 function PortfolioList(props: PortfolioListProps) {
-  const { category, field, query, sort, reload } = props;
+  const { category, recruitmentField, query, sort, reload } = props;
   const [limit, setLimit] = useState(15);
   const { isLoading, isError, data } = PortfolioHooks.usePortfolioListGetApi([
     category,
-    field,
+    recruitmentField,
     query,
     sort,
     limit,

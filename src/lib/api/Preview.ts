@@ -7,21 +7,9 @@ const getPreview = (sort: string) => {
   } else if (sort === "most") {
     sortColumn = "viewNum";
   }
-
-  const body = {
-    page: 0,
-    size: 4,
-    sortColumn,
-    category: "",
-    huntingField: "",
-    region: "",
-    projectCategory: "",
-    keyword: "",
-  };
-
   return base()
-    .post(`/projects/list`, body)
-    .then((res) => res.data.pagelist);
+    .get(`/projects/list?page=${0}&size=${4}&sort=${sortColumn}`)
+    .then((res) => res.data.projectList);
 };
 
 const PreviewService = {

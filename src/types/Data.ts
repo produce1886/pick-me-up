@@ -1,23 +1,28 @@
 /* eslint-disable camelcase */
+
 type DataProps = {
-  page: "project" | "portfolio";
+  id: number;
   title: string;
-  name: string;
-  profileImage: string;
-  category: string;
-  huntingField: string;
-  region: string;
-  projectCategory: string;
-  createdDate: string;
   content: string;
-  image: string;
-  id: string;
-  commentsNum: number;
+  category: string;
+  recruitmentField: string;
+  createdDate: string;
+  modifiedDate: string;
   viewNum: number;
-  projectTag: Tag[];
-  portfolioTag: Tag[];
+  commentsNum: number;
   user: User;
   comments: Comment[];
+};
+
+export type ProjectProps = DataProps & {
+  region: string;
+  projectSection: string;
+  projectTags: Tag[];
+  image: string;
+};
+
+export type PortfolioProps = DataProps & {
+  portfolioTags: Tag[];
 };
 
 export type User = {
@@ -29,13 +34,13 @@ export type User = {
 
 export type Tag = {
   id: string;
-  tag: string;
+  tagName: string;
 };
 
 export type Comment = {
   createdDate: string;
   modifiedDate: string;
-  id: string;
+  id: number;
   content: string;
   user: User;
 };
@@ -57,9 +62,14 @@ export type Preview = {
   commentsNum: number;
 };
 
-export type PostList = {
-  nrOfElements: number;
-  pagelist: DataProps[];
+export type ProjectList = {
+  totalNum: number;
+  projectList: ProjectProps[];
+};
+
+export type PortfolioList = {
+  totalNum: number;
+  portfolioList: PortfolioProps[];
 };
 
 export type Profile = {
@@ -78,5 +88,3 @@ export type Profile = {
   area_security?: boolean;
   interests_security?: boolean;
 };
-
-export default DataProps;

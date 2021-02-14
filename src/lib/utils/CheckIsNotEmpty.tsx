@@ -4,9 +4,9 @@ export default function checkIsNotEmpty(
   title: string,
   content: string,
   category: string,
-  field: string,
+  recruitmentField: string,
   region: string,
-  projectType: string,
+  projectSection: string,
   page: PageType
 ): boolean {
   const flag = false;
@@ -22,7 +22,7 @@ export default function checkIsNotEmpty(
     alert("카테고리를 선택해주세요");
     return flag;
   }
-  if (!field) {
+  if (!recruitmentField) {
     alert("구인분야를 선택해주세요");
     return flag;
   }
@@ -30,7 +30,7 @@ export default function checkIsNotEmpty(
     alert("지역을 선택해주세요");
     return flag;
   }
-  if (!projectType && page === "project") {
+  if (!projectSection && page === "project") {
     alert("프로젝트 종류를 선택해주세요");
     return flag;
   }

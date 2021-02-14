@@ -25,13 +25,13 @@ function ModalWrite({
   reload,
 }: ModalWriteProps) {
   const userState = useSelector((state: { user: UserState }) => state.user);
-  const { email } = userState.userData;
+  const authorEmail = userState.userData.email;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
-  const [field, setField] = useState("");
+  const [recruitmentField, setRecruitmentField] = useState("");
   const [region, setRegion] = useState("");
-  const [projectType, setProjectType] = useState("");
+  const [projectSection, setProjectSection] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
 
@@ -40,24 +40,25 @@ function ModalWrite({
       title,
       content,
       category,
-      field,
+      recruitmentField,
       region,
-      projectType,
+      projectSection,
       page
     );
     if (flag) {
       try {
         if (page === "project") {
           const image = images.length > 0 ? images[0] : "";
+          const projectTags = [...tags];
           const body = {
+            authorEmail,
             title,
             content,
-            email,
             category,
-            huntingField: field,
+            recruitmentField,
             region,
-            projectCategory: projectType,
-            tags,
+            projectSection,
+            projectTags,
             image,
           };
           axios.post(`${process.env.API_HOST}/projects`, body);
@@ -65,13 +66,14 @@ function ModalWrite({
           onClose();
         } else if (page === "portfolio") {
           const image = images.length > 0 ? images[0] : "";
+          const portfolioTags = [...tags];
           const body = {
             title,
             content,
-            email,
+            authorEmail,
             category,
-            huntingField: field,
-            tags,
+            recruitmentField,
+            portfolioTags,
             image,
           };
           axios.post(`${process.env.API_HOST}/portfolios`, body);
@@ -101,16 +103,25 @@ function ModalWrite({
         alert("에러가 발생했습니다.");
       }
     }
-  }, [title, content, category, field, region, projectType, tags, images]);
+  }, [
+    title,
+    content,
+    category,
+    recruitmentField,
+    region,
+    projectSection,
+    tags,
+    images,
+  ]);
 
   return (
     <Modal isVisible={isVisible} onClose={onClose}>
       <Top
         page={page}
         setCategory={setCategory}
-        setField={setField}
+        setRecruitmentField={setRecruitmentField}
         setRegion={setRegion}
-        setProjectType={setProjectType}
+        setProjectSection={setProjectSection}
         setTitle={setTitle}
         title={title}
         profileImage={userState.userData.image}
@@ -123,6 +134,7 @@ function ModalWrite({
         content={content}
       ></Middle>
       <Bottom
+        page={page}
         onClick={post}
         tags={tags}
         setTags={setTags}
