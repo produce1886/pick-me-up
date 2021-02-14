@@ -65,7 +65,15 @@ function ModalWrite({
             `${process.env.API_HOST}/projects`,
             body
           );
-          console.log(data.headers);
+          const pid = data.headers.location.split("/")[2];
+          if (localFiles.length > 0) {
+            const formData = new FormData();
+            formData.append("image", localFiles[0] as Blob);
+            axios.patch(
+              `${process.env.API_HOST}/projects/${pid}/image`,
+              formData
+            );
+          }
           setTimeout(() => setReload(reload + 1), 300);
           onClose();
         } else if (page === "portfolio") {
@@ -136,7 +144,6 @@ function ModalWrite({
         content={content}
       ></Middle>
       <Bottom
-        page={page}
         onClick={post}
         tags={tags}
         setTags={setTags}
