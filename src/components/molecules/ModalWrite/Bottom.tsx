@@ -5,10 +5,8 @@ import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Tag";
 import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
-import { PageType } from "../../atoms/Modal/ModalType";
 
 type ModalBottomProps = {
-  page: PageType;
   portfolioTags?: string[];
   projectTags?: string[];
   setProjectTags?: React.Dispatch<React.SetStateAction<string[]>>;
