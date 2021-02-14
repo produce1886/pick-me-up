@@ -1,11 +1,12 @@
 import React, { useState, useCallback, Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { Images } from "@src/types/Data";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
 import UserState from "../../types/User";
-import { PageType } from "../atoms/Modal/ModalType";
+import { PageType, ImageFile } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
 import checkIsNotEmpty from "../../lib/utils/CheckIsNotEmpty";
 
@@ -32,10 +33,11 @@ function ModalWrite({
   const [recruitmentField, setRecruitmentField] = useState("");
   const [region, setRegion] = useState("");
   const [projectSection, setProjectSection] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [localFiles, setLocalFiles] = useState<ImageFile[]>([]);
+  const [remoteFiles, setRemoteFiles] = useState<Images[]>([]);
   const [tags, setTags] = useState<string[]>([]);
 
-  const post = useCallback(() => {
+  const post = useCallback(async () => {
     const flag = checkIsNotEmpty(
       title,
       content,
@@ -48,7 +50,6 @@ function ModalWrite({
     if (flag) {
       try {
         if (page === "project") {
-          const image = images.length > 0 ? images[0] : "";
           const projectTags = [...tags];
           const body = {
             authorEmail,
@@ -59,14 +60,25 @@ function ModalWrite({
             region,
             projectSection,
             projectTags,
-            image,
           };
-          axios.post(`${process.env.API_HOST}/projects`, body);
+          const data = await axios.post(
+            `${process.env.API_HOST}/projects`,
+            body
+          );
+          const pid = data.headers.location.split("/")[2];
+          if (localFiles.length > 0) {
+            const formData = new FormData();
+            formData.append("image", localFiles[0] as Blob);
+            axios.patch(
+              `${process.env.API_HOST}/projects/${pid}/image`,
+              formData
+            );
+          }
           setTimeout(() => setReload(reload + 1), 300);
           onClose();
         } else if (page === "portfolio") {
-          const image = images.length > 0 ? images[0] : "";
           const portfolioTags = [...tags];
+          const images: string[] = [];
           const body = {
             title,
             content,
@@ -74,30 +86,26 @@ function ModalWrite({
             category,
             recruitmentField,
             portfolioTags,
-            image,
+            images,
           };
-          axios.post(`${process.env.API_HOST}/portfolios`, body);
+          const data = await axios.post(
+            `${process.env.API_HOST}/portfolios`,
+            body
+          );
+          const pid = data.headers.location.split("/")[2];
+          if (localFiles.length > 0) {
+            for (let i = 0; i < localFiles.length; i += 1) {
+              const formData = new FormData();
+              formData.append("image", localFiles[i] as Blob);
+              axios.post(
+                `${process.env.API_HOST}/portfolios/${pid}/image`,
+                formData
+              );
+            }
+          }
           setTimeout(() => setReload(reload + 1), 300);
           onClose();
         }
-        /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
-        else if (props.page === "portfolio") {
-          let imageDataArray = [];
-          images.map((value) => imageDataArray.push(value.data));
-          let body = {
-            title: title,
-            content: content,
-            email: email,
-            category: category,
-            huntingField: field,
-            tags: tags,
-            image: imageDataArray,
-          };
-          axios.post(`${process.env.API_HOST}/portfolios`, body);
-          setTimeout(() => props.setReload(props.reload + 1), 300);
-          props.onClose();
-        }
-        */
       } catch (error) {
         console.log(error);
         alert("에러가 발생했습니다.");
@@ -111,7 +119,7 @@ function ModalWrite({
     region,
     projectSection,
     tags,
-    images,
+    localFiles,
   ]);
 
   return (
@@ -129,12 +137,13 @@ function ModalWrite({
       <Middle
         page={page}
         setContent={setContent}
-        setImages={setImages}
-        images={images}
+        setLocalFiles={setLocalFiles}
+        localFiles={localFiles}
+        remoteFiles={remoteFiles}
+        setRemoteFiles={setRemoteFiles}
         content={content}
       ></Middle>
       <Bottom
-        page={page}
         onClick={post}
         tags={tags}
         setTags={setTags}

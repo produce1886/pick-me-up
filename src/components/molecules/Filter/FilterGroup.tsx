@@ -14,6 +14,10 @@ export type FilterGroupProps = {
   height?: string;
   line?: string;
   level?: number;
+  category?: string;
+  recruitmentField?: string;
+  region?: string;
+  projectSection?: string;
   setCategory: React.Dispatch<React.SetStateAction<string>>;
   setRecruitmentField: React.Dispatch<React.SetStateAction<string>>;
   setRegion?: React.Dispatch<React.SetStateAction<string>>;
@@ -34,6 +38,7 @@ function FilterGroup(props: FilterGroupProps) {
         height={props.height}
         line={props.line}
         level={props.level}
+        updateTitle={props.category}
         defaultText={category}
         data={CATEGORY}
         onClick={props.setCategory}
@@ -43,6 +48,7 @@ function FilterGroup(props: FilterGroupProps) {
         height={props.height}
         line={props.line}
         level={props.level}
+        updateTitle={props.recruitmentField}
         defaultText={recruitmentField}
         data={RECRUITMENT_FIELD}
         onClick={props.setRecruitmentField}
@@ -54,6 +60,7 @@ function FilterGroup(props: FilterGroupProps) {
             height={props.height}
             line={props.line}
             level={props.level}
+            updateTitle={props.region}
             defaultText={region}
             data={REGION}
             onClick={props.setRegion}
@@ -63,6 +70,7 @@ function FilterGroup(props: FilterGroupProps) {
             height={props.height}
             line={props.line}
             level={props.level}
+            updateTitle={props.projectSection}
             defaultText={projectSection}
             data={PROJECT_SECTION}
             onClick={props.setProjectSection}

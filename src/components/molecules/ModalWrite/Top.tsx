@@ -7,6 +7,10 @@ import { PageType } from "../../atoms/Modal/ModalType";
 
 type ModalTopProps = {
   page: PageType;
+  category?: string;
+  recruitmentField?: string;
+  region?: string;
+  projectSection?: string;
   setCategory: Dispatch<SetStateAction<string>>;
   setRecruitmentField: React.Dispatch<React.SetStateAction<string>>;
   setRegion: React.Dispatch<React.SetStateAction<string>>;
@@ -18,6 +22,10 @@ type ModalTopProps = {
 
 function ModalTop({
   page,
+  category,
+  recruitmentField,
+  region,
+  projectSection,
   setCategory,
   setRecruitmentField,
   setRegion,
@@ -45,6 +53,10 @@ function ModalTop({
             width="fit-content"
             height="1rem"
             level={0}
+            category={category}
+            recruitmentField={recruitmentField}
+            region={region}
+            projectSection={projectSection}
             setCategory={setCategory}
             setRecruitmentField={setRecruitmentField}
             setRegion={setRegion}

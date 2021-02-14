@@ -5,10 +5,8 @@ import Bottom from "../../atoms/Modal/Bottom";
 import TagButton from "../Tag";
 import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
-import { PageType } from "../../atoms/Modal/ModalType";
 
 type ModalBottomProps = {
-  page: PageType;
   portfolioTags?: string[];
   projectTags?: string[];
   setProjectTags?: React.Dispatch<React.SetStateAction<string[]>>;
@@ -116,7 +114,7 @@ const TagWrapper = styled.div`
   display: flex;
   align-items: left;
   flex-direction: row;
-  margin: 0 0 0 2.5rem;
+  margin: 1rem 0 0 2.5rem;
   box-sizing: border-box;
 `;
 

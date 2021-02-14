@@ -8,12 +8,14 @@ import React, {
 import { useSelector } from "react-redux";
 import axios from "axios";
 import checkIsNotEmpty from "@src/lib/utils/CheckIsNotEmpty";
+import ProjectHooks from "@src/lib/hooks/Project";
+import PortfolioHooks from "@src/lib/hooks/Portfolio";
+import { Images } from "@src/types/Data";
 import Top from "../molecules/ModalWrite/Top";
 import Middle from "../molecules/ModalWrite/Middle";
 import Bottom from "../molecules/ModalWrite/Bottom";
-import { PortfolioProps, ProjectProps } from "../../types/Data";
 import UserState from "../../types/User";
-import { PageType } from "../atoms/Modal/ModalType";
+import { ImageFile, PageType } from "../atoms/Modal/ModalType";
 import Modal from "../atoms/Modal/index";
 
 type ModalUpdateProps = {
@@ -34,26 +36,60 @@ function ModalUpdate({
   setModalReload,
 }: ModalUpdateProps) {
   const userState = useSelector((state: { user: UserState }) => state.user);
+  const authorEmail = userState.userData.email;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("");
   const [recruitmentField, setRecruitmentField] = useState("");
   const [region, setRegion] = useState("");
-  const [projectSection, setProjectSection] = useState("");
-  const [images, setImages] = useState<string[]>([]);
+  const [remoteFiles, setRemoteFiles] = useState<Images[]>([]);
+  const [remoteRemoveId, setRemoteRemoveId] = useState<number[]>([]);
+  const [localFiles, setLocalFiles] = useState<ImageFile[]>([]);
+  const [projectSection, setProjectSection] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
-  const { isLoading } = getData(
-    pid,
-    page,
-    setTitle,
-    setContent,
-    setCategory,
-    setRecruitmentField,
-    setRegion,
-    setProjectSection,
-    setImages,
-    setTags
-  );
+
+  let getData;
+  if (page === "project") {
+    getData = ProjectHooks.useProjectGetApi;
+  } else if (page === "portfolio") {
+    getData = PortfolioHooks.usePortfolioGetApi;
+  }
+  const { isLoading, isError, data } = getData([pid, modalReload]);
+  useEffect(() => {
+    if (data) {
+      if ("projectTags" in data) {
+        if (data.image !== null) {
+          const projectImage = {
+            id: data.id,
+            image: data.image,
+          };
+          setRemoteFiles([projectImage]);
+        }
+        setTitle(data.title);
+        setContent(data.content);
+        setCategory(data.category);
+        setRecruitmentField(data.recruitmentField);
+        setRegion(data.region);
+        setProjectSection(data.projectSection);
+        let jsonProjectTagArray: string[] = [];
+        jsonProjectTagArray = Object.values(data.projectTags).map(
+          (value) => value.tagName
+        );
+        setTags(jsonProjectTagArray);
+      } else {
+        setTitle(data.title);
+        setContent(data.content);
+        setCategory(data.category);
+        setRecruitmentField(data.recruitmentField);
+        setRemoteFiles(data.images);
+        let jsonPortfolioTagArray: string[] = [];
+        jsonPortfolioTagArray = Object.values(data.portfolioTags).map(
+          (value) => value.tagName
+        );
+        setTags(jsonPortfolioTagArray);
+      }
+    }
+  }, [data]);
 
   if (tags.length > 0 && typeof tags[0] === "object") {
     const tagArray: string[] = [];
@@ -73,51 +109,62 @@ function ModalUpdate({
     if (flag) {
       try {
         if (page === "project") {
-          const image = images.length > 0 ? images[0] : "";
+          const projectTags = [...tags];
           const body = {
             title,
             content,
+            authorEmail,
             category,
             recruitmentField,
             region,
             projectSection,
-            tags,
-            image,
+            projectTags,
           };
           axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
+          if (remoteRemoveId.length > 0 && localFiles.length > 0) {
+            const formData = new FormData();
+            formData.set("image", localFiles[0] as Blob);
+            axios.patch(
+              `${process.env.API_HOST}/projects/${pid}/image`,
+              formData
+            );
+          }
+          if (remoteRemoveId.length > 0 && localFiles.length === 0) {
+            axios.delete(`${process.env.API_HOST}/projects/${pid}/image`);
+          }
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setIsUpdate(false);
         } else if (page === "portfolio") {
-          const image = images.length > 0 ? images[0] : "";
+          const portfolioTags = [...tags];
           const body = {
             title,
             content,
+            authorEmail,
             category,
             recruitmentField,
-            tags,
-            image,
+            portfolioTags,
           };
           axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
+          if (remoteRemoveId.length > 0) {
+            for (let i = 0; i < remoteRemoveId.length; i += 1) {
+              axios.delete(
+                `${process.env.API_HOST}/portfolios/image/${remoteRemoveId[i]}`
+              );
+            }
+          }
+          if (localFiles.length > 0) {
+            for (let i = 0; i < localFiles.length; i += 1) {
+              const formData = new FormData();
+              formData.append("image", localFiles[i] as Blob);
+              axios.post(
+                `${process.env.API_HOST}/portfolios/${pid}/image`,
+                formData
+              );
+            }
+          }
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setIsUpdate(false);
         }
-        /* 나중에 아래 코드로 변경 예정(백엔드 api 수정 완료 시)
-        else if (props.page === "portfolio") {
-          let imageDataArray = [];
-          images.map((value) => imageDataArray.push(value.data));
-          let body = {
-            title: title,
-            content: content,
-            category: category,
-            huntingField: field,
-            tags: tags,
-            image: imageDataArray,
-          };
-          axios.put(`${process.env.API_HOST}/portfolios/${props.pid}`, body);
-          setTimeout(() => props.setModalReload(props.modalReload + 1), 400);
-          props.setUpdate(false);
-        }
-        */
       } catch (error) {
         console.log(error);
         alert("에러가 발생했습니다.");
@@ -131,13 +178,18 @@ function ModalUpdate({
     region,
     projectSection,
     tags,
-    images,
+    remoteFiles,
+    localFiles,
   ]);
   return (
     <Modal isVisible={!isLoading} onClose={onClose}>
       <Top
         page={page}
         title={title}
+        category={category}
+        recruitmentField={recruitmentField}
+        region={region}
+        projectSection={projectSection}
         setCategory={setCategory}
         setRecruitmentField={setRecruitmentField}
         setRegion={setRegion}
@@ -148,8 +200,12 @@ function ModalUpdate({
       <Middle
         page={page}
         setContent={setContent}
-        setImages={setImages}
-        images={images}
+        setRemoteFiles={setRemoteFiles}
+        setLocalFiles={setLocalFiles}
+        localFiles={localFiles}
+        remoteFiles={remoteFiles}
+        setRemoteRemoveId={setRemoteRemoveId}
+        remoteRemoveId={remoteRemoveId}
         content={content}
       ></Middle>
       <Bottom
@@ -163,72 +219,3 @@ function ModalUpdate({
 }
 
 export default React.memo(ModalUpdate);
-
-const getData = (
-  pid: string | string[],
-  type: "project" | "portfolio",
-  setTitle: React.Dispatch<React.SetStateAction<string>>,
-  setContent: React.Dispatch<React.SetStateAction<string>>,
-  setCategory: React.Dispatch<React.SetStateAction<string>>,
-  setRecruitmentField: React.Dispatch<React.SetStateAction<string>>,
-  setRegion: React.Dispatch<React.SetStateAction<string>>,
-  setProjectSection: React.Dispatch<React.SetStateAction<string>>,
-  setImages: React.Dispatch<React.SetStateAction<string[]>>,
-  setTags: React.Dispatch<React.SetStateAction<string[]>>
-) => {
-  const [data, setData] = useState<ProjectProps>();
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        if (type === "project") {
-          const result = await axios.get<ProjectProps>(
-            `${process.env.API_HOST}/projects/${pid}`
-          );
-          setData(result.data);
-          setTitle(result.data.title);
-          setContent(result.data.content);
-          setCategory(result.data.category);
-          setRecruitmentField(result.data.recruitmentField);
-          setRegion(result.data.region);
-          setProjectSection(result.data.projectSection);
-          if (!result.data.image) {
-            setImages([result.data.image]);
-          }
-          let jsonProjectTagArray: string[] = [];
-          jsonProjectTagArray = Object.entries(result.data.projectTags).map(
-            ([value]) => value
-          );
-          setTags(jsonProjectTagArray);
-          setIsLoading(false);
-        } else if (type === "portfolio") {
-          const result = await axios.get<PortfolioProps>(
-            `${process.env.API_HOST}/portfolios/${pid}`
-          );
-          setData(result.data);
-          setTitle(result.data.title);
-          setContent(result.data.content);
-          setCategory(result.data.category);
-          setRecruitmentField(result.data.recruitmentField);
-          if (result.data.image !== "") {
-            setImages([result.data.image]);
-          }
-          let jsonPortfolioTagArray: string[] = [];
-          jsonPortfolioTagArray = Object.entries(result.data.portfolioTags).map(
-            ([value]) => value
-          );
-          setTags(jsonPortfolioTagArray);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (!data) {
-      fetchData();
-    }
-  }, []);
-  return { isLoading };
-};

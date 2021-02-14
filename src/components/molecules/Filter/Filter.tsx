@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Colors from "@colors";
 import Text from "../../atoms/Text";
@@ -19,6 +19,7 @@ type FilterProps = {
   height: string | number;
   line?: string;
   level: number;
+  updateTitle: string;
   onClick: (arg0: string) => void;
   previousItemTitle?: string;
   data: Array<FilterItemType>;
@@ -28,6 +29,12 @@ function Filter(props: FilterProps) {
   const [isFilterOpened, setIsFilterOpened] = useState(false);
   const [selectedItemTitle, setSelectedItemTitle] = useState("");
   const isAlign = props.defaultText === "최신순";
+
+  useEffect(() => {
+    if (props.updateTitle) {
+      setSelectedItemTitle(props.updateTitle);
+    }
+  }, [props.updateTitle]);
 
   const handleFilterClick = () => {
     if (selectedItemTitle === "" || props.isUserInfoEdit) {

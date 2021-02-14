@@ -15,6 +15,5 @@ export type ModalProps = {
 export type PageType = "project" | "portfolio";
 
 export type ImageFile = Blob & {
-  invalid?: boolean;
   data?: string;
 };

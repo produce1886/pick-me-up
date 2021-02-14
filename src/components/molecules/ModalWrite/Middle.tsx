@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Colors from "@colors";
-import { PageType } from "../../atoms/Modal/ModalType";
+import { Images } from "@src/types/Data";
+import { PageType, ImageFile } from "../../atoms/Modal/ModalType";
 import Middle from "../../atoms/Modal/Middle";
 import Dropzone from "./Dropzone";
 
@@ -9,16 +10,24 @@ type ModalMiddleProps = {
   setContent: React.Dispatch<React.SetStateAction<string>>;
   content: string;
   page: PageType;
-  images: string[];
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  localFiles: ImageFile[];
+  remoteFiles: Images[];
+  setLocalFiles: React.Dispatch<React.SetStateAction<ImageFile[]>>;
+  setRemoteFiles: React.Dispatch<React.SetStateAction<Images[]>>;
+  setRemoteRemoveId?: React.Dispatch<React.SetStateAction<number[]>>;
+  remoteRemoveId?: number[];
 };
 
 function ModalMiddle({
   setContent,
   content,
   page,
-  images,
-  setImages,
+  localFiles,
+  remoteFiles,
+  setLocalFiles,
+  setRemoteFiles,
+  setRemoteRemoveId,
+  remoteRemoveId,
 }: ModalMiddleProps) {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
@@ -33,7 +42,15 @@ function ModalMiddle({
         }}
         value={content}
       ></Textarea>
-      <Dropzone page={page} setImages={setImages} images={images}></Dropzone>
+      <Dropzone
+        page={page}
+        setRemoteFiles={setRemoteFiles}
+        setLocalFiles={setLocalFiles}
+        localFiles={localFiles}
+        remoteFiles={remoteFiles}
+        setRemoteRemoveId={setRemoteRemoveId}
+        remoteRemoveId={remoteRemoveId}
+      ></Dropzone>
     </Middle>
   );
 }

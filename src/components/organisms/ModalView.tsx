@@ -1,7 +1,7 @@
 import React from "react";
 import ProjectHooks from "@src/lib/hooks/Project";
 import PortfolioHooks from "@src/lib/hooks/Portfolio";
-import { Tag } from "@src/types/Data";
+import { Tag, Images } from "@src/types/Data";
 import Modal from "../atoms/Modal/index";
 import Top from "../molecules/ModalView/Top";
 import Middle from "../molecules/ModalView/Middle";
@@ -24,6 +24,7 @@ function ModalView(props: ModalProps) {
   let region: string;
   let projectSection: string;
   let image: string;
+  let images: Images[];
 
   if (data) {
     if ("projectTags" in data) {
@@ -33,6 +34,7 @@ function ModalView(props: ModalProps) {
       image = data.image;
     } else {
       originalTags = data.portfolioTags;
+      images = data.images;
     }
     originalTags.forEach((tag) => {
       if (!tags.find((x) => x.id === tag.id)) {
@@ -81,6 +83,7 @@ function ModalView(props: ModalProps) {
             date={data.createdDate.split("T")[0]}
             content={data.content}
             image={image}
+            images={images}
             userEmail={data.user.email}
             pid={data.id}
             tags={tags}
