@@ -15,12 +15,12 @@ const getProjectList = (
     조회순: "viewNum",
   };
 
-  const url = `page=${0}&size=${limit}&sort=${
+  const queryString = `page=${0}&size=${limit}&sort=${
     sortColumn[sort]
   },desc&category=${category}&recruitmentField=${recruitmentField}&region=${region}&projectSection=${projectSection}&keyword=${query}`;
 
   return base()
-    .get(`/projects/list?${url}`)
+    .get(`/projects/list?${queryString}`)
     .then((res) => res.data);
 };
 

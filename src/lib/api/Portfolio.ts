@@ -14,12 +14,12 @@ const getPortfolioList = (
     조회순: "viewNum",
   };
 
-  const url = `page=${0}&size=${limit}&sort=${
+  const queryString = `page=${0}&size=${limit}&sort=${
     sortColumn[sort]
   },desc&category=${category}&recruitmentField=${recruitmentField}&keyword=${query}`;
 
   return base()
-    .get(`/portfolios/list?${url}`)
+    .get(`/portfolios/list?${queryString}`)
     .then((res) => res.data);
 };
 
