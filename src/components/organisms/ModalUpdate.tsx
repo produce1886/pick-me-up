@@ -55,7 +55,6 @@ function ModalUpdate({
     getData = PortfolioHooks.usePortfolioGetApi;
   }
   const { isLoading, isError, data } = getData([pid, modalReload]);
-  console.log(localFiles);
   useEffect(() => {
     if (data) {
       if ("projectTags" in data) {
@@ -97,7 +96,6 @@ function ModalUpdate({
     tags.map((value: string) => tagArray.push(value));
     setTags(tagArray);
   }
-
   const update = useCallback(() => {
     const flag = checkIsNotEmpty(
       title,
@@ -112,11 +110,6 @@ function ModalUpdate({
       try {
         if (page === "project") {
           const projectTags = [...tags];
-          const formData = new FormData();
-          formData.append(
-            "image",
-            localFiles.length && (localFiles[0] as Blob)
-          );
           const body = {
             title,
             content,
@@ -127,15 +120,18 @@ function ModalUpdate({
             projectSection,
             projectTags,
           };
-          const patchBody = {
-            formData,
-          };
           axios.put(`${process.env.API_HOST}/projects/${pid}`, body);
-          axios.patch(
-            `${process.env.API_HOST}/projects/${pid}/image`,
-            patchBody
-          );
-
+          if (remoteRemoveId.length > 0 && localFiles.length > 0) {
+            const formData = new FormData();
+            formData.set("image", localFiles[0] as Blob);
+            axios.patch(
+              `${process.env.API_HOST}/projects/${pid}/image`,
+              formData
+            );
+          }
+          if (remoteRemoveId.length > 0 && localFiles.length === 0) {
+            axios.delete(`${process.env.API_HOST}/projects/${pid}/image`);
+          }
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setIsUpdate(false);
         } else if (page === "portfolio") {
@@ -149,16 +145,10 @@ function ModalUpdate({
             portfolioTags,
           };
           axios.put(`${process.env.API_HOST}/portfolios/${pid}`, body);
-          // remote를 수정시에도 지우고 local이 반영되는거니까...
-          // => remoteRemoveId에 있는만큼 patch
-          // 이후 local 각각 post
           if (remoteRemoveId.length > 0) {
             for (let i = 0; i < remoteRemoveId.length; i += 1) {
-              const formData = new FormData();
-              formData.append("image", null);
-              axios.patch(
-                `${process.env.API_HOST}/portfolios/image/${remoteRemoveId[i]}`,
-                formData
+              axios.delete(
+                `${process.env.API_HOST}/portfolios/image/${remoteRemoveId[i]}`
               );
             }
           }
@@ -170,7 +160,7 @@ function ModalUpdate({
                 `${process.env.API_HOST}/portfolios/${pid}/image`,
                 formData
               );
-            } // map 사용불가
+            }
           }
           setTimeout(() => setModalReload(modalReload + 1), 400);
           setIsUpdate(false);
@@ -219,7 +209,6 @@ function ModalUpdate({
         content={content}
       ></Middle>
       <Bottom
-        page={page}
         tags={tags}
         setTags={setTags}
         onClick={update}
