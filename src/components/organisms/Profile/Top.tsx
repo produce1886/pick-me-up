@@ -9,7 +9,7 @@ type TopProps = {
   setIsEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
   profileImage?: string;
   name: string;
-  introduceSecurity: boolean;
+  isIntroducePublic: boolean;
   introduce: string;
 };
 
@@ -38,7 +38,7 @@ function Top(props: TopProps) {
         <Text level={6} weight="bold" color={Colors.BLACK}>
           {props.name}
         </Text>
-        {props.introduceSecurity && (
+        {props.isIntroducePublic && (
           <Text level={3} color={Colors.DEEP_GREY}>
             {props.introduce}
           </Text>

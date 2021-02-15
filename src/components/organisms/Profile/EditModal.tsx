@@ -24,38 +24,32 @@ function EditModal(props: EditModalProps) {
   const [birth, setBirth] = useState(props.birth);
   const [university, setUniversity] = useState(props.university);
   const [major, setMajor] = useState(props.major);
-  const [area, setArea] = useState(props.area || "지역");
+  const [region, setRegion] = useState(props.region || "지역");
   const [interests, setInterests] = useState(props.interests || "관심 분야");
-  const [birthSecurity, setBirthSecurity] = useState(props.birth_security);
-  const [areaSecurity, setAreaSecurity] = useState(props.area_security);
-  const [interestsSecurity, setInterestsSecurity] = useState(
-    props.interests_security
+  const [isBirthPublic, setBirthSecurity] = useState(props.birthPublic);
+  const [isRegionPublic, setRegionSecurity] = useState(props.regionPublic);
+  const [isInterestsPublic, setInterestsSecurity] = useState(
+    props.interestsPublic
   );
-  const [universitySecurity, setUniversitySecurity] = useState(
-    props.university_security
+  const [isUniversityPublic, setUniversitySecurity] = useState(
+    props.universityPublic
   );
 
   const router = useRouter();
   const userID = router.query.userID.toString();
 
   const body = {
-    email: props.email,
     username,
-    sex: "",
     birth,
     university,
     major,
-    area,
+    region,
     introduce,
-    image,
     interests,
-    sex_security: false,
-    introduce_security: true,
-    birth_security: birthSecurity,
-    university_security: universitySecurity,
-    major_security: universitySecurity,
-    area_security: areaSecurity,
-    interests_security: interestsSecurity,
+    isBirthPublic,
+    isUniversityPublic,
+    isRegionPublic,
+    isInterestsPublic,
   };
 
   const updateProfile = () => {
@@ -94,19 +88,19 @@ function EditModal(props: EditModalProps) {
           setUniversity={setUniversity}
           university={university}
           major={major}
-          area={area}
-          setArea={setArea}
+          region={region}
+          setRegion={setRegion}
           interests={interests}
           setInterests={setInterests}
-          birthSecurity={birthSecurity}
-          setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
-          areaSecurity={areaSecurity}
-          setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
-          interestsSecurity={interestsSecurity}
-          setInterestSecurity={() => setInterestsSecurity(!interestsSecurity)}
-          universitySecurity={universitySecurity}
+          isBirthPublic={isBirthPublic}
+          setBirthSecurity={() => setBirthSecurity(!isBirthPublic)}
+          isRegionPublic={isRegionPublic}
+          setRegionSecurity={() => setRegionSecurity(!isRegionPublic)}
+          isInterestsPublic={isInterestsPublic}
+          setInterestSecurity={() => setInterestsSecurity(!isInterestsPublic)}
+          isUniversityPublic={isUniversityPublic}
           setUniversitySecurity={() =>
-            setUniversitySecurity(!universitySecurity)
+            setUniversitySecurity(!isUniversityPublic)
           }
         ></OptionInfo>
         <UpdateButtonWrapper>

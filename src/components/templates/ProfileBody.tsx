@@ -35,7 +35,7 @@ function ProfileBody() {
           setIsEditVisible={setIsEditVisible}
           profileImage={data.image}
           name={data.username}
-          introduceSecurity={data.introduce_security}
+          isIntroducePublic={true} // 백엔드에 얘기하기
           introduce={data.introduce}
         ></Top>
       )}

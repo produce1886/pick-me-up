@@ -79,17 +79,16 @@ export type PortfolioList = {
 
 export type Profile = {
   username: string;
-  email: string;
+  email?: string;
   image?: string;
   introduce?: string;
-  introduce_security?: boolean;
   birth?: string;
   university?: string;
   major?: string;
-  area?: string;
+  region?: string;
   interests?: string;
-  birth_security?: boolean;
-  university_security?: boolean;
-  area_security?: boolean;
-  interests_security?: boolean;
+  birthPublic?: boolean;
+  universityPublic?: boolean;
+  regionPublic?: boolean;
+  interestsPublic?: boolean;
 };

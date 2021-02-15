@@ -7,7 +7,7 @@ import Filter from "../Filter/Filter";
 import { RECRUITMENT_FIELD, REGION } from "../Filter/ItemData";
 
 type UniversityProps = {
-  universitySecurity: boolean;
+  isUniversityPublic: boolean;
   university: string;
   major: string;
   setUniversitySecurity: () => void;
@@ -16,14 +16,14 @@ type UniversityProps = {
 };
 
 type AreaProps = {
-  areaSecurity: boolean;
-  area: string;
-  setAreaSecurity: () => void;
-  setArea: React.Dispatch<React.SetStateAction<string>>;
+  isRegionPublic: boolean;
+  region: string;
+  setRegionSecurity: () => void;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type InterestProps = {
-  interestsSecurity: boolean;
+  isInterestsPublic: boolean;
   interest: string;
   setInterest: React.Dispatch<React.SetStateAction<string>>;
   setInterestSecurity: () => void;
@@ -42,9 +42,9 @@ export function University(props: UniversityProps) {
     <Content>
       <ToggleSwitchWrapper>
         <Toggle onClick={props.setUniversitySecurity}>
-          <ToggleBall isToggled={props.universitySecurity}></ToggleBall>
+          <ToggleBall isToggled={props.isUniversityPublic}></ToggleBall>
           <RippleBackground
-            isVisible={props.universitySecurity}
+            isVisible={props.isUniversityPublic}
           ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
@@ -86,35 +86,35 @@ export function University(props: UniversityProps) {
 }
 
 export function Area(props: AreaProps) {
-  const [editArea, setEditArea] = useState(false);
+  const [editRegion, setEditRegion] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle onClick={props.setAreaSecurity}>
-          <ToggleBall isToggled={props.areaSecurity}></ToggleBall>
-          <RippleBackground isVisible={props.areaSecurity}></RippleBackground>
+        <Toggle onClick={props.setRegionSecurity}>
+          <ToggleBall isToggled={props.isRegionPublic}></ToggleBall>
+          <RippleBackground isVisible={props.isRegionPublic}></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
-      {editArea && (
+      {editRegion && (
         <Filter
           width="21rem"
           height="1.2rem"
           level={0}
-          defaultText={props.area ? props.area : "지역을 선택하세요"}
-          onClick={props.setArea}
+          defaultText={props.region ? props.region : "지역을 선택하세요"}
+          onClick={props.setRegion}
           data={REGION}
-          previousItemTitle={props.area}
+          previousItemTitle={props.region}
           isUserInfoEdit={true}
         ></Filter>
       )}
-      {!editArea && (
+      {!editRegion && (
         <Row marginRight="3rem" paddingLeft="1rem" width="21.5rem">
           <Text level={3} color={Colors.BLACK} align="left">
-            {props.area}
+            {props.region}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => setEditArea(!editArea)}>
+      <ButtonWrapper onClick={() => setEditRegion(!editRegion)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
           fill={Colors.BLACK}
@@ -130,9 +130,9 @@ export function Interest(props: InterestProps) {
     <Content>
       <ToggleSwitchWrapper>
         <Toggle onClick={props.setInterestSecurity}>
-          <ToggleBall isToggled={props.interestsSecurity}></ToggleBall>
+          <ToggleBall isToggled={props.isInterestsPublic}></ToggleBall>
           <RippleBackground
-            isVisible={props.interestsSecurity}
+            isVisible={props.isInterestsPublic}
           ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
