@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Colors from "@colors";
 import { Profile } from "@src/types/Data";
 import ProfileService from "@src/lib/api/Profile";
+import axios from "axios";
 import Modal from "../../atoms/Modal/index";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
@@ -19,6 +20,7 @@ type EditModalProps = Profile & {
 
 function EditModal(props: EditModalProps) {
   const [image, setImage] = useState(props.image);
+  const [localImage, setLocalImage] = useState(props.localImage);
   const [username, setUsername] = useState(props.username);
   const [introduce, setIntroduce] = useState(props.introduce);
   const [birth, setBirth] = useState(props.birth);
@@ -53,6 +55,9 @@ function EditModal(props: EditModalProps) {
   };
 
   const updateProfile = () => {
+    const formData = new FormData();
+    formData.append("image", localImage);
+    axios.patch(`${process.env.API_HOST}/users/${userID}/image`, formData);
     ProfileService.updateProfile(userID, body)
       .then(() => props.onClose())
       .then(() => props.setReload(props.reload + 1));
@@ -80,6 +85,7 @@ function EditModal(props: EditModalProps) {
           setUsername={setUsername}
           introduce={introduce}
           setIntroduce={setIntroduce}
+          setLocalImage={setLocalImage}
         ></DefaultInfo>
         <OptionInfo
           birth={birth}

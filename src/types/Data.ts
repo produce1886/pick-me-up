@@ -81,6 +81,7 @@ export type Profile = {
   username: string;
   email?: string;
   image?: string;
+  localImage?: Blob;
   introduce?: string;
   birth?: string;
   university?: string;

@@ -14,6 +14,7 @@ type DefaultInfoProps = {
   setImage: React.Dispatch<React.SetStateAction<string>>;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   setIntroduce: React.Dispatch<React.SetStateAction<string>>;
+  setLocalImage: React.Dispatch<React.SetStateAction<Blob>>;
 };
 
 function DefaultInfo(props: DefaultInfoProps) {
@@ -27,6 +28,7 @@ function DefaultInfo(props: DefaultInfoProps) {
     props.setIntroduce(e.target.value);
   };
   const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.setLocalImage(e.target.files[0]);
     props.setImage(URL.createObjectURL(e.target.files[0]));
   };
   return (
@@ -42,12 +44,15 @@ function DefaultInfo(props: DefaultInfoProps) {
         </Text>
 
         <label htmlFor="upload">
-          <ProfileInput
-            type="file"
-            accept="image/png, image/jpeg, image/jpg"
-            id="upload"
-            onChange={onChangeImageHandler}
-          ></ProfileInput>
+          <form method="post" encType="multipart/form-data">
+            <input
+              style={{ display: "none" }}
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              id="upload"
+              onChange={onChangeImageHandler}
+            />
+          </form>
           <Camera
             style={{ width: "0.88rem", height: "0.72rem" }}
             fill={Colors.BLACK}
@@ -180,10 +185,6 @@ const Input = styled.input`
     align-items: center;
     height: 1.2rem;
   `}
-`;
-
-const ProfileInput = styled.input`
-  display: none;
 `;
 
 const ButtonWrapper = styled.button`
