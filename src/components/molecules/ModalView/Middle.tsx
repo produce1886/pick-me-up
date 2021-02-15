@@ -77,7 +77,7 @@ function ModalMiddle(props: ModalMiddleProps) {
           </ImageHolder>
         )}
         {props.images &&
-          props.images.map((image, id) => (
+          props.images.map((image) => (
             <ImageHolder>
               <Img src={image.image}></Img>
             </ImageHolder>
