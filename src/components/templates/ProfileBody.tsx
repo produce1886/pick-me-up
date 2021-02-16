@@ -40,6 +40,7 @@ function ProfileBody() {
     <Wrapper>
       {data && !isLoading && (
         <Top
+          userEmail={data.email}
           setIsEditVisible={setIsEditVisible}
           profileImage={data.image}
           name={data.username}
