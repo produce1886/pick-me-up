@@ -5,6 +5,7 @@ import Profile from "../Profile";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";
+import X from "../../atoms/Icon/X";
 import Edit from "../../atoms/Icon/Edit";
 
 type DefaultInfoProps = {
@@ -31,6 +32,11 @@ function DefaultInfo(props: DefaultInfoProps) {
     props.setLocalImage(e.target.files[0]);
     props.setImage(URL.createObjectURL(e.target.files[0]));
   };
+  const resetProfileImage = () => {
+    props.setLocalImage(null);
+    props.setImage(null);
+  };
+
   return (
     <Wrapper>
       <Title>
@@ -54,9 +60,23 @@ function DefaultInfo(props: DefaultInfoProps) {
             />
           </form>
           <Camera
-            style={{ width: "0.88rem", height: "0.72rem" }}
+            style={{
+              width: "0.88rem",
+              height: "0.72rem",
+              marginBottom: "0.2rem",
+            }}
             fill={Colors.BLACK}
           ></Camera>
+          <XButton onClick={resetProfileImage}>
+            <X
+              style={{
+                marginLeft: "1.5rem",
+                width: "1.1rem",
+                height: "1.1rem",
+              }}
+              fill={Colors.BLACK}
+            ></X>
+          </XButton>
         </label>
       </Div>
       <Profile profileImage={props.image} size="3.6rem" margin="0" />
@@ -205,4 +225,14 @@ const Content = styled.div`
   width: 100%;
   height: 4.5rem;
   box-sizing: border-box;
+`;
+
+const XButton = styled.button`
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
 `;
