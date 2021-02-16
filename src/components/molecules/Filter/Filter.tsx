@@ -19,7 +19,7 @@ type FilterProps = {
   height: string | number;
   line?: string;
   level: number;
-  updateTitle: string;
+  updateTitle?: string;
   onClick: (arg0: string) => void;
   previousItemTitle?: string;
   data: Array<FilterItemType>;

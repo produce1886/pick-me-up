@@ -15,12 +15,12 @@ function Info(props: Profile) {
     birth,
     university,
     major,
-    area,
+    region,
     interests,
-    birth_security,
-    university_security,
-    area_security,
-    interests_security,
+    birthPublic,
+    universityPublic,
+    regionPublic,
+    interestsPublic,
   } = props;
 
   const InfoDataItems = [
@@ -38,7 +38,7 @@ function Info(props: Profile) {
       width: "0.8rem",
       height: "0.8rem",
       content: birth,
-      isPublic: birth_security,
+      isPublic: birthPublic,
     },
     {
       id: 2,
@@ -47,15 +47,15 @@ function Info(props: Profile) {
       height: "0.72rem",
       university,
       major,
-      isPublic: university_security,
+      isPublic: universityPublic,
     },
     {
       id: 3,
       icon: Area,
       width: "0.6rem",
       height: "0.72rem",
-      content: area,
-      isPublic: area_security,
+      content: region,
+      isPublic: regionPublic,
     },
     {
       id: 4,
@@ -63,7 +63,7 @@ function Info(props: Profile) {
       width: "0.83rem",
       height: "0.72rem",
       content: interests,
-      isPublic: interests_security,
+      isPublic: interestsPublic,
     },
   ];
 

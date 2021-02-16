@@ -15,16 +15,20 @@ const getComment = (
   }
 };
 
-const writeComment = (url: string, body: { email: string; content: string }) =>
+const writeComment = (
+  url: string,
+  body: { authorEmail: string; content: string }
+) =>
   base()
     .post(`/${url}`, body)
     .catch((err) => alert("댓글 등록에 실패했습니다"));
 
-const updateComment = (url: string, content: string) =>
+const updateComment = (
+  url: string,
+  body: { authorEmail: string; content: string }
+) =>
   base()
-    .put(`/${url}`, {
-      content,
-    })
+    .put(`/${url}`, body)
     .catch((err) => alert("댓글 수정에 실패했습니다"));
 
 const deleteComment = (url: string) =>

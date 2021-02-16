@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import UserState from "@src/types/User";
 import Colors from "@colors";
 import Text from "../../atoms/Text";
 import ProfileIcon from "../../atoms/Icon/Profile";
@@ -7,13 +9,15 @@ import EditButton from "../../molecules/Button/Edit";
 
 type TopProps = {
   setIsEditVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  userEmail: string;
   profileImage?: string;
   name: string;
-  introduceSecurity: boolean;
+  isIntroducePublic: boolean;
   introduce: string;
 };
 
 function Top(props: TopProps) {
+  const userState = useSelector((state: { user: UserState }) => state.user);
   return (
     <Wrapper>
       <Background></Background>
@@ -33,12 +37,16 @@ function Top(props: TopProps) {
             props.setIsEditVisible(true);
           }}
         >
-          <EditButton></EditButton>
+          {props.userEmail === userState.userData.email ? (
+            <EditButton></EditButton>
+          ) : (
+            <div style={{ marginBottom: "1.2rem" }}></div>
+          )}
         </ButtonWrapper>
         <Text level={6} weight="bold" color={Colors.BLACK}>
           {props.name}
         </Text>
-        {props.introduceSecurity && (
+        {props.isIntroducePublic && (
           <Text level={3} color={Colors.DEEP_GREY}>
             {props.introduce}
           </Text>
