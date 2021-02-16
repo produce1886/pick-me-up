@@ -12,14 +12,19 @@ import Skeleton from "../_skeletons/profile/ProfileInfo";
 
 function ProfileBody() {
   const [reload, setReload] = useState<number>(0);
+  const [selected, setSelected] = useState(0);
+  const [isEditVisible, setIsEditVisible] = useState(false);
+
   const router = useRouter();
   const { userID } = router.query;
+
   const { isLoading, isError, data } = ProfileHooks.useProfileGetApi([
     userID,
     reload,
   ]);
-  const [selected, setSelected] = useState(0);
-  const [isEditVisible, setIsEditVisible] = useState(false);
+
+  const getUserProjects = ProfileHooks.useUserProjectListGetApi([userID]);
+  const userProjectList = getUserProjects;
 
   if (isLoading) {
     return (
@@ -35,14 +40,16 @@ function ProfileBody() {
           setIsEditVisible={setIsEditVisible}
           profileImage={data.image}
           name={data.username}
-          isIntroducePublic={true} // 백엔드에 얘기하기
+          isIntroducePublic={true}
           introduce={data.introduce}
         ></Top>
       )}
       <Tab selected={selected} setSelected={setSelected}></Tab>
       <BodyWrapper>
         {selected === 0 && data && <Info {...data}></Info>}
-        {selected === 1 && <Project></Project>}
+        {selected === 1 && userProjectList && (
+          <Project {...userProjectList}></Project>
+        )}
         {selected === 2 && <Portfolio></Portfolio>}
       </BodyWrapper>
       {isEditVisible && (
