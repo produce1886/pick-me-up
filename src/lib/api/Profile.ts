@@ -24,10 +24,20 @@ const getUserProjectLists = (uid: string) => {
   return null;
 };
 
+const getUserPortfolioLists = (uid: string) => {
+  if (uid) {
+    return base()
+      .get(`/users/${uid}/portfolios`)
+      .then((res) => res.data);
+  }
+  return null;
+};
+
 const ProfileService = {
   getProfile,
   updateProfile,
   getUserProjectLists,
+  getUserPortfolioLists,
 };
 
 export default ProfileService;

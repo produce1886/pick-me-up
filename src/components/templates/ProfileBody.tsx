@@ -26,6 +26,9 @@ function ProfileBody() {
   const getUserProjects = ProfileHooks.useUserProjectListGetApi([userID]);
   const userProjectList = getUserProjects;
 
+  const getUserPortfolio = ProfileHooks.useUserPortfolioListGetApi([userID]);
+  const userPortfolioList = getUserPortfolio;
+
   if (isLoading) {
     return (
       <Wrapper>
@@ -50,7 +53,7 @@ function ProfileBody() {
         {selected === 1 && userProjectList && (
           <Project {...userProjectList}></Project>
         )}
-        {selected === 2 && <Portfolio></Portfolio>}
+        {selected === 2 && <Portfolio {...userPortfolioList}></Portfolio>}
       </BodyWrapper>
       {isEditVisible && (
         <EditModal

@@ -1,5 +1,5 @@
 import ProfileService from "@src/lib/api/Profile";
-import { Profile, ProjectList } from "@src/types/Data";
+import { Profile, ProjectList, PortfolioList } from "@src/types/Data";
 import useAxiosQuery from "./Api";
 
 export const useProfileGetApi = useAxiosQuery<Profile>(
@@ -10,6 +10,14 @@ export const useUserProjectListGetApi = useAxiosQuery<ProjectList>(
   ProfileService.getUserProjectLists
 );
 
-const ProfileHooks = { useProfileGetApi, useUserProjectListGetApi };
+export const useUserPortfolioListGetApi = useAxiosQuery<PortfolioList>(
+  ProfileService.getUserPortfolioLists
+);
+
+const ProfileHooks = {
+  useProfileGetApi,
+  useUserProjectListGetApi,
+  useUserPortfolioListGetApi,
+};
 
 export default ProfileHooks;
