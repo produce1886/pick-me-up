@@ -57,7 +57,11 @@ function EditModal(props: EditModalProps) {
   const updateProfile = () => {
     const formData = new FormData();
     formData.append("image", localImage);
-    axios.patch(`${process.env.API_HOST}/users/${userID}/image`, formData);
+    if (localImage) {
+      axios.patch(`${process.env.API_HOST}/users/${userID}/image`, formData);
+    } else {
+      axios.delete(`${process.env.API_HOST}/users/${userID}/image`);
+    }
     ProfileService.updateProfile(userID, body)
       .then(() => props.onClose())
       .then(() => props.setReload(props.reload + 1));
