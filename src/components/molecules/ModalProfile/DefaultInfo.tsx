@@ -51,8 +51,7 @@ function DefaultInfo(props: DefaultInfoProps) {
 
         <label htmlFor="upload">
           <form method="post" encType="multipart/form-data">
-            <input
-              style={{ display: "none" }}
+            <ProfileImageInput
               type="file"
               accept="image/png, image/jpeg, image/jpg"
               id="upload"
@@ -235,4 +234,8 @@ const XButton = styled.button`
   margin: 0;
   padding: 0;
   outline: none;
+`;
+
+const ProfileImageInput = styled.input`
+  display: none;
 `;
