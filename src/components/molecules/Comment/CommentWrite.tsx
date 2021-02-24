@@ -36,11 +36,12 @@ function CommentWrite(props: CommentProps) {
     }
     if (props.updatingCid) {
       const url = `${props.page}s/${props.pid}/comments/${props.updatingCid}`;
-      CommentService.updateComment(url, content);
+      const body = { authorEmail: userState.userData.email, content };
+      CommentService.updateComment(url, body);
       props.setUpdatingCid(null);
     } else {
       const url = `${props.page}s/${props.pid}/comments`;
-      const body = { email: userState.userData.email, content };
+      const body = { authorEmail: userState.userData.email, content };
       CommentService.writeComment(url, body);
     }
     setContent("");

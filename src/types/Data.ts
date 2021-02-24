@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-type DataProps = {
+type PostProps = {
   id: number;
   title: string;
   content: string;
@@ -14,17 +14,22 @@ type DataProps = {
   comments: Comment[];
 };
 
-export type ProjectProps = DataProps & {
+export type ProjectProps = PostProps & {
   region: string;
   projectSection: string;
   projectTags: Tag[];
   image: string;
 };
 
-export type PortfolioProps = DataProps & {
+export type PortfolioProps = PostProps & {
   portfolioTags: Tag[];
+  images: Images[];
 };
 
+export type Images = {
+  id: number;
+  image: string;
+};
 export type User = {
   id: string;
   username: string;
@@ -74,17 +79,17 @@ export type PortfolioList = {
 
 export type Profile = {
   username: string;
-  email: string;
+  email?: string;
   image?: string;
+  localImage?: Blob;
   introduce?: string;
-  introduce_security?: boolean;
   birth?: string;
   university?: string;
   major?: string;
-  area?: string;
+  region?: string;
   interests?: string;
-  birth_security?: boolean;
-  university_security?: boolean;
-  area_security?: boolean;
-  interests_security?: boolean;
+  birthPublic?: boolean;
+  universityPublic?: boolean;
+  regionPublic?: boolean;
+  interestsPublic?: boolean;
 };

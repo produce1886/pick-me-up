@@ -124,4 +124,6 @@ const ButtonWrapper = styled.button`
   right: 0;
 `;
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;

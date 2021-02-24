@@ -5,6 +5,7 @@ import Profile from "../Profile";
 import Text from "../../atoms/Text";
 import User from "../../atoms/Icon/User";
 import Camera from "../../atoms/Icon/Camera";
+import X from "../../atoms/Icon/X";
 import Edit from "../../atoms/Icon/Edit";
 
 type DefaultInfoProps = {
@@ -14,6 +15,7 @@ type DefaultInfoProps = {
   setImage: React.Dispatch<React.SetStateAction<string>>;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   setIntroduce: React.Dispatch<React.SetStateAction<string>>;
+  setLocalImage: React.Dispatch<React.SetStateAction<Blob>>;
 };
 
 function DefaultInfo(props: DefaultInfoProps) {
@@ -27,8 +29,14 @@ function DefaultInfo(props: DefaultInfoProps) {
     props.setIntroduce(e.target.value);
   };
   const onChangeImageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.setLocalImage(e.target.files[0]);
     props.setImage(URL.createObjectURL(e.target.files[0]));
   };
+  const resetProfileImage = () => {
+    props.setLocalImage(null);
+    props.setImage(null);
+  };
+
   return (
     <Wrapper>
       <Title>
@@ -42,16 +50,32 @@ function DefaultInfo(props: DefaultInfoProps) {
         </Text>
 
         <label htmlFor="upload">
-          <ProfileInput
-            type="file"
-            accept="image/png, image/jpeg, image/jpg"
-            id="upload"
-            onChange={onChangeImageHandler}
-          ></ProfileInput>
+          <form method="post" encType="multipart/form-data">
+            <ProfileImageInput
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              id="upload"
+              onChange={onChangeImageHandler}
+            />
+          </form>
           <Camera
-            style={{ width: "0.88rem", height: "0.72rem" }}
+            style={{
+              width: "0.88rem",
+              height: "0.72rem",
+              marginBottom: "0.2rem",
+            }}
             fill={Colors.BLACK}
           ></Camera>
+          <XButton onClick={resetProfileImage}>
+            <X
+              style={{
+                marginLeft: "1.5rem",
+                width: "1.1rem",
+                height: "1.1rem",
+              }}
+              fill={Colors.BLACK}
+            ></X>
+          </XButton>
         </label>
       </Div>
       <Profile profileImage={props.image} size="3.6rem" margin="0" />
@@ -182,10 +206,6 @@ const Input = styled.input`
   `}
 `;
 
-const ProfileInput = styled.input`
-  display: none;
-`;
-
 const ButtonWrapper = styled.button`
   width: fit-content;
   height: fit-content;
@@ -204,4 +224,18 @@ const Content = styled.div`
   width: 100%;
   height: 4.5rem;
   box-sizing: border-box;
+`;
+
+const XButton = styled.button`
+  width: fit-content;
+  height: fit-content;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  outline: none;
+`;
+
+const ProfileImageInput = styled.input`
+  display: none;
 `;
