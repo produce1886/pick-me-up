@@ -10,7 +10,7 @@ type UniversityProps = {
   isUniversityPublic: boolean;
   university: string;
   major: string;
-  setUniversitySecurity: () => void;
+  setIsUniversityPublic: () => void;
   setMajor: React.Dispatch<React.SetStateAction<string>>;
   setUniversity: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -18,7 +18,7 @@ type UniversityProps = {
 type AreaProps = {
   isRegionPublic: boolean;
   region: string;
-  setRegionSecurity: () => void;
+  setIsRegionPublic: () => void;
   setRegion: React.Dispatch<React.SetStateAction<string>>;
 };
 
@@ -26,11 +26,11 @@ type InterestProps = {
   isInterestsPublic: boolean;
   interest: string;
   setInterest: React.Dispatch<React.SetStateAction<string>>;
-  setInterestSecurity: () => void;
+  setIsInterestsPublic: () => void;
 };
 
 export function University(props: UniversityProps) {
-  const [editUniv, setEditUniv] = useState(false);
+  const [isEditUniv, setIsEditUniv] = useState(false);
 
   const onChangeUnivHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setUniversity(e.target.value);
@@ -41,14 +41,14 @@ export function University(props: UniversityProps) {
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle onClick={props.setUniversitySecurity}>
+        <Toggle onClick={props.setIsUniversityPublic}>
           <ToggleBall isToggled={props.isUniversityPublic}></ToggleBall>
           <RippleBackground
             isVisible={props.isUniversityPublic}
           ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
-      {editUniv && (
+      {isEditUniv && (
         <>
           <Input
             placeholder="학교"
@@ -68,14 +68,14 @@ export function University(props: UniversityProps) {
           ></Input>
         </>
       )}
-      {!editUniv && (
+      {!isEditUniv && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
           <Text level={3} color={Colors.BLACK} align="left">
             {props.university} {props.major}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => setEditUniv(!editUniv)}>
+      <ButtonWrapper onClick={() => setIsEditUniv(!isEditUniv)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
           fill={Colors.BLACK}
@@ -86,16 +86,16 @@ export function University(props: UniversityProps) {
 }
 
 export function Area(props: AreaProps) {
-  const [editRegion, setEditRegion] = useState(false);
+  const [isEditRegion, setIsEditRegion] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle onClick={props.setRegionSecurity}>
+        <Toggle onClick={props.setIsRegionPublic}>
           <ToggleBall isToggled={props.isRegionPublic}></ToggleBall>
           <RippleBackground isVisible={props.isRegionPublic}></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
-      {editRegion && (
+      {isEditRegion && (
         <Filter
           width="21rem"
           height="1.2rem"
@@ -107,14 +107,14 @@ export function Area(props: AreaProps) {
           isUserInfoEdit={true}
         ></Filter>
       )}
-      {!editRegion && (
+      {!isEditRegion && (
         <Row marginRight="3rem" paddingLeft="1rem" width="21.5rem">
           <Text level={3} color={Colors.BLACK} align="left">
             {props.region}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => setEditRegion(!editRegion)}>
+      <ButtonWrapper onClick={() => setIsEditRegion(!isEditRegion)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
           fill={Colors.BLACK}
@@ -125,18 +125,18 @@ export function Area(props: AreaProps) {
 }
 
 export function Interest(props: InterestProps) {
-  const [editInterest, setEditInterest] = useState(false);
+  const [isEditInterest, setIsEditInterest] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle onClick={props.setInterestSecurity}>
+        <Toggle onClick={props.setIsInterestsPublic}>
           <ToggleBall isToggled={props.isInterestsPublic}></ToggleBall>
           <RippleBackground
             isVisible={props.isInterestsPublic}
           ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
-      {editInterest && (
+      {isEditInterest && (
         <Filter
           width="21rem"
           height="1.2rem"
@@ -150,14 +150,14 @@ export function Interest(props: InterestProps) {
           isUserInfoEdit={true}
         ></Filter>
       )}
-      {!editInterest && (
+      {!isEditInterest && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
           <Text level={3} color={Colors.BLACK} align="left">
             {props.interest}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => setEditInterest(!editInterest)}>
+      <ButtonWrapper onClick={() => setIsEditInterest(!isEditInterest)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
           fill={Colors.BLACK}
