@@ -28,12 +28,12 @@ function EditModal(props: EditModalProps) {
   const [major, setMajor] = useState(props.major);
   const [region, setRegion] = useState(props.region || "지역");
   const [interests, setInterests] = useState(props.interests || "관심 분야");
-  const [isBirthPublic, setBirthSecurity] = useState(props.birthPublic);
-  const [isRegionPublic, setRegionSecurity] = useState(props.regionPublic);
-  const [isInterestsPublic, setInterestsSecurity] = useState(
+  const [isBirthPublic, setIsBirthPublic] = useState(props.birthPublic);
+  const [isRegionPublic, setIsRegionPublic] = useState(props.regionPublic);
+  const [isInterestsPublic, setIsInterestsPublic] = useState(
     props.interestsPublic
   );
-  const [isUniversityPublic, setUniversitySecurity] = useState(
+  const [isUniversityPublic, setIsUniversityPublic] = useState(
     props.universityPublic
   );
 
@@ -103,14 +103,14 @@ function EditModal(props: EditModalProps) {
           interests={interests}
           setInterests={setInterests}
           isBirthPublic={isBirthPublic}
-          setBirthSecurity={() => setBirthSecurity(!isBirthPublic)}
+          setIsBirthPublic={() => setIsBirthPublic(!isBirthPublic)}
           isRegionPublic={isRegionPublic}
-          setRegionSecurity={() => setRegionSecurity(!isRegionPublic)}
+          setIsRegionPublic={() => setIsRegionPublic(!isRegionPublic)}
           isInterestsPublic={isInterestsPublic}
-          setInterestSecurity={() => setInterestsSecurity(!isInterestsPublic)}
+          setIsInterestsPublic={() => setIsInterestsPublic(!isInterestsPublic)}
           isUniversityPublic={isUniversityPublic}
-          setUniversitySecurity={() =>
-            setUniversitySecurity(!isUniversityPublic)
+          setIsUniversityPublic={() =>
+            setIsUniversityPublic(!isUniversityPublic)
           }
         ></OptionInfo>
         <UpdateButtonWrapper>

@@ -19,10 +19,10 @@ type OptionInfoProps = {
   major: string;
   region: string;
   interests: string;
-  setBirthSecurity: () => void;
-  setRegionSecurity: () => void;
-  setInterestSecurity: () => void;
-  setUniversitySecurity: () => void;
+  setIsBirthPublic: () => void;
+  setIsRegionPublic: () => void;
+  setIsInterestsPublic: () => void;
+  setIsUniversityPublic: () => void;
   setBirth: React.Dispatch<React.SetStateAction<string>>;
   setMajor: React.Dispatch<React.SetStateAction<string>>;
   setUniversity: React.Dispatch<React.SetStateAction<string>>;
@@ -59,7 +59,7 @@ function OptionInfo(props: OptionInfoProps) {
         </DivTitle>
         <Content>
           <ToggleSwitchWrapper>
-            <Toggle onClick={props.setBirthSecurity}>
+            <Toggle onClick={props.setIsBirthPublic}>
               <ToggleBall isToggled={props.isBirthPublic}></ToggleBall>
               <RippleBackground
                 isVisible={props.isBirthPublic}
@@ -107,7 +107,7 @@ function OptionInfo(props: OptionInfoProps) {
         </DivTitle>
         <University
           isUniversityPublic={props.isUniversityPublic}
-          setUniversitySecurity={props.setUniversitySecurity}
+          setIsUniversityPublic={props.setIsUniversityPublic}
           setUniversity={props.setUniversity}
           university={props.university}
           setMajor={props.setMajor}
@@ -130,7 +130,7 @@ function OptionInfo(props: OptionInfoProps) {
         </DivTitle>
         <Area
           isRegionPublic={props.isRegionPublic}
-          setRegionSecurity={props.setRegionSecurity}
+          setIsRegionPublic={props.setIsRegionPublic}
           setRegion={props.setRegion}
           region={props.region}
         ></Area>
@@ -151,7 +151,7 @@ function OptionInfo(props: OptionInfoProps) {
         </DivTitle>
         <Interest
           isInterestsPublic={props.isInterestsPublic}
-          setInterestSecurity={props.setInterestSecurity}
+          setIsInterestsPublic={props.setIsInterestsPublic}
           setInterest={props.setInterests}
           interest={props.interests}
         ></Interest>
