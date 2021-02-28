@@ -83,6 +83,7 @@ const LinkWrapper = styled.div`
 
 const A = styled.a`
   margin-right: 0.8rem;
+  text-decoration: none;
 `;
 
 const BlockWrapper = styled.div`
