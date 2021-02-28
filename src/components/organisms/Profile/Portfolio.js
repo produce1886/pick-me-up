@@ -32,6 +32,7 @@ function Portfolio(props) {
 }
 
 export default React.memo(Portfolio);
+
 const Wrapper = styled.div`
   width: 100%;
   height: fit-content;
@@ -42,5 +43,5 @@ const Wrapper = styled.div`
   flex-flow: row wrap;
   position: relative;
   box-sizing: border-box;
-  margin-bottom: 1.4rem;
+  margin: 1.4rem 0;
 `;

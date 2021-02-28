@@ -43,5 +43,5 @@ const Wrapper = styled.div`
   flex-flow: row wrap;
   position: relative;
   box-sizing: border-box;
-  margin-bottom: 1.4rem;
+  margin: 1.4rem 0;
 `;
