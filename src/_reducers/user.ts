@@ -16,6 +16,7 @@ if (userData) {
   initialState = {
     isSignedIn: false,
     userData: {
+      id: null,
       username: null,
       email: null,
       image: null,
