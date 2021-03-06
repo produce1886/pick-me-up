@@ -56,6 +56,8 @@ html,
           }
 `;
 
+const siteDescription = "프로젝트나 창업 팀원을 구한다면, 픽미업";
+
 function PickMeUp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -71,6 +73,10 @@ function PickMeUp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"
         />
+        <meta name="description" content={siteDescription} />
+        <meta property="og:title" content={"픽미업, Pick me up"} />
+        <meta property="og:description" content={siteDescription} />
+        <meta property="og:image" content="logo.svg" />
       </Head>
       <Wrapper>
         <Component {...pageProps} />
