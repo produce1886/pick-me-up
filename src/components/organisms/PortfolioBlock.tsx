@@ -46,4 +46,6 @@ const Img = styled.img`
   height: 100%;
 `;
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;

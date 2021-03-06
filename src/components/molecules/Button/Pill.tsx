@@ -31,4 +31,6 @@ function PillButton(props: ButtonProps) {
 
 export default React.memo(PillButton);
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;
