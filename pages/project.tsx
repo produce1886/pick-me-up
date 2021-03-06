@@ -12,11 +12,13 @@ export default function Project() {
   const [reload, setReload] = useState<number>(0);
   const [modalReload, setModalReload] = useState<number>(0);
 
-  const pid = parseInt(router.query.pid.toString(), 10);
+  const pid = router.query.pid
+    ? parseInt(router.query.pid.toString(), 10)
+    : null;
 
   return (
     <>
-      {pid && !isUpdate && (
+      {router.query.pid && !isUpdate && (
         <Modal
           page="project"
           isVisible={!!pid}

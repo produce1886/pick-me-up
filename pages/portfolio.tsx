@@ -12,7 +12,9 @@ export default function Portfolio() {
   const [reload, setReload] = useState<number>(0);
   const [modalReload, setModalReload] = useState<number>(0);
 
-  const pid = parseInt(router.query.pid.toString(), 10);
+  const pid = router.query.pid
+    ? parseInt(router.query.pid.toString(), 10)
+    : null;
 
   return (
     <>
