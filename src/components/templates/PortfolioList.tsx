@@ -9,18 +9,18 @@ import Skeleton from "../_skeletons/portfolio/PortfolioBlock";
 
 type PortfolioListProps = {
   category: string;
-  field: string;
+  recruitmentField: string;
   query: string;
   sort: string;
   reload: number;
 };
 
 function PortfolioList(props: PortfolioListProps) {
-  const { category, field, query, sort, reload } = props;
+  const { category, recruitmentField, query, sort, reload } = props;
   const [limit, setLimit] = useState(15);
   const { isLoading, isError, data } = PortfolioHooks.usePortfolioListGetApi([
     category,
-    field,
+    recruitmentField,
     query,
     sort,
     limit,
@@ -33,7 +33,7 @@ function PortfolioList(props: PortfolioListProps) {
 
   const renderBlocks =
     data &&
-    data.pagelist.map((item) => (
+    data.portfolioList.map((item) => (
       <PortfolioBlock key={item.id} {...item}></PortfolioBlock>
     ));
 
@@ -41,7 +41,7 @@ function PortfolioList(props: PortfolioListProps) {
     return <Wrapper>{duplicate(Skeleton, 15)}</Wrapper>;
   }
 
-  if ((data && data.pagelist.length === 0) || isError) {
+  if ((data && data.portfolioList.length === 0) || isError) {
     return (
       <Wrapper>
         <NoResult></NoResult>
@@ -53,7 +53,7 @@ function PortfolioList(props: PortfolioListProps) {
     <>
       <Wrapper>{renderBlocks}</Wrapper>
       <MoreWrapper>
-        {data && data.pagelist.length < data.nrOfElements && (
+        {data && data.portfolioList.length < data.totalNum && (
           <MoreListButton onClick={loadMoreHandler}></MoreListButton>
         )}
       </MoreWrapper>

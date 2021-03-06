@@ -12,7 +12,7 @@ export type TopProps = {
   title: string | string[];
   name: string;
   profileImage: string;
-  uid: string;
+  uid: number;
   date: string;
 };
 
@@ -75,4 +75,6 @@ const Row = styled.div`
   margin-top: 0.2rem;
 `;
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;

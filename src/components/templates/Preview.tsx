@@ -15,7 +15,7 @@ export default function Preview({ sort }: { sort: "new" | "most" }) {
     <Wrapper>
       <InnerWrapper>
         <LinkWrapper>
-          <Link href="project" passHref>
+          <Link href="/project" passHref>
             <A>
               <Text level={8} color={Colors.BLACK} weight="bold">
                 {sort === "new" && "신규 프로젝트"}
@@ -83,6 +83,7 @@ const LinkWrapper = styled.div`
 
 const A = styled.a`
   margin-right: 0.8rem;
+  text-decoration: none;
 `;
 
 const BlockWrapper = styled.div`

@@ -7,20 +7,28 @@ import Icon from "../../atoms/Icon/Tag";
 import PillButton from "../Button/Pill";
 
 type ModalBottomProps = {
+  portfolioTags?: string[];
+  projectTags?: string[];
+  setProjectTags?: React.Dispatch<React.SetStateAction<string[]>>;
+  setPortfolioTags?: React.Dispatch<React.SetStateAction<string[]>>;
   tags: string[];
   setTags: React.Dispatch<React.SetStateAction<string[]>>;
   onClick: () => void;
   isUpdate: boolean;
 };
 
-function ModalBottom({ tags, setTags, onClick, isUpdate }: ModalBottomProps) {
+function ModalBottom(props: ModalBottomProps) {
   const [tagInput, setTagInput] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTagInput(e.target.value);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyPress = (
+    e: React.KeyboardEvent<HTMLDivElement>,
+    tags: string[],
+    setTags: React.Dispatch<React.SetStateAction<string[]>>
+  ) => {
     if (e.key !== "Enter") return;
     if (tags.length < 5 && tagInput.length > 0) {
       setTags([...tags, tagInput]);
@@ -30,7 +38,11 @@ function ModalBottom({ tags, setTags, onClick, isUpdate }: ModalBottomProps) {
     }
   };
 
-  const removeTag = (value: string) => {
+  const removeTag = (
+    value: string,
+    tags: string[],
+    setTags: React.Dispatch<React.SetStateAction<string[]>>
+  ) => {
     const tagIndex = tags.indexOf(value);
     const newArray = [...tags];
     newArray.splice(tagIndex, 1);
@@ -47,27 +59,27 @@ function ModalBottom({ tags, setTags, onClick, isUpdate }: ModalBottomProps) {
           ></Icon>
           <Input
             onChange={handleChange}
-            onKeyPress={handleKeyPress}
+            onKeyPress={(e) => handleKeyPress(e, props.tags, props.setTags)}
             value={tagInput}
             placeholder="태그를 입력하세요"
           ></Input>
         </IconTextWrapper>
         <TagWrapper>
-          {tags.map((value, index) => (
+          {props.tags.map((value, index) => (
             <TagButton
               key={index}
               isModal={true}
               text={value}
-              onClick={() => removeTag(value)}
+              onClick={() => removeTag(value, props.tags, props.setTags)}
               tagType="MODAL_WRITE"
             ></TagButton>
           ))}
         </TagWrapper>
-        <ButtonWrapper onClick={onClick}>
+        <ButtonWrapper onClick={props.onClick}>
           <PillButton
             weight={500}
             color={Colors.WHITE}
-            text={isUpdate ? "글 수정하기" : "글 작성하기"}
+            text={props.isUpdate ? "글 수정하기" : "글 작성하기"}
           ></PillButton>
         </ButtonWrapper>
       </Div>
@@ -102,7 +114,7 @@ const TagWrapper = styled.div`
   display: flex;
   align-items: left;
   flex-direction: row;
-  margin: 0 0 0 2.5rem;
+  margin: 1rem 0 0 2.5rem;
   box-sizing: border-box;
 `;
 

@@ -9,7 +9,7 @@ import Profile from "../Profile";
 type DetailProps = {
   y: number | string;
   title: string;
-  uid: string;
+  uid: number;
   name: string;
   profileImage?: string;
   viewNum: number;

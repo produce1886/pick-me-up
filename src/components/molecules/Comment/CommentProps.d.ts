@@ -1,16 +1,16 @@
 type CommentProps = {
-  pid: string;
-  cid?: string;
+  pid: number;
+  cid?: number;
   page: "project" | "portfolio";
   modalReload: number;
   setModalReload: Dispatch<SetStateAction<number>>;
-  updatingCid?: string;
+  updatingCid?: number;
   setUpdatingCid?: Dispatch<SetStateAction<string>>;
   setIsButtonClicked?: Dispatch<SetStateAction<boolean>>;
   date?: string;
   image?: string;
   username?: string;
-  id?: string;
+  id?: number;
   email?: string;
   comment?: string;
 };

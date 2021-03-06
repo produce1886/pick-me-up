@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Colors from "@colors";
 import UserState from "@src/types/User";
 import { PageType } from "@src/components/atoms/Modal/ModalType";
-import { Tag } from "@src/types/Data";
+import { Tag, Images } from "@src/types/Data";
 import ProjectService from "@src/lib/api/Project";
 import PortfolioService from "@src/lib/api/Portfolio";
 import Text from "../../atoms/Text";
@@ -17,9 +17,10 @@ type ModalMiddleProps = {
   page: PageType;
   date: string;
   content: string;
-  image: string;
+  image?: string;
+  images?: Images[];
   userEmail: string;
-  pid: string;
+  pid: number;
   tags: Tag[];
   setUpdate: React.Dispatch<React.SetStateAction<boolean>>;
   listReload: number;
@@ -56,7 +57,7 @@ function ModalMiddle(props: ModalMiddleProps) {
         fill={Colors.BLACK}
       ></Icon>
       {props.tags.map((item: Tag) => (
-        <TagButton key={item.id} text={item.tag}></TagButton>
+        <TagButton key={item.id} text={item.tagName}></TagButton>
       ))}
     </TagWrapper>
   );
@@ -75,6 +76,12 @@ function ModalMiddle(props: ModalMiddleProps) {
             <Img src={props.image}></Img>
           </ImageHolder>
         )}
+        {props.images &&
+          props.images.map((image) => (
+            <ImageHolder>
+              <Img src={image.image}></Img>
+            </ImageHolder>
+          ))}
       </ContentBox>
       {renderTags}
       {props.userEmail === userState.userData.email && (

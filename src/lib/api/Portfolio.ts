@@ -2,7 +2,7 @@ import base from "./Api";
 
 const getPortfolioList = (
   category: string,
-  field: string,
+  recruitmentField: string,
   query: string,
   sort: "최신순" | "댓글순" | "조회순",
   limit: number,
@@ -14,28 +14,23 @@ const getPortfolioList = (
     조회순: "viewNum",
   };
 
-  const body = {
-    page: 0,
-    size: limit,
-    sortColumn: sortColumn[sort],
-    category,
-    huntingField: field,
-    keyword: query,
-  };
+  const queryString = `page=${0}&size=${limit}&sort=${
+    sortColumn[sort]
+  },desc&category=${category}&recruitmentField=${recruitmentField}&keyword=${query}`;
 
   return base()
-    .post(`/portfolios/list`, body)
+    .get(`/portfolios/list?${queryString}`)
     .then((res) => res.data);
 };
 
-const getPortfolio = (pid: string, modalReload: number) =>
+const getPortfolio = (pid: number, modalReload: number) =>
   base()
-    .get(`projects/${pid}`)
+    .get(`portfolios/${pid}`)
     .then((res) => res.data);
 
-const deletePortfolio = (pid: string) =>
+const deletePortfolio = (pid: number) =>
   base()
-    .delete(`/projects/${pid}`)
+    .delete(`/portfolios/${pid}`)
     .catch((err) => alert("게시글 삭제에 실패했습니다"));
 
 const PortfolioService = {

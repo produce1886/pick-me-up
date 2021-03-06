@@ -1,6 +1,7 @@
 import React from "react";
 import ProjectHooks from "@src/lib/hooks/Project";
 import PortfolioHooks from "@src/lib/hooks/Portfolio";
+import { Tag, Images } from "@src/types/Data";
 import Modal from "../atoms/Modal/index";
 import Top from "../molecules/ModalView/Top";
 import Middle from "../molecules/ModalView/Middle";
@@ -18,11 +19,45 @@ function ModalView(props: ModalProps) {
   }
   const { isLoading, isError, data } = getData([props.pid, props.modalReload]);
 
+  const tags: Tag[] = [];
+  let originalTags: Tag[] = [];
+  let region: string;
+  let projectSection: string;
+  let image: string;
+  let images: Images[];
+
+  if (data) {
+    if ("projectTags" in data) {
+      originalTags = data.projectTags;
+      region = data.region;
+      projectSection = data.projectSection;
+      image = data.image;
+    } else {
+      originalTags = data.portfolioTags;
+      images = data.images;
+    }
+    originalTags.forEach((tag) => {
+      if (!tags.find((x) => x.id === tag.id)) {
+        tags.push(tag);
+      }
+    });
+  }
+
   if (isLoading) {
     return (
       <>
-        {props.page === "project" && <ProjectSkeleton></ProjectSkeleton>}
-        {props.page === "portfolio" && <PortfolioSkeleton></PortfolioSkeleton>}
+        {props.page === "project" && (
+          <ProjectSkeleton
+            isVisible={props.isVisible}
+            onClose={props.onClose}
+          ></ProjectSkeleton>
+        )}
+        {props.page === "portfolio" && (
+          <PortfolioSkeleton
+            isVisible={props.isVisible}
+            onClose={props.onClose}
+          ></PortfolioSkeleton>
+        )}
       </>
     );
   }
@@ -39,20 +74,19 @@ function ModalView(props: ModalProps) {
             uid={data.user.id}
             profileImage={data.user.image}
             category={data.category}
-            field={data.huntingField}
-            region={data.region}
-            projectCategory={data.projectCategory}
+            recruitmentField={data.recruitmentField}
+            region={region}
+            projectSection={projectSection}
           ></Top>
           <Middle
             page={props.page}
-            date={data.createdDate}
+            date={data.createdDate.split("T")[0]}
             content={data.content}
-            image={data.image}
+            image={image}
+            images={images}
             userEmail={data.user.email}
             pid={data.id}
-            tags={
-              props.page === "project" ? data.projectTag : data.portfolioTag
-            }
+            tags={tags}
             setUpdate={props.setIsUpdate}
             listReload={props.reload}
             setListReload={props.setReload}

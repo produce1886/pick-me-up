@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Colors from "@colors";
 import { Profile } from "@src/types/Data";
 import ProfileService from "@src/lib/api/Profile";
+import axios from "axios";
 import Modal from "../../atoms/Modal/index";
 import DefaultInfo from "../../molecules/ModalProfile/DefaultInfo";
 import OptionInfo from "../../molecules/ModalProfile/OptionInfo";
@@ -19,46 +20,48 @@ type EditModalProps = Profile & {
 
 function EditModal(props: EditModalProps) {
   const [image, setImage] = useState(props.image);
+  const [localImage, setLocalImage] = useState(props.localImage);
   const [username, setUsername] = useState(props.username);
   const [introduce, setIntroduce] = useState(props.introduce);
   const [birth, setBirth] = useState(props.birth);
   const [university, setUniversity] = useState(props.university);
   const [major, setMajor] = useState(props.major);
-  const [area, setArea] = useState(props.area || "지역");
+  const [region, setRegion] = useState(props.region || "지역");
   const [interests, setInterests] = useState(props.interests || "관심 분야");
-  const [birthSecurity, setBirthSecurity] = useState(props.birth_security);
-  const [areaSecurity, setAreaSecurity] = useState(props.area_security);
-  const [interestsSecurity, setInterestsSecurity] = useState(
-    props.interests_security
+  const [isBirthPublic, setIsBirthPublic] = useState(props.birthPublic);
+  const [isRegionPublic, setIsRegionPublic] = useState(props.regionPublic);
+  const [isInterestsPublic, setIsInterestsPublic] = useState(
+    props.interestsPublic
   );
-  const [universitySecurity, setUniversitySecurity] = useState(
-    props.university_security
+  const [isUniversityPublic, setIsUniversityPublic] = useState(
+    props.universityPublic
   );
 
   const router = useRouter();
-  const userID = router.query.userID.toString();
+  const userID = parseInt(router.query.userID.toString(), 10);
 
   const body = {
-    email: props.email,
     username,
-    sex: "",
     birth,
     university,
     major,
-    area,
+    region,
     introduce,
-    image,
     interests,
-    sex_security: false,
-    introduce_security: true,
-    birth_security: birthSecurity,
-    university_security: universitySecurity,
-    major_security: universitySecurity,
-    area_security: areaSecurity,
-    interests_security: interestsSecurity,
+    isBirthPublic,
+    isUniversityPublic,
+    isRegionPublic,
+    isInterestsPublic,
   };
 
   const updateProfile = () => {
+    const formData = new FormData();
+    formData.append("image", localImage);
+    if (localImage) {
+      axios.patch(`${process.env.API_HOST}/users/${userID}/image`, formData);
+    } else {
+      axios.delete(`${process.env.API_HOST}/users/${userID}/image`);
+    }
     ProfileService.updateProfile(userID, body)
       .then(() => props.onClose())
       .then(() => props.setReload(props.reload + 1));
@@ -86,6 +89,7 @@ function EditModal(props: EditModalProps) {
           setUsername={setUsername}
           introduce={introduce}
           setIntroduce={setIntroduce}
+          setLocalImage={setLocalImage}
         ></DefaultInfo>
         <OptionInfo
           birth={birth}
@@ -94,19 +98,19 @@ function EditModal(props: EditModalProps) {
           setUniversity={setUniversity}
           university={university}
           major={major}
-          area={area}
-          setArea={setArea}
+          region={region}
+          setRegion={setRegion}
           interests={interests}
           setInterests={setInterests}
-          birthSecurity={birthSecurity}
-          setBirthSecurity={() => setBirthSecurity(!birthSecurity)}
-          areaSecurity={areaSecurity}
-          setAreaSecurity={() => setAreaSecurity(!areaSecurity)}
-          interestsSecurity={interestsSecurity}
-          setInterestSecurity={() => setInterestsSecurity(!interestsSecurity)}
-          universitySecurity={universitySecurity}
-          setUniversitySecurity={() =>
-            setUniversitySecurity(!universitySecurity)
+          isBirthPublic={isBirthPublic}
+          setIsBirthPublic={() => setIsBirthPublic(!isBirthPublic)}
+          isRegionPublic={isRegionPublic}
+          setIsRegionPublic={() => setIsRegionPublic(!isRegionPublic)}
+          isInterestsPublic={isInterestsPublic}
+          setIsInterestsPublic={() => setIsInterestsPublic(!isInterestsPublic)}
+          isUniversityPublic={isUniversityPublic}
+          setIsUniversityPublic={() =>
+            setIsUniversityPublic(!isUniversityPublic)
           }
         ></OptionInfo>
         <UpdateButtonWrapper>

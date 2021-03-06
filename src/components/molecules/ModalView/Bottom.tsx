@@ -11,7 +11,7 @@ type ModalBottomProps = {
   page: PageType;
   commentsNum: number;
   comments: Comment[];
-  pid: string;
+  pid: number;
   modalReload: number;
   setModalReload: Dispatch<SetStateAction<number>>;
 };
@@ -26,7 +26,7 @@ function ModalBottom(props: ModalBottomProps) {
         key={item.id}
         page={props.page}
         comment={item.content}
-        date={item.createdDate}
+        date={item.createdDate.split("T")[0]}
         {...item.user}
         cid={item.id}
         pid={props.pid}

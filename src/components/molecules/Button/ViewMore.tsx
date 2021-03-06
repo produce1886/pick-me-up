@@ -5,7 +5,7 @@ import Colors from "@colors";
 import Text from "../../atoms/Text";
 
 type ButtonProps = {
-  pid: string;
+  pid: number;
 };
 
 function ViewMoreButton({ pid }: ButtonProps) {
@@ -22,4 +22,6 @@ function ViewMoreButton({ pid }: ButtonProps) {
 
 export default React.memo(ViewMoreButton);
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;

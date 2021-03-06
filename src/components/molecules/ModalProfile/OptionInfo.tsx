@@ -10,23 +10,23 @@ import Edit from "../../atoms/Icon/Edit";
 import { University, Area, Interest } from "./Contents";
 
 type OptionInfoProps = {
-  birthSecurity: boolean;
-  areaSecurity: boolean;
-  interestsSecurity: boolean;
-  universitySecurity: boolean;
+  isBirthPublic: boolean;
+  isRegionPublic: boolean;
+  isInterestsPublic: boolean;
+  isUniversityPublic: boolean;
   birth: string;
   university: string;
   major: string;
-  area: string;
+  region: string;
   interests: string;
-  setBirthSecurity: () => void;
-  setAreaSecurity: () => void;
-  setInterestSecurity: () => void;
-  setUniversitySecurity: () => void;
+  setIsBirthPublic: () => void;
+  setIsRegionPublic: () => void;
+  setIsInterestsPublic: () => void;
+  setIsUniversityPublic: () => void;
   setBirth: React.Dispatch<React.SetStateAction<string>>;
   setMajor: React.Dispatch<React.SetStateAction<string>>;
   setUniversity: React.Dispatch<React.SetStateAction<string>>;
-  setArea: React.Dispatch<React.SetStateAction<string>>;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
   setInterests: React.Dispatch<React.SetStateAction<string>>;
 };
 
@@ -59,10 +59,10 @@ function OptionInfo(props: OptionInfoProps) {
         </DivTitle>
         <Content>
           <ToggleSwitchWrapper>
-            <Toggle onClick={props.setBirthSecurity}>
-              <ToggleBall isToggled={props.birthSecurity}></ToggleBall>
+            <Toggle onClick={props.setIsBirthPublic}>
+              <ToggleBall isToggled={props.isBirthPublic}></ToggleBall>
               <RippleBackground
-                isVisible={props.birthSecurity}
+                isVisible={props.isBirthPublic}
               ></RippleBackground>
             </Toggle>
           </ToggleSwitchWrapper>
@@ -106,8 +106,8 @@ function OptionInfo(props: OptionInfoProps) {
           </Text>
         </DivTitle>
         <University
-          universitySecurity={props.universitySecurity}
-          setUniversitySecurity={props.setUniversitySecurity}
+          isUniversityPublic={props.isUniversityPublic}
+          setIsUniversityPublic={props.setIsUniversityPublic}
           setUniversity={props.setUniversity}
           university={props.university}
           setMajor={props.setMajor}
@@ -129,10 +129,10 @@ function OptionInfo(props: OptionInfoProps) {
           </Text>
         </DivTitle>
         <Area
-          areaSecurity={props.areaSecurity}
-          setAreaSecurity={props.setAreaSecurity}
-          setArea={props.setArea}
-          area={props.area}
+          isRegionPublic={props.isRegionPublic}
+          setIsRegionPublic={props.setIsRegionPublic}
+          setRegion={props.setRegion}
+          region={props.region}
         ></Area>
       </Div>
       <Div>
@@ -150,8 +150,8 @@ function OptionInfo(props: OptionInfoProps) {
           </Text>
         </DivTitle>
         <Interest
-          interestsSecurity={props.interestsSecurity}
-          setInterestSecurity={props.setInterestSecurity}
+          isInterestsPublic={props.isInterestsPublic}
+          setIsInterestsPublic={props.setIsInterestsPublic}
           setInterest={props.setInterests}
           interest={props.interests}
         ></Interest>

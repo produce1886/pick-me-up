@@ -1,55 +1,63 @@
 /* eslint-disable camelcase */
-type DataProps = {
-  page: "project" | "portfolio";
+
+type PostProps = {
+  id: number;
   title: string;
-  name: string;
-  profileImage: string;
-  category: string;
-  huntingField: string;
-  region: string;
-  projectCategory: string;
-  createdDate: string;
   content: string;
-  image: string;
-  id: string;
-  commentsNum: number;
+  category: string;
+  recruitmentField: string;
+  createdDate: string;
+  modifiedDate: string;
   viewNum: number;
-  projectTag: Tag[];
-  portfolioTag: Tag[];
+  commentsNum: number;
   user: User;
   comments: Comment[];
 };
 
+export type ProjectProps = PostProps & {
+  region: string;
+  projectSection: string;
+  projectTags: Tag[];
+  image: string;
+};
+
+export type PortfolioProps = PostProps & {
+  portfolioTags: Tag[];
+  images: Images[];
+};
+
+export type Images = {
+  id: number;
+  image: string;
+};
 export type User = {
-  id: string;
+  id: number;
   username: string;
   email: string;
   image: string;
 };
 
 export type Tag = {
-  id: string;
-  tag: string;
+  id: number;
+  tagName: string;
 };
 
 export type Comment = {
   createdDate: string;
   modifiedDate: string;
-  id: string;
+  id: number;
   content: string;
   user: User;
 };
 
 export type HotTag = {
-  id: string;
-  name: string;
-  score: number;
-  count: number;
+  id: number;
+  tagName: string;
 };
 
 export type Preview = {
   createdDate: string;
-  id: string;
+  id: number;
   title: string;
   content: string;
   viewNum: number;
@@ -57,26 +65,29 @@ export type Preview = {
   commentsNum: number;
 };
 
-export type PostList = {
-  nrOfElements: number;
-  pagelist: DataProps[];
+export type ProjectList = {
+  totalNum: number;
+  projectList: ProjectProps[];
+};
+
+export type PortfolioList = {
+  totalNum: number;
+  portfolioList: PortfolioProps[];
 };
 
 export type Profile = {
   username: string;
-  email: string;
+  email?: string;
   image?: string;
+  localImage?: Blob;
   introduce?: string;
-  introduce_security?: boolean;
   birth?: string;
   university?: string;
   major?: string;
-  area?: string;
+  region?: string;
   interests?: string;
-  birth_security?: boolean;
-  university_security?: boolean;
-  area_security?: boolean;
-  interests_security?: boolean;
+  birthPublic?: boolean;
+  universityPublic?: boolean;
+  regionPublic?: boolean;
+  interestsPublic?: boolean;
 };
-
-export default DataProps;

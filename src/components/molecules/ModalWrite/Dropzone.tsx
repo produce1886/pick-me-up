@@ -1,26 +1,31 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Colors from "@colors";
+import { Images } from "@src/types/Data";
+import { ImageFile } from "@src/components/atoms/Modal/ModalType";
 import Text from "../../atoms/Text/index";
 import Upload from "../../atoms/Icon/Upload";
 import Close from "../../atoms/Icon/Close";
-import { ImageFile } from "../../atoms/Modal/ModalType";
 
 type DropzoneProps = {
   page: string;
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
-  images: string[];
+  localFiles: ImageFile[];
+  remoteFiles: Images[];
+  setLocalFiles: React.Dispatch<React.SetStateAction<ImageFile[]>>;
+  setRemoteFiles: React.Dispatch<React.SetStateAction<Images[]>>;
+  setRemoteRemoveId: React.Dispatch<React.SetStateAction<number[]>>;
+  remoteRemoveId: number[];
 };
 
-export default function Dropzone({ page, setImages, images }: DropzoneProps) {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [preview, setPreview] = useState([]);
-
-  useEffect(() => {
-    setSelectedFiles(images);
-    setPreview(images);
-  }, [images]);
-
+export default function Dropzone({
+  page,
+  localFiles,
+  remoteFiles,
+  setLocalFiles,
+  setRemoteFiles,
+  setRemoteRemoveId,
+  remoteRemoveId,
+}: DropzoneProps) {
   const dragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
@@ -37,14 +42,14 @@ export default function Dropzone({ page, setImages, images }: DropzoneProps) {
     event.preventDefault();
     const { files } = event.dataTransfer;
     if (files.length > 0 && page === "project") {
-      if (selectedFiles.length === 1) {
+      if (localFiles.length + remoteFiles.length === 1) {
         alert("이미지는 1개까지 가능합니다.");
       } else {
         for (let i = 0; i < files.length; i += 1) {
           handleFile(files[i]);
         }
       }
-    } else if (selectedFiles.length === 5) {
+    } else if (localFiles.length + remoteFiles.length === 5) {
       alert("이미지는 5개까지 가능합니다.");
     } else {
       for (let i = 0; i < files.length; i += 1) {
@@ -53,7 +58,7 @@ export default function Dropzone({ page, setImages, images }: DropzoneProps) {
     }
   };
 
-  const validateFile = (file: ImageFile) => {
+  const validateFile = (file: File) => {
     const validTypes = [
       "image/jpeg",
       "image/jpg",
@@ -67,50 +72,69 @@ export default function Dropzone({ page, setImages, images }: DropzoneProps) {
     return true;
   };
 
-  const processImage = (file: ImageFile) => {
+  const processLocalImage = (file: File) => {
     const reader = new FileReader();
-    const inputFile = file;
+    const inputFile = file as ImageFile;
     reader.onloadend = () => {
-      inputFile.invalid = false; // add a new property called invalid
       inputFile.data = reader.result as string;
-      // File의 type을 ImageFile로 수정하였고, images state의 type은 string으로 모두 변경함
-      setPreview([...preview, inputFile]);
+      setLocalFiles([...localFiles, inputFile]);
     };
     reader.readAsDataURL(inputFile);
   };
 
-  const handleFile = (file: ImageFile) => {
+  const handleFile = (file: File) => {
     if (validateFile(file)) {
-      processImage(file);
-      setSelectedFiles([...selectedFiles, file]);
-      setImages([...images, file.data]);
+      processLocalImage(file);
     } else {
       alert("파일 형식이 올바르지 않습니다.");
     }
   };
 
-  const removeFile = (file: ImageFile) => {
-    const currentIndex = selectedFiles.indexOf(file);
-    const newArray = [...selectedFiles];
+  const removeLocalFile = (file: ImageFile) => {
+    const currentIndex = localFiles.indexOf(file);
+    const newArray = [...localFiles];
     newArray.splice(currentIndex, 1);
-    setSelectedFiles(newArray);
-    setPreview(newArray);
-    setImages(newArray);
+    setLocalFiles(newArray);
+  };
+
+  const removeRemoteFile = (file: Images) => {
+    const currentIndex = remoteFiles.indexOf(file);
+    const currentId = file.id;
+    const newFileArray = [...remoteFiles];
+    newFileArray.splice(currentIndex, 1);
+    const newIdArray = [...remoteRemoveId];
+    newIdArray.push(currentId);
+    setRemoteRemoveId(newIdArray);
+    setRemoteFiles(newFileArray);
   };
 
   const renderPreviewImages = () => {
     return (
       <PreviewContainer>
-        {preview.map((file, i) => (
+        {localFiles.map((localFile, i) => (
           <PreviewImage key={i}>
-            <XButton onClick={() => removeFile(file)}>
+            <XButton onClick={() => removeLocalFile(localFile)}>
               <Close
                 style={{ width: "1rem", height: "1rem" }}
                 fill={Colors.BLACK}
               ></Close>
             </XButton>
             <Img
-              src={file.data}
+              src={localFile.data}
+              style={{ width: "5rem", height: "5rem", marginRight: "1rem" }}
+            />
+          </PreviewImage>
+        ))}
+        {remoteFiles.map((remoteFile, i) => (
+          <PreviewImage key={i}>
+            <XButton onClick={() => removeRemoteFile(remoteFile)}>
+              <Close
+                style={{ width: "1rem", height: "1rem" }}
+                fill={Colors.BLACK}
+              ></Close>
+            </XButton>
+            <Img
+              src={remoteFile.image}
               style={{ width: "5rem", height: "5rem", marginRight: "1rem" }}
             />
           </PreviewImage>
@@ -118,7 +142,6 @@ export default function Dropzone({ page, setImages, images }: DropzoneProps) {
       </PreviewContainer>
     );
   };
-
   return (
     <Container>
       <DropContainer
@@ -138,7 +161,8 @@ export default function Dropzone({ page, setImages, images }: DropzoneProps) {
           파일을 드래그해 놓아주세요.
         </Text>
       </DropContainer>
-      {preview.length > 0 && renderPreviewImages()}
+      {(localFiles.length > 0 || remoteFiles.length > 0) &&
+        renderPreviewImages()}
     </Container>
   );
 }

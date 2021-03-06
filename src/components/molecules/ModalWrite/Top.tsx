@@ -7,10 +7,14 @@ import { PageType } from "../../atoms/Modal/ModalType";
 
 type ModalTopProps = {
   page: PageType;
+  category?: string;
+  recruitmentField?: string;
+  region?: string;
+  projectSection?: string;
   setCategory: Dispatch<SetStateAction<string>>;
-  setField: React.Dispatch<React.SetStateAction<string>>;
+  setRecruitmentField: React.Dispatch<React.SetStateAction<string>>;
   setRegion: React.Dispatch<React.SetStateAction<string>>;
-  setProjectType: React.Dispatch<React.SetStateAction<string>>;
+  setProjectSection: React.Dispatch<React.SetStateAction<string>>;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   title: string;
   profileImage: string;
@@ -18,10 +22,14 @@ type ModalTopProps = {
 
 function ModalTop({
   page,
+  category,
+  recruitmentField,
+  region,
+  projectSection,
   setCategory,
-  setField,
+  setRecruitmentField,
   setRegion,
-  setProjectType,
+  setProjectSection,
   setTitle,
   title,
   profileImage,
@@ -45,10 +53,14 @@ function ModalTop({
             width="fit-content"
             height="1rem"
             level={0}
+            category={category}
+            recruitmentField={recruitmentField}
+            region={region}
+            projectSection={projectSection}
             setCategory={setCategory}
-            setField={setField}
+            setRecruitmentField={setRecruitmentField}
             setRegion={setRegion}
-            setProjectType={setProjectType}
+            setProjectSection={setProjectSection}
           ></Filters>
         </TitleFilterWrapper>
         <ProfileWrapper>

@@ -29,7 +29,7 @@ export default function HotTag() {
           {!isLoading &&
             !isError &&
             data &&
-            data.map((item) => <Tag key={item.id} text={item.name}></Tag>)}
+            data.map((item) => <Tag key={item.id} text={item.tagName}></Tag>)}
         </Row>
       </InnerWrapper>
     </Wrapper>

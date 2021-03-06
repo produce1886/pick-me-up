@@ -12,13 +12,17 @@ export default function Project() {
   const [reload, setReload] = useState<number>(0);
   const [modalReload, setModalReload] = useState<number>(0);
 
+  const pid = router.query.pid
+    ? parseInt(router.query.pid.toString(), 10)
+    : null;
+
   return (
     <>
       {router.query.pid && !isUpdate && (
         <Modal
           page="project"
-          isVisible={!!router.query.pid}
-          pid={router.query.pid}
+          isVisible={!!pid}
+          pid={pid}
           onClose={() => router.push(`/project`)}
           setIsUpdate={setIsUpdate}
           reload={reload}
@@ -27,10 +31,10 @@ export default function Project() {
           setModalReload={setModalReload}
         ></Modal>
       )}
-      {router.query.pid && isUpdate && (
+      {pid && isUpdate && (
         <UpdateModal
           page="project"
-          pid={router.query.pid}
+          pid={pid}
           onClose={() => {
             setIsUpdate(false);
             router.push(`/project`);
@@ -42,7 +46,7 @@ export default function Project() {
       )}
       <Gnb></Gnb>
       <ProjectBody
-        isModalVisible={!!router.query.pid}
+        isModalVisible={!!pid}
         reload={reload}
         setReload={setReload}
       ></ProjectBody>

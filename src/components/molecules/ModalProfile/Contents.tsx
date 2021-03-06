@@ -4,33 +4,33 @@ import Colors from "@colors";
 import Text from "../../atoms/Text";
 import Edit from "../../atoms/Icon/Edit";
 import Filter from "../Filter/Filter";
-import { FIELD, REGION } from "../Filter/ItemData";
+import { RECRUITMENT_FIELD, REGION } from "../Filter/ItemData";
 
 type UniversityProps = {
-  universitySecurity: boolean;
+  isUniversityPublic: boolean;
   university: string;
   major: string;
-  setUniversitySecurity: () => void;
+  setIsUniversityPublic: () => void;
   setMajor: React.Dispatch<React.SetStateAction<string>>;
   setUniversity: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type AreaProps = {
-  areaSecurity: boolean;
-  area: string;
-  setAreaSecurity: () => void;
-  setArea: React.Dispatch<React.SetStateAction<string>>;
+  isRegionPublic: boolean;
+  region: string;
+  setIsRegionPublic: () => void;
+  setRegion: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type InterestProps = {
-  interestsSecurity: boolean;
+  isInterestsPublic: boolean;
   interest: string;
   setInterest: React.Dispatch<React.SetStateAction<string>>;
-  setInterestSecurity: () => void;
+  setIsInterestsPublic: () => void;
 };
 
 export function University(props: UniversityProps) {
-  const [editUniv, setEditUniv] = useState(false);
+  const [isEditUniv, setIsEditUniv] = useState(false);
 
   const onChangeUnivHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setUniversity(e.target.value);
@@ -41,14 +41,14 @@ export function University(props: UniversityProps) {
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle onClick={props.setUniversitySecurity}>
-          <ToggleBall isToggled={props.universitySecurity}></ToggleBall>
+        <Toggle onClick={props.setIsUniversityPublic}>
+          <ToggleBall isToggled={props.isUniversityPublic}></ToggleBall>
           <RippleBackground
-            isVisible={props.universitySecurity}
+            isVisible={props.isUniversityPublic}
           ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
-      {editUniv && (
+      {isEditUniv && (
         <>
           <Input
             placeholder="학교"
@@ -68,14 +68,14 @@ export function University(props: UniversityProps) {
           ></Input>
         </>
       )}
-      {!editUniv && (
+      {!isEditUniv && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
           <Text level={3} color={Colors.BLACK} align="left">
             {props.university} {props.major}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => setEditUniv(!editUniv)}>
+      <ButtonWrapper onClick={() => setIsEditUniv(!isEditUniv)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
           fill={Colors.BLACK}
@@ -86,35 +86,35 @@ export function University(props: UniversityProps) {
 }
 
 export function Area(props: AreaProps) {
-  const [editArea, setEditArea] = useState(false);
+  const [isEditRegion, setIsEditRegion] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle onClick={props.setAreaSecurity}>
-          <ToggleBall isToggled={props.areaSecurity}></ToggleBall>
-          <RippleBackground isVisible={props.areaSecurity}></RippleBackground>
+        <Toggle onClick={props.setIsRegionPublic}>
+          <ToggleBall isToggled={props.isRegionPublic}></ToggleBall>
+          <RippleBackground isVisible={props.isRegionPublic}></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
-      {editArea && (
+      {isEditRegion && (
         <Filter
           width="21rem"
           height="1.2rem"
           level={0}
-          defaultText={props.area ? props.area : "지역을 선택하세요"}
-          onClick={props.setArea}
+          defaultText={props.region ? props.region : "지역을 선택하세요"}
+          onClick={props.setRegion}
           data={REGION}
-          previousItemTitle={props.area}
+          previousItemTitle={props.region}
           isUserInfoEdit={true}
         ></Filter>
       )}
-      {!editArea && (
+      {!isEditRegion && (
         <Row marginRight="3rem" paddingLeft="1rem" width="21.5rem">
           <Text level={3} color={Colors.BLACK} align="left">
-            {props.area}
+            {props.region}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => setEditArea(!editArea)}>
+      <ButtonWrapper onClick={() => setIsEditRegion(!isEditRegion)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
           fill={Colors.BLACK}
@@ -125,18 +125,18 @@ export function Area(props: AreaProps) {
 }
 
 export function Interest(props: InterestProps) {
-  const [editInterest, setEditInterest] = useState(false);
+  const [isEditInterest, setIsEditInterest] = useState(false);
   return (
     <Content>
       <ToggleSwitchWrapper>
-        <Toggle onClick={props.setInterestSecurity}>
-          <ToggleBall isToggled={props.interestsSecurity}></ToggleBall>
+        <Toggle onClick={props.setIsInterestsPublic}>
+          <ToggleBall isToggled={props.isInterestsPublic}></ToggleBall>
           <RippleBackground
-            isVisible={props.interestsSecurity}
+            isVisible={props.isInterestsPublic}
           ></RippleBackground>
         </Toggle>
       </ToggleSwitchWrapper>
-      {editInterest && (
+      {isEditInterest && (
         <Filter
           width="21rem"
           height="1.2rem"
@@ -145,19 +145,19 @@ export function Interest(props: InterestProps) {
             props.interest ? props.interest : "관심분야를 선택하세요"
           }
           onClick={props.setInterest}
-          data={FIELD}
+          data={RECRUITMENT_FIELD}
           previousItemTitle={props.interest}
           isUserInfoEdit={true}
         ></Filter>
       )}
-      {!editInterest && (
+      {!isEditInterest && (
         <Row marginRight="2.4rem" paddingLeft="1rem" width="21.5rem">
           <Text level={3} color={Colors.BLACK} align="left">
             {props.interest}
           </Text>
         </Row>
       )}
-      <ButtonWrapper onClick={() => setEditInterest(!editInterest)}>
+      <ButtonWrapper onClick={() => setIsEditInterest(!isEditInterest)}>
         <Edit
           style={{ width: "0.8rem", height: "0.8rem" }}
           fill={Colors.BLACK}
