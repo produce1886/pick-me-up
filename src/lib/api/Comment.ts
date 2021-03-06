@@ -3,7 +3,7 @@ import base from "./Api";
 const getComment = (
   setContent: React.Dispatch<React.SetStateAction<string>>,
   url: string,
-  cid?: string
+  cid?: number
 ) => {
   if (cid) {
     base()

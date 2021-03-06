@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
-import DataProps from "@src/types/Data";
+import { PortfolioProps } from "@src/types/Data";
 import Text from "../atoms/Text";
 import Detail from "../molecules/PortfolioBlock/Detail";
 import Wrapper from "../atoms/Wrapper/PortfolioBlock";
 
-function PortfolioBlock(props: DataProps) {
+function PortfolioBlock(props: PortfolioProps) {
   const [show, setShow] = useState(false);
 
   return (
@@ -17,8 +17,8 @@ function PortfolioBlock(props: DataProps) {
           onMouseOver={() => setShow(true)}
           onMouseOut={() => setShow(false)}
         >
-          {props.image ? (
-            <Img src={props.image}></Img>
+          {props.images ? (
+            <Img src={props.images[0].image}></Img>
           ) : (
             <Text level={5} weight={500}>
               {props.content.substr(0, 15)}
@@ -46,4 +46,6 @@ const Img = styled.img`
   height: 100%;
 `;
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;

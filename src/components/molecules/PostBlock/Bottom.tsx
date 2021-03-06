@@ -7,7 +7,7 @@ import MoreButton from "../Button/ViewMore";
 export type BottomProps = {
   viewNum: number;
   commentsNum: number;
-  pid: string;
+  pid: number;
 };
 
 function Bottom(props: BottomProps) {

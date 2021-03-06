@@ -2,8 +2,8 @@ import base from "./Api";
 
 const getHotTag = () =>
   base()
-    .post(`/tags`, { size: 10 })
-    .then((res) => res.data.content);
+    .get(`/tags`)
+    .then((res) => res.data.tags);
 
 const HotTagService = {
   getHotTag,

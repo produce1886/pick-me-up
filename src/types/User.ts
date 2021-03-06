@@ -1,9 +1,10 @@
 type UserState = {
   isSignedIn: boolean;
   userData: {
-    username?: string;
-    email?: string;
-    image?: string;
+    id: number;
+    username: string;
+    email: string;
+    image: string;
   };
 };
 

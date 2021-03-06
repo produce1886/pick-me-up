@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import UserState from "@src/types/User";
 import Colors from "@colors";
+import Link from "next/link";
 import Logo from "../molecules/Button/Logo";
 import MainMenu from "../molecules/Gnb/Middle";
 import LogInButton from "../molecules/Button/LogIn";
@@ -21,12 +22,16 @@ export default function GlobalNavigationBar() {
         <ProfileWrapper>
           {userState.isSignedIn ? (
             <>
-              <Profile
-                level={1}
-                size="1.4rem"
-                name={userState.userData.username}
-                profileImage={userState.userData.image}
-              ></Profile>
+              <Link href={`/profile/${userState.userData.id}`} passHref>
+                <A>
+                  <Profile
+                    level={1}
+                    size="1.4rem"
+                    name={userState.userData.username}
+                    profileImage={userState.userData.image}
+                  ></Profile>
+                </A>
+              </Link>
               <LogOutButton></LogOutButton>
             </>
           ) : (
@@ -73,4 +78,11 @@ const Wrapper = styled.header`
   justify-content: center;
   display: flex;
   flex-direction: row;
+`;
+
+const A = styled.a`
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;

@@ -10,7 +10,7 @@ import FilterInfo from "../FilterInfo";
 type ModalTopProps = {
   page: PageType;
   title: string;
-  uid: string;
+  uid: number;
   profileImage: string;
   category: string;
   recruitmentField: string;

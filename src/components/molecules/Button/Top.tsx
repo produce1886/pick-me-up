@@ -27,7 +27,9 @@ export default function TopButton() {
   );
 }
 
-const A = styled.a`text-decoration: none;`;
+const A = styled.a`
+  text-decoration: none;
+`;
 
 const Button = styled.button`
   width: fit-content;

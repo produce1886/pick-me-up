@@ -8,7 +8,7 @@ import Profile from "../Profile";
 
 type TopProps = {
   title: string;
-  uid: string;
+  uid: number;
   name: string;
   profileImage?: string;
   category: string;

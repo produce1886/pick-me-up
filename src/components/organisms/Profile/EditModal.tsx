@@ -38,7 +38,7 @@ function EditModal(props: EditModalProps) {
   );
 
   const router = useRouter();
-  const userID = router.query.userID.toString();
+  const userID = parseInt(router.query.userID.toString(), 10);
 
   const body = {
     username,

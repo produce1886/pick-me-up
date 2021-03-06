@@ -12,13 +12,17 @@ export default function Portfolio() {
   const [reload, setReload] = useState<number>(0);
   const [modalReload, setModalReload] = useState<number>(0);
 
+  const pid = router.query.pid
+    ? parseInt(router.query.pid.toString(), 10)
+    : null;
+
   return (
     <>
-      {router.query.pid && !isUpdate && (
+      {pid && !isUpdate && (
         <Modal
           page="portfolio"
-          isVisible={!!router.query.pid}
-          pid={router.query.pid}
+          isVisible={!!pid}
+          pid={pid}
           onClose={() => router.push(`/portfolio`)}
           setIsUpdate={setIsUpdate}
           reload={reload}
@@ -27,10 +31,10 @@ export default function Portfolio() {
           setModalReload={setModalReload}
         ></Modal>
       )}
-      {router.query.pid && isUpdate && (
+      {pid && isUpdate && (
         <UpdateModal
           page="portfolio"
-          pid={router.query.pid}
+          pid={pid}
           onClose={() => {
             setIsUpdate(false);
             router.push(`/portfolio`);
@@ -42,7 +46,7 @@ export default function Portfolio() {
       )}
       <Gnb></Gnb>
       <PortfolioBody
-        isModalVisible={!!router.query.pid}
+        isModalVisible={!!pid}
         reload={reload}
         setReload={setReload}
       ></PortfolioBody>

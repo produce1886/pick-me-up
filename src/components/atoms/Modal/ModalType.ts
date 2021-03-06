@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 export type ModalProps = {
   page: PageType;
   isVisible: boolean;
-  pid: string | string[];
+  pid: number;
   onClose: () => void;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
   setReload: Dispatch<SetStateAction<number>>;

@@ -8,9 +8,9 @@ import { logoutUser } from "../../../_actions/user";
 export default function LogOutButton() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const logoutHandler = useCallback(() => {
+  const handleLogout = useCallback(() => {
     dispatch(logoutUser());
-    setTimeout(() => router.push(router.pathname), 100);
+    setTimeout(() => router.push(router.pathname), 200);
   }, []);
 
   return (
@@ -18,7 +18,7 @@ export default function LogOutButton() {
       <GoogleLogout
         clientId={process.env.GOOGLE_CLIENT_ID}
         buttonText="Log Out"
-        onLogoutSuccess={logoutHandler}
+        onLogoutSuccess={handleLogout}
       ></GoogleLogout>
     </Wrapper>
   );

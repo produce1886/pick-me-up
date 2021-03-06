@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { Tag as TagType } from "@src/types/Data";
 import ViewCount from "../Count/View";
 import CommentCount from "../Count/Comment";
 import MoreButton from "../Button/ViewMore";
 import TagButton from "../Tag";
 
 type BottomProps = {
-  tags?: { tagName: string; id: string }[];
+  tags?: TagType[];
   viewNum: number;
   commentsNum: number;
   pid: number;
