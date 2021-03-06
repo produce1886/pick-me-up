@@ -31,14 +31,14 @@ export type Images = {
   image: string;
 };
 export type User = {
-  id: string;
+  id: number;
   username: string;
   email: string;
   image: string;
 };
 
 export type Tag = {
-  id: string;
+  id: number;
   tagName: string;
 };
 
@@ -51,13 +51,13 @@ export type Comment = {
 };
 
 export type HotTag = {
-  id: string;
+  id: number;
   tagName: string;
 };
 
 export type Preview = {
   createdDate: string;
-  id: string;
+  id: number;
   title: string;
   content: string;
   viewNum: number;

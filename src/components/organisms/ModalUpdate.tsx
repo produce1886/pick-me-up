@@ -20,7 +20,7 @@ import Modal from "../atoms/Modal/index";
 
 type ModalUpdateProps = {
   page: PageType;
-  pid: string | string[];
+  pid: number;
   onClose: () => void;
   setIsUpdate: Dispatch<SetStateAction<boolean>>;
   modalReload: number;

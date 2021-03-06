@@ -12,7 +12,7 @@ export type TopProps = {
   title: string | string[];
   name: string;
   profileImage: string;
-  uid: string;
+  uid: number;
   date: string;
 };
 
