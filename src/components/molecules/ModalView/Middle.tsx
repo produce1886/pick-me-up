@@ -129,6 +129,7 @@ const TextWrapper = styled.pre`
   font-size: 0.64rem;
   color: ${Colors.BLACK};
   font-family: "Noto Sans KR", sans-serif;
+  white-space: pre-wrap;
 `;
 
 const TagWrapper = styled.div`
