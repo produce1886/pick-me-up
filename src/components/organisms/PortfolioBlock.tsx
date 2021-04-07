@@ -17,8 +17,8 @@ function PortfolioBlock(props: PortfolioProps) {
           onMouseOver={() => setShow(true)}
           onMouseOut={() => setShow(false)}
         >
-          {props.images ? (
-            <Img src={props.images[0].image}></Img>
+          {props.image ? (
+            <Img src={props.image}></Img>
           ) : (
             <Text level={5} weight={500}>
               {props.content.substr(0, 15)}

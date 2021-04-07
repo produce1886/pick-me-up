@@ -24,6 +24,7 @@ export type ProjectProps = PostProps & {
 export type PortfolioProps = PostProps & {
   portfolioTags: Tag[];
   images: Images[];
+  image?: string; // for portfolio list api response
 };
 
 export type Images = {
